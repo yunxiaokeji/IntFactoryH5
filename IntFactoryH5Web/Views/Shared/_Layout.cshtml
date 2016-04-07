@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+ @{
+
+}
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="robots" content="noindex,nofollow">
+    @RenderSection("css", false)
+</head>
+<body>
+
+    @RenderBody()
+
+    <script type="text/javascript" src="/Scripts/sea.js"></script>
+    <script type="text/javascript" src="/Scripts/sea-config.js"></script>
+    @RenderSection("scripts", false)
+</body>
+    
+</html>
