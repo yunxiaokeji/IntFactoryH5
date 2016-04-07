@@ -10,12 +10,10 @@
 *_i.c
 *_p.c
 *.ncb
-*.suo
 *.sqlproj
 *.tlb
 *.tlh
 *.bak
-*.csproj
 *.cache
 *.ilk
 *.log
@@ -31,5 +29,3 @@ tempFiles
 tempfile
 UploadFiles
 *.dbmdl
-*.sql
-YXDB/IntFactoryDB.sqlproj
