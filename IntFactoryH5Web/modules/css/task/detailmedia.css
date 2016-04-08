@@ -1,0 +1,62 @@
+﻿@media screen and (max-width:736px) {
+
+    
+
+}
+@media screen and (max-width:620px) {
+
+    .main-info li { font-size:0.9em;}
+
+    .task-info .order-need {font-size:0.9em;}
+
+    nav ul li { font-size:0.9em;width:23.333%;}
+
+    nav ul .buy-plan {width:30%; }
+
+    .return-msg .box-returnmsg { width:70%;}
+
+    .return-msg .box-submit { width:18%;}
+
+}
+
+@media screen and (max-width:414px) {
+
+    .main-info li { font-size:0.8em;}
+
+    .task-info .order-need {font-size:0.8em;}
+
+    nav ul li { font-size:0.8em;width:20%;}
+
+    nav ul .buy-plan {width:40%; }
+
+     .return-msg .box-returnmsg { width:60%;}
+
+    .return-msg .box-submit { width:28%;}
+
+}
+@media screen and (max-width:375px) {
+
+    .main-info .left-task-info {margin-left:10px;}
+
+    .main-info .right-task-info {margin-right:10px;}
+
+    .main-info li { font-size:0.4em;}
+
+    .task-info .order-need { margin-left:10px;margin-right:10px;font-size:0.4em;}
+
+    nav ul li { font-size:0.6em;width:20%;}
+
+    nav ul .buy-plan {width:40%; }
+
+    .return-msg .box-returnmsg { width:60%;}
+
+    .return-msg .box-submit { width:24%;}
+
+    .send-other .talk-other { width:64%;}
+
+    .send-other .return-other .iconfont { font-size:1.0em;color:#a8a8a8;}
+
+    .material-main .material-info li { font-size:0.7em;}
+
+}
+

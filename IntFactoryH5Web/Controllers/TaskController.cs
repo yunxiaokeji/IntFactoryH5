@@ -6,17 +6,12 @@ using System.Web.Mvc;
 
 namespace IntFactoryH5Web.Controllers
 {
-    public class HomeController : Controller
+    public class TaskController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Task/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult TaskDetail()
+        public ActionResult Detail()
         {
             return View();
         }
