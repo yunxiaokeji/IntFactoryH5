@@ -1,0 +1,278 @@
+﻿/*头部*/
+header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;}
+header ul li{float:left;margin-left:20px;cursor:pointer;margin-top:25px;}
+header ul li:hover{color:#007aff;}
+header ul .menu{color:#666;}
+header ul .mytask{margin-left:30%;font-size:18px;margin-top:30px;font-family:'Microsoft YaHei UI';}
+header ul .searth{margin-left:32%;color:#666;}
+/*进行状态*/
+.condition{width:100%;height:100px;border-bottom:1px solid #b2b2b2;}
+.condition a{color:#666;}
+.condition ul li{float:left;margin-left:6%;margin-top:20px;}
+.condition li .all_smallphoto{margin-bottom:7px;margin-left:5px;}
+.condition ul .unreceived{margin-top:19px;margin-left:15%;}
+.condition li .inquadrangle{width:12.5px;height:12.5px;background-color:#666;margin-left:6.5px;margin-top:6px;}
+.condition li .exround{width:25px;height:25px;border:1px solid #000;border-radius:50%;margin-bottom:8px;margin-left:10px;}
+.condition ul .underway{margin-top:15px;margin-left:13%;}
+.condition li .underway_smallphoto{margin-bottom:7px;margin-left:10px;}
+.condition ul .accomplish{margin-top:15px;margin-left:16%;}
+.condition li .accomplish_smallphoto{margin-bottom:7px;margin-left:10px;}
+/*选择条件*/ 
+.select .type-ddl{z-index:88;width:100px;font-size:55px;display:none;}
+.select .flow-ddl{z-index:100;}
+.select .screen-ddl{z-index:100;}
+.select .advanced-ddl{z-index:100;}
+.select{width:100%;height:80px;border-bottom:1px solid #ccc;}
+.select a{color:#999;float:left;margin-left:21%;margin-top:17px;}
+.select .copy{margin-top:15px;margin-left:61%;}
+.select .type{float:left;border-right:1px solid #ccc;width:24%;height:80px;}
+.select .flow{float:left;border-right:1px solid #ccc;width:24%;height:80px;}
+.select .screen{float:left;border-right:1px solid #ccc;width:24%;height:80px;}
+.select .advanced-screen{float:left;height:80px;width:22%;}
+.select .advanced-screen a:hover{color:#007aff;}
+/*列表*/
+.list .listabove{height:240px;width:100%;border-bottom:1px solid #dfdfdf;}
+.list .listabove .imgabove{width:200px;height:200px;margin-left:5%;float:left;}
+.list .listabove .details{margin-top:30px;}
+.list .details .details_inquadrangle{height:10px;width:10px;background-color:#e0483e;margin-left:5px;margin-top:5px;}
+.list .details .details_exround{width:20px;height:20px;border:1px solid #e0483e; border-radius:50%;margin-left:2%;float:left;margin-right:2%;}
+.list .details #details-font{margin-top:2px;}
+.list .details .details_taskname{text-overflow:ellipsis;overflow:hidden;white-space:nowrap;width:40%;}
+.list .details .details_taskname:hover{text-overflow:inherit;overflow:visible;}
+.list .details .details_name{width:100px;color:#666;font-size:1.2em;}
+.list .details .pressing{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-left:96.3%;margin-top:-30px;}
+.list .details .details_middle{float:left;margin-left:10px;margin-right:10px;margin-top:-2px;}
+.list .details .details_last{float:left;margin-left:10px;margin-right:10px;margin-top:-2px;}
+.list .details .stage{margin-top:20px;color:#999;margin-left:30%;}
+.list .details .stage_details{margin-top:10px;margin-left:30%;margin-bottom:13px;}
+.list .details .stage_specific{color:#999;}
+/*时间*/
+.list .details .start_time{float:left;color:#999;background:url(/modules/images/times.jpg) no-repeat;background-position-y:center;padding-left:24px;height:22px;padding-top:2px;margin-left:20px;}
+.list .details .end_time{color:#999;background:url(/modules/images/times.jpg) no-repeat;background-position-y:center;margin-left:55%;padding-left:24px;height:22px;padding-top:2px;}
+@media screen and (min-width:1366px)
+{
+    header ul li{margin-top:30px;}    
+    header ul .mytask{margin-top:25px;margin-left:35%;font-size:32px;}
+    header ul .searth{margin-top:20px;margin-left:38%;}
+    header .iconfont{font-size:2em;}
+    header .iconfont-sousuo{font-size:3em;}
+    .condition{height:120px;}
+    .condition a{font-size:1.7em;}
+    .condition ul li{margin-left:9%;}      
+    .condition ul .unreceived{margin-left:19%;}
+    .condition ul .underway{margin-left:18%;}
+    .condition ul .accomplish{margin-left:20%;}
+    .condition .all .iconfont-all{font-size:2.3em;}
+    .condition li .inquadrangle{width:20px;height:20px;margin-top:10px;margin-left:10px;}
+    .condition li .exround{width:40px;height:40px;margin-left:15px;}
+    .condition ul .iconfont-underway{font-size:2.3em;}    
+    .condition li .underway_smallphoto{margin-left:25%;}
+    .condition li .accomplish_smallphoto{margin-left:25%;}  
+    .list{position:absolute;z-index:1;} 
+    .select .type-ddl{z-index:100;width:100px;}
+    .select .flow-ddl{z-index:100;}
+    .select .screen-ddl{z-index:100;}
+    .select .advanced-ddl{z-index:100;}     
+    .list .listabove{height:260px;}
+    .list .listabove .imgabove{width:220px;height:220px;margin-left:5%;}
+    .select a{margin-left:30%;font-size:1.8em;margin-top:25px}  
+    .select .advanced-screen a{margin-left:37%;}
+    .select .iconfont-select{font-size:1.8em;}
+    .select .copy{margin-left:51%;margin-top:29px;}    
+    .list .details .stage{margin-top:40px;margin-left:300px;}
+    .list .details .stage_details{margin-top:20px;margin-left:320px;margin-bottom:25px;}
+    .list .details .start_time{margin-left:10px;margin-right:40px;background-size:12%;height:40px;}
+    .list .details .end_time{margin-left:66%;background-size:10%;height:40px;}
+    .list .details .details_name{font-size:2em;margin-top:-15px;}
+    .list .details .details_middle{margin-top:6px;}
+    .list .details .details_last{margin-top:6px;}
+    .list .details .details_inquadrangle{height:15px;width:15px;margin-left:7px;margin-top:7px;}
+    .list .details .details_exround{width:30px;height:30px;margin-right:0;}
+    .list .details .iconfont-middle{font-size:1.9em;}
+    .list .details .iconfont-last{font-size:1.9em;}
+    .list a{font-size:2em;margin-left:20px;}
+    .list .details .iconfont-select{font-size:2em;}
+}
+@media screen and (max-width:1365px)
+{
+    header ul li{margin-top:30px;}    
+    header ul .mytask{margin-top:25px;margin-left:35%;font-size:28px;}
+    header ul .searth{margin-top:20px;margin-left:38%;}
+    header .iconfont{font-size:1.8em;}
+    header .iconfont-sousuo{font-size:2.6em;}
+    .condition a{font-size:1.3em;}
+    .condition ul li{margin-left:9%;}      
+    .condition ul .unreceived{margin-left:19%;}
+    .condition ul .underway{margin-left:18%;}
+    .condition ul .accomplish{margin-left:21%;}
+    .condition .all .iconfont-all{font-size:2em;}
+    .condition li .inquadrangle{width:15px;height:15px;margin-top:7px;margin-left:7px;}
+    .condition li .exround{width:30px;height:30px;margin-left:15px;}
+    .condition ul .iconfont-underway{font-size:2em;}    
+    .condition li .underway_smallphoto{margin-left:25%;}
+    .condition li .accomplish_smallphoto{margin-left:25%;}    
+    .list .listabove{height:250px;}
+    .list .listabove .imgabove{width:210px;height:210px;margin-left:5%;}
+    .select a{margin-left:30%;font-size:1.5em;margin-top:25px}  
+    .select .advanced-screen a{margin-left:33%;}
+    .select .iconfont-select{font-size:1.8em;}
+    .select .copy{margin-left:51%;margin-top:25px;}    
+    .list .details .stage{margin-top:40px;margin-left:25%;}
+    .list .details .stage_details{margin-top:20px;margin-left:25%;margin-bottom:25px;}
+    .list .details .start_time{margin-left:10px;margin-right:40px;background-size:12%;height:35px;}
+    .list .details .end_time{margin-left:66%;background-size:8%;height:30px;}
+    .list .details .details_name{font-size:1.5em;margin-top:-10px;}
+    .list .details .details_inquadrangle{height:15px;width:15px;margin-left:7px;margin-top:7px;}
+    .list .details .details_exround{width:30px;height:30px;}
+    .list .details .iconfont-middle{font-size:1.9em;}
+    .list .details .iconfont-last{font-size:1.9em;}
+    .list a{font-size:1.4em;margin-left:3px;}
+    .list .details .iconfont-select{font-size:2em;}
+}
+@media screen and (max-width:1122px)
+{
+    header ul li{margin-top:30px;}    
+    header ul .mytask{margin-top:25px;margin-left:35%;font-size:28px;}
+    header ul .searth{margin-top:20px;margin-left:38%;}
+    header .iconfont{font-size:1.8em;}
+    header .iconfont-sousuo{font-size:2.6em;}
+    .condition a{font-size:1.3em;}
+    .condition ul li{margin-left:9%;}      
+    .condition ul .unreceived{margin-left:19%;}
+    .condition ul .underway{margin-left:18%;}
+    .condition ul .accomplish{margin-left:21%;}
+    .condition .all .iconfont-all{font-size:2em;}
+    .condition li .inquadrangle{width:15px;height:15px;margin-top:7px;margin-left:7px;}
+    .condition li .exround{width:30px;height:30px;margin-left:15px;}
+    .condition ul .iconfont-underway{font-size:2em;}    
+    .condition li .underway_smallphoto{margin-left:25%;}
+    .condition li .accomplish_smallphoto{margin-left:25%;}    
+    .list .listabove{height:250px;}
+    .list .listabove .imgabove{width:210px;height:210px;margin-left:5%;}
+    .select a{margin-left:30%;font-size:1.5em;margin-top:25px}  
+    .select .advanced-screen a{margin-left:33%;}
+    .select .iconfont-select{font-size:1.8em;}
+    .select .copy{margin-left:51%;margin-top:25px;}    
+    .list .details .stage{margin-top:40px;margin-left:25%;}
+    .list .details .stage_details{margin-top:20px;margin-left:25%;margin-bottom:25px;}
+    .list .details .start_time{margin-left:10px;margin-right:40px;background-size:12%;height:35px;}
+    .list .details .end_time{margin-left:66%;background-size:8%;height:30px;}
+    .list .details .details_name{font-size:1.5em;margin-top:-10px;}
+    .list .details .details_inquadrangle{height:15px;width:15px;margin-left:7px;margin-top:7px;}
+    .list .details .details_exround{width:30px;height:30px;}
+    .list .details .iconfont-middle{font-size:1.9em;}
+    .list .details .iconfont-last{font-size:1.9em;}
+    .list a{font-size:1.4em;margin-left:3px;}
+    .list .details .iconfont-select{font-size:2em;}
+}
+@media screen and (max-width:960px)
+{
+    header ul li{margin-top:30px;}    
+    header ul .mytask{margin-top:25px;margin-left:35%;font-size:28px;}
+    header ul .searth{margin-top:20px;margin-left:38%;}
+    header .iconfont{font-size:1.8em;}
+    header .iconfont-sousuo{font-size:2.6em;}    
+    .condition{height:100px;}
+    .condition a{font-size:1.3em;}
+    .condition ul li{margin-left:9%;}      
+    .condition ul .unreceived{margin-left:18%;}
+    .condition ul .underway{margin-left:17%;}
+    .condition ul .accomplish{margin-left:19%;}
+    .condition .all .iconfont-all{font-size:2em;}
+    .condition li .inquadrangle{width:15px;height:15px;margin-top:7px;margin-left:7px;}
+    .condition li .exround{width:30px;height:30px;margin-left:15px;}
+    .condition ul .iconfont-underway{font-size:2em;}
+    .condition li .underway_smallphoto{margin-left:25%;}
+    .condition li .accomplish_smallphoto{margin-left:25%;}    
+    .list .listabove{height:240px;}
+    .list .listabove .imgabove{width:200px;height:200px;margin-left:5%;}
+    .select a{margin-left:30%;font-size:1.5em;margin-top:25px}  
+    .select .advanced-screen{width:27%;height:80px;}
+    .select .iconfont-select{font-size:1.8em;}
+    .select .copy{margin-left:51%;margin-top:25px;}
+    .list .details .stage{margin-top:40px;margin-left:31%;}
+    .list .details .stage_details{margin-top:20px;margin-left:31%;margin-bottom:25px;}
+    .list .details .start_time{margin-left:10px;margin-right:40px;background-size:12%;height:30px;}
+    .list .details .end_time{margin-left:66%;background-size:10%;height:30px;}
+    .list .details .details_name{font-size:1.5em;margin-top:-10px;}
+    .list .details .details_inquadrangle{height:15px;width:15px;margin-left:7px;margin-top:7px;}
+    .list .details .details_exround{width:30px;height:30px;}
+    .list .details .iconfont-middle{font-size:1.9em;}
+    .list .details .iconfont-last{font-size:1.9em;}
+    .list a{font-size:1.4em;margin-left:3px;}
+    .list .details .iconfont-select{font-size:2em;}
+
+}
+@media screen and (max-width:768px)
+{
+    header ul li{margin-top:30px;}
+    header ul .mytask{margin-top:30px;margin-left:35%;font-size:22px;}
+    header ul .searth{margin-top:25px;margin-left:36%;}
+    header .iconfont-sousuo{font-size:1.9em;}    
+    .condition{width:100%;height:100px;border-bottom:1px solid #b2b2b2;}
+    .condition ul li{margin-left:9%;}      
+    .condition ul .unreceived{margin-left:15%;}
+    .condition ul .underway{margin-left:15%;}
+    .condition ul .accomplish{margin-left:18%;}
+    .list .listabove{height:230px;}
+    .list .listabove .imgabove{width:190px;height:190px;margin-left:5%;}
+    .select a{margin-left:30%;}
+    .select .copy{margin-left:51%;}
+    .list .details .stage{margin-top:25px;margin-left:33%;}
+    .list .details .stage_details{margin-top:10px;margin-left:33%;margin-bottom:10px;}
+    .list .details .start_time{margin-left:35%;margin-right:40px;background-size:6%;height:30px;float:none;}
+    .list .details .end_time{margin-left:35%;background-size:6%;height:30px;}
+}
+@media screen and (max-width:596px)
+{    
+    header{height:60px;}
+    header ul li{margin-top:20px;}
+    header ul .mytask{margin-top:17px;margin-left:32%;font-size:22px;}
+    header ul .searth{margin-top:15px;margin-left:32%;}
+    header .iconfont-sousuo{font-size:1.9em;}    
+    .condition{width:100%;height:100px;border-bottom:1px solid #b2b2b2;}
+    .condition ul li{margin-left:8%;}      
+    .condition ul .unreceived{margin-left:13%;}
+    .condition ul .underway{margin-left:15%;}
+    .condition ul .accomplish{margin-left:14%;}
+    .list .listabove{height:210px;}
+    .list .listabove .imgabove{width:150px;height:150px;margin-left:5%;}
+    .select a{margin-left:25%;}
+    .select .advanced-screen a{margin-left:5%;margin-top:35px;}
+    .select .copy{margin-left:51%;}
+    .select .advanced-screen{float:left;height:80px;width:22%;margin-top:-15px;}
+    .list .details .stage{margin-top:40px;margin-left:33.5%;}
+    .list .details .stage_details{margin-top:20px;margin-left:33.5%;}
+    .list .details .start_time{margin-left:5px;margin-right:40px;background-size:10%;float:left;}
+    .list .details .end_time{margin-left:48%;background-size:7%;}
+
+}
+@media screen and (max-width:465px)
+{
+    header{height:60px;}
+    header ul li{margin-top:25px;}
+    header ul .mytask{margin-top:25px;margin-left:22%;font-size:18px;}
+    header ul .searth{margin-top:20px;margin-left:28%;}
+    header .iconfont-sousuo{font-size:1.5em;}
+    .condition{height:80px;}
+    .condition ul li{margin-top:5px;}
+    .condition ul .unreceived{margin-top:4px;margin-left:13%;}
+    .condition ul .underway{margin-top:0;margin-left:12%;}
+    .condition ul .accomplish{margin-top:0px;margin-left:10%;}   
+    .select a{margin-left:25%;font-size:1.5em;margin-top:15px} 
+    .select .copy{margin-left:31%;}
+    .select .advanced-screen{width:26.5%;}    
+    .select .advanced-screen a{margin-left:5%;margin-top:30px;}    
+    .list .listabove{height:230px;}
+    .list .listabove .imgabove{width:150px;height:150px;margin-left:5%;}
+    .list .details .stage{margin-top:30px;margin-left:45%;}
+    .list .details .stage_details{margin-top:30px;margin-left:45%;}
+    .list .details .details_name{font-size:1.2em;float:none;}
+    .list .details .start_time{margin-left:25%;height:30px;float:left;margin-right:12%;}
+    .list .details .end_time{margin-left:25%;margin-top:40px;}
+    .list .details .details_inquadrangle{height:12.5px;width:12.5px;margin-left:6px;margin-top:6px;}
+    .list .details .details_exround{width:25px;height:25px;}
+    .list .details .iconfont-middle{font-size:1.5em;}
+    .list .details .iconfont-last{font-size:1.5em;}
+
+}
