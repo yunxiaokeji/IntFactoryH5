@@ -16,11 +16,7 @@ namespace IntFactoryH5Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-<<<<<<< HEAD
                 defaults: new { controller = "Task", action = "List", id = UrlParameter.Optional }
-=======
-                defaults: new { controller = "Task", action = "Detail", id = UrlParameter.Optional }
->>>>>>> 9e789c5914dfb1cdd1841c4c4baf5eaa730d0182
             );
         }
     }

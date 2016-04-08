@@ -11,11 +11,14 @@ namespace IntFactoryH5Web.Controllers
         //
         // GET: /Task/
 
-<<<<<<< HEAD
+
         public ActionResult List()
-=======
+        {
+            return View();
+        }
+
         public ActionResult Detail()
->>>>>>> 9e789c5914dfb1cdd1841c4c4baf5eaa730d0182
+
         {
             return View();
         }
