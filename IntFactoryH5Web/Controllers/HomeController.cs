@@ -20,5 +20,10 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
+        public ActionResult TaskDetail()
+        {
+            return View();
+        }
+
     }
 }
