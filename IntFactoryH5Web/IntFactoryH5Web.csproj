@@ -116,11 +116,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
-    <Content Include="modules\cssfont\demo.css" />
-    <Content Include="modules\cssfont\demo.html" />
-    <Content Include="modules\cssfont\iconfont.css" />
-    <Content Include="modules\cssfont\iconfont.svg" />
     <Content Include="modules\css\common.css" />
+    <Content Include="modules\css\task\tasklist.css" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\demo.css" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\demo.html" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.css" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.svg" />
+    <Content Include="modules\images\10.jpg" />
+    <Content Include="modules\images\2903.jpg" />
+    <Content Include="modules\images\2e47.jpg" />
+    <Content Include="modules\images\2f1f71ce7485465b393222382411ab79[2].JPG" />
+    <Content Include="modules\images\3f14cfebe8d73561b2dcea1123cae748[1].JPG" />
+    <Content Include="modules\images\4-1.jpg" />
+    <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1]-1.jpg" />
+    <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1].JPG" />
+    <Content Include="modules\images\99abd47e7f15568ab7db29f18b863a68[1]-2.jpg" />
+    <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
@@ -139,7 +150,8 @@
     <Content Include="modules\plug\touchSlider\js\jquery.js" />
     <Content Include="modules\plug\touchSlider\js\jquery_002.js" />
     <Content Include="modules\scripts\global.js" />
-    <Content Include="modules\scripts\task\taskdetail.js" />
+    <Content Include="modules\scripts\task\detail.js" />
+    <Content Include="modules\scripts\task\tasklist.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -170,9 +182,12 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\cssfont\iconfont.eot" />
-    <Content Include="modules\cssfont\iconfont.ttf" />
-    <Content Include="modules\cssfont\iconfont.woff" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.eot" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.ttf" />
+    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Task\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="modules\plug\touchSlider\.DS_Store" />

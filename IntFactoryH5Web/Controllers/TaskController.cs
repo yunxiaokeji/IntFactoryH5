@@ -11,7 +11,14 @@ namespace IntFactoryH5Web.Controllers
         //
         // GET: /Task/
 
+
+        public ActionResult List()
+        {
+            return View();
+        }
+
         public ActionResult Detail()
+
         {
             return View();
         }
