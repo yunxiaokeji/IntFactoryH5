@@ -10,6 +10,16 @@ namespace IntFactory.Sdk
         public string orderID;
 
         /// <summary>
+        /// 订单样图缩约图
+        /// </summary>
+        public string orderImage;
+
+        /// <summary>
+        /// 订单样图列表
+        /// </summary>
+        public string orderImages;
+
+        /// <summary>
         /// 制版信息
         /// </summary>
         public string platemaking;
