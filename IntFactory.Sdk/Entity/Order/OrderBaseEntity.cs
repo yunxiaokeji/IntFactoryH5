@@ -7,7 +7,15 @@ namespace IntFactory.Sdk
 {
     public class OrderBaseEntity
     {
+        /// <summary>
+        /// 订单ID
+        /// </summary>
         public string orderID;
+
+        /// <summary>
+        /// 订单编码
+        /// </summary>
+        public string orderCode;
 
         /// <summary>
         /// 订单样图缩约图

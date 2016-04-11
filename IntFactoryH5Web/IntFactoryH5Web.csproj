@@ -135,7 +135,12 @@
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
+
     <Content Include="modules\images\default-user.gif" />
+
+    <Content Include="modules\images\inuser_07.gif" />
+    <Content Include="modules\images\Zoom.gif" />
+
     <Content Include="modules\plug\doT.js" />
     <Content Include="modules\plug\touchSlider\css\sytyle.css" />
     <Content Include="modules\plug\touchSlider\images\20141206092732_4208.jpg" />
@@ -196,6 +201,7 @@
     <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.ttf" />
     <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.woff" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
   </ItemGroup>
@@ -205,6 +211,7 @@
       <Name>IntFactory.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

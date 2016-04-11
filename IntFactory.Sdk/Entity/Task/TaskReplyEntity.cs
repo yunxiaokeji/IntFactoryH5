@@ -47,5 +47,11 @@ namespace IntFactory.Sdk
         /// 来源讨论人
         /// </summary>
         public UserBase fromReplyUser { get; set; }
+
+        public string fromReplyID { get; set; }
+
+        public string fromReplyUserID { get; set; }
+
+        public string fromReplyAgentID { get; set; }
     }
 }

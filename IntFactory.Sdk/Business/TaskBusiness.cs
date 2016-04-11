@@ -18,11 +18,12 @@ namespace IntFactory.Sdk
         /// <param name="userID"></param>
         /// <param name="agentID"></param>
         /// <returns></returns>
-        public TaskListResult GetTasks(string userID, string agentID)
+        public TaskListResult GetTasks(FilterTasks filter, string userID, string agentID)
         { 
             var paras = new Dictionary<string, object>();
             paras.Add("userID", userID);
             paras.Add("agentID", agentID);
+            paras.Add("filter",JsonConvert.SerializeObject(filter).ToString());
 
             return HttpRequest.RequestServer < TaskListResult>(ApiOption.GetTasks, paras);
         }
@@ -169,6 +170,23 @@ namespace IntFactory.Sdk
             paras.Add("agentID", agentID);
 
             return HttpRequest.RequestServer<UpdateResult>(ApiOption.FinishTask, paras);
+        }
+
+        /// <summary>
+        /// 添加任务讨论
+        /// </summary>
+        /// <param name="reply"></param>
+        /// <param name="userID"></param>
+        /// <param name="agentID"></param>
+        /// <returns></returns>
+        public AddResult SavaTaskReply(TaskReplyEntity reply, string userID, string agentID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("reply", JsonConvert.SerializeObject(reply).ToString() );
+            paras.Add("userID", userID);
+            paras.Add("agentID", agentID);
+
+            return HttpRequest.RequestServer<AddResult>(ApiOption.SavaTaskReply, paras);
         }
         #endregion
 

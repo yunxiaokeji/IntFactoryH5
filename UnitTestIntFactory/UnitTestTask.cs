@@ -13,7 +13,7 @@ namespace UnitTestIntFactory
         [TestMethod]
         public void GetTasks()
         {
-            var result= TaskBusiness.BaseBusiness.GetTasks(userID, agentID);
+            var result= TaskBusiness.BaseBusiness.GetTasks(new FilterTasks(),userID, agentID);
             Assert.IsTrue(result.error_code==0);
         }
     }
