@@ -53,6 +53,12 @@
     <Compile Include="UnitTestTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">
+      <Project>{bc180ed7-4c16-4974-89fb-0894016f58ff}</Project>
+      <Name>IntFactory.Sdk</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
