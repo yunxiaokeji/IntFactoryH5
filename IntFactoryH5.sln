@@ -5,6 +5,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntFactoryH5.WEB", "IntFact
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntFactoryH5Web", "IntFactoryH5Web\IntFactoryH5Web.csproj", "{4178B026-69BF-4DCD-A68B-09A2094354AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntFactory.Tool", "IntFactory.Tool", "{637EC01E-8D47-43D8-A4DE-2F24588A1010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntFactory.Sdk", "IntFactory.Sdk\IntFactory.Sdk.csproj", "{BC180ED7-4C16-4974-89FB-0894016F58FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestIntFactory", "UnitTestIntFactory\UnitTestIntFactory.csproj", "{F8D85562-307A-4A00-9F24-59CF28D2917A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +21,21 @@ Global
 		{4178B026-69BF-4DCD-A68B-09A2094354AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4178B026-69BF-4DCD-A68B-09A2094354AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4178B026-69BF-4DCD-A68B-09A2094354AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC180ED7-4C16-4974-89FB-0894016F58FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC180ED7-4C16-4974-89FB-0894016F58FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC180ED7-4C16-4974-89FB-0894016F58FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC180ED7-4C16-4974-89FB-0894016F58FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D85562-307A-4A00-9F24-59CF28D2917A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D85562-307A-4A00-9F24-59CF28D2917A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D85562-307A-4A00-9F24-59CF28D2917A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D85562-307A-4A00-9F24-59CF28D2917A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4178B026-69BF-4DCD-A68B-09A2094354AB} = {3AF83EFC-4EC0-45F8-B02D-8464C6AE7B2B}
+		{BC180ED7-4C16-4974-89FB-0894016F58FF} = {637EC01E-8D47-43D8-A4DE-2F24588A1010}
+		{F8D85562-307A-4A00-9F24-59CF28D2917A} = {637EC01E-8D47-43D8-A4DE-2F24588A1010}
 	EndGlobalSection
 EndGlobal
