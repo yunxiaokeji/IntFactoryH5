@@ -17,6 +17,12 @@
    
     TaskDetail.bindEvent = function () {
         
+        $.post("/Task/GetTaskDetail", { taskID: '646f88ad-a337-43d3-92ab-4b2b234cfbf3', userID: 'BC6802E9-285C-471C-8172-3867C87803E2', agentID: '9F8AF979-8A3B-4E23-B19C-AB8702988466' }, function (data) {
+
+            
+
+        })
+
         //窗体加载设置自己发送信息文本框的位置
         setTextPosition();
         //窗体加载设置订单需求文本内容
@@ -149,8 +155,7 @@
             $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 70 + "px");
         }
 
-    
-
+        
     }
 
   

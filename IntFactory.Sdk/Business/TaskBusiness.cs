@@ -38,7 +38,6 @@ namespace IntFactory.Sdk
             var paras = new Dictionary<string, object>();
             paras.Add("userID", userID);
             paras.Add("agentID", agentID);
-
             return HttpRequest.RequestServer<ProcessListResult>(ApiOption.GetOrderProcess, paras);
         }
 
