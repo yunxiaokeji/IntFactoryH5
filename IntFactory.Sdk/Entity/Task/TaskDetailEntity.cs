@@ -14,6 +14,11 @@ namespace IntFactory.Sdk
         public string taskID { get; set; }
 
         /// <summary>
+        /// 任务编码
+        /// </summary>
+        public string taskCode { get; set; }
+
+        /// <summary>
         /// 订单ID
         /// </summary>
         public string orderID { get; set; }
@@ -82,5 +87,7 @@ namespace IntFactory.Sdk
         /// 负责人
         /// </summary>
         public UserBase ownerUser { get; set; }
+
+        public OrderBaseEntity order { get; set; }
     }
 }
