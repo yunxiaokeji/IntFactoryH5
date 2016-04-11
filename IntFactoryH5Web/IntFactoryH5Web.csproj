@@ -118,10 +118,10 @@
     <Content Include="Global.asax" />
     <Content Include="modules\css\common.css" />
     <Content Include="modules\css\task\tasklist.css" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\demo.css" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\demo.html" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.css" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.svg" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\demo.css" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\demo.html" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.css" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.svg" />
     <Content Include="modules\images\10.jpg" />
     <Content Include="modules\images\2903.jpg" />
     <Content Include="modules\images\2e47.jpg" />
@@ -182,11 +182,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.eot" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.ttf" />
-    <Content Include="modules\iconfont\ux_1459999176_0237274\iconfont.woff" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Task\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +190,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.eot" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.ttf" />
+    <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

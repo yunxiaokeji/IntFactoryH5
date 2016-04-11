@@ -13,7 +13,7 @@
     <link href="~/modules/css/layout.css" rel="stylesheet" />
     <link href="~/modules/css/task/detail.css" rel="stylesheet" />
     <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
-    <link href="~/modules/cssfont/iconfont.css" rel="stylesheet" />
+    <link href="~/modules/iconfont/ux_1460342755_7796638/iconfont.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
 </head>
     <script src="~/Scripts/jquery-1.11.1.js"></script>
@@ -40,6 +40,7 @@
 
     <!--焦点图-->
     <div class="main_visual">
+        <div class="task-msg">任务名称</div>
         <div class="flicking_con">
             <a class="on" href="javascript:void(0);"></a>
             <a href="javascript:void(0);"></a>
@@ -47,8 +48,8 @@
             <a href="javascript:void(0);"></a>
             <a href="javascript:void(0);"></a>
         </div>
+
         <div class="main_image">
-            <div class="task-msg">任务名称</div>
             <ul>
                 <li> <img src="~/modules/plug/touchSlider/images/20141206092732_4208.jpg"></li>
                 <li> <img src="~/modules/plug/touchSlider/images/20141206093851_5791.jpg"></li>
@@ -57,17 +58,20 @@
                 <li> <img src="~/modules/plug/touchSlider/images/20141206093912_0947.jpg"></li>
             </ul>
         </div>
+
     </div>
     
     <!--任务信息-->
     <div class="task-info">
+
         <div class="main-info">
-            <ul class="left-task-info">
+             <ul class="left-task-info">
                 <li><span>任务编号</span><span class="setindent">:</span><span>201603221631226021</span></li>
                 <li><span>接受任务</span><span class="setindent">:</span><span class="task-status">未接收</span></li>
                 <li><span>完成时间</span><span class="setindent">:</span><span>无</span></li>
                 <li><span>到期时间</span><span class="setindent">:</span><span>未设置</span></li>
             </ul>
+
              <ul class="right-task-info">
                 <li>
                     <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span>李涛</span></div>
@@ -80,7 +84,12 @@
                 <li><span>任务</span><span class="setindent">:</span><span>材料</span></li>
             </ul>
         </div>
-        <div class="order-need"><span>订单需求</span><span class="setindent">:</span><span>衣服要大</span></div>
+        <div class="order-need">
+            <span>订单需求</span>
+            <span class="setindent">:</span>
+            <span>衣服要大衣服要大衣服要大大衣服要大大衣服要大大衣服要大衣服要大衣服要大衣服要大衣服要大</span>
+        </div>
+        <div style="clear:both;"></div>
     </div>
 
     <!--菜单-->
@@ -88,8 +97,8 @@
         <ul>
             <li class="talk menuchecked" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
             <li class="buy-plan" data-classname="shop-status"><i class="iconfont">&#xe614;</i>材料采购计划</li>
-            <li class="print"><i class="iconfont">&#xe617;</i>制版</li>
-            <li class="log"><i class="iconfont">&#xe61a;</i>日志</li>
+            <li class="print " data-classname="print-status"><i class="iconfont">&#xe617;</i>制版</li>
+            <li class="log" data-classname="log-status"><i class="iconfont">&#xe61a;</i>日志</li>
         </ul>
     </nav>
 
@@ -107,7 +116,8 @@
             <div class="talk-main">
                 
                <div class="send-other">
-                    <div class="send-date">
+                    <div class="send-nameanddate">
+                        <span>小明</span>
                         <span>2016-04-08 10:36:58</span>
                     </div>
 
@@ -131,7 +141,8 @@
                 </div>
 
                <div class="send-other">
-                    <div class="send-date">
+                    <div class="send-nameanddate">
+                        <span>小黑</span>
                         <span>2016-04-08 10:36:58</span>
                     </div>
 
@@ -157,8 +168,9 @@
                 </div>
                
                <div class="send-self">
-                    <div class="send-date">
+                    <div class="send-nameanddate">
                         <span>2016-04-08 10:36:58</span>
+                        <span>李涛</span>
                     </div>
 
                     <div class="talk-self">
@@ -176,7 +188,8 @@
                </div>
 
                <div class="send-other">
-                    <div class="send-date">
+                    <div class="send-nameanddate">
+                        <span>小白</span>
                         <span>2016-04-08 10:36:58</span>
                     </div>
 
@@ -202,8 +215,9 @@
                 </div>
 
                <div class="send-self">
-                    <div class="send-date">
+                    <div class="send-nameanddate">
                         <span>2016-04-08 10:36:58</span>
+                        <span>李涛</span>
                     </div>
 
                     <div class="talk-self">
@@ -219,31 +233,29 @@
                         </p>
                     </div>
                </div>
-
              </div>
-
         </div>
-
-         <!--回复-->
-        <div class="return-msg">
-        <div class="box-returnmsg">
-            <input type="text" placeholder="输入讨论内容" class="txt-talkcontent" />
+            <!--回复-->
+            <div class="return-msg">
+                <div class="box-returnmsg">
+                    <input type="text" placeholder="输入讨论内容" class="txt-talkcontent" />
+                </div>
+                <div class="box-submit">
+                    <input type="button" value="提交" class="btn-submit" />
+                </div>
+            </div>
         </div>
-        <div class="box-submit">
-            <input type="button" value="提交" class="btn-submit" />
-        </div>
-    </div>
-        </div>
+           
         
-       
 
         <!--材料采购计划模块-->
         <div class="shop-status hide">
+
             <div class="plan-info">
                 
                 <div class="material">
                     <ul>
-                        <li class="meterial-lump" data-status="0"></li>
+                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
                         <li class="meterial-name">材料名称</li>
                         <li class="meterial-size">6651黑</li>
                     </ul>
@@ -261,11 +273,185 @@
                     </ul>
                 </div>
 
+            </div>
+           
+            <div class="plan-info">
+                
+                <div class="material">
+                    <ul>
+                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
+                        <li class="meterial-name">材料名称</li>
+                        <li class="meterial-size">8888红</li>
+                    </ul>
+                </div>
+                 
+                <div class="material-main">
+                    <ul class="material-info">
+                        <li><span>编码</span><span>9527</span></li>
+                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
+                        <li><span>单位</span><span>米</span></li>
+                        <li><span>单价</span><span>$40.00</span></li>
+                        <li><span>消耗量</span><span>1.00</span></li>
+                        <li><span>损耗量</span><span>0.00</span></li>
+                        <li><span>小计</span><span>$40.00</span></li>
+                    </ul>
+                </div>
+
                 <div style="clear:both;"></div>
             </div>
+
+            <div class="plan-info">
+                
+                <div class="material">
+                    <ul>
+                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
+                        <li class="meterial-name">材料名称</li>
+                        <li class="meterial-size">4251蓝</li>
+                    </ul>
+                </div>
+                 
+                <div class="material-main">
+                    <ul class="material-info">
+                        <li><span>编码</span><span>9527</span></li>
+                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
+                        <li><span>单位</span><span>米</span></li>
+                        <li><span>单价</span><span>$40.00</span></li>
+                        <li><span>消耗量</span><span>1.00</span></li>
+                        <li><span>损耗量</span><span>0.00</span></li>
+                        <li><span>小计</span><span>$40.00</span></li>
+                    </ul>
+                </div>
+
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="plan-info">
+                
+                <div class="material">
+                    <ul>
+                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
+                        <li class="meterial-name">材料名称</li>
+                        <li class="meterial-size">4211白</li>
+                    </ul>
+                </div>
+                 
+                <div class="material-main">
+                    <ul class="material-info">
+                        <li><span>编码</span><span>9527</span></li>
+                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
+                        <li><span>单位</span><span>米</span></li>
+                        <li><span>单价</span><span>$40.00</span></li>
+                        <li><span>消耗量</span><span>1.00</span></li>
+                        <li><span>损耗量</span><span>0.00</span></li>
+                        <li><span>小计</span><span>$40.00</span></li>
+                    </ul>
+                </div>
+
+                <div style="clear:both;"></div>
+            </div>
+
+        </div>
+
+        <!--制版模块-->
+        <div class="print-status hide">
+            <div class="print-header">制版信息</div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li></li>
+                    <li>S</li>
+                    <li>M</li>
+                    <li>L</li>
+                </ul>
+            </div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li>衣长</li>
+                    <li>79</li>
+                    <li>79</li>
+                    <li>79</li>
+                </ul>
+            </div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li>胸围</li>
+                    <li>83</li>
+                    <li>83</li>
+                    <li>83</li>
+                </ul>
+            </div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li>腰围</li>
+                    <li>68</li>
+                    <li>68</li>
+                    <li>68</li>
+                </ul>
+            </div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li>袖长</li>
+                    <li>23.5</li>
+                    <li>23.5</li>
+                    <li>23.5</li>
+                </ul>
+            </div>
+
+            <div class="print-info">
+                <ul class="print-size">
+                    <li>袖口</li>
+                    <li>29</li>
+                    <li>29</li>
+                    <li>29</li>
+                </ul>
+            </div>
+
+            <div style="clear:both;"></div>
+        </div>
+
+        <!--日志模块-->
+        <div class="log-status hide">
+            
+            <div class="log-box">
+                <ul class="log-info">
+                    <li><img src="~/modules/images/default-user.gif" /></li>
+                    <li class="log-name">李白</li>
+                    <li>
+                        <p>标记客户颜色</p>
+                        <p>2016-04-08 18:59:05</p>
+                    </li>                   
+                </ul>
+            </div>
+            
+             <div class="log-box">
+                <ul class="log-info">
+                    <li><img src="~/modules/images/default-user.gif" /></li>
+                    <li class="log-name">李白</li>
+                    <li>
+                        <p>改变负责人</p>
+                        <p>2016-04-08 18:59:05</p>
+                    </li>                   
+                </ul>
+            </div>
+
+             <div class="log-box">
+                <ul class="log-info">
+                    <li><img src="~/modules/images/default-user.gif" /></li>
+                    <li class="log-name">李白</li>
+                    <li>
+                        <p>标记客户颜色</p>
+                        <p>2016-04-08 18:59:05</p>
+                    </li>                   
+                </ul>
+            </div>
+
         </div>
 
     </div>
-
+   
 </body>
 </html>
