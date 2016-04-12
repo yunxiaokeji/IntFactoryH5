@@ -24,17 +24,22 @@
 .task-status li a{height:30px;margin-top:5px;text-align:center;color:#666;display:inline-block;width:100%;font-size:0.7em;}
 .task-status .ico-status .iconfont{color:#666;}
 /*选择条件的css样式*/
-.select{width:100%;height:50px;border-bottom:1px solid #ccc;}
+.select{width:100%;height:30px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:0.7em;}
-.select li{width:25%;float:left;border-right:1px solid #ccc;height:50px;margin-left:-1px;margin-top:-10px;}
-.select li .copy{height:30px;margin-top:15px;text-align:center;}
+.select li{width:25%;float:left;border-right:1px solid #ccc;height:30px;margin-left:-1px;margin-top:-10px;}
+.select li .copy{height:15px;margin-top:5px;text-align:center;}
 .select .copy .iconfont{color:#666;}
 /*选项菜单*/
 .select-box { position:relative;}
 /*类型*/
-.select-box .option { width:100%;border:1px solid #ccc;position:absolute;z-index:333;left:0;display:none;}
-.select-box .option .option-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
-
+.select-box .tab-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;display:none;position:absolute;z-index:333;left:-1px;}
+.select-box .option {width:100%;}
+.select-box .dropdownlist li{font-size:0.8em;color:#999;padding-top:5px;padding-bottom:5px;}
+.select-box .dropdownlist li:hover{background-color:#318AE4;color:#fff;}
+/*流程*/
+.select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;margin-left:25%;background-color:#fff;position:absolute;z-index:334;display:none;}
+/*筛选*/
+.select-box .screen-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;margin-left:50%;background-color:#fff;position:absolute;z-index:335;display:none;}
 /*高级筛选*/
 .select-box .tab-screen { position:absolute;left:0;bottom:-120px;background-color:rgba(239,239,239,0.9);width:100%;display:none;}
 .tab-screen ul {width:100%; }
@@ -42,23 +47,34 @@
 .tab-screen ul li:first-child { width:30px;color:#007aff;}
 .tab-screen ul li:nth-child(2) { margin-left:5px;}
 /*列表*/
-.list .listabove{width:100%;display:block;margin-top:30px;border-bottom:1px solid #dfdfdf;padding-bottom:30px;}
-.list .listabove li{width:120px;height:120px;float:left;margin-left:15px;}
-.list li:first-child img{width:100%;height:100%;}
-.list .listabove li:last-child{margin-right:10px;width:2px;height:15px;border:1px solid #e0483e;background-color:#e0483e;margin-left:10%;}
+.list .listabove{width:100%;display:table;margin-top:30px;border-bottom:1px solid #dfdfdf;}
+.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:30px;padding-left:10px;}
+.list li:first-child img{width:120px;height:120px;}
+.list li:last-child div{width:10px;height:120px;border:1px solid #e0483e;background-color:#e0483e;margin-left:10%;}
 .list .listabove .center-list-task { margin-left:10px;font-size:0.6em;color:#999;}
 .list .details .details-name {color:#666; }
-.list .center-list-task .details {width:12em; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.list .center-list-task .details {width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .list .center-list-task .details:hover {overflow:visible;}
-.list .center-list-task .time { background:url(/modules/images/times.jpg)no-repeat;background-size:15px;background-position-y:center;padding-left:15px;}
-.list .center-list-task .stage { }
-/*.list .center-list-task .center-task { margin-top:-5px;}
-.list .center-task .details-icon { float:left;margin-right:5px;}
-.list .center-task a { font-size:0.7em;color:#666;}
-.list .center-task .stage{ color:#999;}
-.list .center-task .stage-specific{ color:#999;}
-.list .center-task .details-taskname { width:60%; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.list .center-task .details-taskname:hover{ overflow:visible;}
-.list .time a { color:#999;font-size:0.6em;height:10px;line-height:21px;}
-.list .center-task .start-time { float:left;}*/
+.list .center-list-task .stage {height:30px;}
+.list .center-list-task .details-stage {margin-top:25px; }
+.list .center-list-task .time { background:url(/modules/images/times.jpg)no-repeat;background-size:15px;background-position-y:center;padding-left:15px;margin-top:10px;}
+.list .center-list-task .stage-time {padding-right:5%; }
+@media screen and (min-width:414px) {
+    .list li:last-child div{margin-left:40px;}
+}
+@media screen and (min-width:550px) {
+    .task-status{height:80px;}
+    .task-status li .ico-status{margin-top:25px;}
+    .select{height:50px;}
+    .select a{font-size:0.9em;}
+    .select li{height:50px;margin-top:0;}
+    .select li .copy{height:20px;margin-top:15px;}
+    .list li:last-child div{margin-left:1em;}
+    .list li:first-child img{width:200px;height:200px;}
+    .list .details .details-name {font-size:1.5em;}    
+    .list .center-list-task .stage {height:55px;}
+    .list .center-list-task .details-stage {margin-top:60px; }    
+    .list .details .iconfont {font-size:1.7em; }
+}
+
 

@@ -37,28 +37,28 @@
                 <div class="head">我的任务</div>                
             </li>
             <li>
-                <div class="head" id="cancel-header"><i class="iconfont-search">&#xe605;</i></div>  
+                <div class="head" id="cancel-header"><i class="iconfont iconfont-search">&#xe605;</i></div>  
             </li>
         </ul>
     </header>    
     @* 选择状态 *@
     <ul class="task-status">
             <li>
-                <div class="ico-status"><i class="iconfont-status-ico">&#xe61b;</i></div>
+                <div class="ico-status"><i class="iconfont-status-ico iconfont">&#xe61b;</i></div>
                 <a class="all-a">全部</a>
             </li>
             <li>
                 <div class="ico-status">
-                    <i class="iconfont-status">&#xe61e;</i>
+                    <i class="iconfont-status iconfont">&#xe61e;</i>
                 </div>
                 <a class="unreceived-a">未接受</a>
             </li>
             <li>
-                <div class="ico-status"><i class="iconfont-status" id="iconfont-underway">&#xe621;</i></div>
+                <div class="ico-status"><i class="iconfont-status iconfont" id="iconfont-underway">&#xe621;</i></div>
                 <a class="underway-a">进行中</a>
             </li>
             <li>
-                <div class="ico-status"><i class="iconfont-status" id="iconfont-underway-accom">&#xe61f;</i></div>
+                <div class="ico-status"><i class="iconfont-status iconfont" id="iconfont-underway-accom">&#xe61f;</i></div>
                 <a class="accomplish-a">已完成</a>
             </li>
         </ul>
@@ -67,39 +67,50 @@
          <ul class="select">
              <li><div class="copy" id="type-a" data-type="0">
                  <a class="type-a">类型</a>
-                 <i class="iconfont-select" id="iconfont-type">&#xe61c;</i>
+                 <i class="iconfont-select iconfont" id="iconfont-type">&#xe61c;</i>
              </div></li>
-             <li><div class="copy">
+             <li><div class="copy" id="flow-a" data-flow="0">
                  <a class="flow-a">流程</a>
-                 <i class="iconfont-select" id="iconfont-flow">&#xe61c;</i>
+                 <i class="iconfont-select iconfont" id="iconfont-flow">&#xe61c;</i>
              </div></li>
-
-             <li><div class="copy">
+             <li><div class="copy" id="screen-a" data-screen="0">
                  <a class="screen-a">筛选</a>
-                 <i class="iconfont-select" id="iconfont-screen">&#xe61c;</i>
+                 <i class="iconfont-select iconfont" id="iconfont-screen">&#xe61c;</i>
              </div></li>
              <li><div class="copy" id="select-copy" data-select="0">
                  <a>高级筛选</a>            
              </div></li> 
          </ul>
         @* 选项详细下拉 *@           
-        <ul class="option">
-            @* 类型下拉 *@
-            <li class="option-type">
-                <div class="tab-type">
-                    <ul> 
-                        <li>全部</li>                 
-                        <li>打样</li>
-                        <li>大货</li>                        
-                    </ul>                
-                 </div>
-            </li>
+        <div class="dropdownlist">
+            @* 类型下拉 *@            
+            <div class="tab-type">
+                <ul class="option"> 
+                    <li class="all-type">全部</li>                 
+                    <li class="DY-type">打样</li>
+                    <li class="DH-type">大货</li>                        
+                </ul>                
+             </div>            
+        
             @* 流程下拉 *@
-           
+           <div class="flow-type">
+                <ul class="potion">
+                    <li class="all-flow">全部流程</li>
+                    <li class="DY-flow">打样流程</li>
+                    <li class="DH-flow">大货流程</li>
+                    <li class="SC-flow">生产线</li>
+                </ul>
+           </div>
             @* 筛选下拉 *@
-    
-        </ul>
-            
+            <div class="screen-type">
+                <ul class="potion">
+                    <li class="all-screen">全部</li>
+                    <li class="GC-screen">工厂</li>
+                    <li class="ZH-screen">自助</li>
+                    <li class="AL-screen">阿里</li>
+                </ul>
+            </div>        
+        </div>
         @* 高级筛选 *@
         <div class="tab-screen" id="tab-screen">
                 <ul>
@@ -133,99 +144,75 @@
             <li class="center-list-task">
                 @* 任务详情 *@
                  <div class="details">                
-                    <i class="iconfont-details">&#xe61e;</i>
+                    <i class="iconfont-details iconfont">&#xe61e;</i>
                     <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
                 </div>
-                <div class="stage">
+                <div class="stage details-stage">
                     任务:<label>材料</label>
                 </div>
                 <div class="stage">
-                    <i class="iconfont-stage">&#xe612;</i>
+                    <i class="iconfont-stage iconfont">&#xe612;</i>
                     <label>打样</label>
                 </div>
-                <div class="time stage" >
-                    <span>2016-03-24 00:00:00</span>
-                    <span>2016-03-24 00:00:00</span>
+                <div class="stage" >
+                    <span class="time stage-time">2016-03-24 00:00:00</span>
+                    <span class="time">2016-03-24 00:00:00</span>
                 </div>                
             </li>
-            <li>
+            <li class="last-stage">
                 <div></div>
             </li>     
         </ul>
         <ul class="listabove row">
-            <li class="img-li" >
-                <img src="~/modules/images/2903.jpg" />
-            </li>     
-            <li class="center-list-task">
-                @* 任务详情 *@
-                <ul class="center-task">
-                    <li>
-                        <div class="details">                
-                            <div class="details-icon">
-                                <i class="iconfont-details-ZB">&#xe621;</i>
-                            </div>
-                            <div class="details-taskname">
-                                <a class="details-name" href="javascript:void(0);">阿里巴巴与四十大盗旗下最新上线平台</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li> 
-                        <div class="stage">
-                            <a>任务</a><a>:</a><a>制版</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="stage_details">
-                            <i class="iconfont-stage">&#xe612;</i>
-                            <a class="stage-specific">打样</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="time"><a>2016-03-24 00:00:00</a></div>
-                        <div class="time"><a>2016-03-24 00:00:00</a></div>
-                    </li>
-                </ul>                
-            </li>
             <li>
-                <div class="pressing"></div>
-            </li>     
-        </ul>
-        <ul class="listabove row">
-            <li class="img-li" >
                 <img src="~/modules/images/10.jpg" />
             </li>     
             <li class="center-list-task">
                 @* 任务详情 *@
-                <ul class="center-task">
-                    <li>
-                        <div class="details">                
-                            <div class="details-icon">
-                                <i class="iconfont-details-DH">&#xe61f;</i>
-                            </div>
-                            <div class="details-taskname">
-                                <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li> 
-                        <div class="stage">
-                            <a>任务</a><a>:</a><a>材料</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="stage_details">
-                            <i class="iconfont-stage">&#xe60f;</i>
-                            <a class="stage-specific">打样</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="time"><a>2016-03-24 00:00:00</a></div>
-                        <div class="time"><a>2016-03-24 00:00:00</a></div>
-                    </li>
-                </ul>                
+                 <div class="details">                
+                    <i class="iconfont-details iconfont">&#xe61e;</i>
+                    <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
+                </div>
+                <div class="stage details-stage">
+                    任务:<label>材料</label>
+                </div>
+                <div class="stage">
+                    <i class="iconfont-stage iconfont">&#xe612;</i>
+                    <label>打样</label>
+                </div>
+                <div class="stage" >
+                    <span class="time stage-time">2016-03-24 00:00:00</span>
+                    <span class="time">2016-03-24 00:00:00</span>
+                </div>                
             </li>
+            <li class="last-stage">
+                <div></div>
+            </li>     
+        </ul>
+        <ul class="listabove row">
             <li>
-                <div class="pressing"></div>
+                <img src="~/modules/images/10.jpg" />
+            </li>     
+            <li class="center-list-task">
+                @* 任务详情 *@
+                 <div class="details">                
+                    <i class="iconfont-details iconfont">&#xe61e;</i>
+                    <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
+                </div>
+                <div class="stage details-stage">
+                    任务:<label>材料</label>
+                </div>
+                <div class="stage">
+                    <i class="iconfont-stage iconfont">&#xe612;</i>
+                    <label>打样</label>
+                </div>
+                <div class="stage" >
+                    <span class="time stage-time">2016-03-24 00:00:00</span>
+                    <span class="time">2016-03-24 00:00:00</span>
+                </div>                
+            </li>
+            <li class="last-stage">
+                <div></div>
             </li>     
         </ul>
     </div>
