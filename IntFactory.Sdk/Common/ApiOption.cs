@@ -39,6 +39,9 @@ namespace IntFactory.Sdk
         UpdateTaskEndTime,
 
         [Description("/api/task/finishTask")]
-        FinishTask
+        FinishTask,
+
+        [Description("/api/task/savaTaskReply")]
+        SavaTaskReply
     }
 }
