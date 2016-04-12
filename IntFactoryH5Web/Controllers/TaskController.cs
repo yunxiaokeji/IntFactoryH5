@@ -24,7 +24,17 @@ namespace IntFactoryH5Web.Controllers
         {
             return View();
         }
-
+        public JsonResult GetTaskList(string taskID)
+        {
+            taskID=Request["taskID"];
+            IntFactory.Sdk.TaskListResult result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(taskID, userID, agentID);
+            Dictionary<string, object> dr = new Dictionary<string, object>();
+            if (true)
+            {
+                
+            }
+            return null;
+        }
         public JsonResult GetTaskDetail(string taskID)
         {
             taskID = Request["taskID"];
