@@ -17,6 +17,10 @@
 
     .return-msg .box-submit { width:18%;}
 
+    .send-self .talk-self .text-talk { font-size:0.9em;}
+
+    .send-other .talk-other .text-talk { font-size:0.9em;}
+
 }
 
 @media screen and (max-width:414px) {

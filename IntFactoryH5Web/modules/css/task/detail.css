@@ -5,7 +5,7 @@
 
 /*焦点图*/
 .main_visual .main_image img { width:100%;}
-.task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:40px;text-indent:1em;color:#fff;}
+.task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:40px;text-indent:1em;color:#fff;font-size:0.8em;}
 
 /*任务详情信息*/
 .task-info { background-color:#fff;width:100%;}
@@ -19,7 +19,7 @@
 .right-task-info li .dy-info { float:right;margin-top:-2px;line-height:24px;}
 .right-task-info .dy-info a { text-decoration:none;color:#666;display:block;}
 .right-task-info .dy-info span { line-height:10px;}
-.main-info .right-task-info li:last-child { margin-top:82px;}
+.main-info .right-task-info li:last-child { margin-top:89px;}
 .task-info .order-need { line-height:40px;color:#666;font-size:0.8em;margin-left:20px;}
 .task-info .order-need span { float:left; display:block;}
 .task-info .order-need span:last-child {line-height:20px;margin-top:10px;padding-bottom:10px;}
