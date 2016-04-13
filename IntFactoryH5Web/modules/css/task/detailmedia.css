@@ -58,9 +58,9 @@
 
     .return-msg .box-submit { width:24%;}
 
-    .send-other .talk-other { width:64%;}
+    .send-other .talk-other,.send-self .talk-self { width:64%;}
 
-    .send-other .return-other .iconfont { font-size:1.0em;color:#a8a8a8;}
+    .send-other .return-other .iconfont,.talk-self .return-self .iconfont { font-size:1.0em;color:#a8a8a8;}
 
     .material-main .material-info li { font-size:0.6em; }
 

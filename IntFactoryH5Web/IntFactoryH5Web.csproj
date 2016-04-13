@@ -131,11 +131,11 @@
     <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1]-1.jpg" />
     <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1].JPG" />
     <Content Include="modules\images\99abd47e7f15568ab7db29f18b863a68[1]-2.jpg" />
+    <Content Include="modules\images\defaultavatar.png" />
     <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
-    <Content Include="modules\images\default-user.gif" />
     <Content Include="modules\images\inuser_07.gif" />
     <Content Include="modules\images\Zoom.gif" />
     <Content Include="modules\plug\doT.js" />
@@ -154,10 +154,11 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
+    <Content Include="modules\template\task\detailLog.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
-    <Content Include="modules\template\task\taskDetailReply.html" />
+    <Content Include="modules\template\task\detailReply.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
