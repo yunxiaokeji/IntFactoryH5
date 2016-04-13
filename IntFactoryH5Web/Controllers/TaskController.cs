@@ -17,27 +17,28 @@ namespace IntFactoryH5Web.Controllers
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
         Dictionary<string, object> TaskDetail = new Dictionary<string, object>();
         Dictionary<string, object> TaskList = new Dictionary<string, object>();
+
         //浏览器加载获取任务列表
-        public ActionResult List(string taskID)
-        {            
-            FilterTasks filter = new FilterTasks();
-            Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
-            var resultlListTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(filter, userID, agentID);
-            if (resultlListTask.error_code != 0)
-            {
-                resultTaskInfoObj.Add("result", 0);
-                resultTaskInfoObj.Add("error-msg", resultlListTask.error_message);
-            }
-            else
-            {
-                if (resultlListTask.tasks != null)
-                {
-                    var taskList = resultlListTask.tasks;
-                    ViewBag.task = taskList;
-                }
-            }
-            return View();
-        }
+        //public ActionResult List(string taskID)
+        //{            
+        //    FilterTasks filter = new FilterTasks();
+        //    Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
+        //    var resultlListTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(filter, userID, agentID);
+        //    if (resultlListTask.error_code != 0)
+        //    {
+        //        resultTaskInfoObj.Add("result", 0);
+        //        resultTaskInfoObj.Add("error-msg", resultlListTask.error_message);
+        //    }
+        //    else
+        //    {
+        //        if (resultlListTask.tasks != null)
+        //        {
+        //            var taskList = resultlListTask.tasks;
+        //            ViewBag.task = taskList;
+        //        }
+        //    }
+        //    return View();
+        //}
 
         //浏览器加载获取任务详情信息
         public ActionResult Detail(string taskID)
@@ -83,21 +84,18 @@ namespace IntFactoryH5Web.Controllers
 
             };
         }
-        
+
+        //获取任务列表
         public JsonResult GetTask(string filter)
         { 
             JavaScriptSerializer java=new JavaScriptSerializer();
-
             var model= java.Deserialize<FilterTasks>(filter);
             var list= IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, userID, agentID);
             JsonDictionary.Add("items", list);
             return new JsonResult
             {
-
                 Data = JsonDictionary,
-
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
-
             };
         }
 

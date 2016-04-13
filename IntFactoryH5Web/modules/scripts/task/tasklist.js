@@ -185,13 +185,12 @@
 
     };
     MyListTask.getList = function () {
-        $.post("/Task/GetTask", {filter:JSON.stringify(MyListTask.params)}, function (data) {
-            console.log(data.items);
-                    //doT.exec("/modules/template/task/taskListTemplate,html",function (code) {
-                    //    var $result = code(data);
-                    //    $(".list").append($result);
-                    //})
-                });
+        $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {            
+            doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
+                var $result = code(data);                
+                $(".list").append($result);
+            })
+        });
     }
     module.exports = MyListTask;
 });
