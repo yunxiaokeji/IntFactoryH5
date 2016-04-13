@@ -10,6 +10,11 @@ namespace IntFactory.Sdk
     {
         public OrderBaseEntity order;
 
+        /// <summary>
+        /// 材料列表
+        /// </summary>
+        public List<ProductBaseEntity> materialList;
+
         public int totalCount = 0;
 
         public int pageCount = 0;
