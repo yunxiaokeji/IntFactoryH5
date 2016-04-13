@@ -10,6 +10,11 @@ namespace IntFactory.Sdk
     {
         public TaskDetailEntity task;
 
+        /// <summary>
+        /// 材料列表
+        /// </summary>
+        public List<ProductBaseEntity> materialList;
+
         public int error_code = 0;
 
         public string error_message;

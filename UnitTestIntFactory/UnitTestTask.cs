@@ -16,5 +16,21 @@ namespace UnitTestIntFactory
             var result= TaskBusiness.BaseBusiness.GetTasks(new FilterTasks(),userID, agentID);
             Assert.IsTrue(result.error_code==0);
         }
+
+        [TestMethod]
+        public void GetTaskDetail()
+        {
+            var taskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
+            var result = TaskBusiness.BaseBusiness.GetTaskDetail(taskID, userID, agentID);
+            Assert.IsTrue(result.error_code == 0);
+        }
+
+        [TestMethod]
+        public void GetOrderInfo()
+        {
+            var orderID = "f9c9f321-e0d3-4458-b875-27a1821d552e";
+            var result = TaskBusiness.BaseBusiness.GetOrderInfo(orderID, userID, agentID);
+            Assert.IsTrue(result.error_code == 0);
+        }
     }
 }
