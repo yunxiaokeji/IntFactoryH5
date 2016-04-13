@@ -1,5 +1,7 @@
 ﻿@{
     Layout = null;
+    var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
+    string[] imagesUrl=task.order.orderImages.Trim(',').Split(',');
 }
 
 <!DOCTYPE html>
@@ -21,17 +23,16 @@
     <script src="~/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery.js"></script>
     <script src="~/Scripts/sea.js"></script>
+    <script src="~/modules/plug/doT.js"></script>
     <script type="text/javascript">
         $(function () {
-            
-            
 
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
 
-                taskDetail.init();
+                taskDetail.init('@task.orderID','@task.stageID');
 
             });
-
+           
         })
     </script>
 <body>
@@ -44,22 +45,32 @@
 
     <!--焦点图-->
     <div class="main_visual">
-        <div class="task-msg">任务名称</div>
+        <div class="task-msg">@task.title</div>
+        
         <div class="flicking_con">
-            <a class="on" href="javascript:void(0);"></a>
-            <a href="javascript:void(0);"></a>
-            <a href="javascript:void(0);"></a>
-            <a href="javascript:void(0);"></a>
-            <a href="javascript:void(0);"></a>
+            @{
+                for (int i = 0; i < @imagesUrl.Length;i++ )
+                {
+                    if(i==0)
+                    {
+                        <a class="on" href="javascript:void(0);"></a>
+                    }
+                    else
+                    {
+                        <a href="javascript:void(0);"></a>
+                    }
+                 }  
+            }
         </div>
 
         <div class="main_image">
             <ul>
-                <li> <img src="~/modules/plug/touchSlider/images/20141206092732_4208.jpg"></li>
-                <li> <img src="~/modules/plug/touchSlider/images/20141206093851_5791.jpg"></li>
-                <li> <img src="~/modules/plug/touchSlider/images/20141206093912_0947.jpg"></li>
-                <li> <img src="~/modules/plug/touchSlider/images/20141206093912_0947.jpg"></li>
-                <li> <img src="~/modules/plug/touchSlider/images/20141206093912_0947.jpg"></li>
+                @{
+                    for (int i = 0; i < @imagesUrl.Length;i++ )
+                    {
+                       <li><img src="http://dev.90cloudsales.com@(imagesUrl[i])"></li>
+                    }  
+                }
             </ul>
         </div>
 
@@ -67,31 +78,42 @@
     
     <!--任务信息-->
     <div class="task-info">
-
         <div class="main-info">
              <ul class="left-task-info">
-                <li><span>任务编号</span><span class="setindent">:</span><span>201603221631226021</span></li>
-                <li><span>接受任务</span><span class="setindent">:</span><span class="task-status">未接收</span></li>
-                <li><span>完成时间</span><span class="setindent">:</span><span>无</span></li>
-                <li><span>到期时间</span><span class="setindent">:</span><span>未设置</span></li>
+                <li><span>任务编号</span><span class="setindent">:</span><span class="task-code">@task.taskCode</span></li>
+                <li><span>接受时间</span><span class="setindent">:</span><span class="accept-time">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
+                <li><span>完成时间</span><span class="setindent">:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
+                <li><span>到期时间</span><span class="setindent">:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
             </ul>
-
+            
              <ul class="right-task-info">
                 <li>
-                    <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span>李涛</span></div>
+                    <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span class="owner-name">@task.ownerUser.name</span></div>
                    
                     <div class="dy-info">
                         <a href="javascript:void(0);"><span class="ico-dy iconfont">&#xe612;</span></a>
-                        <span>打样</span>
+                        <span class="order-type">
+                            @{
+                                if (task.orderType == 1)
+                                {
+                                    @("打样")
+                                }
+                                else if (task.orderType == 2)
+                                {
+                                    @("大货")
+                                }
+                             }
+                        </span>
+
                     </div>
                 </li>
-                <li><span>任务</span><span class="setindent">:</span><span>材料</span></li>
+                <li><span>任务</span><span class="setindent">:</span><span class="mark">@task.title</span></li>
             </ul>
         </div>
         <div class="order-need">
             <span>订单需求</span>
             <span class="setindent">:</span>
-            <span>衣服要大衣服要大衣服要大大衣服要大大衣服要大大衣服要大衣服要大衣服要大衣服要大衣服要大</span>
+            <span class="order-text">@task.order.plateRemark</span>
         </div>
         <div style="clear:both;"></div>
     </div>
@@ -118,8 +140,9 @@
         <div class="talk-content">
 
             <div class="talk-main">
-                
+
                <div class="send-other">
+
                     <div class="send-nameanddate">
                         <span>小明</span>
                         <span>2016-04-08 10:36:58</span>
@@ -142,6 +165,7 @@
                         </div>
 
                     </div>
+
                 </div>
 
                <div class="send-other">
@@ -171,25 +195,25 @@
                 
                 </div>
                
-               <div class="send-self">
-                    <div class="send-nameanddate">
-                        <span>2016-04-08 10:36:58</span>
-                        <span>李涛</span>
+            <div class="send-self">
+                <div class="send-nameanddate">
+                    <span>2016-04-08 10:36:58</span>
+                    <span>李涛</span>
+                </div>
+
+                <div class="talk-self">
+
+                    <div class="self-pic">
+                        <img src="~/modules/images/default-user.gif" />
                     </div>
 
-                    <div class="talk-self">
+                    <div class="talk-lump"></div>
 
-                        <div class="self-pic">
-                            <img src="~/modules/images/default-user.gif" />
-                        </div>
-
-                        <div class="talk-lump"></div>
-
-                        <p class="text-talk">
-                           吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃
-                        </p>
-                    </div>
-               </div>
+                    <p class="text-talk">
+                        吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃
+                    </p>
+                </div>
+            </div>
 
                <div class="send-other">
                     <div class="send-nameanddate">
@@ -237,6 +261,7 @@
                         </p>
                     </div>
                </div>
+
              </div>
         </div>
             <!--回复-->

@@ -1,13 +1,12 @@
 ﻿/*头部*/
-.header{width:100%;height:50px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;}
+.header{width:100%;height:50px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;color:#666;}
 .header li{float:left;width:33%;}
 .header li:hover{color:#007aff;}
 .header li .head{height:25px;text-align:center;margin-top:15px;}
-.header .head .iconfont{color:#666;}
 .header li .head-menu{margin-left:-30px;}
-.header li #cancel-header{margin-right:-30px;margin-top:5px;}
+.header li #cancel-header{margin-right:-30px;margin-top:13px;}
 /*遮罩*/
-.shade { width:100%;height:100%;position:fixed;z-index:102;background-color:rgba(143,143,143,0.6);left:0px;top:0;display:none;}
+.shade { width:100%;height:100%;position:fixed;z-index:402;background-color:rgba(143,143,143,0.6);left:0px;top:0;display:none;}
 .shade .search {width:100%;height:50px;background-color:#D5D5D5;line-height:50px;}
 .shade .search span { float:left;display:block;}
 .shade .search span:first-child {margin-left:20px; width:75%;}
@@ -17,6 +16,7 @@
 /*进行状态*/
 .task-status{width:100%;height:60px;border-bottom:1px solid #b2b2b2;margin-top:40px;}
 .task-status li{width:25%;float:left;}
+.task-status li:last-child{border-right:0;}
 .task-status li .iconfont-status:hover{color:#007aff;}
 .task-status li .iconfont-status-ico:hover{color:#007aff;}
 .task-status li a:hover{color:#007aff;}
@@ -24,17 +24,24 @@
 .task-status li a{height:30px;margin-top:5px;text-align:center;color:#666;display:inline-block;width:100%;font-size:0.7em;}
 .task-status .ico-status .iconfont{color:#666;}
 /*选择条件的css样式*/
-.select{width:100%;height:50px;border-bottom:1px solid #ccc;}
+.select{width:100%;height:30px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:0.7em;}
-.select li{width:25%;float:left;border-right:1px solid #ccc;height:50px;margin-left:-1px;margin-top:-10px;}
-.select li .copy{height:30px;margin-top:15px;text-align:center;}
+.select li{width:25%;float:left;border-right:1px solid #ccc;height:30px;margin-left:-1px;margin-top:-10px;}
+.select li .copy{height:15px;margin-top:5px;text-align:center;}
 .select .copy .iconfont{color:#666;}
 /*选项菜单*/
 .select-box { position:relative;}
 /*类型*/
-.select-box .option { width:100%;border:1px solid #ccc;position:absolute;z-index:333;left:0;display:none;}
-.select-box .option .option-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
-
+.select-box .tab-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;left:-1px;display:none;}
+.select-box .option {width:100%;}
+.select-box .dropdownlist li{font-size:0.8em;color:#999;padding-top:5px;padding-bottom:5px;}
+.select-box .dropdownlist li:hover{background-color:#007aff;color:#fff;}
+/*无效*/
+.select-box .dropdownlist i:hover{color:#007aff;}
+/*流程*/
+.select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:25%;background-color:#fff;position:absolute;z-index:334;margin-left:-1px;display:none;}
+/*筛选*/
+.select-box .screen-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:50%;background-color:#fff;position:absolute;z-index:335;margin-left:-1px;display:none;}
 /*高级筛选*/
 .select-box .tab-screen { position:absolute;left:0;bottom:-120px;background-color:rgba(239,239,239,0.9);width:100%;display:none;}
 .tab-screen ul {width:100%; }
@@ -42,23 +49,72 @@
 .tab-screen ul li:first-child { width:30px;color:#007aff;}
 .tab-screen ul li:nth-child(2) { margin-left:5px;}
 /*列表*/
-.list .listabove{width:100%;display:block;margin-top:30px;border-bottom:1px solid #dfdfdf;padding-bottom:30px;}
-.list .listabove li{width:120px;height:120px;float:left;margin-left:15px;}
-.list li:first-child img{width:100%;height:100%;}
-.list .listabove li:last-child{margin-right:10px;width:2px;height:15px;border:1px solid #e0483e;background-color:#e0483e;margin-left:10%;}
-.list .listabove .center-list-task { margin-left:10px;font-size:0.6em;color:#999;}
+.list .listabove{width:100%;display:table;margin-top:30px;border-bottom:1px solid #dfdfdf;}
+.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:10px;}
+.list li:first-child img{width:120px;height:120px;}
+.list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-right:20px;}
+.list .listabove .last-stage { }
+.list .last-stage .style-i {float:left;white-space:nowrap; }
+.list .last-stage .shape{ font-size:0.6em;margin-top:85px;width:40px;margin-left:-15px;}
+.list .listabove .center-list-task {font-size:0.6em;color:#999;padding-right:-20px;}
+.list .center-list-task .material {margin-left:4px;}
 .list .details .details-name {color:#666; }
-.list .center-list-task .details {width:12em; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.list .center-list-task .details {width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .list .center-list-task .details:hover {overflow:visible;}
-.list .center-list-task .time { background:url(/modules/images/times.jpg)no-repeat;background-size:15px;background-position-y:center;padding-left:15px;}
-.list .center-list-task .stage { }
-/*.list .center-list-task .center-task { margin-top:-5px;}
-.list .center-task .details-icon { float:left;margin-right:5px;}
-.list .center-task a { font-size:0.7em;color:#666;}
-.list .center-task .stage{ color:#999;}
-.list .center-task .stage-specific{ color:#999;}
-.list .center-task .details-taskname { width:60%; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.list .center-task .details-taskname:hover{ overflow:visible;}
-.list .time a { color:#999;font-size:0.6em;height:10px;line-height:21px;}
-.list .center-task .start-time { float:left;}*/
+.list .center-list-task .stage {height:28px;}
+.list .center-list-task .details-stage {margin-top:35px;}
+.list .center-list-task .time {margin-top:10px;}
+.list .center-list-task .stage-time {padding-right:3%; }
+@media screen and (min-width:414px) {   
+    .list .listabove li{padding-left:25px;}
+    .list li:first-child img{width:135px;height:135px;}
+    .list .center-list-task .details-stage {margin-top:40px;}
+    .list .center-list-task .stage {height:32px;}
+    .list .last-stage .shape{margin-top:95px;}
+}
+@media screen and (min-width:550px) {
+    .shade .search span:first-child {width:82%;}
+    .task-status{height:80px;}
+    .task-status li .ico-status{margin-top:25px;}
+    .select{height:50px;}
+    .select a{font-size:0.9em;}
+    .select li{height:50px;margin-top:0;}
+    .select li .copy{height:20px;margin-top:15px;}
+    .list .listabove li{padding-left:30px;}
+    .list li:first-child img{width:200px;height:200px;}
+    .list .listabove .center-list-task {font-size:1em;}
+    .list .style-i .iconfont-stage { font-size:1.2em;}
+    .list .last-stage .shape{ font-size:1em;margin-top:140px;}
+    .list .details .details-name {font-size:1.3em;}    
+    .list .center-list-task .stage {height:40px;}    
+    .list .center-list-task .details-stage {margin-top:75px; }    
+    .list .details .iconfont {font-size:1.7em; }
+    .list .last-stage .shape{width:80px;margin-top:160px;margin-left:-15px;}  
+}
+@media screen and (min-width:768px) {
+    .header{height:80px;font-size:28px;}   
+    .header .iconfont{font-size:28px;}
+    .header .iconfont-search{font-size:30px;}
+    .header li .head{height:25px;margin-top:25px;}    
+    .header li .head-menu{margin-left:-30px;}
+    .header li #cancel-header{margin-right:-30px;margin-top:25px;}
+    .shade .search span:first-child {width:85%;}
+    .shade .search { height:80px; line-height:80px;}
+    .search span .txt-search {width:100%;line-height:50px;font-size:1em;}
+    .shade .search span:last-child {width:50px;height:50px;line-height:50px;margin-top:15px;}
+    .task-status{height:80px;margin-top:80px;}
+    .task-status li .ico-status{margin-top:25px;}
+    .task-status li a{font-size:1em;}
+    .select a{font-size:1em;} 
+    .list .listabove li{padding-left:50px;}  
+    .list .listabove .center-list-task {font-size:1em;padding-right:25%;}
+    .list .details .details-name {font-size:1.5em;}    
+    .list .center-list-task .stage {height:50px;}
+    .list .center-list-task .details-stage {margin-top:50px; }    
+    .list .details .iconfont {font-size:1.7em; }
+    .list .center-list-task .time {background-size:20px;}
+    .list .last-stage .shape{margin-top:160px;}
+
+}
+
 

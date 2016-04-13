@@ -1,0 +1,37 @@
+﻿{%
+    for(var i=0;i<$data.length;$i++)
+    {
+%}
+<ul class="listabove row">
+            <li>
+                <img src="~/modules/images/10.jpg" />
+            </li>     
+            <li class="center-list-task">
+                @* 任务详情 *@
+                 <div class="details">                
+                    <i class="iconfont-details iconfont">&#xe61e;</i>
+                    <a class="details-name" href="~/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">@task[i].createTime</a>
+                </div>
+                <div class="stage details-stage">
+                    任务:<label class="material">材料</label>
+                </div>
+                <div class="stage" >
+                    <label>开始:</label>
+                    <span class="time stage-time">2016-03-24 00</span>
+                </div>
+                <div class="stage">
+                    <label>截止:</label>
+                    <span class="time">2016-03-24 00</span>
+                </div>                
+            </li>
+            <li class="last-stage">
+                <div class="red-tag"></div>
+                <div class="shape">
+                    <div class="style-i"><i class="iconfont-stage iconfont">&#xe612;</i></div>
+                    <div class="style-lable">打样</div>
+                </div>
+            </li>     
+        </ul>
+
+{%}%}
+

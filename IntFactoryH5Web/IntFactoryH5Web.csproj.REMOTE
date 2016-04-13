@@ -104,7 +104,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,8 +154,6 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
-    <Content Include="modules\template\task\taskListTemplate.html" />
-    <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
