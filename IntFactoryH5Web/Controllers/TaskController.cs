@@ -16,10 +16,9 @@ namespace IntFactoryH5Web.Controllers
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
         string TaskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
-        Dictionary<string, object> TaskList = new Dictionary<string, object>();
         //浏览器加载获取任务列表
         public ActionResult List(string taskID)
-        {            
+        {
             FilterTasks filter = new FilterTasks();
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
             var resultlListTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(filter, userID, agentID);
@@ -58,41 +57,40 @@ namespace IntFactoryH5Web.Controllers
                 if (resultTask.task != null)
                 {
                     var task = resultTask.task;
-                    ViewBag.Task = task;                     
-                    
+                    ViewBag.Task = task;
+
                 }
             }
             return View();
         }
-        
-        public JsonResult GetTaskDetail(string taskID) { return null;  }
+
 
         //获取讨论列表   
-        public JsonResult GetDiscussInfo(string orderID, string stageID,int pageIndex)
-
+        public JsonResult GetDiscussInfo(string orderID, string stageID, int pageIndex)
         {
 
             var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskReplys(orderID, stageID, userID, agentID, pageIndex);
 
             List<IntFactory.Sdk.TaskReplyEntity> listReplys = result.taskReplys;
 
-            JsonResult.Add("items", listReplys);
+            JsonDictionary.Add("items", listReplys);
 
-            return new JsonResult {
+            return new JsonResult
+            {
 
-                Data = JsonResult,
+                Data = JsonDictionary,
 
-                JsonRequestBehavior=JsonRequestBehavior.AllowGet
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
 
             };
         }
-        
-        public JsonResult GetTask(string filter)
-        { 
-            JavaScriptSerializer java=new JavaScriptSerializer();
 
-            var model= java.Deserialize<FilterTasks>(filter);
-            var list= IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, userID, agentID);
+        public JsonResult GetTask(string filter)
+        {
+            JavaScriptSerializer java = new JavaScriptSerializer();
+
+            var model = java.Deserialize<FilterTasks>(filter);
+            var list = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, userID, agentID);
             JsonDictionary.Add("items", list);
             return new JsonResult
             {
@@ -104,6 +102,17 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        public JsonResult GetLogInfo()
+        {
+            var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, 1);
+            JsonDictionary.Add("items", result.taskLogs);
+            return new JsonResult
+            {
+
+                Data=JsonDictionary,
+                JsonRequestBehavior=JsonRequestBehavior.AllowGet
+
+            };
 
         }
 
@@ -112,15 +121,19 @@ namespace IntFactoryH5Web.Controllers
         {
             var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetOrderInfo(orderID, userID, agentID);
             IntFactory.Sdk.OrderBaseEntity orderInfo = result.order;
-            JsonResult.Add("items",orderInfo);
-            return new JsonResult {
+            JsonDictionary.Add("items", orderInfo);
+            return new JsonResult
+            {
 
-                Data = JsonResult,
-                JsonRequestBehavior=JsonRequestBehavior.AllowGet
-            
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+
             };
         }
 
-
     }
+
+
+
+
 }
