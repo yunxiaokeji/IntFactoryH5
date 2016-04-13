@@ -1,7 +1,26 @@
 ﻿define(function (require,exports,module) {
     var MyListTask = {};
+    MyListTask.params = {
+        keyWords: "",
+        isMy: true,
+        userID: "",
+        taskType: -1,
+        colorMark: -1,
+        status: 1,
+        finishStatus: 0,
+        beginDate: "",
+        endDate: "",
+        orderType: -1,
+        orderProcessID: "-1",
+        orderStageID: "-1",
+        taskOrderColumn: 0,
+        isAsc: 0,
+        pageSize: 10,
+        pageIndex:1,
+    };
     MyListTask.init = function () {
-        MyListTask.bindEvent();
+        MyListTask.getList();
+        MyListTask.bindEvent();        
     };
     MyListTask.bindEvent = function () {
         //遮罩
@@ -161,15 +180,18 @@
                        
         });
         //加载列表详情
-        $.post("/Task/GetTaskList", { taskID: '646f88ad-a337-43d3-92ab-4b2b234cfbf3', userID: 'BC6802E9-285C-471C-8172-3867C87803E2', agentID: '9F8AF979-8A3B-4E23-B19C-AB8702988466' }, function () {
-
-        });
-
         
 
 
-
-
     };
+    MyListTask.getList = function () {
+        $.post("/Task/GetTask", {filter:JSON.stringify(MyListTask.params)}, function (data) {
+            console.log(data.items);
+                    //doT.exec("/modules/template/task/taskListTemplate,html",function (code) {
+                    //    var $result = code(data);
+                    //    $(".list").append($result);
+                    //})
+                });
+    }
     module.exports = MyListTask;
 });

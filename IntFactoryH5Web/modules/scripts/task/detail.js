@@ -6,22 +6,25 @@
     //require("/modules/plug/touchSlider/js/jquery_002.js");
     //require("/modules/plug/touchSlider/js/jquery.js");
 
+    var Paras = {
+        orderID: "",
+        stageID: "",
+        pageIndex: 1
+    };
+
     var TaskDetail = {};
 
-    TaskDetail.init = function () {
+    TaskDetail.init = function (orderID, stageID) {
 
         TaskDetail.bindEvent();
-
+        
+        Paras.orderID = orderID;
+        Paras.stageID = stageID;
+        TaskDetail.getTaskReplys();
     }
     //设置自己发送信息文本框的位置
    
     TaskDetail.bindEvent = function () {
-        
-        $.post("/Task/GetTaskDetail", { taskID: '646f88ad-a337-43d3-92ab-4b2b234cfbf3', userID: 'BC6802E9-285C-471C-8172-3867C87803E2', agentID: '9F8AF979-8A3B-4E23-B19C-AB8702988466' }, function (data) {
-
-            
-
-        })
 
         //窗体加载设置自己发送信息文本框的位置
         setTextPosition();
@@ -90,17 +93,6 @@
 
         })
 
-        //文本框获取焦点
-        //$('.txt-talkcontent').bind('focus', function () {
-        //    $('.return-msg').css({ 'position': 'static', 'bottom': '0' });
-        //    $('.main-box').css({ "margin-bottom": '0' ,"padding-bottom":"0px"});
-        //    //或者$('#viewport').height($(window).height()+'px');  
-        //}).bind('blur', function () {
-        //    $('.return-msg').css({ 'position': 'fixed', 'bottom': '0' });
-        //    $('.main-box').css({ "margin-bottom": '80px', "padding-bottom": "0px" });
-        //    //或者$('#viewport').height('auto');  
-        //});
-
         //设置采购计划图标点击事件
         $(".material .meterial-lumpbox").click(function () {
 
@@ -133,6 +125,9 @@
 
         })
 
+
+       
+
         //设置订单需求文本内容宽度
         function setOrderNeedWidth() {
             //订单需求第一个SPAN宽度
@@ -159,7 +154,19 @@
     }
 
   
+    TaskDetail.getTaskReplys = function () {
+        $.post("/Task/GetDiscussInfo", Paras, function (data) {
 
+            alert(data.length);
+
+            //doT.exec("/modules/template/task/taskDetailReply.html", function (template) {
+
+            //    template(data);
+
+            //})
+
+        })
+    }
     //TaskDetail.setTextPosition = function () {
 
     //    //获取显示区域宽度

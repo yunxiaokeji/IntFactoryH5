@@ -35,7 +35,9 @@
 .select-box .tab-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;left:-1px;display:none;}
 .select-box .option {width:100%;}
 .select-box .dropdownlist li{font-size:0.8em;color:#999;padding-top:5px;padding-bottom:5px;}
-.select-box .dropdownlist li:hover{background-color:#318AE4;color:#fff;}
+.select-box .dropdownlist li:hover{background-color:#007aff;color:#fff;}
+/*无效*/
+.select-box .dropdownlist i:hover{color:#007aff;}
 /*流程*/
 .select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:25%;background-color:#fff;position:absolute;z-index:334;margin-left:-1px;display:none;}
 /*筛选*/
@@ -48,19 +50,27 @@
 .tab-screen ul li:nth-child(2) { margin-left:5px;}
 /*列表*/
 .list .listabove{width:100%;display:table;margin-top:30px;border-bottom:1px solid #dfdfdf;}
-.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:30px;padding-left:10px;}
+.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:10px;}
 .list li:first-child img{width:120px;height:120px;}
-.list li:last-child div{width:10px;height:120px;border:1px solid #e0483e;background-color:#e0483e;margin-left:5%;margin-right:20px;}
-.list .listabove .center-list-task { margin-left:10px;font-size:0.6em;color:#999;}
+.list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-right:20px;}
+.list .listabove .last-stage { }
+.list .last-stage .style-i {float:left;white-space:nowrap; }
+.list .last-stage .shape{ font-size:0.6em;margin-top:85px;width:40px;margin-left:-15px;}
+.list .listabove .center-list-task {font-size:0.6em;color:#999;padding-right:-20px;}
+.list .center-list-task .material {margin-left:4px;}
 .list .details .details-name {color:#666; }
 .list .center-list-task .details {width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .list .center-list-task .details:hover {overflow:visible;}
 .list .center-list-task .stage {height:28px;}
-.list .center-list-task .details-stage {margin-top:20px; }
-.list .center-list-task .time { background:url(/modules/images/times.jpg)no-repeat;background-size:15px;background-position-y:center;padding-left:15px;margin-top:10px;}
+.list .center-list-task .details-stage {margin-top:35px;}
+.list .center-list-task .time {margin-top:10px;}
 .list .center-list-task .stage-time {padding-right:3%; }
-@media screen and (min-width:414px) {    
-    .list li:last-child div{margin-left:40px;}
+@media screen and (min-width:414px) {   
+    .list .listabove li{padding-left:25px;}
+    .list li:first-child img{width:135px;height:135px;}
+    .list .center-list-task .details-stage {margin-top:40px;}
+    .list .center-list-task .stage {height:32px;}
+    .list .last-stage .shape{margin-top:95px;}
 }
 @media screen and (min-width:550px) {
     .shade .search span:first-child {width:82%;}
@@ -70,13 +80,16 @@
     .select a{font-size:0.9em;}
     .select li{height:50px;margin-top:0;}
     .select li .copy{height:20px;margin-top:15px;}
-    .list li:last-child div{margin-left:0.8em;height:200px;margin-right:20px;}
+    .list .listabove li{padding-left:30px;}
     .list li:first-child img{width:200px;height:200px;}
-    .list .listabove .center-list-task {font-size:0.8em;}
-    .list .details .details-name {font-size:1.5em;}    
-    .list .center-list-task .stage {height:40px;}
-    .list .center-list-task .details-stage {margin-top:80px; }    
+    .list .listabove .center-list-task {font-size:1em;}
+    .list .style-i .iconfont-stage { font-size:1.2em;}
+    .list .last-stage .shape{ font-size:1em;margin-top:140px;}
+    .list .details .details-name {font-size:1.3em;}    
+    .list .center-list-task .stage {height:40px;}    
+    .list .center-list-task .details-stage {margin-top:75px; }    
     .list .details .iconfont {font-size:1.7em; }
+    .list .last-stage .shape{width:80px;margin-top:160px;margin-left:-15px;}  
 }
 @media screen and (min-width:768px) {
     .header{height:80px;font-size:28px;}   
@@ -92,13 +105,15 @@
     .task-status{height:80px;margin-top:80px;}
     .task-status li .ico-status{margin-top:25px;}
     .task-status li a{font-size:1em;}
-    .select a{font-size:1em;}   
-    .list .listabove .center-list-task {font-size:1em;}
+    .select a{font-size:1em;} 
+    .list .listabove li{padding-left:50px;}  
+    .list .listabove .center-list-task {font-size:1em;padding-right:25%;}
     .list .details .details-name {font-size:1.5em;}    
-    .list .center-list-task .stage {height:45px;}
+    .list .center-list-task .stage {height:50px;}
     .list .center-list-task .details-stage {margin-top:50px; }    
     .list .details .iconfont {font-size:1.7em; }
-    .list .center-list-task .time {background-size:20px;padding-left:20px;}
+    .list .center-list-task .time {background-size:20px;}
+    .list .last-stage .shape{margin-top:160px;}
 
 }
 
