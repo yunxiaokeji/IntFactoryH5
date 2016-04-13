@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    var task = ViewBag.task;
 }
 
 <!DOCTYPE html>
@@ -13,6 +14,7 @@
     <link href="~/modules/iconfont/ux_1460342755_7796638/iconfont.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/Scripts/sea.js"></script>
+    <script src="~/Scripts/doT.js"></script>
     <script type="text/javascript">
         seajs.use("/modules/scripts/task/tasklist.js", function (data) {
             data.init();
@@ -86,14 +88,13 @@
             @* 类型下拉 *@            
             <div class="tab-type">
                 <ul class="option"> 
-                    <li class="all-type">全部</li>                 
-                    <li class="DY-type">打样</li>
-                    <li class="DH-type">大货</li>                        
+                    <li><i class="iconfont-type">&#xe61b;</i><span class="all-type">全部</span></li>                 
+                    <li><i class="iconfont-type">&#xe612;</i><span class="DY-type">打样</span></li>
+                    <li><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="DH-type">大货</span></li>                        
                 </ul>                
-             </div>            
-        
+             </div>    
             @* 流程下拉 *@
-           <div class="flow-type">
+            <div class="flow-type">
                 <ul class="potion">
                     <li class="all-flow">全部流程</li>
                     <li class="DY-flow">打样流程</li>
@@ -109,7 +110,7 @@
                     <li class="ZH-screen">自助</li>
                     <li class="AL-screen">阿里</li>
                 </ul>
-            </div>        
+            </div>
         </div>
         @* 高级筛选 *@
         <div class="tab-screen" id="tab-screen">
@@ -139,80 +140,32 @@
     <div class="list">
         <ul class="listabove row">
             <li>
-                <img src="~/modules/images/10.jpg" />
+                <img src="@task[1].orderImg" />
             </li>     
             <li class="center-list-task">
                 @* 任务详情 *@
                  <div class="details">                
                     <i class="iconfont-details iconfont">&#xe61e;</i>
-                    <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
+                    <a class="details-name" href="~/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">@task[0].createTime</a>
                 </div>
                 <div class="stage details-stage">
-                    任务:<label>材料</label>
-                </div>
-                <div class="stage">
-                    <i class="iconfont-stage iconfont">&#xe612;</i>
-                    <label>打样</label>
+                    任务:<label class="material">材料</label>
                 </div>
                 <div class="stage" >
-                    <span class="time stage-time">2016-03-24 00:00:00</span>
-                    <span class="time">2016-03-24 00:00:00</span>
+                    <label>开始:</label>
+                    <span class="time stage-time">@task[0].createTime</span>
+                </div>
+                <div class="stage">
+                    <label>截止:</label>
+                    <span class="time">2016-03-24 00</span>
                 </div>                
             </li>
             <li class="last-stage">
-                <div></div>
-            </li>     
-        </ul>
-        <ul class="listabove row">
-            <li>
-                <img src="~/modules/images/10.jpg" />
-            </li>     
-            <li class="center-list-task">
-                @* 任务详情 *@
-                 <div class="details">                
-                    <i class="iconfont-details iconfont">&#xe61e;</i>
-                    <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
+                <div class="red-tag"></div>
+                <div class="shape">
+                    <div class="style-i"><i class="iconfont-stage iconfont">&#xe612;</i></div>
+                    <div class="style-lable">打样</div>
                 </div>
-                <div class="stage details-stage">
-                    任务:<label>材料</label>
-                </div>
-                <div class="stage">
-                    <i class="iconfont-stage iconfont">&#xe612;</i>
-                    <label>打样</label>
-                </div>
-                <div class="stage" >
-                    <span class="time stage-time">2016-03-24 00:00:00</span>
-                    <span class="time">2016-03-24 00:00:00</span>
-                </div>                
-            </li>
-            <li class="last-stage">
-                <div></div>
-            </li>     
-        </ul>
-        <ul class="listabove row">
-            <li>
-                <img src="~/modules/images/10.jpg" />
-            </li>     
-            <li class="center-list-task">
-                @* 任务详情 *@
-                 <div class="details">                
-                    <i class="iconfont-details iconfont">&#xe61e;</i>
-                    <a class="details-name" href="javascript:void(0);">衣服订单下订单你下了吗</a>
-                </div>
-                <div class="stage details-stage">
-                    任务:<label>材料</label>
-                </div>
-                <div class="stage">
-                    <i class="iconfont-stage iconfont">&#xe612;</i>
-                    <label>打样</label>
-                </div>
-                <div class="stage" >
-                    <span class="time stage-time">2016-03-24 00:00:00</span>
-                    <span class="time">2016-03-24 00:00:00</span>
-                </div>                
-            </li>
-            <li class="last-stage">
-                <div></div>
             </li>     
         </ul>
     </div>

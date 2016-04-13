@@ -104,7 +104,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -132,13 +131,16 @@
     <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1]-1.jpg" />
     <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1].JPG" />
     <Content Include="modules\images\99abd47e7f15568ab7db29f18b863a68[1]-2.jpg" />
-    <Content Include="modules\images\defaultavatar.png" />
     <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
+
+    <Content Include="modules\images\default-user.gif" />
+
     <Content Include="modules\images\inuser_07.gif" />
     <Content Include="modules\images\Zoom.gif" />
+
     <Content Include="modules\plug\doT.js" />
     <Content Include="modules\plug\touchSlider\css\sytyle.css" />
     <Content Include="modules\plug\touchSlider\images\20141206092732_4208.jpg" />
@@ -155,12 +157,9 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
-    <Content Include="modules\template\task\detailLog.html" />
-    <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
-    <Content Include="modules\template\task\detailReply.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -173,6 +172,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="modules\template\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -201,6 +201,7 @@
     <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.ttf" />
     <Content Include="modules\iconfont\ux_1460342755_7796638\iconfont.woff" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
   </ItemGroup>
@@ -210,6 +211,7 @@
       <Name>IntFactory.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

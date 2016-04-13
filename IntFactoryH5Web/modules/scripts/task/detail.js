@@ -13,7 +13,7 @@
     TaskDetail.init = function (orderID, stageID, platemaking, plateRemark) {
 
         TaskDetail.bindEvent();
-
+        
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         Paras.platemaking = platemaking;

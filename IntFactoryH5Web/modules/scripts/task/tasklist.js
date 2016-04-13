@@ -1,7 +1,26 @@
 ﻿define(function (require,exports,module) {
     var MyListTask = {};
+    MyListTask.params = {
+        keyWords: "",
+        isMy: true,
+        userID: "",
+        taskType: -1,
+        colorMark: -1,
+        status: 1,
+        finishStatus: 0,
+        beginDate: "",
+        endDate: "",
+        orderType: -1,
+        orderProcessID: "-1",
+        orderStageID: "-1",
+        taskOrderColumn: 0,
+        isAsc: 0,
+        pageSize: 10,
+        pageIndex:1,
+    };
     MyListTask.init = function () {
-        MyListTask.bindEvent();
+        MyListTask.getList();
+        MyListTask.bindEvent();        
     };
     MyListTask.bindEvent = function () {
         //遮罩
@@ -9,7 +28,15 @@
             $(".shade").css("display", "block");
         });
         $(".cencal").click(function () {
-            $(".shade").css("display", "none");
+            $(".shade").css("display", "none");           
+        });
+        //点击空白区域
+        $(".shade").click(function () {
+            $(".shade").css("display","none");
+        });
+        //冒泡事件
+        $(".span-search").click(function () {
+            return false;
         });
         //类型
         $("#type-a").click(function () {
@@ -23,7 +50,7 @@
             //判断data的值
             var num = $("#type-a").data("type");
             if (num == "0") {
-                $(".tab-type").css("display", "block");
+                $(".tab-type").slideDown("slow");
                 $("#type-a").data("type", "1");
                 $(".all-type").click(function () {
                     var txt = $(".all-type").text();
@@ -44,7 +71,7 @@
                     $("#type-a").data("type", "0");
                 });
             } else {
-                $(".tab-type").css("display", "none");
+                $(".tab-type").slideUp("slow");
                 $("#type-a").data("type", "0");
             }
         });
@@ -59,7 +86,7 @@
             $("#select-copy").data("select", "0");
             var num = $("#flow-a").data("flow");
             if (num=="0") {
-                $(".flow-type").css("display", "block");
+                $(".flow-type").slideDown("slow");
                 $("#flow-a").data("flow", "1");             
                 $(".all-flow").click(function () {
                     var name = $(".all-flow").text();
@@ -86,7 +113,7 @@
                     $("#flow-a").data("flow", "0");
                 });
             } else {
-                $(".flow-type").css("display", "none");
+                $(".flow-type").slideUp("slow");
                 $("#flow-a").data("flow", "0");
             }
         });
@@ -100,8 +127,8 @@
             $("#tab-screen").css("display", "none");
             $("#select-copy").data("select", "0");
             var num = $("#screen-a").data("screen");            
-            if (num=="0") {
-                $(".screen-type").css("display", "block");
+            if (num == "0") {
+                $(".screen-type").slideDown("slow");                
                 $("#screen-a").data("screen", "1");
                 $(".all-screen").click(function () {
                     var name = $(".all-screen").text();
@@ -128,7 +155,7 @@
                     $("#screen-a").data("screen", "0");
                 });
             } else {
-                $(".screen-type").css("display", "none");
+                $(".screen-type").slideUp("slow");                
                 $("#screen-a").data("screen", "0");
             }
         });
@@ -140,24 +167,31 @@
             $(".flow-type").css("display", "none");
             $(".flow-type").data("type", "0");
             $(".screen-type").css("display", "none");
-            $("#screen-a").data("screen", "0");           
-            var num = $("#select-copy").data("select");            
-            if (num=="0") {
-                $("#tab-screen").css("display", "block");
+            $("#screen-a").data("screen", "0");
+            //滑动事件
+            var num = $("#select-copy").data("select");          
+            if (num == "0") {
+                $("#tab-screen").slideDown("slow");
                 $("#select-copy").data("select", "1");
             } else {
-                $("#tab-screen").css("display", "none");
+                $("#tab-screen").slideUp("slow");
                 $("#select-copy").data("select", "0");
-            }            
+            }
+                       
         });
-
-
+        //加载列表详情
         
-        
-
-
 
 
     };
+    MyListTask.getList = function () {
+        $.post("/Task/GetTask", {filter:JSON.stringify(MyListTask.params)}, function (data) {
+            console.log(data.items);
+                    //doT.exec("/modules/template/task/taskListTemplate,html",function (code) {
+                    //    var $result = code(data);
+                    //    $(".list").append($result);
+                    //})
+                });
+    }
     module.exports = MyListTask;
 });
