@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IntFactory.Sdk;
+using System.Web.Script.Serialization;
 namespace IntFactoryH5Web.Controllers
 {
     public class TaskController : BaseController
@@ -59,6 +60,8 @@ namespace IntFactoryH5Web.Controllers
 
             JsonDictionary.Add("items", listReplys);
 
+            JsonDictionary.Add("pagecount", result.totalCount);
+
             return new JsonResult
             {
 
@@ -106,8 +109,8 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
-        //获取登录信息
+        
+        //获取日志信息
         public JsonResult GetLogInfo()
         {
             var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, 1);
@@ -126,15 +129,52 @@ namespace IntFactoryH5Web.Controllers
         public JsonResult GetOrderInfo(string orderID)
         {
             var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetOrderInfo(orderID, userID, agentID);
-            IntFactory.Sdk.OrderBaseEntity orderInfo = result.order;
-            JsonDictionary.Add("items", orderInfo);
+            JsonDictionary.Add("items", result.materialList);
             return new JsonResult
             {
-
                 Data = JsonDictionary,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        //添加讨论信息
+        public JsonResult AddTaskReply()
+        {
+            string result = Request["resultReply"].ToString();
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
+
+            taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(result);
+
+            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, userID, agentID);
+
+            JsonDictionary.Add("items", addResult.taskReplys);
+
+            return new JsonResult { 
+            
+                Data=JsonDictionary,
+
+                JsonRequestBehavior=JsonRequestBehavior.AllowGet
 
             };
+        }
+
+        //更新任务到期时间
+        public int UpdateTaskEndTime(string taskID,string endTime)
+        {
+            var result = TaskBusiness.BaseBusiness.UpdateTaskEndTime(TaskID, endTime, userID, agentID);
+
+            return result.result;
+        }
+
+        public int FinishTask(string taskID) {
+
+            var result = TaskBusiness.BaseBusiness.FinishTask(TaskID, userID, agentID);
+
+            return result.result;
+;
         }
 
     }
