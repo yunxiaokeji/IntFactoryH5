@@ -15,7 +15,9 @@ namespace IntFactoryH5Web.Controllers
 
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
-        string TaskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
+        string TaskID = "35e17289-c4cf-4f4a-b06f-9404b4a7637c";
+        //35e17289-c4cf-4f4a-b06f-9404b4a7637c
+        //a21d7ea3-9c5b-4711-b7cb-4d5545c74415
         //浏览器加载获取任务列表
         public ActionResult List(string taskID)
         {
@@ -86,6 +88,7 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+
         public JsonResult GetTask(string filter)
         {
             JavaScriptSerializer java = new JavaScriptSerializer();
@@ -128,7 +131,7 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //添加讨论信息
-        public string AddTaskReply()
+        public JsonResult AddTaskReply()
         {
             string result = Request["resultReply"].ToString();
 
@@ -138,11 +141,35 @@ namespace IntFactoryH5Web.Controllers
 
             taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(result);
 
-            AddResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, userID, agentID);
+            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, userID, agentID);
 
-            return addResult.id;
+            JsonDictionary.Add("items", addResult.taskReplys);
+
+            return new JsonResult { 
+            
+                Data=JsonDictionary,
+
+                JsonRequestBehavior=JsonRequestBehavior.AllowGet
+
+            };
         }
-        
+
+        //更新任务到期时间
+        public int UpdateTaskEndTime(string taskID,string endTime)
+        {
+            var result = TaskBusiness.BaseBusiness.UpdateTaskEndTime(TaskID, endTime, userID, agentID);
+
+            return result.result;
+        }
+
+        public int FinishTask(string taskID) {
+
+            var result = TaskBusiness.BaseBusiness.FinishTask(TaskID, userID, agentID);
+
+            return result.result;
+;
+        }
+
     }
 
 

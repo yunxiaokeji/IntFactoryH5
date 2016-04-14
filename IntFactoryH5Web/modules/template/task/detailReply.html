@@ -15,7 +15,11 @@
                         <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
                     </div>
                     <div class="talk-lump"></div>
-                    <p class="text-talk">{%=$data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content%}</p>
+                    <p class="text-talk">
+                        {%=
+                        $data[i].fromReplyUser!=null?($data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content):$data[i].content
+                        %}
+                    </p>
                     <div class="return-self">
                         <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
                     </div>
@@ -39,7 +43,7 @@
                         <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
                     </div>
                     <div class="talk-lump"></div>
-                    <p class="text-talk">{%=$data[i].content%}</p>
+                    <p class="text-talk">{%=$data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content%}</p>
                     <div class="return-other">
                         <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
                     </div>

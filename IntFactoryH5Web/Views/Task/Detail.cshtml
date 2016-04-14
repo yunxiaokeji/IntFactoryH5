@@ -1,9 +1,12 @@
 ﻿@{
     Layout = null;
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
-    string[] imagesUrl=task.order.orderImages.Trim(',').Split(',');
+    string[] imagesUrl = { };
+    if(task.order.orderImages.Length!=0)
+    {
+        imagesUrl = task.order.orderImages.Trim(',').Split(',');      
+    }
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -17,16 +20,22 @@
     <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
     <link href="~/modules/iconfont/ux_1460342755_7796638/iconfont.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
+    <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
+    <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
 </head>
     <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery.js"></script>
     <script src="~/modules/plug/doT.js"></script>
+<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
+<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
+<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
+<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
     <script src="~/Scripts/sea.js"></script>
     <script type="text/javascript">
         $(function () {
-            
+
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 
                 taskDetail.init(
@@ -35,7 +44,7 @@
                     '@task.stageID',
                     '@task.order.platemaking',
                     '@task.mark',
-                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无信息":task.order.plateRemark)'
+                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺信息":task.order.plateRemark)'
                     
                  );
 
@@ -48,7 +57,22 @@
     <header>
         <a href="javascript:void(0);" class="btn-return"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">任务详情</div>
-        <div class="task-accept">接受任务</div>
+        <div class="task-accept">
+            @{
+                if(task.finishStatus==0){
+                    <input type="text" class="appDateTime" name="appDateTime" value="接受任务" />
+                }
+                else if (task.finishStatus == 1)
+                {
+                    <span>标记完成</span>;
+                }
+                else if (task.finishStatus == 2)
+                {
+                    <span>已完成</span>;
+                }
+             }
+
+        </div>
     </header>
 
     <!--焦点图-->
@@ -57,27 +81,33 @@
         
         <div class="flicking_con">
             @{
-                for (int i = 0; i < @imagesUrl.Length;i++ )
+                if(imagesUrl.Length!=0)
                 {
-                    if(i==0)
+                    for (int i = 0; i < imagesUrl.Length; i++)
                     {
-                        <a class="on" href="javascript:void(0);"></a>
-                    }
-                    else
-                    {
-                        <a href="javascript:void(0);"></a>
-                    }
-                 }  
+                        if (i == 0)
+                        {
+                            <a class="on" href="javascript:void(0);"></a>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);"></a>
+                        }
+                    }  
+                }
             }
         </div>
 
         <div class="main_image">
             <ul>
                 @{
-                    for (int i = 0; i < @imagesUrl.Length;i++ )
+                    if (imagesUrl.Length!=0)
                     {
-                       <li><img src="http://dev.90cloudsales.com@(imagesUrl[i])"></li>
-                    }  
+                        for (int i = 0; i < imagesUrl.Length; i++)
+                        {
+                           <li><img src="http://dev.90cloudsales.com@(imagesUrl[i])"></li>
+                        }  
+                    }
                 }
             </ul>
         </div>
@@ -142,13 +172,14 @@
         <!--讨论模块-->
         <div class="talk-status">
 
-        <div class="talk-header"></div>
         <!--讨论内容-->
         <div class="talk-content">
             <div class="talk-main">
 
             </div>
         </div>
+       
+        <div class="noreply-msg">暂无数据！</div>         
         <!--回复-->
         <div class="return-msg">
             <div class="box-returnmsg">
@@ -160,7 +191,7 @@
         </div>
 
         </div>
-           
+
         <!--材料采购计划模块-->
         <div class="shop-status hide">
 
@@ -169,12 +200,17 @@
 
         <!--制版模块-->
         <div class="print-status hide">
-            <div class="print-header">制版信息</div>
+            <h1 class="plate-remark-msg">制版信息</h1>
             <div class="platemakingBody">
 
 
             </div>
-       
+
+            <h1 class="plate-remark-msg">工艺说明</h1>
+            <div class="plate-remark">
+
+            </div>
+            
         </div>
 
         <!--日志模块-->
@@ -182,6 +218,9 @@
             
                 
         </div>
+         
+        <div class="loading-lump"><img src="~/modules/images/img.gif" /></div>
+           
 
     </div>
    

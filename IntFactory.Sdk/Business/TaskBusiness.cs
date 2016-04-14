@@ -154,7 +154,6 @@ namespace IntFactory.Sdk
             paras.Add("endTime", endTime);
             paras.Add("userID", userID);
             paras.Add("agentID", agentID);
-
             return HttpRequest.RequestServer<UpdateResult>(ApiOption.UpdateTaskEndTime, paras);
         }
 

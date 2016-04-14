@@ -1,7 +1,8 @@
 ﻿/*头部*/
 .btn-return {position:absolute;display:block;text-decoration:none;left:10px;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
-.task-accept {cursor:pointer; position:absolute;right:10px;display:block;top:15px;line-height:30px;width:70px;text-align:center;border:1px solid #e0483e; border-radius:5px;color:#e0483e;font-size:0.8em;}
+.task-accept {cursor:pointer; position:absolute;right:10px;display:block;top:15px;line-height:30px;width:70px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;font-size:0.8em;}
+.task-accept input[type=text] { background:transparent;width:100%;text-align:center;line-height:30px;color:#e0483e;cursor:pointer;}
 
 /*焦点图*/
 .main_visual .main_image img { width:100%;}
@@ -14,6 +15,7 @@
 .main-info .right-task-info { float:right;margin-right:20px;text-align:right;}
 .main-info .left-task-info .task-status { color:#e0483e;}
 .main-info li { color:#666;line-height:30px;list-style:none;font-size:0.8em;}
+.main-info li input[type=text] {margin-top:-5px;color:#666;cursor:pointer;}
 .setindent {margin:0 3px;}
 .right-task-info li .owner-msg { float:left;line-height:30px;font-size:1.1em;border-right:1px solid #CCC;padding-right:10px;margin-right:10px;height:40px;}
 .right-task-info li .dy-info { float:right;margin-top:-2px;line-height:24px;}
@@ -23,6 +25,7 @@
 .task-info .order-need { line-height:40px;color:#666;font-size:0.8em;margin-left:20px;}
 .task-info .order-need span { float:left; display:block;}
 .task-info .order-need span:last-child {line-height:20px;margin-top:10px;padding-bottom:10px;}
+
 
 /*菜单*/
 nav { margin-top:20px;}
@@ -35,15 +38,16 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 
 /*讨论显示区域*/
 .main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:60px;}
-.main-box .talk-header {text-align:center;height:40px;line-height:40px;}
-.main-box .talk-content { padding:10px 0;border-top:1px solid #ddd;margin:0 20px;}
+.main-box .talk-content { padding:10px 0;margin:0 20px;}
 .main-box .talk-content li {list-style:none;}
 .main-box .talk-main { width:100%;}
+.main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 
 /*.talk-content .talk-self li{line-height:43px;}
 .talk-content .talk-self .pic-other { width:43px;height:43px;border-radius:50%;overflow:hidden;}
 .talk-content .talk-self .show-returnmsg { margin-left:30px;background-color:#e8e8e8;padding:0 10px;font-size:0.8em;border-radius:8px;color:#666;width:20%;max-width:350px;}*/
 .main-box img{ width:35px;height:35px;}
+.main-box .loading-lump { text-align:center;display:none;margin-top:-20px;}
 .main-box .send-other { margin-top:20px;}
 .main-box .send-nameanddate { color:#666;padding-right:8px;font-size:0.6em;}
 
@@ -90,19 +94,19 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 .material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;line-height:50px;border-bottom:1px solid #eee;}
 .material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;line-height:50px;border-bottom:1px solid #eee;}
 
+
+
 /*制版信息显示区域*/
 .print-status .print-header { color:#82cadb;display:block;height:40px;line-height:40px;margin:0 10px;border-bottom:2px solid #ddd;}
-/*.print-info {height:45px; margin:0 10px;border-bottom:1px solid #eee;}
-.print-info .print-status ul {height:45px;}
-.print-status ul li{float:left;height:45px;line-height:45px;width:20%;color:#666;}
-.print-status ul li:first-child { color:#999;}*/
-.platemakingBody {margin:20px 10px;border-top:1px solid #eee;border-left:1px solid #eee;}
-
+.platemakingBody {margin:20px 10px 50px 10px;border-top:1px solid #eee;border-left:1px solid #eee;}
 .platemakingBody table {width:100%;}
-
 .platemakingBody table tr td{padding:15px 0px 15px 10px;}
-
 .platemakingBody td {border-bottom:1px solid #eee;border-right:1px solid #eee;}
+
+/*工艺说明*/
+.print-status h1 { color:#4a98e7;line-height:40px;margin:0 10px;border-bottom:1px solid #ddd;}
+.plate-remark { margin:10px;color:#666;}
+
 /*日志显示区域*/
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}
