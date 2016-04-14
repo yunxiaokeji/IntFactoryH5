@@ -155,9 +155,12 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
+<<<<<<< HEAD
     <Content Include="modules\template\task\detailLog.html" />
+=======
     <Content Include="modules\template\task\taskListTemplate.html" />
     <Content Include="Scripts\doT.js" />
+>>>>>>> 9cc482b6aea944785742968570046fe738322489
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

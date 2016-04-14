@@ -37,9 +37,5 @@ namespace IntFactory.Sdk
         /// </summary>
         public string plateRemark;
 
-        /// <summary>
-        /// 产品列表
-        /// </summary>
-        List<ProductBaseEntity> details;
     }
 }
