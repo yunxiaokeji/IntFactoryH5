@@ -50,7 +50,7 @@
             return false;
         });        
 
-        //类型
+        //类型下拉 
         $("#type-a").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".flow-type").css("display", "none");
@@ -88,7 +88,7 @@
             }
         });
 
-        //流程
+        //流程下拉 
         $("#flow-a").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
@@ -101,37 +101,18 @@
             if (num=="0") {
                 $(".flow-type").slideDown("slow");
                 $("#flow-a").data("flow", "1");             
-                $(".all-flow").click(function () {
-                    var name = $(".all-flow").text();
-                    $(".flow-a").text(name);
+                $(".all-flow").click(function () {  
+                    $(".flow-a").text($(this).text());
                     $(".flow-type").css("display", "none");
                     $("#flow-a").data("flow", "0");
-                });
-                $(".DY-flow").click(function () {
-                    var name = $(".DY-flow").text();
-                    $(".flow-a").text(name);
-                    $(".flow-type").css("display", "none");
-                    $("#flow-a").data("flow", "0");
-                });
-                $(".DH-flow").click(function () {
-                    var name = $(".DH-flow").text();
-                    $(".flow-a").text(name);
-                    $(".flow-type").css("display", "none");
-                    $("#flow-a").data("flow", "0");
-                });
-                $(".SC-flow").click(function () {
-                    var name = $(".SC-flow").text();
-                    $(".flow-a").text(name);
-                    $(".flow-type").css("display", "none");
-                    $("#flow-a").data("flow", "0");
-                });
+                });               
             } else {
                 $(".flow-type").slideUp("slow");
                 $("#flow-a").data("flow", "0");
             }
         });
 
-        //筛选来源
+        //流程阶段下拉 
         $("#screen-a").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
@@ -144,37 +125,18 @@
             if (num == "0") {
                 $(".screen-type").slideDown("slow");                
                 $("#screen-a").data("screen", "1");
-                $(".all-screen").click(function () {
-                    var name = $(".all-screen").text();
-                    $(".screen-a").text(name);
+                $(".all-screen").click(function () {                    
+                    $(".screen-a").text($(this).text());
                     $(".screen-type").css("display", "none");
                     $("#screen-a").data("screen", "0");
-                });
-                $(".GC-screen").click(function () {
-                    var name = $(".GC-screen").text();
-                    $(".screen-a").text(name);
-                    $(".screen-type").css("display", "none");
-                    $("#screen-a").data("screen", "0");
-                });
-                $(".ZH-screen").click(function () {
-                    var name = $(".ZH-screen").text();
-                    $(".screen-a").text(name);
-                    $(".screen-type").css("display", "none");
-                    $("#screen-a").data("screen", "0");
-                });
-                $(".AL-screen").click(function () {
-                    var name = $(".AL-screen").text();
-                    $(".screen-a").text(name);
-                    $(".screen-type").css("display", "none");
-                    $("#screen-a").data("screen", "0");
-                });
+                    });
             } else {
                 $(".screen-type").slideUp("slow");                
                 $("#screen-a").data("screen", "0");
             }
         });
 
-        //排序       
+        //排序下拉       
         $("#select-copy").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
@@ -188,49 +150,16 @@
             if (num == "0") {
                 $("#tab-screen").slideDown("slow");
                 $("#select-copy").data("select", "1");
-                $(".taketime-positive").click(function () {                                       
-                    $(".sort-a").text($(".taketime-positive").text());
-                    $("#tab-screen").slideUp("slow");
-                    $("#select-copy").data("select", "0");
-                });
-                $(".tasktime-order").click(function () {
-                    $(".sort-a").text($(".tasktime-order").text());
-                    $("#tab-screen").slideUp("slow");
-                    $("#select-copy").data("select", "0");
-                });
-                $(".expire-positive").click(function () {
-                    $(".sort-a").text($(".expire-positive").text());
-                    $("#tab-screen").slideUp("slow");
-                    $("#select-copy").data("select", "0");
-                });
-                $(".expire-order").click(function () {
-                    $(".sort-a").text($(".expire-order").text());
-                    $("#tab-screen").slideUp("slow");
-                    $("#select-copy").data("select", "0");
-                });
-                $(".create-positive").click(function () {
-                    $(".sort-a").text($(".create-positive").text());
-                    //判断当前浏览器的宽度
-                    winWidth = document.body.clientWidth;                    
-                    if (winWidth>=550) {
-                        $(".select li #select-copy").css("margin-top", "15px");
+                $(".tab-screen li").click(function () {
+                    //判断浏览器宽度
+                    var width = document.body.clientWidth;
+                    if (width<=550) {
+                        $("#select-copy").css("margin-top", "3px");
                     }
                     else {
-                        $(".select li #select-copy").css("margin-top","3px");
-                    }                    
-                    $("#tab-screen").slideUp("slow");
-                    $("#select-copy").data("select", "0");
-                });
-                $(".create-order").click(function () {
-                    $(".sort-a").text($(".create-order").text());
-                    //判断当前浏览器的宽度
-                    winWidth = document.body.clientWidth;
-                    if (winWidth >= 550) {
-                        $(".select li #select-copy").css("margin-top", "15px");
+                        $("#select-copy").css("margin-top", "15px");
                     }
-                    else {
-                        $(".select li #select-copy").css("margin-top", "3px");
-                    }
+                    $(".sort-a").text($(this).text());
                     $("#tab-screen").slideUp("slow");
                     $("#select-copy").data("select", "0");
                 });
@@ -244,24 +173,40 @@
         //获取全部状态的任务列表
         $(".task-status li").click(function () {   
             MyListTask.params.finishStatus =$(this).data("status");
-            MyListTask.getList();
-            
-        });
-        
-        //获取类型的任务列表
-        $(".tab-type li").click(function () {
-            MyListTask.params.orderType = $(this).data("id");
-            MyListTask.getList();
+            MyListTask.getList();            
         });
 
-        //获取流程的任务列表
-        $("flow-type li").click(function () {
-            MyListTask.params.mark = $(this).data("flow");
+        //获取类型的任务列表(+读取订单流程的列表[不是详情])
+        $(".tab-type li").click(function () {            
+            MyListTask.params.orderType = $(this).data("id");
+            MyListTask.getList();
+            MyListTask.GetTaskFlow();
+        });
+
+        //获取订单流程的任务列表
+        $("#flow-potion").on("click", ".all-flow", function () {
+            //$(this).data("id");
+            MyListTask.params.orderProcessID = -2;
+            MyListTask.getList();
+            MyListTask.GetTaskFlowStage();
+        });
+        
+        //获得订单流程阶段的任务列表
+        $("#screen-potion").on("click", ".all-screen", function () {
+            MyListTask.params.orderStageID = $(this).data("id");
+            MyListTask.getList();            
+        });
+
+        //获取排序的任务列表(只是接收时间的正序和倒序)
+        $(".tab-screen li").click( function () {
+            MyListTask.params.isAsc = $(this).data("takepo");
             MyListTask.getList();
         });
         
     };
-    //公共方法
+    ///公共方法
+
+    //页面加载获取列表
     MyListTask.getList = function () {
         $(".list").empty();
         //获取任务列表(页面加载)
@@ -273,6 +218,28 @@
             })
         });
 
+    }
+
+    //获取订单流程的列表
+    MyListTask.GetTaskFlow = function () {
+        $("#flow-potion").empty();
+        $.post("/Task/GetTaskFlow", null, function (data) {
+            doT.exec("../modules/template/task/taskFlowTemplate.html", function (e) {
+                var $res = e(data.items);
+                $("#flow-potion").append($res);
+            });
+        });
+    }
+
+    //获取订单流程的任务列表
+    MyListTask.GetTaskFlowStage = function () {
+        $("#screen-potion").empty();
+        $.post("/Task/GetTaskFlowStage", null, function (data) {            
+            doT.exec("../modules/template/task/taskFlowStageTemplate.html", function (code) {
+                var $res = code(data.items);
+                $("#screen-potion").append($res);
+            });
+        });
     }
 
     module.exports = MyListTask;

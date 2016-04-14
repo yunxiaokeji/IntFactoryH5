@@ -74,7 +74,7 @@
                  <i class="iconfont-select iconfont" id="iconfont-flow">&#xe61c;</i>
              </div></li>
              <li><div class="copy" id="screen-a" data-screen="0">
-                 <a class="screen-a">筛选</a>
+                 <a class="screen-a">流程阶段</a>
                  <i class="iconfont-select iconfont" id="iconfont-screen">&#xe61c;</i>
              </div></li>
              <li><div class="copy" id="select-copy" data-select="0">
@@ -92,33 +92,27 @@
                     <li data-id="2"><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="DH-type">大货</span></li>                        
                 </ul>                
              </div>    
-            @* 流程下拉 *@
+              @*流程下拉*@ 
             <div class="flow-type">
-                <ul class="potion">
-                    <li class="all-flow" data-flow="0">全部流程</li>
-                    <li class="DY-flow" data-flow="1">材料流程</li>
-                    <li class="DH-flow" data-flow="2">制版流程</li>
-                    <li class="SC-flow" data-flow="3">大货</li>
+                <ul class="potion" id="flow-potion">                     
+                    <li class="all-flow" data-id="-1">全部流程</li>                            
                 </ul>
-           </div>
-            @* 筛选下拉 *@
+           </div>           
+            @* 流程阶段下拉 *@
             <div class="screen-type">
-                <ul class="potion">
-                    <li class="all-screen">全部</li>
-                    <li class="GC-screen">工厂</li>
-                    <li class="ZH-screen">自助</li>
-                    <li class="AL-screen">阿里</li>
+                <ul class="potion" id="screen-potion"> 
+                                       
                 </ul>
             </div>        
             @* 排序 *@
             <div class="tab-screen" id="tab-screen">
                 <ul class="potion">
-                    <li class="taketime-positive" data-takepo="">接受时间正序</li>
-                    <li class="tasktime-order">接受时间倒序</li>
-                    <li class="expire-positive">到期时间正序</li>
-                    <li class="expire-order">到期时间倒序</li>
-                    <li class="create-positive">任务创造时间正序</li>
-                    <li class="create-order">任务创造时间倒序</li>
+                    <li class="taketime" data-takepo="0">接受时间正序</li>
+                    <li class="tasktime" data-takepo="1">接受时间倒序</li>
+                    <li class="tasktime" data-takepo="0">到期时间正序</li>
+                    <li class="tasktime" data-takepo="1">到期时间倒序</li>
+                    <li class="tasktime" data-takepo="0">任务创造时间正序</li>
+                    <li class="tasktime" data-takepo="1">任务创造时间倒序</li>
                 </ul>               
             </div>
         </div>

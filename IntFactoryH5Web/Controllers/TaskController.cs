@@ -14,7 +14,7 @@ namespace IntFactoryH5Web.Controllers
         string TaskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
-       // string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
+        string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
         Dictionary<string, object> TaskDetail = new Dictionary<string, object>();
         Dictionary<string, object> TaskList = new Dictionary<string, object>();
 
@@ -85,8 +85,7 @@ namespace IntFactoryH5Web.Controllers
 
         //获取订单任务流程列表
         public JsonResult GetTaskFlow()
-        {
-            JavaScriptSerializer java = new JavaScriptSerializer();            
+        {                
             var flowlist = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetOrderProcess(userID, agentID);
             JsonDictionary.Add("items",flowlist.processs);
             return new JsonResult
@@ -95,7 +94,20 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        
+
+        //获取订单任务流程阶段列表
+        public JsonResult GetTaskFlowStage()
+        {
+            var model = TaskBusiness.BaseBusiness.GetOrderStages(processID, userID, agentID);
+            JsonDictionary.Add("items",model.processStages);
+            return new JsonResult
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        //获取登录信息
         public JsonResult GetLogInfo()
         {
             var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, 1);

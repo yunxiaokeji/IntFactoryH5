@@ -156,6 +156,8 @@
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
     <Content Include="modules\template\task\detailLog.html" />
+    <Content Include="modules\template\task\taskFlowStageTemplate.html" />
+    <Content Include="modules\template\task\taskFlowTemplate.html" />
     <Content Include="modules\template\task\taskListTemplate.html" />
     <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />

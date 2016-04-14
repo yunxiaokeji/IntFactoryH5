@@ -1,6 +1,8 @@
 ﻿{%
-    for(var i=0;i<$data.length;i++)
-    {  
+    if($data.length>0){
+        for(var i=0;i<$data.length;i++)
+        { 
+         var item=$data[i];
 
 %}
         <ul class="listabove row">
@@ -10,38 +12,58 @@
             <li class="center-list-task">
                  <!--任务详情-->
                  <div class="details">                   
-                    <!--{%   if ({%=$data[i].finishStatus%}==0) {      %}
+                    {%   if (item.finishStatus==0) {      %}
                         <i class="iconfont-details iconfont">&#xe61e;</i>
-                    {%   }  else if ({%=$data[i].finishStatus%}==1) {      %}
-                        <i class="iconfont-details iconfont">&#xe621;</i>
+                    {%   }  else if (item.finishStatus==1) {      %}
+                        <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
                     {%   }  else {      %}
-                        <i class="iconfont-details iconfont">&#xe61f;</i>
-                    {%}%}-->
-
-                   <i class="iconfont-details iconfont">{%=$data[i].finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>                    
-                   <a class="details-name" href="~/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">{%=$data[i].taskID%}</a>
+                        <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
+                    {%   }  %}
+                   <!--<i class="iconfont-details iconfont">{%=item.finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>-->                    
+                   <a class="details-name" href="~/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">{%=item.taskID%}</a>
                 </div>
                 <div class="stage details-stage">
-                    任务:<label class="material">{%=$data[i].title%}</label>
+                    任务:<label class="material">{%=item.title%}</label>
                 </div>
                 <div class="stage" >
                     <label>接受:</label>
-                    <span class="time stage-time">{%=$data[i].createTime%}</span>
+                    <span class="time stage-time">{%=item.createTime%}</span>
                 </div>
                 <div class="stage">
                     <label>到期:</label>
-                    <span class="time">{%=$data[i].endTime%}</span>
+                    <span class="time">{%=item.endTime%}</span>
                 </div>                
             </li>
-            <li class="last-stage">                
-                <div class="{%=$data[i].colorMark==0?"orange-tag":"red-tag"%}"></div>                
+            <li class="last-stage">    
+                {% if(item.colorMark==0){ %}            
+                <div class="red-tag"></div>  
+                {% }else if(item.colorMark==1){  %}    
+                <div class="orange-tag"></div>   
+                {% }else if(item.colorMark==2){  %}      
+                <div class="green-tag"></div> 
+                {% }else if(item.colorMark==3){  %}      
+                <div class="blue-tag"></div> 
+                {% }else if(item.colorMark==4){  %}      
+                <div class="purple-tag"></div> 
+                {% }else{ %}
+                <div class="yellow-tag"></div> 
+                {% } %}
                 <div class="shape">                    
-                    <div class="style-i"><i class="iconfont-stage iconfont">{%=$data[i].orderType==1?"&#xe612;":"&#xe60f;"%}</i></div>
-                    <div class="style-lable"><span class="DY">{%=$data[i].orderType==1?"打样":"大货"%}</span></div>     
+                    <div class="style-i"><i class="iconfont-stage iconfont">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i></div>
+                    <div class="style-lable"><span class="DY">{%=item.orderType==1?"打样":"大货"%}</span></div>     
                 </div>
             </li>     
         </ul>
    
 {%  
-     }
+        }
+    } else{
+
 %}
+
+<div class="nodata">暂无数据!请刷新页面</div>
+
+
+{%  
+    }
+ %}
