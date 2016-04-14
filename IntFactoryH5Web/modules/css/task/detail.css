@@ -34,7 +34,7 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 .menuchecked i {color:#4a98e7;}
 
 /*讨论显示区域*/
-.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:80px;}
+.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:60px;}
 .main-box .talk-header {text-align:center;height:40px;line-height:40px;}
 .main-box .talk-content { padding:10px 0;border-top:1px solid #ddd;margin:0 20px;}
 .main-box .talk-content li {list-style:none;}
@@ -43,33 +43,35 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 /*.talk-content .talk-self li{line-height:43px;}
 .talk-content .talk-self .pic-other { width:43px;height:43px;border-radius:50%;overflow:hidden;}
 .talk-content .talk-self .show-returnmsg { margin-left:30px;background-color:#e8e8e8;padding:0 10px;font-size:0.8em;border-radius:8px;color:#666;width:20%;max-width:350px;}*/
+.main-box img{ width:35px;height:35px;}
+.main-box .send-other { margin-top:20px;}
+.main-box .send-nameanddate { color:#666;padding-right:8px;font-size:0.6em;}
 
-.send-other { margin-top:20px;}
-.send-other .send-nameanddate{ color:#666;text-align:left;font-size:0.6em;}
-.send-other .send-nameanddate span:first-child { margin-right:20px;color:#308aef;font-size:1.1em;margin-left:-2px;}
+.send-other .send-nameanddate{ text-align:left;}
+.send-other .send-nameanddate span:first-child {margin-right:20px;color:#308aef;font-size:1.1em;}
 .send-other .talk-other {min-height:30px; border-radius:8px;margin-left:45px;width:71%;color:#666;background-color:#e8e8e8;line-height:25px;padding:0 8px;font-size:0.8em;position:relative;margin-top:8px;}
-.send-other .other-pic img{width:35px;height:35px; }
-.send-other .talk-other .other-pic {width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;left:-50px;top:-5px;}
+.send-other .talk-other .other-pic {cursor:pointer;width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;left:-50px;top:-5px;}
 .send-other .talk-other .talk-lump {width:0;height:0;border-right:10px solid #e8e8e8; border-top:8px solid transparent;border-bottom:8px solid transparent;position:absolute;left:-8px;top:5px;}
-.send-other .talk-other .return-other { position:absolute;right:-50px;top:2px;}
-.send-other .return-other .iconfont { font-size:1.2em;color:#a8a8a8;}
+.send-other .talk-other .return-other { position:absolute;right:-50px;top:2px;cursor:pointer;}
+.send-other .return-other .iconfont { font-size:1em;color:#a8a8a8;}
 
 .send-self { margin-top:20px;}
-.send-self .send-nameanddate{ color:#666;text-align:right;font-size:0.6em;margin-left:5px;padding-right:8px;}
-.send-self .send-nameanddate span:last-child {margin-left:23px;color:#308aef;font-size:1.1em;}
+.send-self .send-nameanddate{text-align:right;}
+.send-self .send-nameanddate span:last-child {margin-left:20px;color:#308aef;font-size:1.1em;}
 .send-self .talk-self {min-height:30px; border-radius:8px;width:71%;color:#fff;background-color:#007aff;line-height:25px;padding:0 8px;font-size:0.8em;position:relative;margin-top:8px;}
-.send-self .talk-self img{width:35px;height:35px;}
-.send-self .talk-self .self-pic { width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;right:-50px;top:-5px;}
+.send-self .talk-self .self-pic { width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;right:-50px;top:-5px;cursor:pointer;}
 .send-self .talk-self .talk-lump { width:0;height:0;border-left:10px solid #007aff; border-top:8px solid transparent;border-bottom:8px solid transparent;position:absolute;right:-8px;top:5px;}
-.send-self .talk-self .text-talk { text-align:left;}
+.send-self .talk-self .return-self {cursor:pointer;position:absolute;z-index:999;left:-48px;top:0;}
+.talk-self .return-self .iconfont { font-size:1em;color:#a8a8a8;}
+
 .talk-content .talk-main div:first-child { margin-top:0px;}
 
 /*提交讨论信息*/
-.return-msg { background-color:#888888;width:100%;height:50px;padding:15px 0;position:fixed;bottom:0;z-index:999;left:0;}
-.return-msg .box-returnmsg { float:left;margin-left:10px;line-height:50px;height:50px;width:74.1%;}
-.return-msg .box-submit { float:right;margin-right:10px;line-height:50px;height:50px;margin-left:10px;width:14.8%;}
-.return-msg .box-returnmsg .txt-talkcontent{ line-height:50px;height:50px;outline:none;border:1px solid #CCC;border-radius:3px;padding-left:10px;width:100%;color:#666;}
-.return-msg .box-submit .btn-submit {border-radius:4px; padding:0 20px;line-height:50px;height:50px;background-color:#4b98e8;text-align:center;border:1px solid #68a9ed;color:#fff;width:100%;}
+.return-msg { background-color:#888888;width:100%;padding:10px 0;position:fixed;bottom:0;z-index:999;left:0;}
+.return-msg .box-returnmsg { float:left;margin-left:10px;line-height:40px;height:40px;width:74.1%;}
+.return-msg .box-submit { float:right;margin-right:10px;line-height:40px;height:40px;margin-left:10px;width:14.8%;}
+.return-msg .box-returnmsg .txt-talkcontent{height:40px;outline:none;border:1px solid #CCC;border-radius:3px;padding-left:10px;width:100%;color:#666;}
+.return-msg .box-submit .btn-submit {border-radius:4px; padding:0 20px;line-height:40px;height:40px;background-color:#4b98e8;text-align:center;border:1px solid #68a9ed;color:#fff;width:100%;}
 
 
 /*材料采购计划显示区域*/
@@ -98,7 +100,7 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}
 .log-status li { float:left;font-size:0.9em;line-height:45px;}
-.log-status .log-name { font-size:1.1em;color:#444040;}
+.log-status .log-name { font-size:1em;color:#444040;}
 .log-status li:first-child{ width:45px;height:45px;border-radius:50%;margin-right:10px;overflow:hidden;}
 .log-status li:last-child { line-height:25px;margin-left:10px;}
 .log-status li:last-child p:first-child { color:#666;font-size:1em;}

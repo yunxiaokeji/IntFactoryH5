@@ -1,0 +1,50 @@
+﻿{%
+    for(var i=0;i<$data.length;i++)
+    {
+        if($data[i].createUser.userID=='bc6802e9-285c-471c-8172-3867c87803e2')
+        {
+%}
+            <div class="send-self">
+                <div class="send-nameanddate">
+                    <span>{%=$data[i].createTime%}</span>
+                    <span>{%=$data[i].createUser.name%}</span>
+                </div>
+
+                <div class="talk-self">
+                    <div class="self-pic">
+                        <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
+                    </div>
+                    <div class="talk-lump"></div>
+                    <p class="text-talk">{%=$data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content%}</p>
+                    <div class="return-self">
+                        <i class="iconfont">&#xe611;回复</i>
+                    </div>
+                </div>
+               
+            </div>
+
+      {%}
+        else
+        {    
+      %}
+
+            <div class="send-other">
+                <div class="send-nameanddate">
+                    <span>{%=$data[i].createUser.name%}</span>
+                    <span>{%=$data[i].createTime%}</span>
+                </div>
+
+                <div class="talk-other">
+                    <div class="other-pic">
+                        <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
+                    </div>
+                    <div class="talk-lump"></div>
+                    <p class="text-talk">{%=$data[i].content%}</p>
+                    <div class="return-other">
+                        <i class="iconfont">&#xe611;回复</i>
+                    </div>
+                </div>
+            </div>
+      
+       {%}
+    }%}

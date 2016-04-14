@@ -1,33 +1,31 @@
 ﻿define(function (require, exports, module) {
 
-    
-    //引用滑屏控件JS
-    //require("/modules/plug/touchSlider/js/jquery-1.js");
-    //require("/modules/plug/touchSlider/js/jquery_002.js");
-    //require("/modules/plug/touchSlider/js/jquery.js");
-
     var Paras = {
         orderID: "",
         stageID: "",
+        platemaking: "",
+        plateRemark: "",
         pageIndex: 1
     };
 
     var TaskDetail = {};
 
-    TaskDetail.init = function (orderID, stageID) {
+    TaskDetail.init = function (orderID, stageID, platemaking, plateRemark) {
 
-        TaskDetail.bindEvent();
-        
         Paras.orderID = orderID;
         Paras.stageID = stageID;
+        Paras.platemaking = platemaking;
         TaskDetail.getTaskReplys();
+        TaskDetail.bindEvent();
+      
+       
+
     }
     //设置自己发送信息文本框的位置
    
     TaskDetail.bindEvent = function () {
 
-        //窗体加载设置自己发送信息文本框的位置
-        setTextPosition();
+        
         //窗体加载设置订单需求文本内容
         setOrderNeedWidth();
 
@@ -64,32 +62,30 @@
             $(this).find("i").css("color", "#4a98e7");
 
             var classname = $(this).data("classname");
-            if (classname == "talk-status") {
 
-                $(".main-box").css("margin-bottom", "80px");
+            if (classname == "talk-status") {  
+                TaskDetail.getTaskReplys();
+                $(".main-box").css("margin-bottom", "60px");
             }
-            else {
+
+            else if (classname == "shop-status")
+            {
+                TaskDetail.getOrderList();
+            }
+
+            else if (classname == "log-status") {
+                $('.log-status').find('.log-box').remove();
+                TaskDetail.getTaskLogs();
                 $(".main-box").css("margin-bottom", "0px");
             }
+
+            else if (classname == "print-status") {
+                TaskDetail.printBaseInfo();
+            }
+
             $(".main-box ." + classname).show().siblings().hide();
 
             setTextPosition();
-
-            //$(".main-box").data("status", $(this).index());
-            //var showModuleStatus = $(".main-box").data("status");
-
-            //if (showModuleStatus == '0')
-            //{
-
-            //    $(".main-box .talk-status").show().siblings().hide();
-            //    $(".main-box").css("margin-bottom","80px");
-            //}
-            //else if (showModuleStatus == '1')
-            //{
-
-            //    $(".main-box .shop-status").show().siblings().hide();
-            //    $(".main-box").css("margin-bottom", "0px");
-            //}
 
         })
 
@@ -125,9 +121,6 @@
 
         })
 
-
-       
-
         //设置订单需求文本内容宽度
         function setOrderNeedWidth() {
             //订单需求第一个SPAN宽度
@@ -140,43 +133,77 @@
             $(".order-need span:last-child").css("width", orderNeedThree + "px");
         }
 
-        //设置自己发送信息文本框的位置
-        function setTextPosition() {
-            //获取显示区域宽度
-            var showWidth = $(this).width() - 40;
-            //获取显示文本宽度
-            var showTextWidth = $(".send-self .talk-self").width();
-            //设置自己发送信息文本框的位置
-            $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 70 + "px");
-        }
+    }
+    
 
-        
+    //设置自己发送信息文本框的位置
+    function setTextPosition() {
+        //获取显示区域宽度
+        var showWidth = $(this).width() - 40;
+        //获取显示文本宽度
+        var showTextWidth = $(".send-self .talk-self").width();
+        //设置自己发送信息文本框的位置
+        $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 70 + "px");
     }
 
-  
+    //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
+
         $.post("/Task/GetDiscussInfo", Paras, function (data) {
+            alert(data.items);
+            doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-            alert(data.length);
+                var items = data.items;
 
-            //doT.exec("/modules/template/task/taskDetailReply.html", function (template) {
+                var innerText = templateFun(items);
 
-            //    template(data);
+                $(".talk-main").html(innerText);
 
-            //})
+                //窗体加载设置自己发送信息文本框的位置
+                setTextPosition();
+                
+            });
 
         })
     }
-    //TaskDetail.setTextPosition = function () {
+    
+    //获取任务详情日志列表
+    TaskDetail.getTaskLogs = function () {
 
-    //    //获取显示区域宽度
-    //    var showWidth = $(this).width() - 40;
-    //    //获取显示文本宽度
-    //    var showTextWidth = $(".send-self .talk-self").width();
-    //    //设置自己发送信息文本框的位置
-    //    $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 60 + "px");
+        $.post("/Task/GetLogInfo", null, function (data) {
+            
+            doT.exec("/template/task/detailLog.html", function (templateFun) {
 
-    //}
+                var items = data.items;
+
+                var innerText = templateFun(items);
+
+                $('.log-status').html(innerText);
+
+            });
+
+        })
+
+    }
+
+    //获取材料采购计划列表
+    TaskDetail.getOrderList = function () {
+
+        $.post("Task/GetOrderInfo",Paras, function (data) {
+
+           
+
+        })
+
+    }
+
+    //获取制版信息
+    TaskDetail.printBaseInfo = function () {
+
+        alert(Paras.platemaking);
+        alert(paras.plateRemark);
+
+    }
 
     module.exports = TaskDetail;
 

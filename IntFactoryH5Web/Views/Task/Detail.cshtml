@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0;" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
     <title>任务详情</title>
     <link href="~/modules/css/common.css" rel="stylesheet" />
     <link href="~/modules/css/layout.css" rel="stylesheet" />
@@ -22,14 +22,14 @@
     <script src="~/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery.js"></script>
-    <script src="~/Scripts/sea.js"></script>
     <script src="~/modules/plug/doT.js"></script>
+    <script src="~/Scripts/sea.js"></script>
     <script type="text/javascript">
         $(function () {
-
+            
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
-
-                taskDetail.init('@task.orderID','@task.stageID');
+                
+                taskDetail.init('@task.orderID', '@task.stageID', '@task.order.platemaking', '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无信息":task.order.plateRemark)');
 
             });
            
@@ -135,148 +135,24 @@
         <div class="talk-status">
 
         <div class="talk-header"></div>
-
         <!--讨论内容-->
         <div class="talk-content">
-
             <div class="talk-main">
 
-               <div class="send-other">
-
-                    <div class="send-nameanddate">
-                        <span>小明</span>
-                        <span>2016-04-08 10:36:58</span>
-                    </div>
-
-                    <div class="talk-other">
-
-                        <div class="other-pic">
-                            <img src="~/modules/images/default-user.gif" />
-                        </div>
-
-                        <div class="talk-lump"></div>
-
-                        <p class="text-talk">
-                            今天吃啥
-                        </p>
-
-                        <div class="return-other">
-                            <i class="iconfont">&#xe611;回复</i>
-                        </div>
-
-                    </div>
-
-                </div>
-
-               <div class="send-other">
-                    <div class="send-nameanddate">
-                        <span>小黑</span>
-                        <span>2016-04-08 10:36:58</span>
-                    </div>
-
-                    <div class="talk-other">
-
-                        <div class="other-pic">
-                            <img src="~/modules/images/default-user.gif" />
-                        </div>
-
-                        <div class="talk-lump"></div>
-
-                        <p class="text-talk">
-                            骨头汤啊啊啊
-                        </p>
-
-                        <div class="return-other">
-                            <i class="iconfont">&#xe611;回复</i>
-                        </div>
-
-                    </div>
-
-                
-                </div>
-               
-            <div class="send-self">
-                <div class="send-nameanddate">
-                    <span>2016-04-08 10:36:58</span>
-                    <span>李涛</span>
-                </div>
-
-                <div class="talk-self">
-
-                    <div class="self-pic">
-                        <img src="~/modules/images/default-user.gif" />
-                    </div>
-
-                    <div class="talk-lump"></div>
-
-                    <p class="text-talk">
-                        吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃
-                    </p>
-                </div>
             </div>
-
-               <div class="send-other">
-                    <div class="send-nameanddate">
-                        <span>小白</span>
-                        <span>2016-04-08 10:36:58</span>
-                    </div>
-
-                    <div class="talk-other">
-
-                        <div class="other-pic">
-                            <img src="~/modules/images/default-user.gif" />
-                        </div>
-
-                        <div class="talk-lump"></div>
-
-                        <p class="text-talk">
-                            吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃
-                        </p>
-
-                        <div class="return-other">
-                            <i class="iconfont">&#xe611;回复</i>
-                        </div>
-
-                    </div>
-
-                
-                </div>
-
-               <div class="send-self">
-                    <div class="send-nameanddate">
-                        <span>2016-04-08 10:36:58</span>
-                        <span>李涛</span>
-                    </div>
-
-                    <div class="talk-self">
-
-                        <div class="self-pic">
-                            <img src="~/modules/images/default-user.gif" />
-                        </div>
-
-                        <div class="talk-lump"></div>
-
-                        <p class="text-talk">
-                            吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃吃毛线
-                        </p>
-                    </div>
-               </div>
-
-             </div>
         </div>
-            <!--回复-->
-            <div class="return-msg">
-                <div class="box-returnmsg">
-                    <input type="text" placeholder="输入讨论内容" class="txt-talkcontent" />
-                </div>
-                <div class="box-submit">
-                    <input type="button" value="提交" class="btn-submit" />
-                </div>
+        <!--回复-->
+        <div class="return-msg">
+            <div class="box-returnmsg">
+                <input type="text" placeholder="输入讨论内容" class="txt-talkcontent" />
             </div>
+            <div class="box-submit">
+                <input type="button" value="提交" class="btn-submit" />
+            </div>
+        </div>
+
         </div>
            
-        
-
         <!--材料采购计划模块-->
         <div class="shop-status hide">
 
@@ -445,39 +321,7 @@
         <!--日志模块-->
         <div class="log-status hide">
             
-            <div class="log-box">
-                <ul class="log-info">
-                    <li><img src="~/modules/images/default-user.gif" /></li>
-                    <li class="log-name">李白</li>
-                    <li>
-                        <p>标记客户颜色</p>
-                        <p>2016-04-08 18:59:05</p>
-                    </li>                   
-                </ul>
-            </div>
-            
-             <div class="log-box">
-                <ul class="log-info">
-                    <li><img src="~/modules/images/default-user.gif" /></li>
-                    <li class="log-name">李白</li>
-                    <li>
-                        <p>改变负责人</p>
-                        <p>2016-04-08 18:59:05</p>
-                    </li>                   
-                </ul>
-            </div>
-
-             <div class="log-box">
-                <ul class="log-info">
-                    <li><img src="~/modules/images/default-user.gif" /></li>
-                    <li class="log-name">李白</li>
-                    <li>
-                        <p>标记客户颜色</p>
-                        <p>2016-04-08 18:59:05</p>
-                    </li>                   
-                </ul>
-            </div>
-
+                
         </div>
 
     </div>
