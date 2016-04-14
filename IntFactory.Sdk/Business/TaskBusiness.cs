@@ -182,14 +182,14 @@ namespace IntFactory.Sdk
         /// <param name="userID"></param>
         /// <param name="agentID"></param>
         /// <returns></returns>
-        public AddResult SavaTaskReply(TaskReplyEntity reply, string userID, string agentID)
+        public TaskReplyListResult SavaTaskReply(TaskReplyEntity reply, string userID, string agentID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("reply", JsonConvert.SerializeObject(reply).ToString() );
             paras.Add("userID", userID);
             paras.Add("agentID", agentID);
 
-            return HttpRequest.RequestServer<AddResult>(ApiOption.SavaTaskReply, paras);
+            return HttpRequest.RequestServer<TaskReplyListResult>(ApiOption.SavaTaskReply, paras);
         }
         #endregion
 
