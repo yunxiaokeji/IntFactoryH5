@@ -76,26 +76,33 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;}
 
 /*材料采购计划显示区域*/
 .shop-status .plan-info { margin:0 20px 10px 20px;overflow:hidden;}
-.shop-status .plan-info .material { color:#fff;font-size:0.9em;line-height:50px;background-color:#4b98e8;width:100%;position:relative;}
-.shop-status .plan-info .select-material { background-color:#efefef;color:#666;}
+.shop-status .plan-info .material {font-size:0.9em;line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
+.shop-status .plan-info .select-material {background-color:#4b98e8;color:#fff;}
 .shop-status .material ul { margin:0 10px;height:50px;font-size:0.9em;}
 .shop-status .material .meterial-name {width:50%;float:left;}
 .shop-status .material .meterial-size { width:50%;float:left;}
-.material ul .meterial-lumpbox { width:5px;height:5px;transform:rotate(0deg);transition-duration:0.5s; position: absolute;right:5px;top:20px;}
-.material ul .meterial-lump { width: 0; height: 0; border-left: 5px solid #fff; border-top: 5px solid transparent; border-bottom: 5px solid transparent;cursor:pointer;display:block;}
+.material ul li:first-child { position:absolute;right:25px;}
+.material ul .meterial-lumpbox { width:5px;height:5px;-webkit-transform:rotate(0deg);-webkit-transition-duration:0.5s; position: absolute;right:5px;top:20px;}
+.material ul .meterial-lump { width: 0; height: 0; border-left: 5px solid #999; border-top: 5px solid transparent; border-bottom: 5px solid transparent;cursor:pointer;display:block;}
 
 .shop-status .material-main { display:none;}
 .material-main .material-info li {padding:0 10px;line-height:50px;font-size:0.9em;}
 .material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;line-height:50px;border-bottom:1px solid #eee;}
-.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:left;line-height:50px;border-bottom:1px solid #eee;}
+.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;line-height:50px;border-bottom:1px solid #eee;}
 
 /*制版信息显示区域*/
 .print-status .print-header { color:#82cadb;display:block;height:40px;line-height:40px;margin:0 10px;border-bottom:2px solid #ddd;}
-.print-info {height:45px; margin:0 10px;border-bottom:1px solid #eee;}
+/*.print-info {height:45px; margin:0 10px;border-bottom:1px solid #eee;}
 .print-info .print-status ul {height:45px;}
 .print-status ul li{float:left;height:45px;line-height:45px;width:20%;color:#666;}
-.print-status ul li:first-child { color:#999;}
+.print-status ul li:first-child { color:#999;}*/
+.platemakingBody {margin:20px 10px;border-top:1px solid #eee;border-left:1px solid #eee;}
 
+.platemakingBody table {width:100%;}
+
+.platemakingBody table tr td{padding:15px 0px 15px 10px;}
+
+.platemakingBody td {border-bottom:1px solid #eee;border-right:1px solid #eee;}
 /*日志显示区域*/
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}

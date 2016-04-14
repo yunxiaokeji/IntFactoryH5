@@ -7,25 +7,47 @@
         plateRemark: "",
         pageIndex: 1
     };
+    
+    var AddReplyParas = {
+        orderID: "",
+        stageID: "",
+        mark: "",
+        content: "",
+        fromReplyID: "",
+        fromReplyUserID: "",
+        fromReplyAgentID:""
+    };
+
+
+
+    var Content = "";
 
     var TaskDetail = {};
 
-    TaskDetail.init = function (orderID, stageID, platemaking, plateRemark) {
+    $PageCount = 0;
 
+    
+
+    TaskDetail.init = function (orderID, stageID, platemaking,mark) {
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         Paras.platemaking = platemaking;
+
+
+        AddReplyParas.orderID = orderID;
+        AddReplyParas.stageID = stageID;
+        AddReplyParas.mark = mark;
+
         TaskDetail.getTaskReplys();
         TaskDetail.bindEvent();
       
        
 
     }
-    //设置自己发送信息文本框的位置
    
+    //绑定事件
     TaskDetail.bindEvent = function () {
 
-        
         //窗体加载设置订单需求文本内容
         setOrderNeedWidth();
 
@@ -63,7 +85,10 @@
 
             var classname = $(this).data("classname");
 
-            if (classname == "talk-status") {  
+            if (classname == "talk-status") {
+                //初始化讨论页数
+                $(".talk-main").html("");
+                Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
                 $(".main-box").css("margin-bottom", "60px");
             }
@@ -89,37 +114,95 @@
 
         })
 
-        //设置采购计划图标点击事件
-        $(".material .meterial-lumpbox").click(function () {
+        //点击提交按钮
+        $(".btn-submit").bind("click",function () {
 
+            AddReplyParas.content = $(".txt-talkcontent").val().replace(Content, "");
+
+            if ($(".txt-talkcontent").val().indexOf(Content) != 0) {
+
+                AddReplyParas.fromReplyID = "";
+
+                AddReplyParas.fromReplyUserID = "";
+
+                AddReplyParas.fromReplyAgentID = "";
+
+            }
+          
+            
+            if (AddReplyParas.content != "") {
+
+                var msgReply = JSON.stringify(AddReplyParas);
+
+                    $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
+
+                        doT.exec("/template/task/detailReply", function (templateFun) {
+
+                            var innerText = templateFun(data);
+
+                            $(".talk-main").prepend(innerText);
+
+                        });
+
+                })
+
+            }
+
+        })
+     
+        //设置采购计划图标点击事件
+        $(".material").live("click", function () {
+            var meterialLumpbox = $(this).find(".meterial-lumpbox");
             if (!$(".material-main").is(":animated")) {
-                $(this).parent().parent().siblings().slideToggle(500);
-                if ($(this).data('status') == '0') {
-                    $(this).css("transform", "rotate(90deg)");
-                    $(this).data('status', '1');
-                    $(this).find('span').css("border-left-color", "#999");
-                    $(this).parent().parent().addClass("select-material");
+                $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
+                if ($(meterialLumpbox).data('status') == '0') {
+                    $(meterialLumpbox).css("-webkit-transform", "rotate(90deg)");
+                    $(meterialLumpbox).data('status', '1');
+                    $(meterialLumpbox).find('span').css("border-left-color", "#fff");
+                    $(meterialLumpbox).parent().parent().addClass("select-material");
 
                 }
                 else {
-                    $(this).css("transform", "rotate(0deg)");
-                    $(this).data('status', '0');
-                    $(this).find('span').css("border-left-color", "#fff");
-                    $(this).parent().parent().removeClass("select-material");
+                    $(meterialLumpbox).css("-webkit-transform", "rotate(0deg)");
+                    $(meterialLumpbox).data('status', '0');
+                    $(meterialLumpbox).find('span').css("border-left-color", "#999");
+                    $(meterialLumpbox).parent().parent().removeClass("select-material");
                 }
             }
-            //var status=$(this).data("status");
-
-            //if (status == 0) {
-            //    $(".material-main").slideDown(500);
-            //    $(this).data("status", "1");
-            //}
-            //else {
-            //    $(this).data("status", "0");
-            //    $(".material-main").slideUp(500);
-            //}
 
         })
+
+        //点击回复把用户名写入文本框
+        $(".talk-content .talk-main .iconfont").live("click", function () {
+
+            AddReplyParas.fromReplyID = $(this).data("replyid");
+
+            AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+            Content = "@" + $(this).data("name") + " ";
+
+            $(".txt-talkcontent").val(Content);
+
+            $(".txt-talkcontent").focus();
+
+        })
+
+        //浏览器滚动条在最下方时加载10条讨论信息
+        $(window).bind("scroll", function () {
+
+            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+
+            if (bottom <= 0) {
+                //$("#tableLoad").attr("class", "");
+                setTimeout(function () {
+                    Paras.pageIndex++;
+                    TaskDetail.getTaskReplys();
+                }, 1000);
+            }
+
+        });
 
         //设置订单需求文本内容宽度
         function setOrderNeedWidth() {
@@ -150,19 +233,33 @@
     TaskDetail.getTaskReplys = function () {
 
         $.post("/Task/GetDiscussInfo", Paras, function (data) {
-            alert(data.items);
-            doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-                var items = data.items;
+            $PageCount = data.pagecount;
+            var items = data.items;
+            $pageNowCount = $(".talk-main").find('.send-self').length;
+            for (var i = 0; i < items.length; i++) {
 
-                var innerText = templateFun(items);
+                if (items[i].createUser.userID != "bc6802e9-285c-471c-8172-3867c87803e2")
+                {
+                    $pageNowCount += 1;
+                }
 
-                $(".talk-main").html(innerText);
+            }
+             
+            if ($PageCount != $pageNowCount) {
+                doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-                //窗体加载设置自己发送信息文本框的位置
-                setTextPosition();
-                
-            });
+                    
+
+                    var innerText = templateFun(items);
+
+                    $(".talk-main").append(innerText);
+
+                    //窗体加载设置自己发送信息文本框的位置
+                    setTextPosition();
+
+                });
+            }
 
         })
     }
@@ -191,7 +288,13 @@
 
         $.post("Task/GetOrderInfo",Paras, function (data) {
 
-           
+            doT.exec("/template/task/materList.html", function (templateFun) {
+
+                var innerText = templateFun(data.items);
+
+                $(".shop-status").html(innerText);
+
+            });
 
         })
 
@@ -200,10 +303,12 @@
     //获取制版信息
     TaskDetail.printBaseInfo = function () {
 
-        alert(Paras.platemaking);
-        alert(paras.plateRemark);
+        $(".platemakingBody").html(decodeURI(Paras.platemaking));
+        $(".platemakingBody table tr td:last-child").remove();
 
     }
+
+
 
     module.exports = TaskDetail;
 

@@ -29,7 +29,15 @@
             
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 
-                taskDetail.init('@task.orderID', '@task.stageID', '@task.order.platemaking', '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无信息":task.order.plateRemark)');
+                taskDetail.init(
+
+                    '@task.orderID',
+                    '@task.stageID',
+                    '@task.order.platemaking',
+                    '@task.mark',
+                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无信息":task.order.plateRemark)'
+                    
+                 );
 
             });
            
@@ -156,166 +164,17 @@
         <!--材料采购计划模块-->
         <div class="shop-status hide">
 
-            <div class="plan-info">
-                
-                <div class="material">
-                    <ul>
-                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
-                        <li class="meterial-name">材料名称</li>
-                        <li class="meterial-size">6651黑</li>
-                    </ul>
-                </div>
-
-                <div class="material-main">
-                    <ul class="material-info">
-                        <li><span>编码</span><span>9527</span></li>
-                        <li><span>规格</span><span>[颜色:黑色][门幅:CM]</span></li>
-                        <li><span>单位</span><span>米</span></li>
-                        <li><span>单价</span><span>$27.00</span></li>
-                        <li><span>消耗量</span><span>1.00</span></li>
-                        <li><span>损耗量</span><span>0.00</span></li>
-                        <li><span>小计</span><span>$27.00</span></li>
-                    </ul>
-                </div>
-
-            </div>
-           
-            <div class="plan-info">
-                
-                <div class="material">
-                    <ul>
-                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
-                        <li class="meterial-name">材料名称</li>
-                        <li class="meterial-size">8888红</li>
-                    </ul>
-                </div>
-                 
-                <div class="material-main">
-                    <ul class="material-info">
-                        <li><span>编码</span><span>9527</span></li>
-                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
-                        <li><span>单位</span><span>米</span></li>
-                        <li><span>单价</span><span>$40.00</span></li>
-                        <li><span>消耗量</span><span>1.00</span></li>
-                        <li><span>损耗量</span><span>0.00</span></li>
-                        <li><span>小计</span><span>$40.00</span></li>
-                    </ul>
-                </div>
-
-                <div style="clear:both;"></div>
-            </div>
-
-            <div class="plan-info">
-                
-                <div class="material">
-                    <ul>
-                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
-                        <li class="meterial-name">材料名称</li>
-                        <li class="meterial-size">4251蓝</li>
-                    </ul>
-                </div>
-                 
-                <div class="material-main">
-                    <ul class="material-info">
-                        <li><span>编码</span><span>9527</span></li>
-                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
-                        <li><span>单位</span><span>米</span></li>
-                        <li><span>单价</span><span>$40.00</span></li>
-                        <li><span>消耗量</span><span>1.00</span></li>
-                        <li><span>损耗量</span><span>0.00</span></li>
-                        <li><span>小计</span><span>$40.00</span></li>
-                    </ul>
-                </div>
-
-                <div style="clear:both;"></div>
-            </div>
-
-            <div class="plan-info">
-                
-                <div class="material">
-                    <ul>
-                        <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
-                        <li class="meterial-name">材料名称</li>
-                        <li class="meterial-size">4211白</li>
-                    </ul>
-                </div>
-                 
-                <div class="material-main">
-                    <ul class="material-info">
-                        <li><span>编码</span><span>9527</span></li>
-                        <li><span>规格</span><span>[颜色:红色][门幅:CM]</span></li>
-                        <li><span>单位</span><span>米</span></li>
-                        <li><span>单价</span><span>$40.00</span></li>
-                        <li><span>消耗量</span><span>1.00</span></li>
-                        <li><span>损耗量</span><span>0.00</span></li>
-                        <li><span>小计</span><span>$40.00</span></li>
-                    </ul>
-                </div>
-
-                <div style="clear:both;"></div>
-            </div>
 
         </div>
 
         <!--制版模块-->
         <div class="print-status hide">
             <div class="print-header">制版信息</div>
+            <div class="platemakingBody">
 
-            <div class="print-info">
-                <ul class="print-size">
-                    <li></li>
-                    <li>S</li>
-                    <li>M</li>
-                    <li>L</li>
-                </ul>
+
             </div>
-
-            <div class="print-info">
-                <ul class="print-size">
-                    <li>衣长</li>
-                    <li>79</li>
-                    <li>79</li>
-                    <li>79</li>
-                </ul>
-            </div>
-
-            <div class="print-info">
-                <ul class="print-size">
-                    <li>胸围</li>
-                    <li>83</li>
-                    <li>83</li>
-                    <li>83</li>
-                </ul>
-            </div>
-
-            <div class="print-info">
-                <ul class="print-size">
-                    <li>腰围</li>
-                    <li>68</li>
-                    <li>68</li>
-                    <li>68</li>
-                </ul>
-            </div>
-
-            <div class="print-info">
-                <ul class="print-size">
-                    <li>袖长</li>
-                    <li>23.5</li>
-                    <li>23.5</li>
-                    <li>23.5</li>
-                </ul>
-            </div>
-
-            <div class="print-info">
-                <ul class="print-size">
-                    <li>袖口</li>
-                    <li>29</li>
-                    <li>29</li>
-                    <li>29</li>
-                </ul>
-            </div>
-
-            <div style="clear:both;"></div>
+       
         </div>
 
         <!--日志模块-->

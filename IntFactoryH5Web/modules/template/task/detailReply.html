@@ -4,7 +4,7 @@
         if($data[i].createUser.userID=='bc6802e9-285c-471c-8172-3867c87803e2')
         {
 %}
-            <div class="send-self">
+            <div class="send-self" >
                 <div class="send-nameanddate">
                     <span>{%=$data[i].createTime%}</span>
                     <span>{%=$data[i].createUser.name%}</span>
@@ -17,7 +17,7 @@
                     <div class="talk-lump"></div>
                     <p class="text-talk">{%=$data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content%}</p>
                     <div class="return-self">
-                        <i class="iconfont">&#xe611;回复</i>
+                        <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
                     </div>
                 </div>
                
@@ -41,7 +41,7 @@
                     <div class="talk-lump"></div>
                     <p class="text-talk">{%=$data[i].content%}</p>
                     <div class="return-other">
-                        <i class="iconfont">&#xe611;回复</i>
+                        <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
                     </div>
                 </div>
             </div>

@@ -64,7 +64,6 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
-
         //获取讨论列表   
         public JsonResult GetDiscussInfo(string orderID, string stageID, int pageIndex)
         {
@@ -74,6 +73,8 @@ namespace IntFactoryH5Web.Controllers
             List<IntFactory.Sdk.TaskReplyEntity> listReplys = result.taskReplys;
 
             JsonDictionary.Add("items", listReplys);
+
+            JsonDictionary.Add("pagecount", result.totalCount);
 
             return new JsonResult
             {
@@ -96,22 +97,20 @@ namespace IntFactoryH5Web.Controllers
             {
 
                 Data = JsonDictionary,
-
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
 
             };
         }
-
+        
+        //获取日志信息
         public JsonResult GetLogInfo()
         {
             var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, 1);
             JsonDictionary.Add("items", result.taskLogs);
             return new JsonResult
             {
-
                 Data=JsonDictionary,
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
-
             };
 
         }
@@ -120,17 +119,30 @@ namespace IntFactoryH5Web.Controllers
         public JsonResult GetOrderInfo(string orderID)
         {
             var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetOrderInfo(orderID, userID, agentID);
-            IntFactory.Sdk.OrderBaseEntity orderInfo = result.order;
-            JsonDictionary.Add("items", orderInfo);
+            JsonDictionary.Add("items", result.materialList);
             return new JsonResult
             {
-
                 Data = JsonDictionary,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
-
             };
         }
 
+        //添加讨论信息
+        public string AddTaskReply()
+        {
+            string result = Request["resultReply"].ToString();
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
+
+            taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(result);
+
+            AddResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, userID, agentID);
+
+            return addResult.id;
+        }
+        
     }
 
 
