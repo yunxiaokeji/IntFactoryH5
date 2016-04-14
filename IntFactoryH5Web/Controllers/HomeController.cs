@@ -11,18 +11,27 @@ namespace IntFactoryH5Web.Controllers
         //
         // GET: /Home/
 
+        string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
+        string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
+
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult text()
-        {
-            return View();
-        }
 
-        public ActionResult TaskDetail()
+
+        public JsonResult UserLogin(string userName, string pwd)
         {
-            return View();
+
+            Dictionary<string, object> resultObj = new Dictionary<string, object>();
+            var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,agentID);
+          
+
+            return new JsonResult()
+            {
+                Data = result,
+                JsonRequestBehavior=JsonRequestBehavior.AllowGet
+            };
         }
 
     }

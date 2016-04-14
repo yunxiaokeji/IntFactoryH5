@@ -37,5 +37,10 @@ namespace IntFactory.Sdk
         /// </summary>
         public string plateRemark;
 
+        /// <summary>
+        /// 订单描述
+        /// </summary>
+        public string remark;
+
     }
 }
