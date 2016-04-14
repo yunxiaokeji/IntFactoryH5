@@ -11,6 +11,9 @@ namespace IntFactory.Sdk
         [Description("getToken")]
         getToken,
 
+        [Description("/api/user/userLogin")]
+        userLogin,
+
         [Description("member.get")]
         memberDetail,
 

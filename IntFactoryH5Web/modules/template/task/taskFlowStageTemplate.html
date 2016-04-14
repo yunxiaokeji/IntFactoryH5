@@ -1,0 +1,16 @@
+﻿<li class="all-screen" data-id="-1">全部</li>
+
+
+{%
+    for(var i=0;i<$data.length;i++){
+
+%}
+
+    <li class="all-screen" data-id="{%=i%}">{%=$data[i].stageName%}</li>
+
+
+
+
+{%
+    }
+%}

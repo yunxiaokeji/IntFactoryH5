@@ -72,6 +72,7 @@
     <Compile Include="Entity\User\MemberJson.cs" />
     <Compile Include="Entity\User\MemberResult.cs" />
     <Compile Include="Entity\UserBase.cs" />
+    <Compile Include="Entity\User\UserLoginResult.cs" />
     <Compile Include="Http\HttpRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Signature.cs" />

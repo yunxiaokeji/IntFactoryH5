@@ -1,6 +1,6 @@
 ﻿@{
     Layout = null;
-    var task = ViewBag.task;
+    
 }
 
 <!DOCTYPE html>
@@ -45,23 +45,21 @@
     </header>    
     @* 选择状态 *@
     <ul class="task-status">
-            <li>
-                <div class="ico-status"><i class="iconfont-status-ico iconfont">&#xe61b;</i></div>
-                <a class="all-a">全部</a>
+            <li id="all-status" data-status="-1">
+                <div class="ico-status iconfont-status-ico iconfont">&#xe61b;</div>
+                <a>全部</a>
             </li>
-            <li>
-                <div class="ico-status">
-                    <i class="iconfont-status iconfont">&#xe61e;</i>
-                </div>
-                <a class="unreceived-a">未接受</a>
+            <li id="unreceived-status" data-status="0">
+                <div class="ico-status iconfont-status iconfont"  id="iconfont-unreceived">&#xe61e;</div>
+                <a>未接受</a>
             </li>
-            <li>
-                <div class="ico-status"><i class="iconfont-status iconfont" id="iconfont-underway">&#xe621;</i></div>
-                <a class="underway-a">进行中</a>
+            <li id="underway-status" data-status="1">
+                <div class="ico-status iconfont-status iconfont" id="iconfont-underway">&#xe621;</div>
+                <a>进行中</a>
             </li>
-            <li>
-                <div class="ico-status"><i class="iconfont-status iconfont" id="iconfont-underway-accom">&#xe61f;</i></div>
-                <a class="accomplish-a">已完成</a>
+            <li id="accomplish-status" data-status="2">
+                <div class="ico-status iconfont-status iconfont" id="iconfont-underway-accom">&#xe61f;</div>
+                <a>已完成</a>
             </li>
         </ul>
     <div class="select-box"> 
@@ -76,11 +74,12 @@
                  <i class="iconfont-select iconfont" id="iconfont-flow">&#xe61c;</i>
              </div></li>
              <li><div class="copy" id="screen-a" data-screen="0">
-                 <a class="screen-a">筛选</a>
+                 <a class="screen-a">流程阶段</a>
                  <i class="iconfont-select iconfont" id="iconfont-screen">&#xe61c;</i>
              </div></li>
              <li><div class="copy" id="select-copy" data-select="0">
-                 <a>高级筛选</a>            
+                 <a class="sort-a">排序</a>        
+                 <i class="iconfont-select iconfont" id="iconfont-sort">&#xe61c;</i>    
              </div></li> 
          </ul>
         @* 选项详细下拉 *@           
@@ -88,86 +87,39 @@
             @* 类型下拉 *@            
             <div class="tab-type">
                 <ul class="option"> 
-                    <li><i class="iconfont-type">&#xe61b;</i><span class="all-type">全部</span></li>                 
-                    <li><i class="iconfont-type">&#xe612;</i><span class="DY-type">打样</span></li>
-                    <li><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="DH-type">大货</span></li>                        
+                    <li data-id="-1"><i class="iconfont-type">&#xe61b;</i><span class="all-type">全部</span></li>                 
+                    <li data-id="1"><i class="iconfont-type">&#xe612;</i><span class="DY-type" >打样</span></li>
+                    <li data-id="2"><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="DH-type">大货</span></li>                        
                 </ul>                
              </div>    
-            @* 流程下拉 *@
+              @*流程下拉*@ 
             <div class="flow-type">
-                <ul class="potion">
-                    <li class="all-flow">全部流程</li>
-                    <li class="DY-flow">打样流程</li>
-                    <li class="DH-flow">大货流程</li>
-                    <li class="SC-flow">生产线</li>
+                <ul class="potion" id="flow-potion">                     
+                    <li class="all-flow" data-id="-1">全部流程</li>                            
                 </ul>
-           </div>
-            @* 筛选下拉 *@
+           </div>           
+            @* 流程阶段下拉 *@
             <div class="screen-type">
-                <ul class="potion">
-                    <li class="all-screen">全部</li>
-                    <li class="GC-screen">工厂</li>
-                    <li class="ZH-screen">自助</li>
-                    <li class="AL-screen">阿里</li>
+                <ul class="potion" id="screen-potion"> 
+                                       
                 </ul>
+            </div>        
+            @* 排序 *@
+            <div class="tab-screen" id="tab-screen">
+                <ul class="potion">
+                    <li class="taketime" data-takepo="0">接受时间正序</li>
+                    <li class="tasktime" data-takepo="1">接受时间倒序</li>
+                    <li class="tasktime" data-takepo="0">到期时间正序</li>
+                    <li class="tasktime" data-takepo="1">到期时间倒序</li>
+                    <li class="tasktime" data-takepo="0">任务创造时间正序</li>
+                    <li class="tasktime" data-takepo="1">任务创造时间倒序</li>
+                </ul>               
             </div>
         </div>
-        @* 高级筛选 *@
-        <div class="tab-screen" id="tab-screen">
-                <ul>
-                    <li>类型:</li>
-                    <li>打样</li>
-                    <li>大货</li>
-                    <li>全部</li>
-                </ul>
-                <div style="clear:both"></div>
-                <ul>
-                    <li>流程:</li>
-                    <li>进行中</li>
-                    <li>未完成</li>
-                    <li>终止</li>
-                </ul>
-                <div style="clear:both"></div>
-                <ul>
-                    <li>任务:</li>
-                    <li>材料</li>
-                    <li>制版</li>
-                    <li>全部</li>
-                </ul>
-            </div>
      </div> 
     @* 任务列表 *@
     <div class="list">
-        <ul class="listabove row">
-            <li>
-                <img src="@task[1].orderImg" />
-            </li>     
-            <li class="center-list-task">
-                @* 任务详情 *@
-                 <div class="details">                
-                    <i class="iconfont-details iconfont">&#xe61e;</i>
-                    <a class="details-name" href="~/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">@task[0].createTime</a>
-                </div>
-                <div class="stage details-stage">
-                    任务:<label class="material">材料</label>
-                </div>
-                <div class="stage" >
-                    <label>开始:</label>
-                    <span class="time stage-time">@task[0].createTime</span>
-                </div>
-                <div class="stage">
-                    <label>截止:</label>
-                    <span class="time">2016-03-24 00</span>
-                </div>                
-            </li>
-            <li class="last-stage">
-                <div class="red-tag"></div>
-                <div class="shape">
-                    <div class="style-i"><i class="iconfont-stage iconfont">&#xe612;</i></div>
-                    <div class="style-lable">打样</div>
-                </div>
-            </li>     
-        </ul>
+        
     </div>
 </body>
 </html>
