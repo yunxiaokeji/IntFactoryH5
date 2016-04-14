@@ -46,10 +46,16 @@
 .list li:first-child img{width:120px;height:120px;}
 .list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-right:20px;}
 .list li .orange-tag{width:2px;height:20px;border:1px solid #F7BB41;background-color:#F7BB41;margin-right:20px;}
+.list li .yellow-tag{width:2px;height:20px;border:1px solid #F7F910;background-color:#F7F910;margin-right:20px;}
+.list li .green-tag{width:2px;height:20px;border:1px solid #00FF00;background-color:#00FF00;margin-right:20px;}
+.list li .blue-tag{width:2px;height:20px;border:1px solid #009BE1;background-color:#009BE1;margin-right:20px;}
+.list li .purple-tag{width:2px;height:20px;border:1px solid #884898;background-color:#884898;margin-right:20px;}
 .list .last-stage .style-i {float:left;white-space:nowrap; }
 .list .last-stage .shape{ font-size:0.6em;margin-top:85px;width:40px;margin-left:-15px;}
 .list .listabove .center-list-task {font-size:0.6em;color:#999;padding-right:-20px;}
 .list .center-list-task .material {margin-left:4px;}
+.list .details .status-proceed { color:#09aa4a;}
+.list .details .status-finish { color:#999;}
 .list .details .details-name {color:#666; }
 .list .center-list-task .details {width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
 .list .center-list-task .details:hover {overflow:visible;}
@@ -57,6 +63,7 @@
 .list .center-list-task .details-stage {margin-top:35px;}
 .list .center-list-task .time {margin-top:10px;}
 .list .center-list-task .stage-time {padding-right:3%; }
+.list .nodata {color:#999; margin-top:20%;margin-left:30%;font-family:'Microsoft YaHei'; }
 @media screen and (min-width:414px) {   
     .list .listabove li{padding-left:25px;}
     .list li:first-child img{width:135px;height:135px;}
@@ -100,7 +107,7 @@
     .task-status li a{font-size:1em;}
     .select a{font-size:1em;} 
     .list .listabove li{padding-left:50px;}  
-    .list .listabove .center-list-task {font-size:1em;padding-right:25%;}
+    .list .listabove .center-list-task {font-size:1em;padding-right:5%;}
     .list .details .details-name {font-size:1.5em;}    
     .list .center-list-task .stage {height:50px;}
     .list .center-list-task .details-stage {margin-top:50px; }    

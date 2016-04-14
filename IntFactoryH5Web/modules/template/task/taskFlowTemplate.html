@@ -1,0 +1,14 @@
+﻿<li class="all-flow" data-id="-1">全部</li>
+
+{%
+    for(var i=0;i<$data.length;i++){
+        
+%}
+  
+    
+    <li class="all-flow" data-id="{%=$data[i].type%}">{%=$data[i].processName%}</li>
+    
+{%
+       
+    }
+%}
