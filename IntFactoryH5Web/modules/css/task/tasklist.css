@@ -16,18 +16,16 @@
 /*进行状态*/
 .task-status{width:100%;height:60px;border-bottom:1px solid #b2b2b2;margin-top:40px;}
 .task-status li{width:25%;float:left;}
+.task-status li:hover .ico-status{color:#007aff;font-size:1.3em;}
 .task-status li:last-child{border-right:0;}
-.task-status li .iconfont-status:hover{color:#007aff;}
-.task-status li .iconfont-status-ico:hover{color:#007aff;}
-.task-status li a:hover{color:#007aff;}
 .task-status li .ico-status{height:20px;margin-top:15px;text-align:center;}
 .task-status li a{height:30px;margin-top:5px;text-align:center;color:#666;display:inline-block;width:100%;font-size:0.7em;}
 .task-status .ico-status .iconfont{color:#666;}
 /*选择条件的css样式*/
-.select{width:100%;height:30px;border-bottom:1px solid #ccc;}
+.select{width:100%;height:40px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:0.7em;}
-.select li{width:25%;float:left;border-right:1px solid #ccc;height:30px;margin-left:-1px;margin-top:-10px;}
-.select li .copy{height:15px;margin-top:5px;text-align:center;}
+.select li{width:25%;float:left;border-right:1px solid #ccc;height:40px;margin-left:-1px;margin-top:-10px;}
+.select li .copy{height:15px;margin-top:10px;text-align:center;}
 .select .copy .iconfont{color:#666;}
 /*选项菜单*/
 .select-box { position:relative;}
@@ -36,24 +34,18 @@
 .select-box .option {width:100%;}
 .select-box .dropdownlist li{font-size:0.8em;color:#999;padding-top:5px;padding-bottom:5px;}
 .select-box .dropdownlist li:hover{background-color:#007aff;color:#fff;}
-/*无效*/
-.select-box .dropdownlist i:hover{color:#007aff;}
 /*流程*/
 .select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:25%;background-color:#fff;position:absolute;z-index:334;margin-left:-1px;display:none;}
 /*筛选*/
 .select-box .screen-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:50%;background-color:#fff;position:absolute;z-index:335;margin-left:-1px;display:none;}
-/*高级筛选*/
-.select-box .tab-screen { position:absolute;left:0;bottom:-120px;background-color:rgba(239,239,239,0.9);width:100%;display:none;}
-.tab-screen ul {width:100%; }
-.tab-screen ul li { float:left;color:#666;font-size:0.8em;line-height:40px;margin-left:20px;width:20%;}
-.tab-screen ul li:first-child { width:30px;color:#007aff;}
-.tab-screen ul li:nth-child(2) { margin-left:5px;}
+/*排序*/
+.select-box .tab-screen { width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:75%;background-color:#fff;position:absolute;z-index:334;margin-left:-2px;display:none;}
 /*列表*/
 .list .listabove{width:100%;display:table;margin-top:30px;border-bottom:1px solid #dfdfdf;}
-.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:10px;}
+.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:5px;}
 .list li:first-child img{width:120px;height:120px;}
 .list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-right:20px;}
-.list .listabove .last-stage { }
+.list li .orange-tag{width:2px;height:20px;border:1px solid #F7BB41;background-color:#F7BB41;margin-right:20px;}
 .list .last-stage .style-i {float:left;white-space:nowrap; }
 .list .last-stage .shape{ font-size:0.6em;margin-top:85px;width:40px;margin-left:-15px;}
 .list .listabove .center-list-task {font-size:0.6em;color:#999;padding-right:-20px;}
@@ -80,6 +72,7 @@
     .select a{font-size:0.9em;}
     .select li{height:50px;margin-top:0;}
     .select li .copy{height:20px;margin-top:15px;}
+    .select li:last-child .copy {margin-top:15px; }
     .list .listabove li{padding-left:30px;}
     .list li:first-child img{width:200px;height:200px;}
     .list .listabove .center-list-task {font-size:1em;}

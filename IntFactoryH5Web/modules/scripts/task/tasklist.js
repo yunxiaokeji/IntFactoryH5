@@ -7,7 +7,7 @@
         taskType: -1,
         colorMark: -1,
         status: 1,
-        finishStatus: 0,
+        finishStatus: -1,
         beginDate: "",
         endDate: "",
         orderType: -1,
@@ -16,7 +16,8 @@
         taskOrderColumn: 0,
         isAsc: 0,
         pageSize: 10,
-        pageIndex:1,
+        pageIndex: 1,
+        mark:0,
     };
     MyListTask.init = function () {
         MyListTask.getList();
@@ -28,16 +29,27 @@
             $(".shade").css("display", "block");
         });
         $(".cencal").click(function () {
-            $(".shade").css("display", "none");           
+            var txt = $(".txt-search").val();            
+            if (txt!="") {
+                MyListTask.params.keyWords = txt;
+                MyListTask.getList();
+                $(".shade").css("display", "none");
+            } else {
+                alert("请输入搜索关键字")
+                return false;
+            }                       
         });
+
         //点击空白区域
         $(".shade").click(function () {
             $(".shade").css("display","none");
         });
+
         //冒泡事件
         $(".span-search").click(function () {
             return false;
-        });
+        });        
+
         //类型
         $("#type-a").click(function () {
             //当点击此事件时,关闭其他下拉框
@@ -75,6 +87,7 @@
                 $("#type-a").data("type", "0");
             }
         });
+
         //流程
         $("#flow-a").click(function () {
             //当点击此事件时,关闭其他下拉框
@@ -117,6 +130,7 @@
                 $("#flow-a").data("flow", "0");
             }
         });
+
         //筛选来源
         $("#screen-a").click(function () {
             //当点击此事件时,关闭其他下拉框
@@ -159,7 +173,8 @@
                 $("#screen-a").data("screen", "0");
             }
         });
-        //高级筛选       
+
+        //排序       
         $("#select-copy").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
@@ -173,25 +188,92 @@
             if (num == "0") {
                 $("#tab-screen").slideDown("slow");
                 $("#select-copy").data("select", "1");
+                $(".taketime-positive").click(function () {                                       
+                    $(".sort-a").text($(".taketime-positive").text());
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
+                $(".tasktime-order").click(function () {
+                    $(".sort-a").text($(".tasktime-order").text());
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
+                $(".expire-positive").click(function () {
+                    $(".sort-a").text($(".expire-positive").text());
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
+                $(".expire-order").click(function () {
+                    $(".sort-a").text($(".expire-order").text());
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
+                $(".create-positive").click(function () {
+                    $(".sort-a").text($(".create-positive").text());
+                    //判断当前浏览器的宽度
+                    winWidth = document.body.clientWidth;                    
+                    if (winWidth>=550) {
+                        $(".select li #select-copy").css("margin-top", "15px");
+                    }
+                    else {
+                        $(".select li #select-copy").css("margin-top","3px");
+                    }                    
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
+                $(".create-order").click(function () {
+                    $(".sort-a").text($(".create-order").text());
+                    //判断当前浏览器的宽度
+                    winWidth = document.body.clientWidth;
+                    if (winWidth >= 550) {
+                        $(".select li #select-copy").css("margin-top", "15px");
+                    }
+                    else {
+                        $(".select li #select-copy").css("margin-top", "3px");
+                    }
+                    $("#tab-screen").slideUp("slow");
+                    $("#select-copy").data("select", "0");
+                });
             } else {
                 $("#tab-screen").slideUp("slow");
                 $("#select-copy").data("select", "0");
             }
                        
+        });        
+
+        //获取全部状态的任务列表
+        $(".task-status li").click(function () {   
+            MyListTask.params.finishStatus =$(this).data("status");
+            MyListTask.getList();
+            
         });
-        //加载列表详情
         
+        //获取类型的任务列表
+        $(".tab-type li").click(function () {
+            MyListTask.params.orderType = $(this).data("id");
+            MyListTask.getList();
+        });
 
-
+        //获取流程的任务列表
+        $("flow-type li").click(function () {
+            MyListTask.params.mark = $(this).data("flow");
+            MyListTask.getList();
+        });
+        
     };
+    //公共方法
     MyListTask.getList = function () {
-        $.post("/Task/GetTask", {filter:JSON.stringify(MyListTask.params)}, function (data) {
-            console.log(data.items);
-                    //doT.exec("/modules/template/task/taskListTemplate,html",function (code) {
-                    //    var $result = code(data);
-                    //    $(".list").append($result);
-                    //})
-                });
+        $(".list").empty();
+        //获取任务列表(页面加载)
+        $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
+            doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
+                var $result = code(data.items);                
+                $(".list").append($result);
+               
+            })
+        });
+
     }
+
     module.exports = MyListTask;
 });
