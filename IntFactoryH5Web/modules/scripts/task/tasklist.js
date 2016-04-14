@@ -1,5 +1,6 @@
 ﻿define(function (require,exports,module) {
     var MyListTask = {};
+
     MyListTask.params = {
         keyWords: "",
         isMy: true,
@@ -23,7 +24,9 @@
         MyListTask.getList();
         MyListTask.bindEvent();        
     };
+
     MyListTask.bindEvent = function () {
+
         //遮罩
         $("#cancel-header").click(function () {
             $(".shade").css("display", "block");
@@ -52,6 +55,7 @@
 
         //类型下拉 
         $("#type-a").click(function () {
+            $("#screen-potion").empty();
             //当点击此事件时,关闭其他下拉框
             $(".flow-type").css("display", "none");
             $(".flow-type").data("type", "0");
@@ -171,7 +175,7 @@
         });        
 
         //获取全部状态的任务列表
-        $(".task-status li").click(function () {   
+        $(".tab-type").on("click", ".task-status li", function () {            
             MyListTask.params.finishStatus =$(this).data("status");
             MyListTask.getList();            
         });
@@ -185,8 +189,7 @@
 
         //获取订单流程的任务列表
         $("#flow-potion").on("click", ".all-flow", function () {
-            //$(this).data("id");
-            MyListTask.params.orderProcessID = -2;
+            MyListTask.params.orderProcessID = $(this).data("id");
             MyListTask.getList();
             MyListTask.GetTaskFlowStage();
         });
