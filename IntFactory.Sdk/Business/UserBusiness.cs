@@ -21,5 +21,14 @@ namespace IntFactory.Sdk
 
         }
 
+        public static UserLoginResult UserLogin(string userName, string pwd) 
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userName", userName);
+            paras.Add("pwd", pwd);
+
+            return HttpRequest.RequestServer<UserLoginResult>(ApiOption.userLogin, paras);
+        }
+
     }
 }
