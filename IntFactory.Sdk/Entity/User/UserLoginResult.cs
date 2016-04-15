@@ -23,6 +23,8 @@ namespace IntFactory.Sdk
         /// </summary>
         public int forbidTime = 0;
 
+        public UserBase user;
+
         public int error_code = 0;
 
         public string error_message;
