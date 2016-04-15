@@ -110,6 +110,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Common\UserAuthorize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,7 @@
     <Content Include="modules\scripts\home\login.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
+    <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
     <Content Include="modules\template\task\taskFlowStageTemplate.html" />
     <Content Include="modules\template\task\taskFlowTemplate.html" />
