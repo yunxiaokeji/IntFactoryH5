@@ -1,8 +1,17 @@
 ﻿/*头部*/
-.btn-return {position:absolute;display:block;text-decoration:none;left:10px;}
+.btn-return {position:absolute;text-decoration:none;left:10px;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
-.task-accept {cursor:pointer; position:absolute;right:10px;display:block;top:15px;line-height:30px;width:70px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;font-size:0.8em;}
+.task-accept {cursor:pointer; position:absolute;right:10px;top:15px;line-height:30px;width:70px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;font-size:0.8em;}
 .task-accept input[type=text] { background:transparent;width:100%;text-align:center;line-height:30px;color:#e0483e;cursor:pointer;}
+
+/*提示*/
+.alert-layer { width:100%;height:100%;position:fixed;background:rgba(123, 120, 120,0.7);z-index:9998;top:0;left:0;text-align:center;}
+.alert {width:250px;border:1px solid #2F73B8; background-color:#fff;min-height:110px;font-size:0.9em;text-align:center;position:fixed;z-index:9999;top:30%;left:10%;}
+.alert .alert-header { background-color:#2F73B8;line-height:34px;color:#fff;padding:0 10px;margin-bottom:10px;}
+.alert .alert-msg {padding:0 10px;color:#666;font-size:0.8em;}
+.alert-bottom { height:25px;margin:15px 10px 10px 10px;text-align:center;overflow:hidden;text-align:center;font-size:0.8em;}
+.alert .alert-bottom .confirm { background:#6a96f0;color:#fff;border-radius:1px;width:40px;line-height:24px;text-align:center;margin-right:10px;display:inline-block;cursor:pointer;}
+.alert .alert-bottom .cancel { background:#e8e8e8;border-radius:1px;width:40px;line-height:24px;text-align:center;color:#999;margin-left:10px;display:inline-block;cursor:pointer;}
 
 /*焦点图*/
 .main_visual .main_image img { width:100%;}

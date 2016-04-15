@@ -5,7 +5,8 @@
         stageID: "",
         platemaking: "",
         plateremark:"",
-        pageIndex: 1
+        pageIndex: 1,
+        endTime:""
     };
     
     var AddReplyParas = {
@@ -82,7 +83,8 @@
             setTextPosition();
             //浏览器大小改变设置订单需求文本内容
             setOrderNeedWidth();
-
+            //浏览器大小改变设置接受任务、标记任务完成按钮弹出层位置
+            setAcceptTaskPosition();
         })
 
         //菜单切换模块事件
@@ -100,20 +102,49 @@
                 Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
                 $(".main-box").css("margin-bottom", "60px");
+                //浏览器滚动条在最下方时加载10条讨论信息
+                $(window).unbind("scroll");
+                $(window).bind("scroll", function () {
+                    var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+                    if (bottom <= 0) {
+                        //$("#tableLoad").attr("class", "");
+                        setTimeout(function () {
+                            Paras.pageIndex++;
+                            TaskDetail.getTaskReplys();
+                        }, 1000);
+                    }
+
+                });
+
             }
 
             else if (classname == "shop-status")
             {
+                $(window).unbind("scroll");
                 TaskDetail.getOrderList();
             }
 
             else if (classname == "log-status") {
+                Paras.pageIndex = 1;
                 $('.log-status').find('.log-box').remove();
-                TaskDetail.getTaskLogs();
                 $(".main-box").css("margin-bottom", "0px");
+                TaskDetail.getTaskLogs();
+                $(window).unbind("scroll");
+                $(window).bind("scroll", function () {
+                    var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+                    if (bottom <= 0) {
+                        //$("#tableLoad").attr("class", "");
+                        setTimeout(function () {
+                            Paras.pageIndex++;
+                            TaskDetail.getTaskLogs();
+                        }, 1000);
+                    }
+
+                });
             }
 
             else if (classname == "print-status") {
+                $(window).unbind("scroll");
                 TaskDetail.printBaseInfo();
             }
 
@@ -142,7 +173,8 @@
             if (AddReplyParas.content != "") {
 
                 var msgReply = JSON.stringify(AddReplyParas);
-
+                $(this).val("提交中...");
+                $(this).attr("disabled", "disabled");
                     $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
 
                         doT.exec("/template/task/detailReply.html", function (templateFun) {
@@ -155,6 +187,9 @@
                             //窗体加载设置自己发送信息文本框的位置
                             setTextPosition();
 
+                            $(".btn-submit").val("提交");
+                            $(".btn-submit").attr("disabled", false);
+
                         });
 
                 })
@@ -165,7 +200,13 @@
      
         //绑定完成任务
         $(".task-accept").click(function () {
-            TaskDetail.finishTask();
+
+            if ($(this).find("span").text() == "标记完成") {
+
+                TaskDetail.showConfirmForm(1);
+               
+            }
+
         });
 
         //点击回复把用户名写入文本框
@@ -185,11 +226,9 @@
 
         })
 
-        //浏览器滚动条在最下方时加载10条讨论信息
+        //窗体加载绑定讨论下拉
         $(window).bind("scroll", function () {
-
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-
             if (bottom <= 0) {
                 //$("#tableLoad").attr("class", "");
                 setTimeout(function () {
@@ -224,6 +263,13 @@
         $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 70 + "px");
     }
 
+    //设置接受任务、标记任务完成按钮弹出层位置
+    function setAcceptTaskPosition() {
+
+        $(".alert").css("left", ($(window).width() - 250) / 2 + "px");
+
+    }
+
     //绑定时间控件
     TaskDetail.bindTimerPicker = function () {
 
@@ -235,7 +281,11 @@
             lang: 'zh',
             onSelect: function () {
 
-                TaskDetail.setTaskEndTime();
+                Paras.endTime =  $(".appDateTime").val();
+
+                TaskDetail.showConfirmForm(0);
+
+                $(".appDateTime").val("接受任务");
 
             }
         };
@@ -256,14 +306,11 @@
         //获取本地时间
         var LocalTime = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-" + (vDay < 10 ? "0" + vDay : vDay) + " " + (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
 
-        $.post("/Task/UpdateTaskEndTime", { endTime: $(".appDateTime").val() }, function (data) {
+        $.post("/Task/UpdateTaskEndTime", { endTime: Paras.endTime }, function (data) {
             if (data == 1) {
-                $(".end-time").html($(".appDateTime").val());
+                $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(LocalTime);
                 $(".task-accept").html("<span>标记完成</span>");
-                $(".task-accept").find("span").click(function () {
-                    TaskDetail.finishTask();
-                });
             }
         });
 
@@ -283,7 +330,7 @@
         $.post("/Task/FinishTask", null, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
-                $(".task-accept").find("span").unbind('click');
+                $(".task-accept").unbind('click');
                 $(".complete-time").html(LocalTime);
             }
         });
@@ -297,63 +344,57 @@
 
         $.post("/Task/GetDiscussInfo", Paras, function (data) {
 
-            $PageCount = data.pagecount;
+            $totalCount = data.totalcount;
             
-            if ($PageCount == 0) {
-                $(".noreply-msg").show();
-                $(".main-box .loading-lump").hide();
-            }
-            else {
-                $(".noreply-msg").hide();
-                var items = data.items;
-                $pageNowCount = $(".talk-main").find('.send-self').length;
-                for (var i = 0; i < items.length; i++) {
+            $PageCount = data.pagecount;
 
-                    if (items[i].createUser.userID != "bc6802e9-285c-471c-8172-3867c87803e2") {
-                        $othercount += 1;
-
-                    }
-
-                }
-                alert($pageNowCount);
-                alert($PageCount);
-                if ($PageCount != $pageNowCount) {
-                    doT.exec("/template/task/detailReply.html", function (templateFun) {
-
-                        var innerText = templateFun(items);
-
-                        $(".talk-main").append(innerText);
-
-                        $(".main-box .loading-lump").hide();
-
-                        //窗体加载设置自己发送信息文本框的位置
-                        setTextPosition();
-
-                    });
-                }
-                else {
+                if ($totalCount == 0) {
+                    $(".noreply-msg").show();
                     $(".main-box .loading-lump").hide();
                 }
+                else {
+                    if ($PageCount >= Paras.pageIndex) {
+
+                        doT.exec("/template/task/detailReply.html", function (templateFun) {
+
+                            var items = data.items;
+
+                            var innerText = templateFun(items);
+
+                            $(".talk-main").append(innerText);
+
+                            $(".main-box .loading-lump").hide();
+
+                            //窗体加载设置自己发送信息文本框的位置
+                            setTextPosition();  
+
+                        });
+                    }
+                    else {
+                        $(".main-box .loading-lump").hide();
+                    }
             }
-          })
+            })
 
     }
     
     //获取任务详情日志列表
     TaskDetail.getTaskLogs = function () {
         $(".main-box .loading-lump").show();
-        $.post("/Task/GetLogInfo", null, function (data) {
-            
-            doT.exec("/template/task/detailLog.html", function (templateFun) {
+        $.post("/Task/GetLogInfo", Paras, function (data) {
+            $PageCount = data.pagecount;
+            if ($PageCount >= Paras.pageIndex) {
+                doT.exec("/template/task/detailLog.html", function (templateFun) {
 
-                var items = data.items;
+                    var items = data.items;
 
-                var innerText = templateFun(items);
+                    var innerText = templateFun(items);
 
-                $('.log-status').html(innerText);
-                $(".main-box .loading-lump").hide();
-            });
-
+                    $('.log-status').append(innerText);
+                    
+                });
+            }
+            $(".main-box .loading-lump").hide();
         })
 
     }
@@ -407,6 +448,58 @@
         $(".platemakingBody table tr td:last-child").remove();
         $(".plate-remark").html(decodeURI(Paras.plateremark));
         $(".main-box .loading-lump").hide();
+    }
+
+    //设置接受任务、标记任务完成按钮弹出层位置
+    TaskDetail.showConfirmForm = function (showStatus) {
+        var alertMsg = "";
+        doT.exec("/template/task/alertPage.html", function (templateFun) {
+
+            if (showStatus == 0) {
+                alertMsg = "任务到期时间不可逆,确定设置?";
+            }
+            else {
+                alertMsg = "标记完成的任务不可逆,确定设置?";
+            }
+            var innerText = templateFun(alertMsg);
+
+            innerText = $(innerText);
+
+            $("body").append(innerText);
+            //加载完毕设置位置剧中
+            setAcceptTaskPosition();
+
+            //点击提示框外关闭提示框
+            $(".alert-layer").bind("click", function () {
+
+                $(this).hide();
+
+                $(".alert").hide();
+
+            })
+            $(".confirm").click(function () {
+
+                if (showStatus == 0) {
+                    TaskDetail.setTaskEndTime();
+                }
+                else {
+                    TaskDetail.finishTask();
+                }
+
+                $(".alert").hide();
+
+                $(".alert-layer").hide();
+            })
+
+            $(".cancel").click(function () {
+
+                $(".alert").hide();
+
+                $(".alert-layer").hide();
+
+            })
+        })
+
     }
 
     module.exports = TaskDetail;

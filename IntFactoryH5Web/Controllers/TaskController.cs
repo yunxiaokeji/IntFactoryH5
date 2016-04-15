@@ -12,6 +12,8 @@ namespace IntFactoryH5Web.Controllers
     {
         //
         // GET: /Task/
+        //8e266ab4-0ff6-499b-89ce-d2e3454be123
+        //765f89a5-f3a6-4eb0-b9ba-b3813354e582
         string TaskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
@@ -60,7 +62,9 @@ namespace IntFactoryH5Web.Controllers
 
             JsonDictionary.Add("items", listReplys);
 
-            JsonDictionary.Add("pagecount", result.totalCount);
+            JsonDictionary.Add("totalcount", result.totalCount);
+
+            JsonDictionary.Add("pagecount", result.pageCount);
 
             return new JsonResult
             {
@@ -111,10 +115,11 @@ namespace IntFactoryH5Web.Controllers
         }
         
         //获取日志信息
-        public JsonResult GetLogInfo()
+        public JsonResult GetLogInfo(int pageIndex)
         {
-            var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, 1);
+            var result = TaskBusiness.BaseBusiness.GetTaskLogs(TaskID, userID, agentID, pageIndex);
             JsonDictionary.Add("items", result.taskLogs);
+            JsonDictionary.Add("pagecount", result.pageCount);
             return new JsonResult
             {
 
@@ -169,6 +174,7 @@ namespace IntFactoryH5Web.Controllers
             return result.result;
         }
 
+        //标记完成任务
         public int FinishTask(string taskID) {
 
             var result = TaskBusiness.BaseBusiness.FinishTask(TaskID, userID, agentID);
