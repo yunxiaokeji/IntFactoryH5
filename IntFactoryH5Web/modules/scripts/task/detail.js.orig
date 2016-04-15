@@ -2,7 +2,7 @@
 
     var Paras = {
         orderID: "",
-        stageID: "",     
+        stageID: "",
         pageIndex: 1,
         endTime: "",
         taskID:""
@@ -24,8 +24,6 @@
     var Content = "";
 
     var TaskDetail = {};
-
-
 
     //第一次加载判断讨论总页数
     var IsPageCount = true;
@@ -95,7 +93,6 @@
 
             var classname = $(this).data("classname");
 
-            //点击讨论模块
             if (classname == "talk-status") {
                 //初始化讨论页数
                 $(".talk-main").html("");
@@ -115,24 +112,24 @@
                             TaskDetail.getTaskReplys();
                         }, 1000);
                     }
+
                 });
+
             }
 
-            //点击材料计划模块
             else if (classname == "shop-status")
             {
                 $(window).unbind("scroll");
                 TaskDetail.getOrderList();
             }
 
-            //点击日志模块
             else if (classname == "log-status") {
                 IsPageCount = true;
                 Paras.pageIndex = 1;
-                $PageCount = 100000;
                 $('.log-status').find('.log-box').remove();
                 TaskDetail.getTaskLogs();
                 $(".main-box").css("margin-bottom", "0px");
+                TaskDetail.getTaskLogs();
                 $(window).unbind("scroll");
                 $(window).bind("scroll", function () {
                     var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
@@ -147,7 +144,6 @@
                 });
             }
 
-            //点击制版模块
             else if (classname == "print-status") {
                 $(window).unbind("scroll");
                 TaskDetail.printBaseInfo();
@@ -181,13 +177,12 @@
                 $(this).val("提交中...");
                 $(this).attr("disabled", "disabled");
                     $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
-                       
+
                         doT.exec("/template/task/detailReply.html", function (templateFun) {
 
+
                             var innerText = templateFun(data.items);
-                            if ($(".talk-main").find('div').length == 0) {
-                                $(".noreply-msg").hide();
-                            }
+
                             $(".talk-main").prepend(innerText);
 
                             //窗体加载设置自己发送信息文本框的位置
@@ -319,12 +314,10 @@
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(LocalTime);
                 $(".task-accept").html("<span>标记完成</span>");
+
                 $(".task-accept").find("span").click(function () {
                     TaskDetail.finishTask();
                 });
-            }
-            else {
-                alert("设置任务到期时间失败");
             }
         });
 
@@ -347,46 +340,72 @@
                 $(".task-accept").unbind('click');
                 $(".complete-time").html(LocalTime);
             }
-            else {
-                alert("标记完成任务失败");
-            }
         });
 
     }
 
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
-        
+
         $(".main-box .loading-lump").show();
         if ($PageCount >= Paras.pageIndex) {
 
+<<<<<<< HEAD
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
+
                 $totalCount = data.totalcount;
-            if (IsPageCount) {
-                $PageCount = data.pagecount;
-            }
+                if (IsPageCount) {
+                    $PageCount = data.pagecount;
+                }
+                if ($totalCount == 0) {
+                    $(".noreply-msg").show();
+                    $(".main-box .loading-lump").hide();
+                }
+                else {
+                    if ($PageCount >= Paras.pageIndex) {
+=======
+        $.post("/Task/GetDiscussInfo", Paras, function (data) {            
+
+
+            $totalCount = data.totalcount;
+            
+            $PageCount = data.pagecount;            
+
             if ($PageCount == 0) {
                 $(".noreply-msg").show();
                 $(".main-box .loading-lump").hide();
             }
             else {
-                if ($PageCount >= Paras.pageIndex) {
+                $(".noreply-msg").hide();
+                var items = data.items;
+                $pageNowCount = $(".talk-main").find('.send-self').length;
+                for (var i = 0; i < items.length; i++) {
+>>>>>>> 840512b0a71306c915c578efd7420dfc066ba096
 
+                    if (items[i].createUser.userID != "bc6802e9-285c-471c-8172-3867c87803e2") {
+                        $othercount += 1;
+
+                    }
+
+                }
+                alert($pageNowCount);
+                alert($PageCount);
+                if ($PageCount != $pageNowCount) {
                     doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-                        var items = data.items;
+                            var items = data.items;
 
-                        var innerText = templateFun(items);
+                            var innerText = templateFun(items);
 
-                        $(".talk-main").append(innerText);
+                            $(".talk-main").append(innerText);
 
-                        $(".main-box .loading-lump").hide();
+                            $(".main-box .loading-lump").hide();
 
-                        //窗体加载设置自己发送信息文本框的位置
-                        setTextPosition();
+                            //窗体加载设置自己发送信息文本框的位置
+                            setTextPosition();
 
-                    });
-                }
+                        });
+                    }
                     else {
                         $(".main-box .loading-lump").hide();
                     }
@@ -405,14 +424,8 @@
         $(".main-box .loading-lump").show();
         if ($PageCount >= Paras.pageIndex) {
             $.post("/Task/GetLogInfo", Paras, function (data) {
-                if (IsPageCount) {
+                
                     $PageCount = data.pagecount;
-                }
-                if ($PageCount == 0) {
-                    $(".log-status").html("<div class='no-log'>暂无数据</div>");
-
-                }
-                else {
                     if ($PageCount >= Paras.pageIndex) {
                         doT.exec("/template/task/detailLog.html", function (templateFun) {
 
@@ -424,14 +437,22 @@
 
                         });
                     }
-                }
+                
                 $(".main-box .loading-lump").hide();
-                IsPageCount = false;
             })
         }
         else {
+            $('.log-status').html("<div class='no-log'>暂无数据!</div>");
             $(".main-box .loading-lump").hide();
+<<<<<<< HEAD
         }
+=======
+                $('.log-status').html(innerText);
+                $(".main-box .loading-lump").hide();
+            });
+
+        })
+>>>>>>> 840512b0a71306c915c578efd7420dfc066ba096
 
     }
 

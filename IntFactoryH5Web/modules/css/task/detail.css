@@ -56,7 +56,8 @@ nav ul .menuchecked{ border-bottom:5px solid #4a98e7;color:#4a98e7;height:45px;}
 .talk-content .talk-self .pic-other { width:43px;height:43px;border-radius:50%;overflow:hidden;}
 .talk-content .talk-self .show-returnmsg { margin-left:30px;background-color:#e8e8e8;padding:0 10px;font-size:0.8em;border-radius:8px;color:#666;width:20%;max-width:350px;}*/
 .main-box img{ width:35px;height:35px;}
-.main-box .loading-lump { text-align:center;display:none;margin-top:-20px;}
+.loading-lump {text-align:center;display:none;margin-top:-20px;}
+.loading-lump img { width:35px;height:35px;}
 .main-box .send-other { margin-top:20px;}
 .main-box .send-nameanddate { color:#666;padding-right:8px;font-size:0.6em;}
 

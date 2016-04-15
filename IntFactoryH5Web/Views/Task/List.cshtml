@@ -95,7 +95,7 @@
               @*流程下拉*@ 
             <div class="flow-type">
                 <ul class="potion" id="flow-potion">                     
-                    <li class="all-flow" data-id="-1">全部流程</li>                            
+                    <li class="all-flow" id="all-flow-drop" data-id="-1">全部流程</li>                            
                 </ul>
            </div>           
             @* 流程阶段下拉 *@
@@ -109,17 +109,19 @@
                 <ul class="potion">
                     <li class="taketime" data-takepo="0">接受时间正序</li>
                     <li class="tasktime" data-takepo="1">接受时间倒序</li>
-                    <li class="tasktime" data-takepo="0">到期时间正序</li>
-                    <li class="tasktime" data-takepo="1">到期时间倒序</li>
-                    <li class="tasktime" data-takepo="0">任务创造时间正序</li>
-                    <li class="tasktime" data-takepo="1">任务创造时间倒序</li>
+                    <li class="tasktime" data-takepo="2">到期时间正序</li>
+                    <li class="tasktime" data-takepo="3">到期时间倒序</li>
+                    <li class="tasktime" data-takepo="4">任务创造时间正序</li>
+                    <li class="tasktime" data-takepo="5">任务创造时间倒序</li>
                 </ul>               
             </div>
         </div>
      </div> 
     @* 任务列表 *@
     <div class="list">
-        
+        <div class="imgrefresh">
+            <img src="~/modules/images/imgrefresh.gif" />
+        </div>
     </div>
 </body>
 </html>
