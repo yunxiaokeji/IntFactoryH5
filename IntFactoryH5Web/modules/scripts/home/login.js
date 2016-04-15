@@ -8,8 +8,8 @@ define(function (require, exports, module) {
     var Home = {};
 
     //登陆初始化
-    Home.initLogin = function () {
-        //Home.placeholderSupport();
+    Home.initLogin = function (returnUrl) {
+        Home.returnUrl = returnUrl;
 
         Home.bindLoginEvent();
     }
@@ -45,7 +45,12 @@ define(function (require, exports, module) {
 
                 if (data.result == 1)
                 {
-                    location.href = "/task/list";
+                    if (Home.returnUrl != '') {
+                        location.href = Home.returnUrl;
+                    }
+                    else {
+                        location.href = "/task/list";
+                    }
                 }
                 else if (data.result == 0)
                 {

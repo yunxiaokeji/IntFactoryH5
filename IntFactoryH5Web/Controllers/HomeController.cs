@@ -14,8 +14,11 @@ namespace IntFactoryH5Web.Controllers
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
 
-        public ActionResult Index()
+        public ActionResult Index(string ReturnUrl)
         {
+            ReturnUrl = ReturnUrl ?? string.Empty;
+            ViewBag.ReturnUrl = ReturnUrl;
+
             return View();
         }
 
