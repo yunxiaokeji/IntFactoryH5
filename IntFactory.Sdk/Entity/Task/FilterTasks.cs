@@ -69,12 +69,12 @@ namespace IntFactory.Sdk
         public string orderStageID = "-1";
 
         /// <summary>
-        /// 排序列
+        /// 排序列 0:创建时间；1：到期时间
         /// </summary>
         public int taskOrderColumn = 0;
 
         /// <summary>
-        /// 是否升序
+        /// 是否升序 0：降序；1：升序
         /// </summary>
         public int isAsc = 0;
 
