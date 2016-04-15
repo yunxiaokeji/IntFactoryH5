@@ -16,7 +16,6 @@ namespace IntFactoryH5Web.Controllers
         //8e266ab4-0ff6-499b-89ce-d2e3454be123
         //765f89a5-f3a6-4eb0-b9ba-b3813354e582
         //string TaskID = "58a189dc-8e6b-4eaa-b6b9-785fe738e2de";
-        
         //string CurrentUser.userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         //string CurrentUser.agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
 
@@ -169,7 +168,7 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //更新任务到期时间
-        public int UpdateTaskEndTime(string taskID,string endTime)
+        public int UpdateTaskEndTime( string endTime,string taskID)
         {
             var result = TaskBusiness.BaseBusiness.UpdateTaskEndTime(taskID, endTime, CurrentUser.userID, CurrentUser.agentID);
 

@@ -3,10 +3,9 @@
     var Paras = {
         orderID: "",
         stageID: "",
-        platemaking: "",
-        plateremark:"",
         pageIndex: 1,
-        endTime:""
+        endTime: "",
+        taskID:""
     };
     
     var AddReplyParas = {
@@ -31,13 +30,14 @@
 
     $PageCount = 1000000;
 
-    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark) {
+    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
-        Paras.platemaking = platemaking;
-        Paras.plateremark = plateremark;
-        
+        TaskDetail.platemaking = platemaking;
+        TaskDetail.plateremark = plateremark;
+        Paras.taskID = taskID;
+
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
         AddReplyParas.mark = mark;
@@ -97,6 +97,7 @@
                 //初始化讨论页数
                 $(".talk-main").html("");
                 IsPageCount = true;
+                $PageCount = 100000;
                 Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
                 $(".main-box").css("margin-bottom", "60px");
@@ -305,7 +306,7 @@
         //获取本地时间
         var LocalTime = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-" + (vDay < 10 ? "0" + vDay : vDay) + " " + (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
 
-        $.post("/Task/UpdateTaskEndTime", { endTime: Paras.endTime }, function (data) {
+        $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(LocalTime);
@@ -326,7 +327,7 @@
         //获取本地时间
         var LocalTime = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-" + (vDay < 10 ? "0" + vDay : vDay) + " " + (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
 
-        $.post("/Task/FinishTask", null, function (data) {
+        $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
                 $(".task-accept").unbind('click');
@@ -340,13 +341,14 @@
     TaskDetail.getTaskReplys = function () {
 
         $(".main-box .loading-lump").show();
+        if ($PageCount >= Paras.pageIndex) {
 
-        $.post("/Task/GetDiscussInfo", Paras, function (data) {
+            $.post("/Task/GetDiscussInfo", Paras, function (data) {
 
-            $totalCount = data.totalcount;
-            if (IsPageCount) {
-                $PageCount = data.pagecount;
-            }
+                $totalCount = data.totalcount;
+                if (IsPageCount) {
+                    $PageCount = data.pagecount;
+                }
                 if ($totalCount == 0) {
                     $(".noreply-msg").show();
                     $(".main-box .loading-lump").hide();
@@ -365,7 +367,7 @@
                             $(".main-box .loading-lump").hide();
 
                             //窗体加载设置自己发送信息文本框的位置
-                            setTextPosition();  
+                            setTextPosition();
 
                         });
                     }
@@ -375,23 +377,79 @@
                 }
                 IsPageCount = false;
             })
-
+        }
+        else {
+            $(".main-box .loading-lump").hide();
+        }
     }
     
     //获取任务详情日志列表
     TaskDetail.getTaskLogs = function () {
+    
         $(".main-box .loading-lump").show();
-        $.post("/Task/GetLogInfo", Paras, function (data) {
-            $PageCount = data.pagecount;
-            if ($PageCount >= Paras.pageIndex) {
-                doT.exec("/template/task/detailLog.html", function (templateFun) {
+        if ($PageCount >= Paras.pageIndex) {
+            $.post("/Task/GetLogInfo", Paras, function (data) {
+                
+                    $PageCount = data.pagecount;
+                    if ($PageCount >= Paras.pageIndex) {
+                        doT.exec("/template/task/detailLog.html", function (templateFun) {
 
-                    var items = data.items;
+                            var items = data.items;
 
-                    var innerText = templateFun(items);
+                            var innerText = templateFun(items);
 
-                    $('.log-status').append(innerText);
-                    
+                            $('.log-status').append(innerText);
+
+                        });
+                    }
+                
+                $(".main-box .loading-lump").hide();
+            })
+        }
+        else {
+            $('.log-status').html("<div class='no-log'>暂无数据!</div>");
+            $(".main-box .loading-lump").hide();
+        }
+
+    }
+
+    //获取材料采购计划列表
+    TaskDetail.getOrderList = function () {
+        $(".main-box .loading-lump").show();
+        $.post("/Task/GetOrderInfo", Paras, function (data) {
+            if (data.items.length == 0) {
+                $(".shop-status").html("<div class='no-material'>暂无材料！</div>");
+            }
+            else {
+                doT.exec("/template/task/materList.html", function (templateFun) {
+
+                    var innerText = templateFun(data.items);
+                    innerText = $(innerText);
+                    $(".shop-status").html(innerText);
+                    //设置采购计划图标点击事件
+                    innerText.find(".material").click(function () {
+                        var meterialLumpbox = $(this).find(".meterial-lumpbox");
+
+                        if (!$(".material-main").is(":animated")) {
+                            $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
+                            if ($(meterialLumpbox).data('status') == '0') {
+                                $(meterialLumpbox).css("-webkit-transform", "rotate(90deg)");
+                                $(meterialLumpbox).data('status', '1');
+                                $(meterialLumpbox).find('span').css("border-left-color", "#fff");
+                                $(meterialLumpbox).parent().parent().addClass("select-material");
+
+                            }
+                            else {
+                                $(meterialLumpbox).css("-webkit-transform", "rotate(0deg)");
+                                $(meterialLumpbox).data('status', '0');
+                                $(meterialLumpbox).find('span').css("border-left-color", "#999");
+                                $(meterialLumpbox).parent().parent().removeClass("select-material");
+                            }
+                        }
+
+                    });
+
+
                 });
             }
             $(".main-box .loading-lump").hide();
@@ -399,54 +457,12 @@
 
     }
 
-    //获取材料采购计划列表
-    TaskDetail.getOrderList = function () {
-        $(".main-box .loading-lump").show();
-        $.post("Task/GetOrderInfo",Paras, function (data) {
-
-            doT.exec("/template/task/materList.html", function (templateFun) {
-
-                var innerText = templateFun(data.items);
-                innerText = $(innerText);
-                $(".shop-status").html(innerText);
-                $(".main-box .loading-lump").hide();
-
-                //设置采购计划图标点击事件
-                innerText.find(".material").click(function () {
-                    var meterialLumpbox = $(this).find(".meterial-lumpbox");
-
-                    if (!$(".material-main").is(":animated")) {
-                        $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
-                        if ($(meterialLumpbox).data('status') == '0') {
-                            $(meterialLumpbox).css("-webkit-transform", "rotate(90deg)");
-                            $(meterialLumpbox).data('status', '1');
-                            $(meterialLumpbox).find('span').css("border-left-color", "#fff");
-                            $(meterialLumpbox).parent().parent().addClass("select-material");
-
-                        }
-                        else {
-                            $(meterialLumpbox).css("-webkit-transform", "rotate(0deg)");
-                            $(meterialLumpbox).data('status', '0');
-                            $(meterialLumpbox).find('span').css("border-left-color", "#999");
-                            $(meterialLumpbox).parent().parent().removeClass("select-material");
-                        }
-                    }
-
-                });
-
-
-            });
-
-        })
-
-    }
-
     //获取制版信息
     TaskDetail.printBaseInfo = function () {
         $(".main-box .loading-lump").show();
-        $(".platemakingBody").html(decodeURI(Paras.platemaking));
+        $(".platemakingBody").html(decodeURI(TaskDetail.platemaking));
         $(".platemakingBody table tr td:last-child").remove();
-        $(".plate-remark").html(decodeURI(Paras.plateremark));
+        $(".plate-remark").html(decodeURI(TaskDetail.plateremark));
         $(".main-box .loading-lump").hide();
     }
 
