@@ -25,7 +25,10 @@ namespace IntFactoryH5Web.Controllers
 
             Dictionary<string, object> resultObj = new Dictionary<string, object>();
             var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,agentID);
-          
+
+            if (result.error_code == 0) {
+                Session["ClientManager"] = result.user;
+            }
 
             return new JsonResult()
             {
