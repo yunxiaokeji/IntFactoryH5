@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntFactory.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,24 @@ namespace IntFactoryH5Web.Controllers
     {
         //
         // GET: /Base/
-
-        public ActionResult Index()
+        private UserBase _currentUser;
+        public UserBase CurrentUser
         {
-            return View();
+            set
+            {
+                _currentUser = value;
+            }
+            get 
+            {
+                if (Session["ClientManager"] != null)
+                {
+                    _currentUser = (UserBase)Session["ClientManager"];
+                }
+
+                return _currentUser;
+            }
         }
+
         public Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
 
     }
