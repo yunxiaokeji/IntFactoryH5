@@ -21,11 +21,7 @@
                         <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
                     {%   }  %}
                    <!--<i class="iconfont-details iconfont">{%=item.finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>-->                    
-<<<<<<< HEAD
-                   <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.taskID%}</a>
-=======
                    <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.taskID%}</a>
->>>>>>> 840512b0a71306c915c578efd7420dfc066ba096
                 </div>
                 <div class="stage details-stage">
                     任务:<label class="material">{%=item.title%}</label>

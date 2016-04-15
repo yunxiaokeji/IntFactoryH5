@@ -41,7 +41,7 @@ namespace IntFactory.Sdk
         /// <summary>
         /// 任务进行状态
         /// </summary>
-        public int finishStatus = 0;
+        public int finishStatus = -1;
 
         /// <summary>
         /// 任务创建起始时间

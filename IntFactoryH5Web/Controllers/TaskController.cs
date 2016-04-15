@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IntFactory.Sdk;
-using System.Web.Script.Serialization;
 namespace IntFactoryH5Web.Controllers
 {
     [IntFactoryH5Web.Common.UserAuthorize]
@@ -16,7 +15,6 @@ namespace IntFactoryH5Web.Controllers
         //8e266ab4-0ff6-499b-89ce-d2e3454be123
         //765f89a5-f3a6-4eb0-b9ba-b3813354e582
         //string TaskID = "58a189dc-8e6b-4eaa-b6b9-785fe738e2de";
-        
         //string CurrentUser.userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         //string CurrentUser.agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
 
@@ -85,6 +83,8 @@ namespace IntFactoryH5Web.Controllers
             var model = java.Deserialize<FilterTasks>(filter);
             var list = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, CurrentUser.userID, CurrentUser.agentID);
             JsonDictionary.Add("items", list.tasks);
+            JsonDictionary.Add("pageCount",list.pageCount);
+            JsonDictionary.Add("totalCount",list.totalCount);
             return new JsonResult
             {
                 Data = JsonDictionary,
@@ -115,6 +115,13 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        //分页
+        public JsonResult GetPaging()
+        {
+            
+            return null;
+        }
         
         //获取日志信息
         public JsonResult GetLogInfo(string taskID, int pageIndex)
@@ -124,7 +131,6 @@ namespace IntFactoryH5Web.Controllers
             JsonDictionary.Add("pagecount", result.pageCount);
             return new JsonResult
             {
-
                 Data=JsonDictionary,
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
 
@@ -169,7 +175,7 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //更新任务到期时间
-        public int UpdateTaskEndTime(string taskID,string endTime)
+        public int UpdateTaskEndTime( string endTime,string taskID)
         {
             var result = TaskBusiness.BaseBusiness.UpdateTaskEndTime(taskID, endTime, CurrentUser.userID, CurrentUser.agentID);
 

@@ -28,10 +28,10 @@
     <script src="~/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery.js"></script>
     <script src="~/modules/plug/doT.js"></script>
-<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
-<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
-<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
-<script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
+    <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
+    <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
+    <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
+    <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
     <script src="~/Scripts/sea.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -44,7 +44,8 @@
                     '@task.stageID',
                     '@task.order.platemaking',
                     '@task.mark',
-                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺信息":task.order.plateRemark)'
+                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺信息":task.order.plateRemark)',
+                    '@task.taskID'
                     
                  );
 
@@ -70,7 +71,7 @@
                 {
                     <span>已完成</span>;
                 }
-             }
+             }  
 
         </div>
     </header>
@@ -203,7 +204,7 @@
         <div class="print-status hide">
             <h1 class="plate-remark-msg">制版信息</h1>
             <div class="platemakingBody">
-
+                
 
             </div>
 

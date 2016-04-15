@@ -1,5 +1,6 @@
 ﻿define(function (require,exports,module) {
     var MyListTask = {};
+
     MyListTask.params = {
         keyWords: "",
         isMy: true,
@@ -15,15 +16,23 @@
         orderStageID: "-1",
         taskOrderColumn: 0,
         isAsc: 0,
-        pageSize: 10,
+        pageSize: 5,
         pageIndex: 1,
         mark:0,
     };
+
     MyListTask.init = function () {
         MyListTask.getList();
         MyListTask.bindEvent();        
     };
-    MyListTask.bindEvent = function () {
+
+    MyListTask.pageCount = 0;
+
+    MyListTask.totalCount = 0;
+
+    MyListTask.isLoading = false;
+
+    MyListTask.bindEvent = function () {        
         //遮罩
         $("#cancel-header").click(function () {
             $(".shade").css("display", "block");
@@ -52,6 +61,7 @@
 
         //类型下拉 
         $("#type-a").click(function () {
+            $("#screen-potion").empty();
             //当点击此事件时,关闭其他下拉框
             $(".flow-type").css("display", "none");
             $(".flow-type").data("type", "0");
@@ -170,8 +180,13 @@
                        
         });        
 
+        //点击全部流程下的[全部]时获取列表(页面初次加载的时候)
+        $("#all-flow-drop").click(function () {
+            MyListTask.getList();
+        });
+
         //获取全部状态的任务列表
-        $(".task-status li").click(function () {   
+        $(".task-status li").click(function () {            
             MyListTask.params.finishStatus =$(this).data("status");
             MyListTask.getList();            
         });
@@ -183,10 +198,9 @@
             MyListTask.GetTaskFlow();
         });
 
-        //获取订单流程的任务列表
+        //获取订单流程的任务列表(+读取订单流程阶段的列表[不是详情])
         $("#flow-potion").on("click", ".all-flow", function () {
-            //$(this).data("id");
-            MyListTask.params.orderProcessID = -2;
+            MyListTask.params.orderProcessID = $(this).data("id");
             MyListTask.getList();
             MyListTask.GetTaskFlowStage();
         });
@@ -201,23 +215,42 @@
         $(".tab-screen li").click( function () {
             MyListTask.params.isAsc = $(this).data("takepo");
             MyListTask.getList();
+            
         });
-        
+
+        //滚动条在最下面时增加数据
+        $(window).scroll(function () {
+            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+            if (bottom <= 0) {
+                if (!MyListTask.isLoading) {
+                    if (MyListTask.params.pageIndex<MyListTask.pageCount) {
+                        MyListTask.params.pageIndex++;
+                        MyListTask.getList(true);
+                    }  
+                }   
+            }
+        });
     };
     ///公共方法
-
+   
     //页面加载获取列表
-    MyListTask.getList = function () {
-        $(".list").empty();
+    MyListTask.getList = function (noEmpty) {
+        MyListTask.isLoading = true;
+        if (!noEmpty) {
+            $(".list").empty();
+        }
+        $(".imgrefresh").append("<img src=\"~/modules/images/imgrefresh.gif\" />");
         //获取任务列表(页面加载)
         $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
+            //分页数据
+            MyListTask.pageCount = data.pageCount;
+            MyListTask.totalCount = data.totalCount;           
             doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
-                var $result = code(data.items);                
+                var $result = code(data.items);
                 $(".list").append($result);
-               
-            })
-        });
-
+            });
+            MyListTask.isLoading = false;
+        });               
     }
 
     //获取订单流程的列表
