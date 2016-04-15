@@ -16,17 +16,23 @@
         orderStageID: "-1",
         taskOrderColumn: 0,
         isAsc: 0,
-        pageSize: 10,
+        pageSize: 5,
         pageIndex: 1,
         mark:0,
     };
+
     MyListTask.init = function () {
         MyListTask.getList();
         MyListTask.bindEvent();        
     };
 
-    MyListTask.bindEvent = function () {
+    MyListTask.pageCount = 0;
 
+    MyListTask.totalCount = 0;
+
+    MyListTask.isLoading = false;
+
+    MyListTask.bindEvent = function () {        
         //遮罩
         $("#cancel-header").click(function () {
             $(".shade").css("display", "block");
@@ -174,9 +180,13 @@
                        
         });        
 
+        //点击全部流程下的[全部]时获取列表(页面初次加载的时候)
+        $("#all-flow-drop").click(function () {
+            MyListTask.getList();
+        });
+
         //获取全部状态的任务列表
-        $(".task-status li").click(function () {
-            console.log($(this).data("status"));
+        $(".task-status li").click(function () {            
             MyListTask.params.finishStatus =$(this).data("status");
             MyListTask.getList();            
         });
@@ -207,21 +217,40 @@
             MyListTask.getList();
             
         });
-        
+
+        //滚动条在最下面时增加数据
+        $(window).scroll(function () {
+            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+            if (bottom <= 0) {
+                if (!MyListTask.isLoading) {
+                    if (MyListTask.params.pageIndex<MyListTask.pageCount) {
+                        MyListTask.params.pageIndex++;
+                        MyListTask.getList(true);
+                    }  
+                }   
+            }
+        });
     };
     ///公共方法
-
+   
     //页面加载获取列表
-    MyListTask.getList = function () {
-        $(".list").empty();
+    MyListTask.getList = function (noEmpty) {
+        MyListTask.isLoading = true;
+        if (!noEmpty) {
+            $(".list").empty();
+        }
+        $(".imgrefresh").append("<img src=\"~/modules/images/imgrefresh.gif\" />");
         //获取任务列表(页面加载)
         $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
+            //分页数据
+            MyListTask.pageCount = data.pageCount;
+            MyListTask.totalCount = data.totalCount;           
             doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
-                var $result = code(data.items);                
-                $(".list").append($result);               
-            })
-        });
-
+                var $result = code(data.items);
+                $(".list").append($result);
+            });
+            MyListTask.isLoading = false;
+        });               
     }
 
     //获取订单流程的列表

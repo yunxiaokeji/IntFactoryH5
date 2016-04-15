@@ -21,7 +21,7 @@
                         <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
                     {%   }  %}
                    <!--<i class="iconfont-details iconfont">{%=item.finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>-->                    
-                   <a class="details-name" href="/Task/Detail?userID=BC6802E9-285C-471C-8172-3867C87803E2&">{%=item.taskID%}</a>
+                   <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.taskID%}</a>
                 </div>
                 <div class="stage details-stage">
                     任务:<label class="material">{%=item.title%}</label>

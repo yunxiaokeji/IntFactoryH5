@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IntFactory.Sdk;
-using System.Web.Script.Serialization;
 namespace IntFactoryH5Web.Controllers
 {
     public class TaskController : BaseController
@@ -79,6 +78,8 @@ namespace IntFactoryH5Web.Controllers
             var model = java.Deserialize<FilterTasks>(filter);
             var list = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, userID, agentID);
             JsonDictionary.Add("items", list.tasks);
+            JsonDictionary.Add("pageCount",list.pageCount);
+            JsonDictionary.Add("totalCount",list.totalCount);
             return new JsonResult
             {
                 Data = JsonDictionary,
@@ -108,6 +109,13 @@ namespace IntFactoryH5Web.Controllers
                 Data = JsonDictionary,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
+        }
+
+        //分页
+        public JsonResult GetPaging()
+        {
+            
+            return null;
         }
         
         //获取日志信息

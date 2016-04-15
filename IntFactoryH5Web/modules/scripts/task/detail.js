@@ -295,10 +295,8 @@
 
         $(".main-box .loading-lump").show();
 
-        $.post("/Task/GetDiscussInfo", Paras, function (data) {
-
-            $PageCount = data.pagecount;
-            
+        $.post("/Task/GetDiscussInfo", Paras, function (data) {            
+            $PageCount = data.pagecount;            
             if ($PageCount == 0) {
                 $(".noreply-msg").show();
                 $(".main-box .loading-lump").hide();

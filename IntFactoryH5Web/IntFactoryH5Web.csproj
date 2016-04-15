@@ -138,6 +138,7 @@
     <Content Include="modules\images\bg-loginBackground.png" />
     <Content Include="modules\images\defaultavatar.png" />
     <Content Include="modules\images\img.gif" />
+    <Content Include="modules\images\imgrefresh.gif" />
     <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\layout.css" />
