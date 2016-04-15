@@ -175,7 +175,8 @@
         });        
 
         //获取全部状态的任务列表
-        $(".tab-type").on("click", ".task-status li", function () {            
+        $(".task-status li").click(function () {
+            console.log($(this).data("status"));
             MyListTask.params.finishStatus =$(this).data("status");
             MyListTask.getList();            
         });
@@ -187,7 +188,7 @@
             MyListTask.GetTaskFlow();
         });
 
-        //获取订单流程的任务列表
+        //获取订单流程的任务列表(+读取订单流程阶段的列表[不是详情])
         $("#flow-potion").on("click", ".all-flow", function () {
             MyListTask.params.orderProcessID = $(this).data("id");
             MyListTask.getList();
@@ -204,6 +205,7 @@
         $(".tab-screen li").click( function () {
             MyListTask.params.isAsc = $(this).data("takepo");
             MyListTask.getList();
+            
         });
         
     };
@@ -216,8 +218,7 @@
         $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
             doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
                 var $result = code(data.items);                
-                $(".list").append($result);
-               
+                $(".list").append($result);               
             })
         });
 
