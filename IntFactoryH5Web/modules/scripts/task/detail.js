@@ -26,13 +26,10 @@
 
     var TaskDetail = {};
 
-    $PageCount = 0;
+    //第一次加载判断讨论总页数
+    var IsPageCount = true;
 
-    $selfCount = 0;
-
-    $othercount = 0;
-
-
+    $PageCount = 1000000;
 
     TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark) {
 
@@ -99,6 +96,7 @@
             if (classname == "talk-status") {
                 //初始化讨论页数
                 $(".talk-main").html("");
+                IsPageCount = true;
                 Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
                 $(".main-box").css("margin-bottom", "60px");
@@ -125,6 +123,7 @@
             }
 
             else if (classname == "log-status") {
+                IsPageCount = true;
                 Paras.pageIndex = 1;
                 $('.log-status').find('.log-box').remove();
                 $(".main-box").css("margin-bottom", "0px");
@@ -189,7 +188,7 @@
 
                             $(".btn-submit").val("提交");
                             $(".btn-submit").attr("disabled", false);
-
+                            $(".txt-talkcontent").val("");
                         });
 
                 })
@@ -345,9 +344,9 @@
         $.post("/Task/GetDiscussInfo", Paras, function (data) {
 
             $totalCount = data.totalcount;
-            
-            $PageCount = data.pagecount;
-
+            if (IsPageCount) {
+                $PageCount = data.pagecount;
+            }
                 if ($totalCount == 0) {
                     $(".noreply-msg").show();
                     $(".main-box .loading-lump").hide();
@@ -373,7 +372,8 @@
                     else {
                         $(".main-box .loading-lump").hide();
                     }
-            }
+                }
+                IsPageCount = false;
             })
 
     }

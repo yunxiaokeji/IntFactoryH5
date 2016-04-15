@@ -21,7 +21,7 @@
 .task-info { background-color:#fff;width:100%;}
 .main-info { border-bottom:1px solid #CCC;height:120px;padding:10px 0;}
 .main-info .left-task-info { float:left;margin-left:20px;}
-.main-info .right-task-info { float:right;margin-right:20px;text-align:right;}
+.main-info .right-task-info { float:right;margin-right:20px;text-align:left;}
 .main-info .left-task-info .task-status { color:#e0483e;}
 .main-info li { color:#666;line-height:30px;list-style:none;font-size:0.8em;}
 .main-info li input[type=text] {margin-top:-5px;color:#666;cursor:pointer;}
