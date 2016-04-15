@@ -14,12 +14,12 @@ namespace IntFactoryH5Web.Controllers
         // GET: /Task/
         //8e266ab4-0ff6-499b-89ce-d2e3454be123
         //765f89a5-f3a6-4eb0-b9ba-b3813354e582
-        string TaskID = "8e266ab4-0ff6-499b-89ce-d2e3454be123";
+        string TaskID = "58a189dc-8e6b-4eaa-b6b9-785fe738e2de";
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
         string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
-        Dictionary<string, object> TaskDetail = new Dictionary<string, object>();
-        Dictionary<string, object> TaskList = new Dictionary<string, object>();
+        //Dictionary<string, object> TaskDetail = new Dictionary<string, object>();
+        //Dictionary<string, object> TaskList = new Dictionary<string, object>();
 
         public ActionResult List()
         {
