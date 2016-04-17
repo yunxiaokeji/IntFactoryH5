@@ -36,11 +36,10 @@
         TaskDetail.platemaking = platemaking;
         TaskDetail.plateremark = plateremark;
         Paras.taskID = taskID;
-        //alert(materList[0].title);
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
         AddReplyParas.mark = mark;
-
+        alert(JSON.stringify(materList));
 
         
         TaskDetail.bindEvent();
