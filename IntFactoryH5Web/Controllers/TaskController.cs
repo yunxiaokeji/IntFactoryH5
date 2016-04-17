@@ -47,7 +47,6 @@ namespace IntFactoryH5Web.Controllers
                     var task = resultTask.task;
                     ViewBag.Task = task;
                     ViewBag.List = resultTask.materialList;
-
                 }
             }
             return View();
@@ -66,7 +65,7 @@ namespace IntFactoryH5Web.Controllers
             JsonDictionary.Add("totalcount", result.totalCount);
 
             JsonDictionary.Add("pagecount", result.pageCount);
-
+            
             return new JsonResult
             {
 
