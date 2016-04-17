@@ -1,5 +1,5 @@
 ﻿define(function (require, exports, module) {
-
+    var Global = require("global");
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -416,6 +416,7 @@
                         var items = data.items;
 
                         var innerText = templateFun(items);
+                        innerText = $(innerText);
 
                         $(".talk-main").append(innerText);
 
@@ -423,6 +424,10 @@
 
                         //窗体加载设置自己发送信息文本框的位置
                         setTextPosition();
+
+                        innerText.find(".text-talk").each(function () {
+                            $(this).html(Global.replaceQqface($(this).html()));
+                        });
 
                     });
                 }
