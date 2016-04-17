@@ -1,5 +1,5 @@
 ﻿/*头部*/
-.btn-return {position:absolute;text-decoration:none;left:10px;}
+.btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:15px;line-height:30px;width:70px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;font-size:0.8em;}
 .task-accept input[type=text] { background:transparent;width:100%;text-align:center;line-height:30px;color:#e0483e;cursor:pointer;}
@@ -17,14 +17,16 @@
 .main_visual .main_image img { width:100%;}
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:40px;text-indent:1em;color:#fff;font-size:0.8em;}
 
+
 /*任务详情信息*/
 .task-info { background-color:#fff;width:100%;}
 .main-info { border-bottom:1px solid #CCC;height:120px;padding:10px 0;}
 .main-info .left-task-info { float:left;margin-left:20px;}
-.main-info .right-task-info { float:right;margin-right:20px;text-align:left;}
+.main-info .right-task-info { float:right;margin-right:20px;text-align:right;}
 .main-info .left-task-info .task-status { color:#e0483e;}
 .main-info li { color:#666;line-height:30px;list-style:none;font-size:0.8em;}
 .main-info li input[type=text] {margin-top:-5px;color:#666;cursor:pointer;}
+.dy-info { text-align:left;}
 .setindent {margin:0 3px;}
 .right-task-info li .owner-msg { float:left;line-height:30px;font-size:1.1em;border-right:1px solid #CCC;padding-right:10px;margin-right:10px;height:40px;}
 .right-task-info li .dy-info { float:right;margin-top:-2px;line-height:24px;}

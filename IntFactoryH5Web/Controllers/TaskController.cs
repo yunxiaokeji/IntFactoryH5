@@ -46,6 +46,7 @@ namespace IntFactoryH5Web.Controllers
                 {
                     var task = resultTask.task;
                     ViewBag.Task = task;
+                    ViewBag.List = resultTask.materialList;
 
                 }
             }

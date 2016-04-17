@@ -1,5 +1,5 @@
 ﻿define(function (require, exports, module) {
-
+    var Global = require("global");
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -18,9 +18,6 @@
         fromReplyAgentID:""
     };
 
-   
-
-
     var Content = "";
 
     var TaskDetail = {};
@@ -32,19 +29,20 @@
 
     $PageCount = 1000000;
 
-    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID) {
+    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID,materList) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         TaskDetail.platemaking = platemaking;
         TaskDetail.plateremark = plateremark;
         Paras.taskID = taskID;
-
+        //alert(materList[0].title);
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
         AddReplyParas.mark = mark;
 
-        TaskDetail.getTaskReplys();
+
+        
         TaskDetail.bindEvent();
       
        
@@ -54,12 +52,25 @@
     //绑定事件
     TaskDetail.bindEvent = function () {
 
+        //浏览器加载获取讨论列表
+        TaskDetail.getTaskReplys();
+
+        //浏览器加载获取材料信息
+        TaskDetail.getOrderList();
+
         //调用绑定选择时间控件
         TaskDetail.bindTimerPicker();
 
-        //窗体加载设置订单需求文本内容
+        //浏览器加载设置订单需求文本内容
         setOrderNeedWidth();
 
+        //返回按钮history.back();
+        $(".btn-return").click(function () {
+
+            location.href = history.back();
+
+        })
+        
         //绑定滑屏控件事件
         $(document).ready(function () {
             $dragBln = false;
@@ -122,7 +133,6 @@
             else if (classname == "shop-status")
             {
                 $(window).unbind("scroll");
-                TaskDetail.getOrderList();
             }
 
             //点击日志模块
@@ -305,16 +315,17 @@
     //设置任务到期时间
     TaskDetail.setTaskEndTime =function() {
 
-        var d = new Date()
-        var vYear = d.getFullYear()
-        var vMon = d.getMonth() + 1
-        var vDay = d.getDate()
+        var d = new Date();
+        var vYear = d.getFullYear();
+        var vMon = d.getMonth() + 1;
+        var vDay = d.getDate();
         var h = d.getHours();
         var m = d.getMinutes();
         //获取本地时间
         var LocalTime = vYear + "-" + (vMon < 10 ? "0" + vMon : vMon) + "-" + (vDay < 10 ? "0" + vDay : vDay) + " " + (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m);
 
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
+            
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(LocalTime);
@@ -323,8 +334,25 @@
                     TaskDetail.finishTask();
                 });
             }
-            else {
-                alert("设置任务到期时间失败");
+            else if (data == 0)
+            {
+                alert("失败");
+            }
+            else if (data == 2)
+            {
+                alert("有前面阶段任务未完成");
+            }
+            else if(data==3)
+            {    
+                 alert("没有权限");
+            }
+            else if (data == 4)
+            {
+                alert("任务没有接受，不能设置完成");
+            }
+            else if (data == 5)
+            {
+                alert("任务有未完成步骤");
             }
         });
 
@@ -347,8 +375,20 @@
                 $(".task-accept").unbind('click');
                 $(".complete-time").html(LocalTime);
             }
-            else {
-                alert("标记完成任务失败");
+            else if (data == 0) {
+                alert("失败");
+            }
+            else if (data == 2) {
+                alert("有前面阶段任务未完成");
+            }
+            else if (data == 3) {
+                alert("没有权限;");
+            }
+            else if (data == 4) {
+                alert("任务没有接受，不能设置完成");
+            }
+            else if (data == 5) {
+                alert("任务有未完成步骤");
             }
         });
 
@@ -377,6 +417,7 @@
                         var items = data.items;
 
                         var innerText = templateFun(items);
+                        innerText = $(innerText);
 
                         $(".talk-main").append(innerText);
 
@@ -384,6 +425,10 @@
 
                         //窗体加载设置自己发送信息文本框的位置
                         setTextPosition();
+
+                        innerText.find(".text-talk").each(function () {
+                            $(this).html(Global.replaceQqface($(this).html()));
+                        });
 
                     });
                 }

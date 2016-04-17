@@ -29,7 +29,7 @@ namespace IntFactory.Sdk
         public int taskType = -1;
 
         /// <summary>
-        /// 颜色标记
+        /// 颜色标记 ["#FFF", "#FF7C7C", "#3BB3FF", "#9F74FF", "#FFC85D", "#FFF65F"]
         /// </summary>
         public int colorMark = -1;
 

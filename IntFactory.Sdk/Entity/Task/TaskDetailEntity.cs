@@ -44,7 +44,7 @@ namespace IntFactory.Sdk
         public int mark { get; set; }
 
         /// <summary>
-        /// 颜色标记
+        /// 颜色标记   ["#FFF", "#FF7C7C", "#3BB3FF", "#9F74FF", "#FFC85D", "#FFF65F"]
         /// </summary>
         public int colorMark { get; set; }
 
