@@ -146,7 +146,7 @@ namespace IntFactory.Sdk
         /// <param name="endTime"></param>
         /// <param name="userID"></param>
         /// <param name="agentID"></param>
-        /// <returns></returns>
+        /// <returns>result 0：失败，1：成功，2: 任务已接受,3:没有权限</returns>
         public UpdateResult UpdateTaskEndTime(string taskID, string endTime, string userID, string agentID)
         {
             var paras = new Dictionary<string, object>();
@@ -163,7 +163,7 @@ namespace IntFactory.Sdk
         /// <param name="taskID"></param>
         /// <param name="userID"></param>
         /// <param name="agentID"></param>
-        /// <returns></returns>
+        /// <returns>result 0：失败，1：成功，2: 有前面阶段任务未完成,3:没有权限；4：任务没有接受，不能设置完成;5.任务有未完成步骤</returns>
         public UpdateResult FinishTask(string taskID, string userID, string agentID)
         {
             var paras = new Dictionary<string, object>();

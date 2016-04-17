@@ -38,15 +38,11 @@
             $(".shade").css("display", "block");
         });
         $(".cencal").click(function () {
-            var txt = $(".txt-search").val();            
-            if (txt!="") {
-                MyListTask.params.keyWords = txt;
-                MyListTask.getList();
-                $(".shade").css("display", "none");
-            } else {
-                alert("请输入搜索关键字")
-                return false;
-            }                       
+            var txt = $(".txt-search").val(); 
+            MyListTask.params.keyWords = txt;
+            MyListTask.getList();
+            $(".shade").css("display", "none");
+            return false;                                
         });
 
         //点击空白区域
@@ -122,7 +118,7 @@
             }
         });
 
-        //流程阶段下拉 
+        //流程阶段下拉        
         $("#screen-a").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
@@ -131,19 +127,30 @@
             $("#flow-a").data("flow", "0");
             $("#tab-screen").css("display", "none");
             $("#select-copy").data("select", "0");
-            var num = $("#screen-a").data("screen");            
-            if (num == "0") {
-                $(".screen-type").slideDown("slow");                
-                $("#screen-a").data("screen", "1");
-                $(".all-screen").click(function () {                    
-                    $(".screen-a").text($(this).text());
-                    $(".screen-type").css("display", "none");
-                    $("#screen-a").data("screen", "0");
+            //判断流程阶段下面有没有li
+            var linum = $(".screen-type").find("li").length;            
+            if (linum>0) {
+                var num = $("#screen-a").data("screen");            
+                if (num == "0") {
+                    $(".screen-type").slideDown("slow");                
+                    $("#screen-a").data("screen", "1");
+                    $(".all-screen").click(function () {                    
+                        $(".screen-a").text($(this).text());
+                        $(".screen-type").css("display", "none");
+                        $("#screen-a").data("screen", "0");
                     });
+                } else {
+                    $(".screen-type").slideUp("slow");                
+                    $("#screen-a").data("screen", "0");
+                }
             } else {
-                $(".screen-type").slideUp("slow");                
-                $("#screen-a").data("screen", "0");
-            }
+                $(".screen-type").css("display","none");
+            }            
+        });
+
+        //排序-默认
+        $(".taketime-tatic").click(function () {
+            MyListTask.getList();
         });
 
         //排序下拉       
@@ -211,7 +218,7 @@
             MyListTask.getList();            
         });
 
-        //获取排序的任务列表(只是接收时间的正序和倒序)
+        //获取排序的任务列表(只是【接收】时间的正序和倒序)
         $(".tab-screen li").click( function () {
             MyListTask.params.isAsc = $(this).data("takepo");
             MyListTask.getList();
@@ -223,14 +230,22 @@
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
             if (bottom <= 0) {
                 if (!MyListTask.isLoading) {
-                    if (MyListTask.params.pageIndex<MyListTask.pageCount) {
-                        MyListTask.params.pageIndex++;
-                        MyListTask.getList(true);
-                    }  
-                }   
-            }
-        });
-    };
+                    if (MyListTask.params.pageIndex < MyListTask.pageCount) 
+                        $(".list").append("<div class=\"imgrefresh\"><img src=\"../modules/images/img.gif\" /></div>");
+                    MyListTask.params.pageIndex++;
+                    MyListTask.getList(true);
+                } else {
+                    alert("已经到页低啦");
+                    $(".getback").css("display", "block");
+                    $(".getback").click(function () {
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        $(".getback").css("display","none");
+                    });
+                }
+            }   
+        }
+        
+    )};
     ///公共方法
    
     //页面加载获取列表
@@ -238,8 +253,7 @@
         MyListTask.isLoading = true;
         if (!noEmpty) {
             $(".list").empty();
-        }
-        $(".imgrefresh").append("<img src=\"~/modules/images/imgrefresh.gif\" />");
+        }        
         //获取任务列表(页面加载)
         $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
             //分页数据
