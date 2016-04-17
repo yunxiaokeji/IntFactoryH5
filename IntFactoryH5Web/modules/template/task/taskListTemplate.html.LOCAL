@@ -11,25 +11,23 @@
             </li>     
             <li class="center-list-task">
                  <!--任务详情-->
-                 <div class="details">        
-                     <!-- 状态图标 -->           
+                 <div class="details">                   
                     {%   if (item.finishStatus==0) {      %}
                         <i class="iconfont-details iconfont">&#xe61e;</i>
                     {%   }  else if (item.finishStatus==1) {      %}
                         <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
                     {%   }  else {      %}
                         <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
-                    {%   }  %}                                      
-                   <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.title%}</a>
-<<<<<<< HEAD
+                    {%   }  %}
+                   <!--<i class="iconfont-details iconfont">{%=item.finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>-->                    
                    <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.taskID%}</a>
-=======
-                   <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.taskID%}</a>
->>>>>>> 840512b0a71306c915c578efd7420dfc066ba096
-                </div>                
+                </div>
+                <div class="stage details-stage">
+                    任务:<label class="material">{%=item.title%}</label>
+                </div>
                 <div class="stage" >
                     <label>接受:</label>
-                    <span class="time stage-time">{%=item.acceptTime%}</span>
+                    <span class="time stage-time">{%=item.createTime%}</span>
                 </div>
                 <div class="stage">
                     <label>到期:</label>
@@ -37,16 +35,15 @@
                 </div>                
             </li>
             <li class="last-stage">    
-                <!-- 标记颜色 -->
-                {% if(item.colorMark==-1){ %}            
-                <div class="orange-tag"></div>  
-                {% }else if(item.colorMark==0){  %}    
-                <div class="red-tag"></div>   
-                {% }else if(item.colorMark==1){  %}      
-                <div class="green-tag"></div> 
+                {% if(item.colorMark==0){ %}            
+                <div class="red-tag"></div>  
+                {% }else if(item.colorMark==1){  %}    
+                <div class="orange-tag"></div>   
                 {% }else if(item.colorMark==2){  %}      
-                <div class="blue-tag"></div> 
+                <div class="green-tag"></div> 
                 {% }else if(item.colorMark==3){  %}      
+                <div class="blue-tag"></div> 
+                {% }else if(item.colorMark==4){  %}      
                 <div class="purple-tag"></div> 
                 {% }else{ %}
                 <div class="yellow-tag"></div> 

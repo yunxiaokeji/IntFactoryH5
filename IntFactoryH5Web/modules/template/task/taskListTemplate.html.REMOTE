@@ -19,14 +19,13 @@
                         <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
                     {%   }  else {      %}
                         <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
-                    {%   }  %}                                      
-                   <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.title%}</a>
-<<<<<<< HEAD
-                   <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.taskID%}</a>
-=======
+                    {%   }  %}
+                   <!--<i class="iconfont-details iconfont">{%=item.finishStatus==0?"&#xe61e;":"&#xe621;"%}</i>-->                    
                    <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.taskID%}</a>
->>>>>>> 840512b0a71306c915c578efd7420dfc066ba096
-                </div>                
+                </div>
+                <div class="stage details-stage">
+                    任务:<label class="material">{%=item.title%}</label>
+                </div>
                 <div class="stage" >
                     <label>接受:</label>
                     <span class="time stage-time">{%=item.acceptTime%}</span>
