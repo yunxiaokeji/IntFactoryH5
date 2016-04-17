@@ -1,6 +1,6 @@
 ﻿define(function (require, exports, module) {
     var Global = {},
-        jQuery = require("jquery");
+    jQuery = require("jquery");
     Global.post = function (url, params, callback, anync) {
         jQuery.ajax({
             type: "POST",

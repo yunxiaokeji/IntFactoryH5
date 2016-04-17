@@ -1,5 +1,7 @@
 ﻿define(function (require, exports, module) {
-    var Global = require("global");
+
+    //var Global = require("global");
+
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -29,7 +31,7 @@
 
     $PageCount = 1000000;
 
-    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID,materList) {
+    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
@@ -39,12 +41,7 @@
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
         AddReplyParas.mark = mark;
-        alert(JSON.stringify(materList));
-
-        
         TaskDetail.bindEvent();
-      
-       
 
     }
    
@@ -73,7 +70,6 @@
         //绑定滑屏控件事件
         $(document).ready(function () {
             $dragBln = false;
-
             $(".main_image").touchSlider({
                 flexible: true,
                 speed: 200,
@@ -84,7 +80,7 @@
                     $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
                 }
             });
-       });
+        });
 
         //绑定浏览器大小改变事件
         $(window).resize(function () {
@@ -205,6 +201,24 @@
                             $(".btn-submit").val("提交");
                             $(".btn-submit").attr("disabled", false);
                             $(".txt-talkcontent").val("");
+
+                            //点击回复把用户名写入文本框
+                            $(".talk-content .talk-main .iconfont").bind("click", function () {
+
+                                AddReplyParas.fromReplyID = $(this).data("replyid");
+
+                                AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+                                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+                                Content = "@" + $(this).data("name") + " ";
+
+                                $(".txt-talkcontent").val(Content);
+
+                                $(".txt-talkcontent").focus();
+
+                            });
+
                         });
 
                 })
@@ -224,22 +238,7 @@
 
         });
 
-        //点击回复把用户名写入文本框
-        $(".talk-content .talk-main .iconfont").live("click", function () {
-
-            AddReplyParas.fromReplyID = $(this).data("replyid");
-
-            AddReplyParas.fromReplyUserID = $(this).data("userid");
-
-            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
-
-            Content = "@" + $(this).data("name") + " ";
-
-            $(".txt-talkcontent").val(Content);
-
-            $(".txt-talkcontent").focus();
-
-        })
+      
 
         //窗体加载绑定讨论下拉
         $(window).bind("scroll", function () {
@@ -289,7 +288,6 @@
 
     //绑定时间控件
     TaskDetail.bindTimerPicker = function () {
-
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式
@@ -306,9 +304,7 @@
 
             }
         };
-
         $(".appDateTime").mobiscroll().datetime(defaultParas);
-
     }
 
     //设置任务到期时间
@@ -426,7 +422,25 @@
                         setTextPosition();
 
                         innerText.find(".text-talk").each(function () {
-                            $(this).html(Global.replaceQqface($(this).html()));
+                            $(this).html(TaskDetail.replaceQqface($(this).html()));
+                        });
+
+
+                        //点击回复把用户名写入文本框
+                        $(".talk-content .talk-main .iconfont").bind("click", function () {
+
+                            AddReplyParas.fromReplyID = $(this).data("replyid");
+
+                            AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+                            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+                            Content = "@" + $(this).data("name") + " ";
+
+                            $(".txt-talkcontent").val(Content);
+
+                            $(".txt-talkcontent").focus();
+
                         });
 
                     });
@@ -582,6 +596,14 @@
             })
         })
 
+    }
+
+    TaskDetail.replaceQqface = function (str) {
+        str = str.replace(/\</g, '&lt;');
+        str = str.replace(/\>/g, '&gt;');
+        str = str.replace(/\n/g, '<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g, '<img style="width:24px;height:24px;" align="absbottom" src="/modules/images/qqface/$1.gif" border="0" />');
+        return str;
     }
 
     module.exports = TaskDetail;
