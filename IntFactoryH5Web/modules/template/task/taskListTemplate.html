@@ -7,7 +7,7 @@
 %}
         <ul class="listabove row">
             <li>
-                <img src="../modules/images/3f14cfebe8d73561b2dcea1123cae748[1].JPG" />
+                <a href="/Task/Detail/{%=item.taskID%}"><img src="../modules/images/3f14cfebe8d73561b2dcea1123cae748[1].JPG" /></a>
             </li>     
             <li class="center-list-task">
                  <!--任务详情-->
@@ -20,7 +20,7 @@
                     {%   }  else {      %}
                         <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
                     {%   }  %}                                      
-                   <a class="details-name" href="/Task/Detail?{%=item.taskID%}">{%=item.title%}</a>
+                   <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                 </div>                
                 <div class="stage" >
                     <label>接受:</label>

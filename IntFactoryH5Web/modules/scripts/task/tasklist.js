@@ -45,15 +45,28 @@
             return false;                                
         });
 
-        //点击空白区域
+        //(搜索框)点击空白区域
         $(".shade").click(function () {
             $(".shade").css("display","none");
         });
 
-        //冒泡事件
+        //(搜索框)冒泡事件
         $(".span-search").click(function () {
             return false;
         });        
+
+        //点击其他处关闭(所有)下拉框
+        
+        //$(document).click(function () {
+        //    $(".tab-type").css("display", "none");
+        //    $("#type-a").data("type", "0");
+        //    $(".flow-type").css("display", "none");
+        //    $(".flow-type").data("type", "0");
+        //    $(".screen-type").css("display", "none");
+        //    $("#screen-a").data("screen", "0");
+        //    $("#tab-screen").css("display", "none");
+        //    $("#select-copy").data("select", "0");
+        //});
 
         //类型下拉 
         $("#type-a").click(function () {
@@ -193,7 +206,11 @@
         });
 
         //获取全部状态的任务列表
-        $(".task-status li").click(function () {            
+        $(".task-status li").click(function () {
+            $(".task-status li").find(".iconfont").css("color", "#666");
+            $(".task-status li").find("a").css("color", "#666");
+            $(this).find(".iconfont").css("color", "#007aff");
+            $(this).find("a").css("color", "#007aff");
             MyListTask.params.finishStatus =$(this).data("status");
             MyListTask.getList();            
         });
@@ -218,9 +235,10 @@
             MyListTask.getList();            
         });
 
-        //获取排序的任务列表(只是【接收】时间的正序和倒序)
+        //获取排序的任务列表
         $(".tab-screen li").click( function () {
             MyListTask.params.isAsc = $(this).data("takepo");
+            MyListTask.params.taskOrderColumn = $(this).data("id");
             MyListTask.getList();
             
         });
@@ -235,14 +253,15 @@
                     MyListTask.params.pageIndex++;
                     MyListTask.getList(true);
                 } else {
-                    alert("已经到页低啦");
-                    $(".getback").css("display", "block");
-                    $(".getback").click(function () {
-                        $('html, body').animate({ scrollTop: 0 }, 'slow');
-                        $(".getback").css("display","none");
-                    });
+                    alert("已经到页低啦");                   
                 }
-            }   
+            } else {
+                $(".getback").css("display", "block");
+                $(".getback").click(function () {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    $(".getback").css("display", "none");
+                });
+            }
         }
         
     )};

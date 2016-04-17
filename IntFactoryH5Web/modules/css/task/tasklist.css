@@ -15,8 +15,8 @@
 /*进行状态*/
 .task-status{width:100%;height:60px;border-bottom:1px solid #b2b2b2;margin-top:40px;}
 .task-status li{width:25%;float:left;}
-.task-status li:hover .ico-status{color:#007aff;}
-.task-status li:hover a{color:#007aff;}
+.task-status li:hover .ico-status{color:#007aff;cursor:pointer;}
+.task-status li:hover a{color:#007aff;cursor:pointer;}
 .task-status li:last-child{border-right:0;}
 .task-status li .ico-status{height:20px;margin-top:15px;text-align:center;}
 .task-status li a{height:30px;margin-top:5px;text-align:center;color:#666;display:inline-block;width:100%;font-size:0.7em;}
@@ -24,8 +24,8 @@
 /*选择条件的css样式*/
 .select{width:100%;height:40px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:0.7em;}
-.select li:hover a{color:#007aff;}
-.select li:hover .iconfont-select{color:#007aff;}
+.select li:hover a{color:#007aff;cursor:pointer;}
+.select li:hover .iconfont-select{color:#007aff;cursor:pointer;}
 .select li{width:25%;float:left;border-right:1px solid #ccc;height:40px;margin-left:-1px;margin-top:-10px;}
 .select li .copy{height:15px;margin-top:10px;text-align:center;}
 .select .copy .iconfont{color:#666;}
@@ -75,7 +75,7 @@
 @media screen and (min-width:375px) {
     .select li a { font-size: 0.9em; }
     .select li .iconfont-select { font-size: 1em; }
-    .list .listabove li { padding-left: 25px; }
+    .list .listabove li { padding-left: 20px; }
     .list li:first-child img { width: 135px; height: 135px; }
     .list .listabove .center-list-task { padding-left: 0; }
     .list .center-list-task .details-stage { margin-top: 40px; }
