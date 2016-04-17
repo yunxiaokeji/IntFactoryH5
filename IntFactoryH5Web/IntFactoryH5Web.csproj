@@ -220,7 +220,6 @@
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
-    <Content Include="modules\images\inuser_07.gif" />
     <Content Include="modules\images\Zoom.gif" />
     <Content Include="modules\plug\dataTimePicker\css\mobiscroll.custom-2.5.2.min.css" />
     <Content Include="modules\plug\dataTimePicker\css\wp_icons.png" />

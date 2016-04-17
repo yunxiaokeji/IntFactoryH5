@@ -32,7 +32,8 @@
 
     MyListTask.isLoading = false;
 
-    MyListTask.bindEvent = function () {        
+    MyListTask.bindEvent = function () {
+
         //遮罩
         $("#cancel-header").click(function () {
             $(".shade").css("display", "block");
