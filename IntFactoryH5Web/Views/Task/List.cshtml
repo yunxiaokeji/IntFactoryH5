@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width;" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
     <title>任务列表</title>
     <link href="~/modules/css/common.css" rel="stylesheet" />    
     <link href="~/modules/css/task/tasklist.css" rel="stylesheet" />    
@@ -22,6 +22,8 @@
     </script>
 </head>
 <body>
+    @* 透明遮罩 *@
+    <div class="maskshade"></div>
     @* 遮罩 *@
     <div class="shade">
         <div class="search"> 
@@ -88,8 +90,8 @@
             <div class="tab-type">
                 <ul class="option"> 
                     <li data-id="-1"><i class="iconfont-type">&#xe61b;</i><span class="all-type">全部</span></li>                 
-                    <li data-id="1"><i class="iconfont-type">&#xe612;</i><span class="DY-type" >打样</span></li>
-                    <li data-id="2"><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="DH-type">大货</span></li>                        
+                    <li data-id="1"><i class="iconfont-type">&#xe612;</i><span class="all-type" >打样</span></li>
+                    <li data-id="2"><i class="iconfont-type iconfont-type-last">&#xe60f;</i><span class="all-type">大货</span></li>                        
                 </ul>                
              </div>    
               @*流程下拉*@ 

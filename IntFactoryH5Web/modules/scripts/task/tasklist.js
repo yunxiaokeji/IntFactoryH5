@@ -49,27 +49,38 @@
         $(".shade").click(function () {
             $(".shade").css("display","none");
         });
+        $(".maskshade").click(function () {
+            $(".tab-type").css("display", "none");
+            $("#type-a").data("type", "0");
+            $(".flow-type").css("display", "none");
+            $("#flow-a").data("flow", "0");
+            $(".screen-type").css("display", "none");
+            $("#screen-a").data("screen", "0");
+            $(".tab-screen").css("display", "none");
+            $("#select-copy").data("select", "0");
+            $(".maskshade").hide();
+        });
 
         //(搜索框)冒泡事件
         $(".span-search").click(function () {
             return false;
         });        
-
-        //点击其他处关闭(所有)下拉框
-        
-        //$(document).click(function () {
-        //    $(".tab-type").css("display", "none");
-        //    $("#type-a").data("type", "0");
-        //    $(".flow-type").css("display", "none");
-        //    $(".flow-type").data("type", "0");
-        //    $(".screen-type").css("display", "none");
-        //    $("#screen-a").data("screen", "0");
-        //    $("#tab-screen").css("display", "none");
-        //    $("#select-copy").data("select", "0");
-        //});
-
+        $(".tab-type").click(function () {
+            return false;        
+        });
+        $(".flow-type").click(function () {
+            return false;
+        });
+        $(".screen-type").click(function () {
+            return false;
+        });
+        $(".tab-screen").click(function () {
+            return false;
+        });
+   
         //类型下拉 
         $("#type-a").click(function () {
+            $(".maskshade").show();
             $("#screen-potion").empty();
             //当点击此事件时,关闭其他下拉框
             $(".flow-type").css("display", "none");
@@ -83,32 +94,22 @@
             if (num == "0") {
                 $(".tab-type").slideDown("slow");
                 $("#type-a").data("type", "1");
-                $(".all-type").click(function () {
-                    var txt = $(".all-type").text();
-                    $(".type-a").text(txt);
+                $(".all-type").click(function () {                    
+                    $(".type-a").text($(this).text());
                     $(".tab-type").css("display", "none");
                     $("#type-a").data("type", "0");
-                });
-                $(".DY-type").click(function () {
-                    var txt = $(".DY-type").text();
-                    $(".type-a").text(txt);
-                    $(".tab-type").css("display", "none");
-                    $("#type-a").data("type", "0");
-                });
-                $(".DH-type").click(function () {
-                    var txt = $(".DH-type").text();
-                    $(".type-a").text(txt);
-                    $(".tab-type").css("display", "none");
-                    $("#type-a").data("type", "0");
-                });
+                    $(".maskshade").hide();
+                });                
             } else {
                 $(".tab-type").slideUp("slow");
                 $("#type-a").data("type", "0");
+                $(".maskshade").hide();
             }
         });
 
         //流程下拉 
         $("#flow-a").click(function () {
+            $(".maskshade").show();
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
             $("#type-a").data("type", "0");
@@ -124,15 +125,18 @@
                     $(".flow-a").text($(this).text());
                     $(".flow-type").css("display", "none");
                     $("#flow-a").data("flow", "0");
+                    $(".maskshade").hide();
                 });               
             } else {
                 $(".flow-type").slideUp("slow");
                 $("#flow-a").data("flow", "0");
+                $(".maskshade").hide();
             }
         });
 
         //流程阶段下拉        
         $("#screen-a").click(function () {
+            $(".maskshade").show();
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
             $("#type-a").data("type", "0");
@@ -151,13 +155,16 @@
                         $(".screen-a").text($(this).text());
                         $(".screen-type").css("display", "none");
                         $("#screen-a").data("screen", "0");
+                        $(".maskshade").hide();
                     });
                 } else {
                     $(".screen-type").slideUp("slow");                
                     $("#screen-a").data("screen", "0");
+                    $(".maskshade").hide();
                 }
             } else {
-                $(".screen-type").css("display","none");
+                $(".screen-type").css("display", "none");
+                $(".maskshade").hide();
             }            
         });
 
@@ -168,6 +175,7 @@
 
         //排序下拉       
         $("#select-copy").click(function () {
+            $(".maskshade").show();
             //当点击此事件时,关闭其他下拉框
             $(".tab-type").css("display", "none");
             $("#type-a").data("type", "0");
@@ -192,10 +200,12 @@
                     $(".sort-a").text($(this).text());
                     $("#tab-screen").slideUp("slow");
                     $("#select-copy").data("select", "0");
+                    $(".maskshade").hide();
                 });
             } else {
                 $("#tab-screen").slideUp("slow");
                 $("#select-copy").data("select", "0");
+                $(".maskshade").hide();
             }
                        
         });        
@@ -243,25 +253,31 @@
             
         });
 
+        //点击回到顶部
+        $(".getback").click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            $(".getback").css("display", "none");
+        });
+
         //滚动条在最下面时增加数据
         $(window).scroll(function () {
+            //判断滚动条发生变化时
+            if (document.body.scrollTop > 0) {
+                $(".getback").show();
+            }else {
+                $(".getback").hide();
+            }
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
             if (bottom <= 0) {
                 if (!MyListTask.isLoading) {
-                    if (MyListTask.params.pageIndex < MyListTask.pageCount) 
+                    if (MyListTask.params.pageIndex < MyListTask.pageCount)
                         $(".list").append("<div class=\"imgrefresh\"><img src=\"../modules/images/img.gif\" /></div>");
                     MyListTask.params.pageIndex++;
                     MyListTask.getList(true);
                 } else {
-                    alert("已经到页低啦");                   
+                    alert("已经到页低啦");
                 }
-            } else {
-                $(".getback").css("display", "block");
-                $(".getback").click(function () {
-                    $('html, body').animate({ scrollTop: 0 }, 'slow');
-                    $(".getback").css("display", "none");
-                });
-            }
+            } 
         }
         
     )};
@@ -274,6 +290,7 @@
             $(".list").empty();
         }        
         //获取任务列表(页面加载)
+        $(".imgrefresh").show();
         $.post("/Task/GetTask", { filter: JSON.stringify(MyListTask.params) }, function (data) {
             //分页数据
             MyListTask.pageCount = data.pageCount;
@@ -283,7 +300,8 @@
                 $(".list").append($result);
             });
             MyListTask.isLoading = false;
-        });               
+        });
+        $(".imgrefresh").hide();
     }
 
     //获取订单流程的列表

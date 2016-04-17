@@ -1,4 +1,6 @@
-﻿/*头部*/
+﻿/*透明遮罩*/
+.maskshade {width:100%;height:100%;position:fixed;z-index:330;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
+/*头部*/
 .header{width:100%;height:50px;border-bottom:1px solid #b2b2b2;background-color:rgba(248,248,248,0.9);position:fixed;left:0;top:0;z-index:100;color:#666;}
 .header li{float:left;width:33%;}
 .header li:hover{color:#007aff;}
@@ -47,12 +49,12 @@
 .list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:15px;}
 .list li:first-child img{width:120px;height:120px;}
 /*标记颜色*/
-.list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-left:-12px;}
-.list li .orange-tag{width:2px;height:20px;border:1px solid #F7BB41;background-color:#F7BB41;margin-left:-12px;}
-.list li .yellow-tag{width:2px;height:20px;border:1px solid #F7F910;background-color:#F7F910;margin-left:-12px;}
-.list li .green-tag{width:2px;height:20px;border:1px solid #00FF00;background-color:#00FF00;margin-left:-12px;}
-.list li .blue-tag{width:2px;height:20px;border:1px solid #009BE1;background-color:#009BE1;margin-left:-12px;}
-.list li .purple-tag{width:2px;height:20px;border:1px solid #884898;background-color:#884898;margin-left:-12px;}
+.list li .orange-tag{width:2px;height:20px;border:1px solid #fff;background-color:#fff;margin-left:-12px;}
+.list li .red-tag{width:2px;height:20px;border:1px solid #ff7c7c;background-color:#ff7c7c;margin-left:-12px;}
+.list li .green-tag{width:2px;height:20px;border:1px solid #3bb3ff;background-color:#3bb3ff;margin-left:-12px;}
+.list li .blue-tag{width:2px;height:20px;border:1px solid #9F74FF;background-color:#9F74FF;margin-left:-12px;}
+.list li .purple-tag{width:2px;height:20px;border:1px solid #FFC85D;background-color:#FFC85D;margin-left:-12px;}
+.list li .yellow-tag{width:2px;height:20px;border:1px solid #FFF65F;background-color:#FFF65F;margin-left:-12px;}
 /*列表详情*/
 .list .last-stage .style-i {float:left;white-space:nowrap; }
 .list .last-stage .shape{ font-size:0.6em;margin-top:82px;width:40px;margin-left:-30px;}
@@ -67,7 +69,8 @@
 .list .center-list-task .time {margin-top:10px;}
 .list .center-list-task .stage-time {padding-right:3%; }
 .list .nodata {color:#999; margin-top:20%;margin-left:30%;font-family:'Microsoft YaHei'; }
-.imgrefresh{display:none;text-align:center;position:fixed;z-index:666;bottom:0;color:#884898;}
+.imgrefresh{position:fixed;z-index:666;color:#884898;bottom:0;margin-left:49%;}
+.imgrefresh img{width:25px;height:25px;}
 /*返回顶部*/
 .getback { position:fixed;z-index:555;color:#007aff;right:5%;bottom:8%;display:none;}
 .getback span{right:10%;}
