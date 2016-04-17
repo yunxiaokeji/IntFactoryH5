@@ -10,14 +10,13 @@
 .shade .search {width:100%;height:50px;background-color:#D5D5D5;line-height:50px;}
 .shade .search span { float:left;display:block;}
 .shade .search span:first-child {margin-left:20px; width:75%;}
-.shade .search .span-search{}
-.search span .txt-search {width:100%;line-height:40px;border-radius:5px;border:1px solid #CCC;font-size:0.8em;text-indent:2.5em;color:#666;background:url(/modules/images/Zoom.gif) no-repeat;background-color:#fff;background-position-y:center;margin-top:-3px}
-.shade .search span:last-child {width:40px;text-align:center;color:#FFFDFD;background-color:#007aff;height:30px;line-height:30px;margin-top:10px;margin-left:10px;border:1px solid #ccc;border-radius:20%;}
+.search span .txt-search {width:100%;line-height:40px;border-radius:5px;border:1px solid #CCC;font-size:0.8em;text-indent:2em;color:#666;background:url(/modules/images/Zoom.gif) no-repeat;background-color:#fff;background-position-y:center;margin-top:-3px;background-size:2em;}
+.shade .search span:last-child {font-size:0.8em;width:40px;text-align:center;color:#FFFDFD;background-color:#007aff;height:30px;line-height:30px;margin-top:10px;margin-left:10px;border:1px solid #ccc;border-radius:20%;}
 /*进行状态*/
 .task-status{width:100%;height:60px;border-bottom:1px solid #b2b2b2;margin-top:40px;}
 .task-status li{width:25%;float:left;}
-.task-status li:hover .ico-status{color:#007aff;font-size:1.3em;}
-.task-status li:hover a{color:#007aff;font-size:1em;}
+.task-status li:hover .ico-status{color:#007aff;}
+.task-status li:hover a{color:#007aff;}
 .task-status li:last-child{border-right:0;}
 .task-status li .ico-status{height:20px;margin-top:15px;text-align:center;}
 .task-status li a{height:30px;margin-top:5px;text-align:center;color:#666;display:inline-block;width:100%;font-size:0.7em;}
@@ -25,8 +24,8 @@
 /*选择条件的css样式*/
 .select{width:100%;height:40px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:0.7em;}
-.select li:hover a{color:#007aff;font-size:0.9em;}
-.select li:hover .iconfont-select{color:#007aff;font-size:1em;}
+.select li:hover a{color:#007aff;}
+.select li:hover .iconfont-select{color:#007aff;}
 .select li{width:25%;float:left;border-right:1px solid #ccc;height:40px;margin-left:-1px;margin-top:-10px;}
 .select li .copy{height:15px;margin-top:10px;text-align:center;}
 .select .copy .iconfont{color:#666;}
@@ -35,7 +34,7 @@
 /*类型*/
 .select-box .tab-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;left:-1px;display:none;}
 .select-box .option {width:100%;}
-.select-box .dropdownlist li{font-size:0.8em;color:#999;padding-top:5px;padding-bottom:5px;}
+.select-box .dropdownlist li{font-size:0.6em;color:#999;padding-top:5px;padding-bottom:5px;}
 .select-box .dropdownlist li:hover{background-color:#007aff;color:#fff;}
 /*流程*/
 .select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:25%;background-color:#fff;position:absolute;z-index:334;margin-left:-1px;display:none;}
@@ -45,33 +44,54 @@
 .select-box .tab-screen { width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:75%;background-color:#fff;position:absolute;z-index:334;margin-left:-2px;display:none;}
 /*列表*/
 .list .listabove{width:100%;display:table;margin-top:30px;border-bottom:1px solid #dfdfdf;}
-.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:5px;}
+.list .listabove li{display:table-cell; vertical-align:top;padding-bottom:20px;padding-left:15px;}
 .list li:first-child img{width:120px;height:120px;}
-.list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-right:20px;}
-.list li .orange-tag{width:2px;height:20px;border:1px solid #F7BB41;background-color:#F7BB41;margin-right:20px;}
-.list li .yellow-tag{width:2px;height:20px;border:1px solid #F7F910;background-color:#F7F910;margin-right:20px;}
-.list li .green-tag{width:2px;height:20px;border:1px solid #00FF00;background-color:#00FF00;margin-right:20px;}
-.list li .blue-tag{width:2px;height:20px;border:1px solid #009BE1;background-color:#009BE1;margin-right:20px;}
-.list li .purple-tag{width:2px;height:20px;border:1px solid #884898;background-color:#884898;margin-right:20px;}
+/*标记颜色*/
+.list li .red-tag{width:2px;height:20px;border:1px solid #e0483e;background-color:#e0483e;margin-left:-12px;}
+.list li .orange-tag{width:2px;height:20px;border:1px solid #F7BB41;background-color:#F7BB41;margin-left:-12px;}
+.list li .yellow-tag{width:2px;height:20px;border:1px solid #F7F910;background-color:#F7F910;margin-left:-12px;}
+.list li .green-tag{width:2px;height:20px;border:1px solid #00FF00;background-color:#00FF00;margin-left:-12px;}
+.list li .blue-tag{width:2px;height:20px;border:1px solid #009BE1;background-color:#009BE1;margin-left:-12px;}
+.list li .purple-tag{width:2px;height:20px;border:1px solid #884898;background-color:#884898;margin-left:-12px;}
+/*列表详情*/
 .list .last-stage .style-i {float:left;white-space:nowrap; }
-.list .last-stage .shape{ font-size:0.6em;margin-top:85px;width:40px;margin-left:-15px;}
-.list .listabove .center-list-task {font-size:0.6em;color:#999;padding-right:-20px;}
+.list .last-stage .shape{ font-size:0.6em;margin-top:82px;width:40px;margin-left:-30px;}
+.list .listabove .center-list-task {font-size:0.6em;color:#999;}
 .list .center-list-task .material {margin-left:4px;}
 .list .details .status-proceed { color:#09aa4a;}
 .list .details .status-finish { color:#999;}
 .list .details .details-name {color:#666; }
-.list .center-list-task .details {width:12em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.list .center-list-task .details {width:12em;margin-bottom:40px; }
 .list .center-list-task .details:hover {overflow:visible;}
-.list .center-list-task .stage {height:28px;}
-.list .center-list-task .details-stage {margin-top:35px;}
+.list .center-list-task .stage {height:28px;margin-top:21px;overflow:hidden;white-space:nowrap;width:115px;}
 .list .center-list-task .time {margin-top:10px;}
 .list .center-list-task .stage-time {padding-right:3%; }
 .list .nodata {color:#999; margin-top:20%;margin-left:30%;font-family:'Microsoft YaHei'; }
+.imgrefresh{display:none;text-align:center;position:fixed;z-index:666;bottom:0;color:#884898;}
+/*返回顶部*/
+.getback { position:fixed;z-index:555;color:#007aff;right:5%;bottom:8%;display:none;}
+.getback span{right:10%;}
+.getback:hover{color:#249a23;}
+@media screen and (min-width:375px) {
+    .select li a { font-size: 0.9em; }
+    .select li .iconfont-select { font-size: 1em; }
+    .list .listabove li { padding-left: 25px; }
+    .list li:first-child img { width: 135px; height: 135px; }
+    .list .listabove .center-list-task { padding-left: 0; }
+    .list .center-list-task .details-stage { margin-top: 40px; }
+    .list .center-list-task .stage { height: 32px; }
+    .list .center-list-task .details { margin-bottom: 52px; }
+    .list .last-stage .shape { margin-top: 95px; }
+}
 @media screen and (min-width:414px) {   
+    .select li a{font-size:0.9em;}
+    .select li .iconfont-select{font-size:1em;}
     .list .listabove li{padding-left:25px;}
     .list li:first-child img{width:135px;height:135px;}
+    .list .listabove .center-list-task {padding-left:0;}
     .list .center-list-task .details-stage {margin-top:40px;}
     .list .center-list-task .stage {height:32px;}
+    .list .center-list-task .details {margin-bottom:52px; }
     .list .last-stage .shape{margin-top:95px;}
 }
 @media screen and (min-width:550px) {
@@ -87,12 +107,19 @@
     .list li:first-child img{width:200px;height:200px;}
     .list .listabove .center-list-task {font-size:1em;}
     .list .style-i .iconfont-stage { font-size:1.2em;}
-    .list .last-stage .shape{ font-size:1em;margin-top:140px;}
+    .list .last-stage .shape{ font-size:1em;width:80px;margin-top:160px;margin-left:-15px;}
     .list .details .details-name {font-size:1.3em;}    
-    .list .center-list-task .stage {height:40px;}    
+    .list .center-list-task .stage {height:40px;width:152px;}    
     .list .center-list-task .details-stage {margin-top:75px; }    
     .list .details .iconfont {font-size:1.7em; }
-    .list .last-stage .shape{width:80px;margin-top:160px;margin-left:-15px;}  
+    .list .center-list-task .details {margin-bottom:92px; }
+    .list li .red-tag{margin-left:12px;}
+    .list li .orange-tag{margin-left:12px;}
+    .list li .yellow-tag{margin-left:12px;}
+    .list li .green-tag{margin-left:12px;}
+    .list li .blue-tag{margin-left:12px;}
+    .list li .purple-tag{margin-left:12px;}
+
 }
 @media screen and (min-width:768px) {
     .header{height:80px;font-size:28px;}   
@@ -110,9 +137,8 @@
     .task-status li a{font-size:1em;}
     .select a{font-size:1em;} 
     .list .listabove li{padding-left:50px;}  
-    .list .listabove .center-list-task {font-size:1em;padding-right:5%;}
+    .list .listabove .center-list-task {font-size:1em;padding-right:10%;}
     .list .details .details-name {font-size:1.5em;}    
-    .list .center-list-task .stage {height:50px;}
     .list .center-list-task .details-stage {margin-top:50px; }    
     .list .details .iconfont {font-size:1.7em; }
     .list .center-list-task .time {background-size:20px;}

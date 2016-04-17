@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width;" />
     <title>任务列表</title>
     <link href="~/modules/css/common.css" rel="stylesheet" />    
     <link href="~/modules/css/task/tasklist.css" rel="stylesheet" />    
@@ -33,7 +33,7 @@
     <header>
         <ul class="header">
             <li>
-                <div class="head head-menu"><i class="iconfont">&#xe60d;</i></div>
+                <div class="head head-menu"><i class="iconfont"></i></div>
             </li>
             <li>
                 <div class="head">我的任务</div>                
@@ -107,22 +107,30 @@
             @* 排序 *@
             <div class="tab-screen" id="tab-screen">
                 <ul class="potion">
+                    <li class="taketime-tatic" data-takepo="2">默认</li>
                     <li class="taketime" data-takepo="0">接受时间正序</li>
                     <li class="tasktime" data-takepo="1">接受时间倒序</li>
-                    <li class="tasktime" data-takepo="2">到期时间正序</li>
-                    <li class="tasktime" data-takepo="3">到期时间倒序</li>
-                    <li class="tasktime" data-takepo="4">任务创造时间正序</li>
-                    <li class="tasktime" data-takepo="5">任务创造时间倒序</li>
+                    <li class="tasktime" data-takepo="0">到期时间正序</li>
+                    <li class="tasktime" data-takepo="1">到期时间倒序</li>
+                    <li class="tasktime" data-takepo="0">创建时间正序</li>
+                    <li class="tasktime" data-takepo="1">创建时间倒序</li>
                 </ul>               
             </div>
         </div>
      </div> 
     @* 任务列表 *@
     <div class="list">
-        <div class="imgrefresh">
-            <img src="~/modules/images/imgrefresh.gif" />
-        </div>
+        
     </div>
+    <div class="imgrefresh">
+            <img src="~/modules/images/img.gif" />
+        </div>
+    @* 回到顶部 *@
+    <div class="getback">
+        <div class="iconfont-back">&#xe602;</div>
+        <span>返回顶部</span>
+    </div>
+    
 </body>
 </html>
 

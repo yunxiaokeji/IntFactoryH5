@@ -46,6 +46,7 @@ namespace IntFactoryH5Web.Controllers
                 {
                     var task = resultTask.task;
                     ViewBag.Task = task;
+                    ViewBag.List = resultTask.materialList;
 
                 }
             }
@@ -115,14 +116,7 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
-        //分页
-        public JsonResult GetPaging()
-        {
-            
-            return null;
-        }
-        
+      
         //获取日志信息
         public JsonResult GetLogInfo(string taskID, int pageIndex)
         {
