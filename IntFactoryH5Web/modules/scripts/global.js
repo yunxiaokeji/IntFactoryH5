@@ -1,8 +1,9 @@
 ﻿define(function (require, exports, module) {
-    var Global = {},
-    jQuery = require("jquery");
+    var Global = {};
+   //var jQuery = require("jquery");
+
     Global.post = function (url, params, callback, anync) {
-        jQuery.ajax({
+        $.ajax({
             type: "POST",
             url: url,
             data: params,
@@ -18,6 +19,7 @@
             }
         });
     }
+
     //格式化日期
     Date.prototype.toString = function (format) {
         var o = {
@@ -41,12 +43,14 @@
         }
         return format;
     };
+
     //日期字符串转换日期格式
     String.prototype.toDate = function (format) {
         var d = new Date();
         d.setTime(this.match(/\d+/)[0]);
         return (!!format) ? d.toString(format) : d;
     }
+
     //截取字符串
     String.prototype.subString = function (len) {
         if (this.length > len) {
@@ -54,10 +58,12 @@
         }
         return this;
     }
+
     //判断字符串是否整数
     String.prototype.isInt = function () {
         return this.match(/^(0|([1-9]\d*))$/);
     }
+
     //判断字符串是否数字
     String.prototype.isDouble = function () {
         return this.match(/^\d+(.\d+)?$/);
