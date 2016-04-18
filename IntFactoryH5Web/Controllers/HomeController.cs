@@ -16,6 +16,10 @@ namespace IntFactoryH5Web.Controllers
 
         public ActionResult Index(string ReturnUrl)
         {
+            if (Session["ClientManager"] != null) {
+                return Redirect("/Task/List");
+            }
+
             ReturnUrl = ReturnUrl ?? string.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
 
@@ -25,7 +29,6 @@ namespace IntFactoryH5Web.Controllers
 
         public JsonResult UserLogin(string userName, string pwd)
         {
-
             Dictionary<string, object> resultObj = new Dictionary<string, object>();
             var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,agentID);
 

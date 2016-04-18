@@ -1,6 +1,7 @@
 ﻿<li class="all-screen" data-id="-1">全部</li>
-   
+  
 {%
+   if($data.length>0){ 
     for(var i=0;i<$data.length;i++){ 
         var item=$data[i];
 %}
@@ -8,4 +9,10 @@
     <li class="all-screen" data-id="{%=item.stageID%}">{%=item.stageName%}</li>
 {%
     }
+   }else{
 %}
+<div class="nodata">暂无数据!</div>
+
+{%  
+    }
+ %}

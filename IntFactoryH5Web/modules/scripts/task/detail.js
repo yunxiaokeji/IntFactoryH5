@@ -1,6 +1,6 @@
 ﻿define(function (require, exports, module) {
 
-    //var Global = require("global");
+    var Global = require("global");
 
     var Paras = {
         orderID: "",
@@ -67,11 +67,10 @@
         setOrderNeedWidth();
 
         //返回按钮history.back();
-        $(".btn-return").click(function () {
+        //$(".btn-return").click(function () {
+        //    //href = "javascript:if(history.length>1){ history.go(-1);} else{}"
+        //    //location.href = history.back();
 
-            location.href = history.go(-1);
-
-        })
         
         //绑定滑屏控件事件
         $(document).ready(function () {

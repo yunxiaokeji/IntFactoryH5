@@ -7,7 +7,7 @@
 %}
         <ul class="listabove row">
             <li>
-                <a href="/Task/Detail/{%=item.taskID%}"><img src="../modules/images/3f14cfebe8d73561b2dcea1123cae748[1].JPG" /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"../modules/images/img-noimg.png":"http://dev.90cloudsales.com"+item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                  <!--任务详情-->
@@ -23,26 +23,30 @@
                    <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                 </div>                
                 <div class="stage" >
-                    <label>接受:</label>
-                    <span class="time stage-time">{%=item.acceptTime%}</span>
+                    <label>接受:</label>     
+                    <span class="time stage-time">{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
                 </div>
                 <div class="stage">
-                    <label>到期:</label>
-                    <span class="time">{%=item.endTime%}</span>
+                    <label>到期:</label>     
+                    <span class="time stage-time">{%=item.endTime==""?"未设置":item.endTime%}</span>                                
+                </div>  
+                <div class="stage">
+                    <label>完成:</label>   
+                    <span class="time stage-time">{%=item.completeTime==""?"未完成":item.completeTime%}</span>                              
                 </div>                
             </li>
             <li class="last-stage">    
                 <!-- 标记颜色 -->
-                {% if(item.colorMark==-1){ %}            
-                <div class="orange-tag"></div>  
-                {% }else if(item.colorMark==0){  %}    
+                {% if(item.colorMark==0){ %}            
+                <div class="write-tag"></div>  
+                {% }else if(item.colorMark==1){  %}    
                 <div class="red-tag"></div>   
-                {% }else if(item.colorMark==1){  %}      
-                <div class="green-tag"></div> 
                 {% }else if(item.colorMark==2){  %}      
-                <div class="blue-tag"></div> 
+                <div class="green-tag"></div> 
                 {% }else if(item.colorMark==3){  %}      
                 <div class="purple-tag"></div> 
+                {% }else if(item.colorMark==4){  %}      
+                <div class="orange-tag"></div> 
                 {% }else{ %}
                 <div class="yellow-tag"></div> 
                 {% } %}
@@ -59,7 +63,7 @@
 
 %}
 
-<div class="nodata">暂无数据!请刷新页面</div>
+<div class="nodata">暂无数据!</div>
 
 
 {%  

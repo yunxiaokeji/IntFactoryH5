@@ -19,8 +19,3 @@ seajs.config({
 });
 
 
-seajs.config({
-    alias: {
-    }
-});
-
