@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   }
 .iconfont-search {
-  font-size:22px;
+  font-size:35px;
   color:#666; 
   }
 .iconfont-status {
@@ -32,11 +32,11 @@
   color:#999;
 }
 .iconfont-details {
-  font-size:12px;
+  font-size:22px;
   color:#e0183e;
 }
 .iconfont-stage {
-  font-size:12px;
+  font-size:20px;
   color:#999;
 }
 .iconfont-back {

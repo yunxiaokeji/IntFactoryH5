@@ -19,7 +19,7 @@ namespace IntFactoryH5Web.Controllers
         //string CurrentUser.agentID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
 
 
-        string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
+        //string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
         //Dictionary<string, object> TaskDetail = new Dictionary<string, object>();
         //Dictionary<string, object> TaskList = new Dictionary<string, object>();
 
@@ -105,7 +105,7 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //获取订单任务流程阶段列表
-        public JsonResult GetTaskFlowStage()
+        public JsonResult GetTaskFlowStage(string processID)
         {
             var model = TaskBusiness.BaseBusiness.GetOrderStages(processID, CurrentUser.userID, CurrentUser.agentID);
             JsonDictionary.Add("items",model.processStages);
