@@ -18,8 +18,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
     <title>任务详情</title>
+    <link href="~/modules/css/layout.css" rel="stylesheet" />
     <link href="~/modules/css/common.css" rel="stylesheet" />
     <link href="~/modules/css/task/detail.css" rel="stylesheet" />
+    <link href="~/modules/css/base.css" rel="stylesheet" />
     <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
     <link href="~/modules/iconfont/ux_1460342755_7796638/iconfont.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
@@ -69,32 +71,38 @@
         <div class="task-accept">
             @{
                 
-                if(task.finishStatus==0){
-                    if (userStatus)
-                    { 
-                        <input type="text" class="appDateTime" name="appDateTime" value="接受任务" />                        
+                    if(task.finishStatus==2){
+                    <span>已完成</span>
                     }
                     else
                     {
-                        <span>未接收</span>;
+                        if (!userStatus)
+                        {
+                            if (task.finishStatus == 0)
+                            {
+                                <span>未接收</span>
+                            }
+                            else if (task.finishStatus == 1)
+                            {
+                                 <span>进行中</span>
+                            }
+                        }
+                        else
+                        {
+                            if (task.finishStatus == 0)
+                            {
+                                <input type="text" class="btn-acceptTaskTime" name="appDateTime" value="接受任务" />              
+                            }
+                            else if (task.finishStatus == 1)
+                            { 
+                                <input type="text" class="btn-finishTask" name="appDateTime" value="标记完成" />   
+                            }
+                        }
                     }
 
-                }
-                else if (task.finishStatus == 1)
-                {
-                    if (userStatus)
-                    { 
-                        <span>标记完成</span>;
-                    }
-                    else
-                    {
-                        <span>未完成</span>
-                    }
-                }
-                else if (task.finishStatus == 2)
-                {
-                    <span>已完成</span>;
-                }
+
+            
+                 
                 
              }  
         </div>

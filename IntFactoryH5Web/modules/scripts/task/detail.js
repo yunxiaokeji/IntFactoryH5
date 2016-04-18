@@ -49,11 +49,7 @@
         AddReplyParas.mark = mark;
         TaskDetail.bindEvent();
 
-    }
-   
-    //绑定事件
-    TaskDetail.bindEvent = function () {
-
+        
         //浏览器加载获取讨论列表
         TaskDetail.getTaskReplys();
 
@@ -63,15 +59,14 @@
         //调用绑定选择时间控件
         TaskDetail.bindTimerPicker();
 
-        //浏览器加载设置订单需求文本内容
-        setOrderNeedWidth();
+        ////浏览器加载设置订单需求文本内容
+        //setOrderNeedWidth();
 
-        //返回按钮history.back();
-        //$(".btn-return").click(function () {
-        //    //href = "javascript:if(history.length>1){ history.go(-1);} else{}"
-        //    //location.href = history.back();
+    }
+   
+    //绑定事件
+    TaskDetail.bindEvent = function () {
 
-        
         //绑定滑屏控件事件
         $(document).ready(function () {
             if (TaskDetail.imgStatus == 1) {
@@ -105,6 +100,7 @@
             $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
             $(this).parent().parent().find("i").css("color", "#9e9e9e");
             $(this).find("i").css("color", "#4a98e7");
+
             var classname = $(this).data("classname");
             $(".main-box ." + classname).show().siblings().hide();
             $(".main-box .loading-lump").show();
@@ -118,6 +114,7 @@
                 Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
                 $(".main-box").css("margin-bottom", "60px");
+
                 //浏览器滚动条在最下方时加载10条讨论信息
                 $(window).unbind("scroll");
                 $(window).bind("scroll", function () {
@@ -178,8 +175,11 @@
 
         //点击提交按钮
         $(".btn-submit").bind("click",function () {
+            
 
             AddReplyParas.content = $(".txt-talkcontent").val().replace(Content, "");
+
+            if (AddReplyParas.content == "") { return; }
 
             if ($(".txt-talkcontent").val().indexOf(Content) != 0) {
 
@@ -191,68 +191,69 @@
 
             }
           
-            
-            if (AddReplyParas.content != "") {
-
-                var msgReply = JSON.stringify(AddReplyParas);
-                $(this).val("提交中...");
-                $(this).attr("disabled", "disabled");
-                    $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
+            var msgReply = JSON.stringify(AddReplyParas);
+            $(this).val("提交中...").attr("disabled", "disabled");
+                $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
                        
-                        doT.exec("/template/task/detailReply.html", function (templateFun) {
+                    doT.exec("/template/task/detailReply.html", function (templateFun) {
+                        $(".btn-submit").val("提交").removeAttr("disabled");
+                        $(".btn-submit")
 
-                            var dataReplys = {};
-                            dataReplys.items = data.items;
-                            dataReplys.userID = TaskDetail.userID;
-                            var innerText = templateFun(dataReplys);
+                        var dataReplys = {};
+                        dataReplys.items = data.items;
+                        dataReplys.userID = TaskDetail.userID;
+                        var innerText = templateFun(dataReplys);
 
-                            if ($(".talk-main").find('div').length == 0) {
-                                $(".noreply-msg").hide();
-                            }
-                            $(".talk-main").prepend(innerText);
+                        if ($(".talk-main").find('div').length == 0) {
+                            $(".noreply-msg").hide();
+                        }
 
-                            //窗体加载设置自己发送信息文本框的位置
-                            setTextPosition();
+                        $(".talk-main").prepend(innerText);
 
-                            $(".btn-submit").val("提交");
-                            $(".btn-submit").attr("disabled", false);
-                            $(".txt-talkcontent").val("");
+                        //窗体加载设置自己发送信息文本框的位置
+                        setTextPosition();
 
-                            //点击回复把用户名写入文本框
-                            $(".talk-content .talk-main .iconfont").bind("click", function () {
+                       
+                        $(".txt-talkcontent").val("");
 
-                                AddReplyParas.fromReplyID = $(this).data("replyid");
+                        //点击回复把用户名写入文本框
+                        $(innerText).find(".iconfont").bind("click", function () {
 
-                                AddReplyParas.fromReplyUserID = $(this).data("userid");
+                            AddReplyParas.fromReplyID = $(this).data("replyid");
 
-                                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+                            AddReplyParas.fromReplyUserID = $(this).data("userid");
 
-                                Content = "@" + $(this).data("name") + " ";
+                            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
 
-                                $(".txt-talkcontent").val(Content);
+                            Content = "@" + $(this).data("name") + " ";
 
-                                $(".txt-talkcontent").focus();
+                            $(".txt-talkcontent").val(Content);
 
-                            });
+                            $(".txt-talkcontent").focus();
 
                         });
 
-                })
+                    });
 
-            }
+            })
+
 
         })
      
         //绑定完成任务
-        $(".task-accept").click(function () {
+        if ($(".btn-finishTask").length != 0)
+        {
+            $(".btn-finishTask").click(function () {
 
-            if ($(this).find("span").text() == "标记完成") {
+                if ($(this).val() == "标记完成") {
 
-                TaskDetail.showConfirmForm(1);
-               
-            }
+                    TaskDetail.showConfirmForm(1);
 
-        });
+                }
+
+            });
+        }
+        
 
         //窗体加载绑定讨论下拉
         $(window).bind("scroll", function () {
@@ -295,15 +296,12 @@
         $(".send-self .talk-self").css("margin-left", showWidth - showTextWidth - 70 + "px");
     }
 
-    //设置接受任务、标记任务完成按钮弹出层位置
-    function setAcceptTaskPosition() {
-
-        $(".alert").css("left", ($(window).width() - 250) / 2 + "px");
-
-    }
 
     //绑定时间控件
     TaskDetail.bindTimerPicker = function () {
+
+        if ($(".btn-acceptTaskTime").length == 0) { return; }
+
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式
@@ -312,15 +310,15 @@
             lang: 'zh',
             onSelect: function () {
 
-                Paras.endTime =  $(".appDateTime").val();
+                Paras.endTime = $(".btn-acceptTaskTime").val();
 
                 TaskDetail.showConfirmForm(0);
 
-                $(".appDateTime").val("接受任务");
+                $(".btn-acceptTaskTime").val("接受任务");
 
             }
         };
-        $(".appDateTime").mobiscroll().datetime(defaultParas);
+        $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
     }
 
     //设置任务到期时间
@@ -340,8 +338,8 @@
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(LocalTime);
-                $(".task-accept").html("<span>标记完成</span>");
-                $(".task-accept").find("span").click(function () {
+                $(".task-accept").html("<input type='text' class='btn-finishTask' name='appDateTime' value='标记完成' />");
+                $(".task-accept").find(".btn-finishTask").bind('click',function () {
                     TaskDetail.finishTask();
                 });
             }
@@ -565,53 +563,22 @@
 
     //设置接受任务、标记任务完成按钮弹出层位置
     TaskDetail.showConfirmForm = function (showStatus) {
-        var alertMsg = "";
-        doT.exec("/template/task/alertPage.html", function (templateFun) {
 
+        var alertMsg = "";
+        if (showStatus == 0) {
+            alertMsg = "任务到期时间不可逆,确定设置?";
+        }
+        else {
+            alertMsg = "标记完成的任务不可逆,确定设置?";
+        }
+        confirm(alertMsg, function () {
             if (showStatus == 0) {
-                alertMsg = "任务到期时间不可逆,确定设置?";
+                TaskDetail.setTaskEndTime();
             }
             else {
-                alertMsg = "标记完成的任务不可逆,确定设置?";
+                TaskDetail.finishTask();
             }
-            var innerText = templateFun(alertMsg);
-
-            innerText = $(innerText);
-
-            $("body").append(innerText);
-            //加载完毕设置位置剧中
-            setAcceptTaskPosition();
-
-            //点击提示框外关闭提示框
-            $(".alert-layer").bind("click", function () {
-
-                $(this).hide();
-
-                $(".alert").hide();
-
-            })
-            $(".confirm").click(function () {
-
-                if (showStatus == 0) {
-                    TaskDetail.setTaskEndTime();
-                }
-                else {
-                    TaskDetail.finishTask();
-                }
-
-                $(".alert").hide();
-
-                $(".alert-layer").hide();
-            })
-
-            $(".cancel").click(function () {
-
-                $(".alert").hide();
-
-                $(".alert-layer").hide();
-
-            })
-        })
+        });
 
     }
 
