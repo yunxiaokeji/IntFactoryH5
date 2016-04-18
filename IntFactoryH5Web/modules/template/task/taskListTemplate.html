@@ -1,5 +1,4 @@
 ﻿{%
-    if($data.length>0){
         for(var i=0;i<$data.length;i++)
         { 
          var item=$data[i];
@@ -7,7 +6,7 @@
 %}
         <ul class="listabove row">
             <li>
-                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"../modules/images/img-noimg.png":"http://dev.90cloudsales.com"+item.orderImg%}' /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"../modules/images/img-noimg.png":+item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                  <!--任务详情-->
@@ -58,14 +57,8 @@
         </ul>
    
 {%  
-        }
-    } else{
+        
+    }
 
 %}
 
-<div class="nodata">暂无数据!</div>
-
-
-{%  
-    }
- %}
