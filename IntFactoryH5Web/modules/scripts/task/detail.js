@@ -31,12 +31,18 @@
 
     $PageCount = 1000000;
 
-    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID) {
+    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark,taskID,imgStatus,userID) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         TaskDetail.platemaking = platemaking;
         TaskDetail.plateremark = plateremark;
+        TaskDetail.imgStatus = imgStatus;
+        TaskDetail.userID = userID;
+
+        //加载图标状态
+        TaskDetail.loadingStatus = true;
+
         Paras.taskID = taskID;
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
@@ -63,23 +69,25 @@
         //返回按钮history.back();
         $(".btn-return").click(function () {
 
-            location.href = history.back();
+            location.href = history.go(-1);
 
         })
         
         //绑定滑屏控件事件
         $(document).ready(function () {
-            $dragBln = false;
-            $(".main_image").touchSlider({
-                flexible: true,
-                speed: 200,
-                //btn_prev: $("#btn_prev"),
-                //btn_next: $("#btn_next"),
-                paging: $(".flicking_con a"),
-                counter: function (e) {
-                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
-                }
-            });
+            if (TaskDetail.imgStatus == 1) {
+                $dragBln = false;
+                $(".main_image").touchSlider({
+                    flexible: true,
+                    speed: 200,
+                    //btn_prev: $("#btn_prev"),
+                    //btn_next: $("#btn_next"),
+                    paging: $(".flicking_con a"),
+                    counter: function (e) {
+                        $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                    }
+                });
+            }
         });
 
         //绑定浏览器大小改变事件
@@ -94,18 +102,19 @@
 
         //菜单切换模块事件
         $("nav ul li").click(function () {
-
+            
             $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
             $(this).parent().parent().find("i").css("color", "#9e9e9e");
             $(this).find("i").css("color", "#4a98e7");
-
             var classname = $(this).data("classname");
-
+            $(".main-box ." + classname).show().siblings().hide();
+            $(".main-box .loading-lump").show();
             //点击讨论模块
             if (classname == "talk-status") {
                 //初始化讨论页数
                 $(".talk-main").html("");
                 IsPageCount = true;
+                TaskDetail.loadingStatus = true;
                 $PageCount = 100000;
                 Paras.pageIndex = 1;
                 TaskDetail.getTaskReplys();
@@ -113,7 +122,11 @@
                 //浏览器滚动条在最下方时加载10条讨论信息
                 $(window).unbind("scroll");
                 $(window).bind("scroll", function () {
+
                     var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+                    if (TaskDetail.loadingStatus) {
+                        $(".main-box .loading-lump").show().css("margin-bottom", "10px");
+                    }
                     if (bottom <= 0) {
                         //$("#tableLoad").attr("class", "");
                         setTimeout(function () {
@@ -127,6 +140,7 @@
             //点击材料计划模块
             else if (classname == "shop-status")
             {
+                $(".main-box .loading-lump").hide();
                 $(window).unbind("scroll");
             }
 
@@ -156,9 +170,8 @@
             else if (classname == "print-status") {
                 $(window).unbind("scroll");
                 TaskDetail.printBaseInfo();
+                $(".main-box .loading-lump").hide();
             }
-
-            $(".main-box ." + classname).show().siblings().hide();
 
             setTextPosition();
 
@@ -189,7 +202,11 @@
                        
                         doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-                            var innerText = templateFun(data.items);
+                            var dataReplys = {};
+                            dataReplys.items = data.items;
+                            dataReplys.userID = TaskDetail.userID;
+                            var innerText = templateFun(dataReplys);
+
                             if ($(".talk-main").find('div').length == 0) {
                                 $(".noreply-msg").hide();
                             }
@@ -238,13 +255,13 @@
 
         });
 
-      
-
         //窗体加载绑定讨论下拉
         $(window).bind("scroll", function () {
 
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-
+            if (TaskDetail.loadingStatus) {
+                $(".main-box .loading-lump").show().css("margin-bottom", "10px");
+            }
             if (bottom <= 0) {
                 //$("#tableLoad").attr("class", "");
                 setTimeout(function () {
@@ -392,9 +409,8 @@
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
         
-        $(".main-box .loading-lump").show();
         if ($PageCount >= Paras.pageIndex) {
-
+           
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $totalCount = data.totalcount;
             if (IsPageCount) {
@@ -408,10 +424,11 @@
                 if ($PageCount >= Paras.pageIndex) {
 
                     doT.exec("/template/task/detailReply.html", function (templateFun) {
-
-                        var items = data.items;
-
-                        var innerText = templateFun(items);
+                        var dataReplys = {};
+                        dataReplys.items = data.items;
+                        dataReplys.userID = TaskDetail.userID;
+                        var innerText = templateFun(dataReplys);
+                        //var innerText = templateFun(items);
                         innerText = $(innerText);
 
                         $(".talk-main").append(innerText);
@@ -448,11 +465,12 @@
                     else {
                         $(".main-box .loading-lump").hide();
                     }
-                }
+            }
                 IsPageCount = false;
             })
         }
         else {
+            TaskDetail.loadingStatus = false;
             $(".main-box .loading-lump").hide();
         }
     }

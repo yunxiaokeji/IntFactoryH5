@@ -217,7 +217,6 @@
     <Content Include="modules\images\imgrefresh.gif" />
     <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\times.jpg" />
-    <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
     <Content Include="modules\images\inuser_07.gif" />
@@ -261,12 +260,14 @@
     <Content Include="modules\plug\touchSlider\js\jquery-1.js" />
     <Content Include="modules\plug\touchSlider\js\jquery.js" />
     <Content Include="modules\plug\touchSlider\js\jquery_002.js" />
+    <Content Include="modules\scripts\font.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\login.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
     <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
+    <Content Include="modules\template\task\materList.html" />
     <Content Include="modules\template\task\taskFlowStageTemplate.html" />
     <Content Include="modules\template\task\taskFlowTemplate.html" />
     <Content Include="modules\template\task\taskListTemplate.html" />

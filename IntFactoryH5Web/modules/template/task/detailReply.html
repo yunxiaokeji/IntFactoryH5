@@ -1,27 +1,30 @@
 ﻿{%
-    for(var i=0;i<$data.length;i++)
+    $items=$data.items;
+    $userID=$data.userID;
+    for(var i=0;i<$items.length;i++)
     {
-        if($data[i].createUser.userID=='bc6802e9-285c-471c-8172-3867c87803e2')
+        var item=$items[i];
+        if(item.createUser.userID==$userID)
         {
 %}
             <div class="send-self" >
                 <div class="send-nameanddate">
-                    <span>{%=$data[i].createTime%}</span>
-                    <span>{%=$data[i].createUser.name%}</span>
+                    <span>{%=item.createTime%}</span>
+                    <span>{%=item.createUser.name%}</span>
                 </div>
 
                 <div class="talk-self">
                     <div class="self-pic">
-                        <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
+                        <img src='{%=item.createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+item.createUser.avatar%}' />
                     </div>
                     <div class="talk-lump"></div>
                     <p class="text-talk">
                         {%=
-                        $data[i].fromReplyUser!=null?($data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content):$data[i].content
+                        item.fromReplyUser!=null?(item.fromReplyUser.name==null?item.content:"@"+item.fromReplyUser.name+" "+item.content):item.content
                         %}
                     </p>
                     <div class="return-self">
-                        <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
+                        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}">&#xe611;回复</i>
                     </div>
                 </div>
                
@@ -34,18 +37,18 @@
 
             <div class="send-other">
                 <div class="send-nameanddate">
-                    <span>{%=$data[i].createUser.name%}</span>
-                    <span>{%=$data[i].createTime%}</span>
+                    <span>{%=item.createUser.name%}</span>
+                    <span>{%=item.createTime%}</span>
                 </div>
 
                 <div class="talk-other">
                     <div class="other-pic">
-                        <img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' />
+                        <img src='{%=item.createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+item.createUser.avatar%}' />
                     </div>
                     <div class="talk-lump"></div>
-                    <p class="text-talk">{%=$data[i].fromReplyUser.name==null?$data[i].content:"@"+$data[i].fromReplyUser.name+" "+$data[i].content%}</p>
+                    <p class="text-talk">{%=item.fromReplyUser.name==null?item.content:"@"+item.fromReplyUser.name+" "+item.content%}</p>
                     <div class="return-other">
-                        <i class="iconfont" data-replyid="{%=$data[i].replyID%}" data-agentid="{%=$data[i].createUser.agentID%}"  data-userid="{%=$data[i].createUser.userID%}" data-name="{%=$data[i].createUser.name%}">&#xe611;回复</i>
+                        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}">&#xe611;回复</i>
                     </div>
                 </div>
             </div>
