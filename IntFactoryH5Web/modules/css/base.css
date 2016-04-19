@@ -126,6 +126,6 @@
 .width500 { width:500px !important; }
 .minwidth300 { min-width:300px !important; }
 
-/*taskList*/
-.dropdownlist .potion{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;top:51px;display:none; }
+/*任务列表*/
+.dropdownlist .potion{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;display:none; }
 .list li .tag-make { width:10px;height:20px;margin-left:-12px;}
