@@ -24,45 +24,44 @@
 .select{width:100%;height:50px;border-bottom:1px solid #ccc;}
 .select a{color:#999;font-size:16px;}
 .select li{width:25%;float:left;border-right:1px solid #ccc;height:50px;margin-left:-1px;text-align:center;line-height:50px;}
-.select .iconfont{color:#666;}
-/*选项菜单*/
-.select-box { position:relative;}
+.select .iconfont{color:#999;}
+/*选项下拉*/
+.dropdownlist { position:relative;}
 /*类型下拉*/
-.select-box .tab-type{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:333;left:-1px;display:none;}
-.select-box .dropdownlist ul{box-shadow:2px 4px 10px #ccc;}
-.select-box .dropdownlist li{font-size:12px;color:#999;padding-top:7px;padding-bottom:7px;}
+.dropdownlist .tab-type{border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
+.dropdownlist ul{box-shadow:2px 4px 10px #ccc;}
+.dropdownlist li{font-size:12px;color:#999;padding-top:7px;padding-bottom:7px;}
 /*流程下拉*/
-.select-box .flow-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:25%;background-color:#fff;position:absolute;z-index:334;margin-left:-1px;display:none;}
+.dropdownlist .flow-type{border:1px solid #ccc;border-top:0;left:25%;margin-left:-1px;}
 /*筛选下拉*/
-.select-box .screen-type{width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:50%;background-color:#fff;position:absolute;z-index:335;margin-left:-1px;display:none;}
+.dropdownlist .screen-type{border:1px solid #ccc;border-top:0;left:50%;margin-left:-1px;}
 /*排序下拉*/
-.select-box .tab-screen { width:25%;border:1px solid #ccc;border-top:0; text-align:center;left:75%;background-color:#fff;position:absolute;z-index:334;margin-left:-2px;display:none;}
+.dropdownlist .tab-screen {border:1px solid #ccc;border-top:0;left:75%;margin-left:-2px;}
 /*列表*/
 .list .listabove{width:100%;border-bottom:1px solid #dfdfdf;}
 .list .listabove li{float:left;margin-top:30px;}
 .list li:first-child img{width:200px;height:200px;margin-bottom:30px;margin-left:20px;margin-right:20px;}
 .list li:last-child { float:right;}
 /*标记颜色*/
-.list li .write-tag{width:10px;height:20px;background-color:#fff;margin-left:-12px;border:1px solid #ccc;}
-.list li .red-tag{width:10px;height:20px;border:1px solid #FF7C7C;background-color:#FF7C7C;margin-left:-12px;}
-.list li .green-tag{width:10px;height:20px;border:1px solid #3BB3FF;background-color:#3BB3FF;margin-left:-12px;}
-.list li .purple-tag{width:10px;height:20px;border:1px solid #9F74FF;background-color:#9F74FF;margin-left:-12px;}
-.list li .orange-tag{width:10px;height:20px;border:1px solid #FFC85D;background-color:#FFC85D;margin-left:-12px;}
-.list li .yellow-tag{width:10px;height:20px;border:1px solid #FFF65F;background-color:#FFF65F;margin-left:-12px;}
+.list li .write-tag{border:1px solid #ccc;background-color:#fff;}
+.list li .red-tag{border:1px solid #FF7C7C;background-color:#FF7C7C;}
+.list li .green-tag{border:1px solid #3BB3FF;background-color:#3BB3FF;}
+.list li .purple-tag{border:1px solid #9F74FF;background-color:#9F74FF;}
+.list li .orange-tag{border:1px solid #FFC85D;background-color:#FFC85D;}
+.list li .yellow-tag{border:1px solid #FFF65F;background-color:#FFF65F;}
 /*列表详情*/
 .list .last-stage .style-lable {line-height:30px; }
-.list .last-stage .style-i {float:left;white-space:nowrap; }
-.list .last-stage .shape{ margin-top:155px;margin-left:-65px;width:60px;color:#999;margin-right:20px;}
+.list .last-stage .style-i {float:left;}
+.list .last-stage .shape{ margin-top:155px;margin-left:-60px;width:60px;color:#999;margin-right:20px;}
 .list .listabove .center-list-task {font-size:20px;color:#999;float:left;}
-/*状态图标*/
+/*状态图标(不同的图标颜色)*/
 .list .details .status-proceed { color:#09aa4a;}
 .list .details .status-finish { color:#999;}
+/*标题颜色*/
 .list .details .details-name {color:#666; }
 /*信息文字*/
 .list .center-list-task .details {width:12em;margin-bottom:50px; }
-.list .center-list-task .details:hover {overflow:visible;}
 .list .center-list-task .stage {height:30px;margin-top:21px;overflow:hidden;white-space:nowrap;width:250px;font-size:18px;}
-.list .center-list-task .stage-time {padding-right:3%; }
 /*无数据*/
 .list .nodata {color:#999; margin-top:20%;margin-left:45%;font-family:'Microsoft YaHei'; }
 /*加载状态图片*/

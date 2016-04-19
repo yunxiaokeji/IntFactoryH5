@@ -1,5 +1,5 @@
 ﻿define(function (require,exports,module) {
-    var Global = require("global");
+    //var Global = require("global");
     var List = {};
     List.params = {
         keyWords: "",
@@ -42,7 +42,7 @@
             $(".search").show();
         });
         $(".cencal").click(function () {
-            MyListTask.params.pageIndex = 1;
+            List.params.pageIndex = 1;
             var name = $(this).text();
             if (name=="确定") {
                 var txt = $(".txt-search").val();
@@ -124,35 +124,43 @@
             List.params.pageIndex = 1;
             $(".mask-shade").show();
             $(".dropdownlist").show();
-            //判读流程下拉框的类别
-            var name = $(".type-a").text();                       
-            if (name == "打样") {
-                $(".DH").hide();               
-            } else if(name=="大货") {
-                $(".DY").hide();
-            }
-            //当点击此事件时,关闭其他下拉框
-            $(".tab-type").css("display", "none");
-            $(".type-LX").data("type", "0");
-            $(".screen-type").css("display", "none");
-            $(".screen-JD").data("screen", "0");
-            $(".tab-screen").css("display", "none");
-            $(".select-copy").data("select", "0");
-            var num = $(".flow-LC").data("flow");
-            if (num == "0") {
-                $(".flow-type").slideDown("slow");
-                $(".flow-LC").data("flow", "1");
-                $(".all-flow").click(function () {
-                    $(".flow-a").text($(this).text());
-                    $(".flow-type").css("display", "none");
+            //判断流程下面有没有li
+            var liflow = $(".flow-type").find("li").length;
+            if (liflow=="") {
+                $(".flow-type").hide();
+                $(".flow-LC").data("flow", "0");
+            } else {
+                //判读流程下拉框的类别
+                var name = $(".type-a").text();                       
+                if (name == "打样") {
+                    $(".DH").hide();               
+                } else if(name=="大货") {
+                    $(".DY").hide();
+                }
+                //当点击此事件时,关闭其他下拉框
+                $(".tab-type").css("display", "none");
+                $(".type-LX").data("type", "0");
+                $(".screen-type").css("display", "none");
+                $(".screen-JD").data("screen", "0");
+                $(".tab-screen").css("display", "none");
+                $(".select-copy").data("select", "0");
+                var num = $(".flow-LC").data("flow");
+                if (num == "0") {
+                    $(".flow-type").slideDown("slow");
+                    $(".flow-LC").data("flow", "1");
+                    $(".all-flow").click(function () {
+                        $(".flow-a").text($(this).text());
+                        $(".flow-type").css("display", "none");
+                        $(".flow-LC").data("flow", "0");
+                        $(".mask-shade").hide();
+                    });
+                } else {
+                    $(".flow-type").slideUp("slow");
                     $(".flow-LC").data("flow", "0");
                     $(".mask-shade").hide();
-                });
-            } else {
-                $(".flow-type").slideUp("slow");
-                $(".flow-LC").data("flow", "0");
-                $(".mask-shade").hide();
+                }
             }
+
         });
 
         //流程阶段下拉        
@@ -279,7 +287,7 @@
             if (bottom <= 1) {
                 if (!List.isLoading) {
                     List.params.pageIndex++;
-                    if (List.params.pageIndex <= MyListTask.pageCount) {
+                    if (List.params.pageIndex <= List.pageCount) {
                         List.getList(true);
                     }else {
                         alert("已经到页低啦");                                                
@@ -330,7 +338,7 @@
     //获取订单流程的任务列表
     List.GetTaskFlowStage = function () {
         $(".screen-type").empty();
-        $.post("/Task/GetTaskFlowStage", { processID: MyListTask.params.orderProcessID }, function (data) {            
+        $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {            
             doT.exec("../modules/template/task/taskFlowStageTemplate.html", function (code) {
                 var $res = code(data.items);
                 $(".screen-type").append($res);

@@ -34,7 +34,7 @@
     </div>
     
     @* 头部 *@
-        <ul class="header">
+    <ul class="header">
             <li>
                 <div class="head head-menu"><i class="iconfont"></i></div>
             </li>
@@ -45,6 +45,7 @@
                 <div class="head cancel-header"><i class="iconfont iconfont-search">&#xe605;</i></div>  
             </li>
         </ul>
+
     @* 选择状态 *@
     <ul class="task-status">
             <li data-status="-1">
@@ -64,50 +65,52 @@
                 <a>已完成</a>
             </li>
         </ul>
-    <div class="select-box"> 
-        @* 选项 *@  
-        <ul class="select">
-             <li class="copy type-LX" data-type="0">
-                 <a class="type-a">类型</a>
-                 <i class="iconfont-select iconfont">&#xe61c;</i>
-             </li>
-             <li class="copy flow-LC" data-flow="0">
-                 <a class="flow-a">流程</a>
-                 <i class="iconfont-select iconfont">&#xe61c;</i>
-             </li>
-             <li class="copy screen-JD" data-screen="0">
-                 <a class="screen-a">流程阶段</a>
-                 <i class="iconfont-select iconfont">&#xe61c;</i>
-             </li>
-             <li class="copy select-copy" data-select="0">
-                 <a class="sort-a">排序</a>        
-                 <i class="iconfont-select iconfont">&#xe61c;</i>    
-             </li> 
-         </ul>
-        @* 选项详细下拉 *@           
-        <div class="dropdownlist">
-            @* 类型下拉 *@   
-                <ul class="potion tab-type">                    
-                    <li data-id="-1">全部</li>                 
-                    <li data-id="1">打样</li>
-                    <li data-id="2">大货</li>                        
-                </ul>   
-              @*流程下拉*@ 
-                <ul class="potion flow-type">                     
-                    <li class="all-flow" data-id="-1">全部流程</li>                            
-                </ul>  
-            @* 流程阶段下拉 *@
-                <ul class="potion screen-type">                
-                </ul>
-            @* 排序 *@
-                <ul class="potion tab-screen">                                        
-                    <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
-                    <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
-                    <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
-                    <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
-                </ul>  
-        </div>
-     </div> 
+
+    @* 选项详细下拉 *@    
+    <div class="dropdownlist">
+        @* 类型下拉 *@   
+        <ul class="potion tab-type">                    
+            <li data-id="-1">全部</li>                 
+            <li data-id="1">打样</li>
+            <li data-id="2">大货</li>                        
+        </ul>   
+        @*流程下拉*@ 
+        <ul class="potion flow-type">                     
+            <li class="all-flow" data-id="-1">全部流程</li>                            
+        </ul>  
+        @* 流程阶段下拉 *@
+        <ul class="potion screen-type"> 
+                           
+        </ul>
+        @* 排序 *@
+        <ul class="potion tab-screen">                                        
+            <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
+            <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
+            <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
+            <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
+        </ul>  
+    </div> 
+        
+    @* 选项 *@  
+    <ul class="select">
+            <li class="copy type-LX" data-type="0">
+                <a class="type-a">类型</a>
+                <i class="iconfont-select iconfont">&#xe61c;</i>
+            </li>
+            <li class="copy flow-LC" data-flow="0">
+                <a class="flow-a">流程</a>
+                <i class="iconfont-select iconfont">&#xe61c;</i>
+            </li>
+            <li class="copy screen-JD" data-screen="0">
+                <a class="screen-a">流程阶段</a>
+                <i class="iconfont-select iconfont">&#xe61c;</i>
+            </li>
+            <li class="copy select-copy" data-select="0">
+                <a class="sort-a">排序</a>        
+                <i class="iconfont-select iconfont">&#xe61c;</i>    
+            </li> 
+        </ul>
+     
     @* 任务列表 *@
     <div class="list">
         
@@ -117,7 +120,8 @@
         <div class="iconfont-back">&#xe643;</div>
         <span>返回顶部</span>
     </div>
-    
+
+
 </body>
 </html>
 
