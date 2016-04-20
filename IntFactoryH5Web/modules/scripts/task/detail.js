@@ -29,31 +29,28 @@
     var LogIsPageCount = true;
 
     var ReplyIsPageCount = true;
-
+    
     $replyPageCount = 1;
 
     $logPageCount = 1;
-
-    TaskDetail.init = function (orderID, stageID, platemaking, mark, plateremark, taskID, imgStatus, userID, materialList, operateStatus) {
-
+    
+    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark,mark,imgStatus, userID, materialList, operateStatus) {
+        
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         Paras.taskID = taskID;
-
-        TaskDetail.platemaking = platemaking;
-        TaskDetail.plateremark = plateremark;
+        TaskDetail.platemaking = platemaking == null ? "" : platemaking;
+        TaskDetail.plateremark = plateremark == null ? "暂无工艺说明" : plateremark;
         TaskDetail.imgStatus = imgStatus;
         TaskDetail.userID = userID;
         TaskDetail.operateStatus = operateStatus;
+        TaskDetail.materialList = JSON.parse(materialList.replace(/&quot;/g, '"'));
 
-        
         AddReplyParas.orderID = orderID;
         AddReplyParas.stageID = stageID;
         AddReplyParas.mark = mark;
 
         TaskDetail.bindEvent();
-
-        TaskDetail.materialList = JSON.parse(materialList.replace(/&quot;/g, '"'));
 
         //浏览器加载获取讨论列表
         TaskDetail.getTaskReplys();
@@ -72,22 +69,20 @@
     //绑定事件
     TaskDetail.bindEvent = function () {
 
-        //绑定滑屏控件事件
-        $(document).ready(function () {
-            if (TaskDetail.imgStatus == 1) {
-                $dragBln = false;
-                $(".main_image").touchSlider({
-                    flexible: true,
-                    speed: 200,
-                    //btn_prev: $("#btn_prev"),
-                    //btn_next: $("#btn_next"),
-                    paging: $(".flicking_con a"),
-                    counter: function (e) {
-                        $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
-                    }
-                });
-            }
-        });
+        //是否绑定滑屏控件事件
+        if (TaskDetail.imgStatus == 1) {
+            $dragBln = false;
+            $(".main_image").touchSlider({
+                flexible: true,
+                speed: 200,
+                //btn_prev: $("#btn_prev"),
+                //btn_next: $("#btn_next"),
+                paging: $(".flicking_con a"),
+                counter: function (e) {
+                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                }
+            });
+        }
 
         //菜单切换模块事件
         $("nav ul li").click(function () {
@@ -100,9 +95,7 @@
 
             //点击讨论模块
             if (classname == "talk-status") {
-                //初始化讨论页数
                 $(".main-box").css("margin-bottom", "60px");
-                //浏览器滚动条在最下方时加载10条讨论信息
                 $(window).unbind("scroll");
                 TaskDetail.bindScroll('bindReply');
             }
@@ -300,7 +293,6 @@
 
     //标记完成任务
     TaskDetail.finishTask = function () {
-
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
@@ -352,7 +344,7 @@
 
 
                             innerText.find(".text-talk").each(function () {
-                                $(this).html(TaskDetail.replaceQqface($(this).html()));
+                                $(this).html(Global.replaceQqface($(this).html()));
                             });
 
 
@@ -455,8 +447,6 @@
 
                 });
             }
-       
-
     }
 
     //获取制版信息
@@ -488,15 +478,7 @@
         });
 
     }
-
-    TaskDetail.replaceQqface = function (str) {
-        str = str.replace(/\</g, '&lt;');
-        str = str.replace(/\>/g, '&gt;');
-        str = str.replace(/\n/g, '<br/>');
-        str = str.replace(/\[em_([0-9]*)\]/g, '<img style="width:24px;height:24px;" align="absbottom" src="/modules/images/qqface/$1.gif" border="0" />');
-        return str;
-    }
-
+        
     module.exports = TaskDetail;
 
 })

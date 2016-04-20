@@ -40,10 +40,10 @@
                 taskDetail.init(
                     '@task.orderID',
                     '@task.stageID',
-                    '@task.order.platemaking',
-                    '@task.mark',
-                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":task.order.plateRemark)',
                     '@task.taskID',
+                    '@task.order.platemaking',
+                    '@task.order.plateRemark',
+                    '@task.order.remark',
                     '@(imagesUrl.Length>1?"1":"0")',
                     '@userbase.userID',
                     '@materialList',

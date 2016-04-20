@@ -128,6 +128,7 @@
     <Content Include="modules\iconfont\demo.html" />
     <Content Include="modules\iconfont\iconfont.css" />
     <Content Include="modules\iconfont\iconfont.svg" />
+    <Content Include="modules\images\ico-loading.jpg" />
     <Content Include="modules\images\img-noimg.png" />
     <Content Include="modules\images\qqface\1.gif" />
     <Content Include="modules\images\qqface\10.gif" />

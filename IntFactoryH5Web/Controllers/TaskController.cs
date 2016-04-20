@@ -156,7 +156,7 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //更新任务到期时间
-        public int UpdateTaskEndTime( string endTime,string taskID)
+        public int UpdateTaskEndTime(string endTime,string taskID)
         {
             var result = TaskBusiness.BaseBusiness.UpdateTaskEndTime(taskID, endTime, CurrentUser.userID, CurrentUser.agentID);
 
