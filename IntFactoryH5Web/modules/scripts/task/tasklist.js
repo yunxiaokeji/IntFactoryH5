@@ -365,8 +365,7 @@
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
                 List.keyWordsIsTrue = false;
             } else {
-                //分页数据
-                console.log(data.items[0].orderImg);
+                //分页数据                
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
                 doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
