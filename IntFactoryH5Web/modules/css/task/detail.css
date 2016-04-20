@@ -5,7 +5,7 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
 .task-accept {padding:5px 0;cursor:pointer; position:absolute;right:15px;top:10px;line-height:30px;text-align:center;color:#e0483e; border-radius:5px;}
-.task-accept span { color:#999;}
+.task-accept span { color:#999;font-size:18px;}
 .task-accept input[type=text] { background:transparent;text-align:center;color:#e0483e;cursor:pointer;border:none;outline:none;font-size:18px;height:30px;line-height:30px;}
 
 
