@@ -34,13 +34,13 @@
 
     $logPageCount = 1;
     
-    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark,mark,imgStatus, userID, materialList, operateStatus) {
-        
+    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList, operateStatus) {
+
         Paras.orderID = orderID;
         Paras.stageID = stageID;
         Paras.taskID = taskID;
-        TaskDetail.platemaking = platemaking == null ? "" : platemaking;
-        TaskDetail.plateremark = plateremark == null ? "暂无工艺说明" : plateremark;
+        TaskDetail.platemaking = platemaking;
+        TaskDetail.plateremark = plateremark;
         TaskDetail.imgStatus = imgStatus;
         TaskDetail.userID = userID;
         TaskDetail.operateStatus = operateStatus;

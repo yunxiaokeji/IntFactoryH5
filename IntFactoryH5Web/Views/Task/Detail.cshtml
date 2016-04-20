@@ -42,7 +42,7 @@
                     '@task.stageID',
                     '@task.taskID',
                     '@task.order.platemaking',
-                    '@task.order.plateRemark',
+                    '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":task.order.plateRemark)',
                     '@task.order.remark',
                     '@(imagesUrl.Length>1?"1":"0")',
                     '@userbase.userID',
