@@ -6,48 +6,48 @@
 %}
         <ul class="listabove row">
             <li>
-                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"../modules/images/img-noimg.png":+item.orderImg%}' /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"/modules/images/img-noimg.png":+item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
-                 <!--任务详情-->
-                 <div class="details">        
+                <!--任务详情-->
+                <div class="details">        
                      <!-- 状态图标 -->           
                     {%   if (item.finishStatus==0) {      %}
-                        <i class="iconfont-details iconfont">&#xe61e;</i>
+                        <i class="iconfont-details">&#xe61e;</i>
                     {%   }  else if (item.finishStatus==1) {      %}
-                        <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
+                        <i class="iconfont-details status-proceed" >&#xe621;</i>
                     {%   }  else {      %}
-                        <i class="iconfont-details iconfont status-finish" >&#xe61f;</i>
+                        <i class="iconfont-details color999" >&#xe61f;</i>
                     {%   }  %}                                      
-                   <a class="details-name" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
+                   <a class="color666" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                 </div>                
                 <div class="stage" >
                     <label>接受:</label>     
-                    <span class="time stage-time">{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
+                    <span>{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
                 </div>
                 <div class="stage">
                     <label>到期:</label>     
-                    <span class="time stage-time">{%=item.endTime==""?"未设置":item.endTime%}</span>                                
+                    <span>{%=item.endTime==""?"未设置":item.endTime%}</span>                                
                 </div>  
                 <div class="stage">
                     <label>完成:</label>   
-                    <span class="time stage-time">{%=item.completeTime==""?"未完成":item.completeTime%}</span>                              
+                    <span>{%=item.completeTime==""?"未完成":item.completeTime%}</span>                              
                 </div>                
             </li>
             <li class="last-stage">    
                 <!-- 标记颜色 -->
                 {% if(item.colorMark==0){ %}            
-                <div class="write-tag"></div>  
+                <div class="write-tag tag-make"></div>  
                 {% }else if(item.colorMark==1){  %}    
-                <div class="red-tag"></div>   
+                <div class="red-tag tag-make"></div>   
                 {% }else if(item.colorMark==2){  %}      
-                <div class="green-tag"></div> 
+                <div class="green-tag tag-make"></div> 
                 {% }else if(item.colorMark==3){  %}      
-                <div class="purple-tag"></div> 
+                <div class="purple-tag tag-make"></div> 
                 {% }else if(item.colorMark==4){  %}      
-                <div class="orange-tag"></div> 
+                <div class="orange-tag tag-make"></div> 
                 {% }else{ %}
-                <div class="yellow-tag"></div> 
+                <div class="yellow-tag tag-make"></div> 
                 {% } %}
                 <div class="shape">                    
                     <div class="style-i"><i class="iconfont-stage iconfont">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i></div>

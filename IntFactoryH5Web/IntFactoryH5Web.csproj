@@ -128,17 +128,7 @@
     <Content Include="modules\iconfont\demo.html" />
     <Content Include="modules\iconfont\iconfont.css" />
     <Content Include="modules\iconfont\iconfont.svg" />
-    <Content Include="modules\images\10.jpg" />
-    <Content Include="modules\images\2903.jpg" />
-    <Content Include="modules\images\2e47.jpg" />
-    <Content Include="modules\images\2f1f71ce7485465b393222382411ab79[2].JPG" />
-    <Content Include="modules\images\3f14cfebe8d73561b2dcea1123cae748[1].JPG" />
-    <Content Include="modules\images\4-1.jpg" />
-    <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1]-1.jpg" />
-    <Content Include="modules\images\706c8a4fdbdd293e22594689de098cf1[1].JPG" />
-    <Content Include="modules\images\99abd47e7f15568ab7db29f18b863a68[1]-2.jpg" />
     <Content Include="modules\images\img-noimg.png" />
-    <Content Include="modules\images\imgbg.gif" />
     <Content Include="modules\images\qqface\1.gif" />
     <Content Include="modules\images\qqface\10.gif" />
     <Content Include="modules\images\qqface\11.gif" />
@@ -217,7 +207,6 @@
     <Content Include="modules\images\bg-loginBackground.png" />
     <Content Include="modules\images\defaultavatar.png" />
     <Content Include="modules\images\img.gif" />
-    <Content Include="modules\images\imgrefresh.gif" />
     <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\task\detail.css" />
@@ -265,7 +254,6 @@
     <Content Include="modules\scripts\font.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\login.js" />
-    <Content Include="modules\scripts\layout.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\tasklist.js" />
     <Content Include="modules\template\task\alertPage.html" />
