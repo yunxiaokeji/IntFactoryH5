@@ -42,7 +42,23 @@
             $(".cencal").text("确定");
             $(".txt-search").val("");
             $(".shade").show();
-            $(".search").show();            
+            $(".search").show();
+            $(".span-search").css("width", (document.body.clientWidth - 150) + "px");
+            $(".txt-search").focus();
+        });
+
+        //个人信息     
+        
+        $(".login-menu").click(function () {
+            $(".mask-shade").show();;
+            var loginnum = $(".login").data("login");
+            if (loginnum=="0") {
+                $(".login").show();
+                $(".login").data("login","1");
+            } else {
+                $(".login").hide();
+                $(".login").data("login", "0");
+            }           
         });
 
         //搜索判断
@@ -86,6 +102,8 @@
             $(".flow-LC").data("flow", "0");
             $(".screen-JD").data("screen", "0");
             $(".select-copy").data("select", "0");
+            $(".login").hide();
+            $(".login").data("login", "0");
             $(".mask-shade").hide();
         });
 
@@ -94,6 +112,11 @@
             return false;
         });
 
+        //退出事件
+        $(".login").click(function () {
+            
+            
+        });
         //(下拉框)冒泡事件
         $(".select-box").click(function () {
             return false;
@@ -196,7 +219,7 @@
                 //判读流程下拉框的选项
                 var name = $(".flow-a").text();
                 if (name == "全部") {
-                    $(".nodata").hide();
+                    $(".nodata").remove();
                 } 
                 var num = $(".screen-JD").data("screen");
                 if (num == "0") {
@@ -362,11 +385,17 @@
         //获取任务列表(页面加载)
         $(".list").append('<div class="listbg mTop20"></div>');
         $.post("/Task/GetTask", { filter: JSON.stringify(List.params) }, function (data) {
+            //获取用户名
+            $(".login-name").text(data.userName);
             if (data.items.length==0) {
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
                 List.keyWordsIsTrue = false;
+<<<<<<< HEAD
             } else {
-                //分页数据                
+=======
+            } else {               
+>>>>>>> b3f4eca598e1332335bc3e20f43ed185e1b87b66
+                //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
                 doT.exec("../modules/template/task/taskListTemplate.html", function (code) {

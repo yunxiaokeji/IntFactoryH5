@@ -5,7 +5,7 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
 .task-accept {padding:5px 0;cursor:pointer; position:absolute;right:15px;top:10px;line-height:30px;text-align:center;color:#e0483e; border-radius:5px;}
-.task-accept span { color:#999;}
+.task-accept span { color:#999;font-size:18px;}
 .task-accept input[type=text] { background:transparent;text-align:center;color:#e0483e;cursor:pointer;border:none;outline:none;font-size:18px;height:30px;line-height:30px;}
 
 
@@ -26,11 +26,10 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .dy-info { text-align:left;}
 .setindent {margin:0 3px;}
 
-.right-task-info li div:last-child { margin-top:80px;}
+.right-task-info li div:last-child { margin-top:110px;}
 .right-task-info li .owner-msg {line-height:30px;text-align:right;}
 .right-task-info li .dy-info {margin-top:-7px;line-height:24px;text-align:right;}
-.right-task-info .dy-info a { text-decoration:none;color:#666;display:block;}
-
+.right-task-info .dy-info a { text-decoration:none;color:#666;}
 .task-info .order-need { line-height:40px;color:#666;padding:10px 20px;}
 .task-info .order-need div{display:table-cell;}
 
@@ -51,7 +50,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box .talk-main { width:100%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk { font-size:16px;line-height:30px;padding:10px 0;}
-.main-box img{ width:35px;height:35px;}
+.main-box img{ width:35px;height:35px;border-radius:50%;}
 .loading-lump {text-align:center;margin-bottom:10px;}
 .loading-lump img { width:35px;height:35px;}
 
@@ -66,7 +65,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .send-other .return-other .iconfont { font-size:1em;color:#a8a8a8;}
 
 .send-self { margin-top:20px;margin-right:55px;float:right;clear:both;width:71%;}
-.send-self .send-nameanddate{text-align:right;margin-right:-60px;}
+.send-self .send-nameanddate{text-align:right;margin-right:-45px;}
 .send-self .send-nameanddate span:last-child {margin-left:5px;color:#308aef;}
 .send-self .talk-self {min-height:30px; border-radius:8px;color:#666;background-color:#B5E0FE;line-height:25px;padding:0 8px;position:relative;margin-top:8px;}
 .send-self .talk-self .self-pic { width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;right:-50px;top:-5px;cursor:pointer;}
@@ -86,7 +85,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 
 /*材料采购计划显示区域*/
 .shop-status .plan-info { margin:0 20px 10px 20px;overflow:hidden;}
-.shop-status .plan-info .material {font-size:0.9em;line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
+.shop-status .plan-info .material {line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
 .shop-status .plan-info .select-material {background-color:#4a98e7;color:#fff;}
 .shop-status .material ul { margin:0 10px;height:50px;}
 .shop-status .material .meterial-name {width:50%;float:left;font-size:18px;line-height:50px;}
@@ -97,10 +96,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .no-material { text-align:center;margin-left:20px;color:#666;margin-top:20px;}
 
 .shop-status .material-main { display:none;}
-.material-main .material-info li {padding:0 10px;line-height:50px;font-size:0.9em;}
-.material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;line-height:50px;border-bottom:1px solid #eee;}
-.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;line-height:50px;border-bottom:1px solid #eee;}
-
+.material-main .material-info li {padding:0 10px;line-height:50px;font-size:18px;border-bottom:1px solid #eee;clear:both;height:50px;}
+.material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;}
+.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;}
 
 
 /*制版信息显示区域*/
@@ -120,8 +118,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}
 .log-status li { float:left;line-height:45px;}
-.log-status .log-name { font-size:1em;color:#444040;}
-.log-status li:first-child{ width:45px;height:45px;border-radius:50%;margin-right:10px;overflow:hidden;}
+.log-status .log-name {color:#444040;}
+.log-status li:first-child{ width:35px;height:35px;margin-right:10px;}
 .log-status li:last-child { line-height:25px;margin-left:10px;}
 .log-status li:last-child p:first-child { color:#666;}
 .log-status li:last-child p:last-child { color:#999;}

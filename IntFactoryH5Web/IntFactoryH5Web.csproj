@@ -121,7 +121,7 @@
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home\login.css" />
     <Content Include="modules\css\layout.css" />
-    <Content Include="modules\css\task\tasklist.css" />
+    <Content Include="modules\css\task\list.css" />
     <Content Include="modules\iconfont\demo.css" />
     <Content Include="modules\iconfont\demo.html" />
     <Content Include="modules\iconfont\iconfont.css" />
@@ -254,13 +254,13 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\login.js" />
     <Content Include="modules\scripts\task\detail.js" />
-    <Content Include="modules\scripts\task\tasklist.js" />
+    <Content Include="modules\scripts\task\list.js" />
     <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
     <Content Include="modules\template\task\materList.html" />
-    <Content Include="modules\template\task\taskFlowStageTemplate.html" />
-    <Content Include="modules\template\task\taskFlowTemplate.html" />
-    <Content Include="modules\template\task\taskListTemplate.html" />
+    <Content Include="modules\template\task\FlowStage.html" />
+    <Content Include="modules\template\task\Flow.html" />
+    <Content Include="modules\template\task\List.html" />
     <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />

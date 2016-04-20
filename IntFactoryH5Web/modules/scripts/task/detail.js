@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
 
     var Global = require("global");
-
+        
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -34,7 +34,7 @@
 
     $logPageCount = 1;
     
-    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList, operateStatus,mytask) {
+    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList,operateStatus,mytask) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
@@ -198,7 +198,6 @@
         else {
             $(".task-accept").css({ "border": "none"});
         }
-        
     }
 
     //窗体加载绑定讨论下拉
@@ -224,6 +223,7 @@
                     }
                 }, 1000);
             }
+
         });
 
     }
@@ -292,6 +292,7 @@
 
     //标记完成任务
     TaskDetail.finishTask = function () {
+
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
@@ -342,11 +343,9 @@
 
                             $(".talk-main").append(innerText);
 
-
                             innerText.find(".text-talk").each(function () {
                                 $(this).html(Global.replaceQqface($(this).html()));
                             });
-
 
                             //点击回复把用户名写入文本框
                             $(".talk-content .talk-main .iconfont").bind("click", function () {
