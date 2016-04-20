@@ -111,6 +111,11 @@
             return false;
         });
 
+        //退出事件
+        $(".login").click(function () {
+            
+            
+        });
         //(下拉框)冒泡事件
         $(".select-box").click(function () {
             return false;
