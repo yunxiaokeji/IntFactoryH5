@@ -20,7 +20,7 @@
         pageIndex: 1,
         mark:0,
     };
-
+    
     List.init = function () {
         List.getList();
         List.bindEvent();
