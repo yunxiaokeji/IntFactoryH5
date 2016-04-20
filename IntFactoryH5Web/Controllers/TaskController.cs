@@ -39,12 +39,10 @@ namespace IntFactoryH5Web.Controllers
                     UserBase userBase = new UserBase();
                     var task = resultTask.task;
                     ViewBag.Task = task;
-
+                    ViewBag.DomainUrl = resultTask.domainUrl;
                     JavaScriptSerializer serializer=new JavaScriptSerializer();
 
                     ViewBag.MaterialList =serializer.Serialize(resultTask.materialList);
-
-                    ViewBag.ID = Session["ClientManager"];
                 }
             }
             return View();

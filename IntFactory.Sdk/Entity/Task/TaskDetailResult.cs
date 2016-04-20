@@ -10,6 +10,8 @@ namespace IntFactory.Sdk
     {
         public TaskDetailEntity task;
 
+        public string domainUrl;
+
         /// <summary>
         /// 材料列表
         /// </summary>

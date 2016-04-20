@@ -34,7 +34,7 @@
 
     $logPageCount = 1;
     
-    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList, operateStatus) {
+    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList, operateStatus,mytask) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
@@ -58,13 +58,12 @@
         //浏览器加载获取材料信息
         TaskDetail.getOrderList(TaskDetail.materialList);
         
+        //浏览器加载获取制版信息
         TaskDetail.printBaseInfo();
 
         //调用绑定选择时间控件(绑定设置到期时间事件)
-        if (TaskDetail.operateStatus) {
-            TaskDetail.bindTimerPicker();
-        }
-
+        TaskDetail.bindTimerPicker();
+       
 
     }
    
@@ -143,7 +142,6 @@
                 AddReplyParas.fromReplyAgentID = "";
 
             }
-          
             var msgReply = JSON.stringify(AddReplyParas);
             $(this).val("提交中...").attr("disabled", "disabled");
             $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
@@ -187,18 +185,18 @@
         })
      
         //绑定完成任务
-        if ($(".btn-finishTask").length != 0)
-        {
-            $(".btn-finishTask").click(function () {
-
-                if ($(this).val() == "标记完成") {
-                    if (TaskDetail.operateStatus)
-                    {
+        if ($(".btn-finishTask").length > 0) {
+            $(".task-accept").css({ "border": "1px solid #e0483e" });
+            if ($('.btn-finishTask').val() == "标记完成") {
+                if (TaskDetail.operateStatus) {
+                    $(".btn-finishTask").click(function () {
                         TaskDetail.showConfirmForm(1);
-                    }
+                    });
                 }
-
-            });
+            }
+        }
+        else {
+            $(".task-accept").css({ "border": "none"});
         }
         
     }
@@ -234,7 +232,8 @@
     TaskDetail.bindTimerPicker = function () {
 
         if ($(".btn-acceptTaskTime").length == 0) { return; }
-
+        if (!TaskDetail.operateStatus) { return;}
+        $(".task-accept").css({ "border": "1px solid #e0483e" });
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式
@@ -298,6 +297,7 @@
                 $(".task-accept").html("<span>已完成</span>");
                 $(".task-accept").unbind('click');
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+                $(".task-accept").css({ "border": "none" })
             }
             else if (data == 0) {
                 alert("失败");
@@ -413,11 +413,10 @@
     TaskDetail.getOrderList = function (data) {
         
             if (data.length == 0) {
-                $(".shop-status").html("<div class='no-material'>暂无材料！</div>");
+                $(".shop-status").html("<div class='no-material'>暂无材料</div>");
             }
             else {
                 doT.exec("/template/task/materList.html", function (templateFun) {
-
                     var innerText = templateFun(data);
                     innerText = $(innerText);
                     $(".shop-status").html(innerText);
@@ -443,8 +442,6 @@
                         }
 
                     });
-
-
                 });
             }
     }
@@ -459,13 +456,7 @@
     //接受任务、标记任务完成的弹出浮层
     TaskDetail.showConfirmForm = function (showStatus) {
 
-        var alertMsg = "";
-        if (showStatus == 0) {
-            alertMsg = "任务到期时间不可逆,确定设置?";
-        }
-        else {
-            alertMsg = "标记完成的任务不可逆,确定设置?";
-        }
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
         confirm(alertMsg, function () {
             if (showStatus == 0) {
                 TaskDetail.setTaskEndTime();
