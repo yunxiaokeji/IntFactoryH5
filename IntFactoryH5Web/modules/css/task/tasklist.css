@@ -3,9 +3,10 @@
 /*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;color:#666;}
 .header li{float:left;width:33%;font-size:24px;height:50px;text-align:center;margin-top:30px;}
-.header li:last-child{float:right;margin-top:25px;text-align:right;}
-.header li:first-child div{font-size:20px;float:left;margin-left:30px;}
-.header li .login-name{float:left;line-height:25px;margin-left:10px;font-size:18px;width:150px;text-align:left;}
+.header li:last-child{float:right;margin-top:20px;text-align:right;}
+.header li:first-child{margin-top:35px;}
+.header li:first-child div{font-size:21px;float:left;margin-left:30px;}
+.header li .login-name{float:left;line-height:25px;margin-left:10px;font-size:20px;width:150px;text-align:left;}
 /*遮罩*/
 .shade { width:100%;height:100%;position:fixed;z-index:402;background-color:rgba(143,143,143,0.6);display:none;}
 .search {width:100%;height:80px;background-color:#D5D5D5;line-height:80px;position:fixed;top:0;z-index:430;display:none;}
