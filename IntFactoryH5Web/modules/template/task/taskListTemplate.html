@@ -6,7 +6,7 @@
 %}
         <ul class="listabove row">
             <li>
-                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"/modules/images/img-noimg.png":+item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->
