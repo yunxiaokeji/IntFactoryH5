@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
 
     var Global = require("global");
-
+        
     var Paras = {
         orderID: "",
         stageID: "",     
