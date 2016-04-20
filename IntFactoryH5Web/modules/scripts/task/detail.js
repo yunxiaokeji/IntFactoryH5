@@ -26,7 +26,9 @@
     var TaskDetail = {};
 
     //判断日志第一次加载
-    var IsPageCount = true;
+    var LogIsPageCount = true;
+
+    var ReplyIsPageCount = true;
 
     $replyPageCount = 1;
 
@@ -64,7 +66,6 @@
             TaskDetail.bindTimerPicker();
         }
 
-        TaskDetail.bindScroll('bindReply');
 
     }
    
@@ -116,9 +117,9 @@
             //点击日志模块
             else if (classname == "log-status") {
 
-                if (IsPageCount) {
+                if (LogIsPageCount) {
                     TaskDetail.getTaskLogs();
-                    IsPageCount = false;
+                    LogIsPageCount = false;
                 }
                 $(".main-box").css("margin-bottom", "0px");
                 $(window).unbind("scroll");
@@ -327,12 +328,11 @@
 
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
+
             $(".main-box .loading-lump").show();
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $totalCount = data.totalcount;
                 $replyPageCount = data.pagecount;
-                console.log($replyPageCount);
-                console.log(Paras.replayPageIndex);
                 if ($replyPageCount == 0) {
                     $(".noreply-msg").show();
                     $(".main-box .loading-lump").hide();
@@ -380,6 +380,11 @@
                     else {
                         $(".main-box .loading-lump").hide();
                     }
+                }
+                if (ReplyIsPageCount)
+                {
+                    TaskDetail.bindScroll('bindReply');
+                    ReplyIsPageCount = false;
                 }
             })
     }

@@ -4,7 +4,7 @@
 %}
     <div class="log-box">
         <ul class="log-info">
-            <li><img src='{%=$data[i].createUser.avatar==""?"/modules/template/task/detailLog.html":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' /></li>
+            <li><img src='{%=$data[i].createUser.avatar==""?"/modules/images/defaultavatar.png":"http://dev.90cloudsales.com"+$data[i].createUser.avatar%}' /></li>
             <li class="log-name">{%=$data[i].createUser.name%}</li>
             <li>
                 <p>{%=$data[i].remark%}</p>
