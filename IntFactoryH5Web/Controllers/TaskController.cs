@@ -23,6 +23,7 @@ namespace IntFactoryH5Web.Controllers
         //页面加载获取任务详情
         public ActionResult Detail(string id)
         {
+            ViewBag.Title = "任务详情";
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
 
             var resultTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskDetail(id, CurrentUser.userID, CurrentUser.agentID);
@@ -39,6 +40,11 @@ namespace IntFactoryH5Web.Controllers
                     UserBase userBase = new UserBase();
                     var task = resultTask.task;
                     ViewBag.Task = task;
+
+                    JavaScriptSerializer serializer=new JavaScriptSerializer();
+
+                    ViewBag.MaterialList =serializer.Serialize(resultTask.materialList);
+
                     ViewBag.ID = Session["ClientManager"];
                 }
             }
@@ -46,10 +52,10 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //获取讨论列表   
-        public JsonResult GetDiscussInfo(string orderID, string stageID, int pageIndex)
+        public JsonResult GetDiscussInfo(string orderID, string stageID, int replayPageIndex)
         {
 
-            var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskReplys(orderID, stageID, CurrentUser.userID, CurrentUser.agentID, pageIndex);
+            var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskReplys(orderID, stageID, CurrentUser.userID, CurrentUser.agentID, replayPageIndex);
 
             List<IntFactory.Sdk.TaskReplyEntity> listReplys = result.taskReplys;
 
@@ -109,12 +115,13 @@ namespace IntFactoryH5Web.Controllers
             };
         }
       
-        //获取日志信息
-        public JsonResult GetLogInfo(string taskID, int pageIndex)
+        //获取日志列表
+        public JsonResult GetLogInfo(string taskID, int logPageIndex)
         {
-            var result = TaskBusiness.BaseBusiness.GetTaskLogs(taskID, CurrentUser.userID, CurrentUser.agentID, pageIndex);
+            var result = TaskBusiness.BaseBusiness.GetTaskLogs(taskID, CurrentUser.userID, CurrentUser.agentID, logPageIndex);
             JsonDictionary.Add("items", result.taskLogs);
             JsonDictionary.Add("pagecount", result.pageCount);
+            JsonDictionary.Add("totalcount", result.totalCount);
             return new JsonResult
             {
                 Data=JsonDictionary,
@@ -122,18 +129,6 @@ namespace IntFactoryH5Web.Controllers
 
             };
 
-        }
-
-        //获取材料采购计划列表
-        public JsonResult GetOrderInfo(string orderID)
-        {
-            var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetOrderInfo(orderID, CurrentUser.userID, CurrentUser.agentID);
-            JsonDictionary.Add("items", result.materialList);
-            return new JsonResult
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
         }
 
         //添加讨论信息
