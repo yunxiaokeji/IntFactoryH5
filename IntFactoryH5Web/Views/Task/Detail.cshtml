@@ -1,5 +1,7 @@
 ﻿@{
+   
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
+    ViewBag.Title = "任务详情-" + task.title;
     var userbase = (IntFactory.Sdk.UserBase)ViewBag.ID;
     var materialList = ViewBag.MaterialList;
     var userStatus = userbase.userID == task.ownerUser.userID ? true : false;
