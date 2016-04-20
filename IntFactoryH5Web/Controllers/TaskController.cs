@@ -81,6 +81,7 @@ namespace IntFactoryH5Web.Controllers
             JsonDictionary.Add("items", list.tasks);
             JsonDictionary.Add("pageCount",list.pageCount);
             JsonDictionary.Add("totalCount",list.totalCount);
+            JsonDictionary.Add("userName", CurrentUser.name);
             return new JsonResult
             {
                 Data = JsonDictionary,

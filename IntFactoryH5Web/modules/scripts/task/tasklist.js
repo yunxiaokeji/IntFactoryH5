@@ -41,7 +41,23 @@
             $(".cencal").text("确定");
             $(".txt-search").val("");
             $(".shade").show();
-            $(".search").show();            
+            $(".search").show();
+            $(".span-search").css("width", (document.body.clientWidth - 150) + "px");
+            $(".txt-search").focus();
+        });
+
+        //个人信息     
+        
+        $(".login-menu").click(function () {
+            $(".mask-shade").show();;
+            var loginnum = $(".login").data("login");
+            if (loginnum=="0") {
+                $(".login").show();
+                $(".login").data("login","1");
+            } else {
+                $(".login").hide();
+                $(".login").data("login", "0");
+            }           
         });
 
         //搜索判断
@@ -85,6 +101,8 @@
             $(".flow-LC").data("flow", "0");
             $(".screen-JD").data("screen", "0");
             $(".select-copy").data("select", "0");
+            $(".login").hide();
+            $(".login").data("login", "0");
             $(".mask-shade").hide();
         });
 
@@ -365,7 +383,9 @@
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
                 List.keyWordsIsTrue = false;
             } else {
-                //分页数据                
+                //获取用户名
+                $(".login-name").text(data.userName);
+                //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
                 doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
