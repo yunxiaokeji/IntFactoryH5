@@ -185,16 +185,18 @@
         })
      
         //绑定完成任务
-        if ($(".btn-finishTask").length > 0)
-        {
+        if ($(".btn-finishTask").length > 0) {
+            $(".task-accept").css({ "border": "1px solid #e0483e" });
             if ($('.btn-finishTask').val() == "标记完成") {
-                if (TaskDetail.operateStatus)
-                {
+                if (TaskDetail.operateStatus) {
                     $(".btn-finishTask").click(function () {
-                          TaskDetail.showConfirmForm(1);
-                     });
+                        TaskDetail.showConfirmForm(1);
+                    });
                 }
             }
+        }
+        else {
+            $(".task-accept").css({ "border": "none"});
         }
         
     }
@@ -231,7 +233,7 @@
 
         if ($(".btn-acceptTaskTime").length == 0) { return; }
         if (!TaskDetail.operateStatus) { return;}
-
+        $(".task-accept").css({ "border": "1px solid #e0483e" });
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式
@@ -295,6 +297,7 @@
                 $(".task-accept").html("<span>已完成</span>");
                 $(".task-accept").unbind('click');
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+                $(".task-accept").css({ "border": "none" })
             }
             else if (data == 0) {
                 alert("失败");
