@@ -117,7 +117,7 @@
                 $(".tab-type").slideDown("slow");
                 $(".type-LX").data("type", "1");
                 $(".tab-type li").click(function () {
-                    if ($(this).text()=="全部") {
+                    if ($(this).text()!="") {
                         $(".flow-a").text("流程");
                         $(".screen-a").text("流程阶段");
                     }
@@ -277,6 +277,8 @@
                 List.params.keyWords;
             }
             List.params.pageIndex = 1;
+            List.params.orderProcessID = -1;
+            List.params.orderStageID = -1;
             List.params.orderType = $(this).data("id");
             List.getList();
             List.GetTaskFlow();
@@ -291,6 +293,7 @@
                 List.params.keyWords;
             }
             List.params.pageIndex = 1;
+            List.params.orderStageID = -1;
             List.params.orderProcessID = $(this).data("id");
             List.getList();
             List.GetTaskFlowStage();
