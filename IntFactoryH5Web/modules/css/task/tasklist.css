@@ -1,5 +1,4 @@
-﻿
-/*透明遮罩*/
+﻿/*透明遮罩*/
 .mask-shade {width:100%;height:100%;position:fixed;z-index:330;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
 /*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;color:#666;}
@@ -51,7 +50,7 @@
 .list .last-stage .shape{ margin-top:155px;margin-left:-60px;color:#999;margin-right:20px;}
 /*列表详情*/
 .list .listabove .center-list-task {font-size:20px;color:#999;}
-/*状态图标(不同的图标颜色)*/
+/*状态图标(不同的图标颜色不同)*/
 .list .details .status-proceed { color:#09aa4a;}
 /*信息文字*/
 .list .center-list-task .details {margin-bottom:50px; }

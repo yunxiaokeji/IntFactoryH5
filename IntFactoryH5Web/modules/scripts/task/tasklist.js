@@ -41,7 +41,7 @@
             $(".cencal").text("确定");
             $(".txt-search").val("");
             $(".shade").show();
-            $(".search").show();
+            $(".search").show();            
         });
 
         //搜索判断
@@ -366,6 +366,7 @@
                 List.keyWordsIsTrue = false;
             } else {
                 //分页数据
+                console.log(data.items[0].orderImg);
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
                 doT.exec("../modules/template/task/taskListTemplate.html", function (code) {
