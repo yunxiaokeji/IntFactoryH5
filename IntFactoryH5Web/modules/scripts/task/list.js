@@ -1,5 +1,5 @@
 ﻿define(function (require,exports,module) {
-    //var Global = require("global");
+    var Global = require("global");
     var List = {};
     List.params = {
         keyWords: "",
@@ -364,8 +364,6 @@
                     List.params.pageIndex++;
                     if (List.params.pageIndex <= List.pageCount) {
                         List.getList(true);
-                    }else {
-                        alert("已经到页低啦");                                                
                     }
                 } 
             }
