@@ -121,7 +121,7 @@
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home\login.css" />
     <Content Include="modules\css\layout.css" />
-    <Content Include="modules\css\task\tasklist.css" />
+    <Content Include="modules\css\task\list.css" />
     <Content Include="modules\iconfont\demo.css" />
     <Content Include="modules\iconfont\demo.html" />
     <Content Include="modules\iconfont\iconfont.css" />
