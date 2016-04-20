@@ -34,7 +34,7 @@
 
     $logPageCount = 1;
     
-    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList, operateStatus,mytask) {
+    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList,operateStatus,mytask) {
 
         Paras.orderID = orderID;
         Paras.stageID = stageID;
