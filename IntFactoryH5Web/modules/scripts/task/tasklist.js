@@ -384,12 +384,12 @@
         //获取任务列表(页面加载)
         $(".list").append('<div class="listbg mTop20"></div>');
         $.post("/Task/GetTask", { filter: JSON.stringify(List.params) }, function (data) {
+            //获取用户名
+            $(".login-name").text(data.userName);
             if (data.items.length==0) {
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
                 List.keyWordsIsTrue = false;
             } else {
-                //获取用户名
-                $(".login-name").text(data.userName);
                 //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;

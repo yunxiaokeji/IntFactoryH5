@@ -2,9 +2,9 @@
    
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
     ViewBag.Title = "任务详情-" + task.title;
-    var userbase = (IntFactory.Sdk.UserBase)Session["ClientManager"];
+    var UserID = ViewBag.UserID;
     var materialList = ViewBag.MaterialList;
-    var userStatus = userbase.userID == task.ownerUser.userID ? true : false;
+    var userStatus = UserID == task.ownerUser.userID ? true : false;
     string[] imagesUrl = { };
     if(task.order.orderImages.Length!=0)
     {
@@ -46,7 +46,7 @@
                     '@task.order.plateRemark',
                     '@task.mark',
                     '@(imagesUrl.Length>1?"1":"0")',
-                    '@userbase.userID',
+                    '@UserID',
                     '@materialList',
                     '@userStatus',
                     '@task'
