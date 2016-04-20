@@ -35,7 +35,7 @@
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
     <script type="text/javascript">
         $(function () {
-            
+            alert(decodeURI('@(task.order.platemaking)'));
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
                     '@task.orderID',
@@ -47,9 +47,9 @@
                     '@(imagesUrl.Length>1?"1":"0")',
                     '@userbase.userID',
                     '@materialList',
-                    '@userStatus'
+                    '@userStatus',
+                    '@task'
                  );
-
             });
            
         })
@@ -69,24 +69,17 @@
                     {
                         if (!userStatus)
                         {
-                            if (task.finishStatus == 0)
-                            {
-                                <span>未接收</span>
-                            }
-                            else if (task.finishStatus == 1)
-                            {
-                                 <span>进行中</span>
-                            }
+                            <span>@(task.finishStatus==0?"未接收":task.finishStatus==1?"进行中":"")</span>
                         }
                         else
                         {
                             if (task.finishStatus == 0)
                             {
-                                <input type="text" class="btn-acceptTaskTime" name="appDateTime" value="接受任务" />              
+                                <input type="text" class="btn-acceptTaskTime" value="接受任务" readonly="readonly" />              
                             }
                             else if (task.finishStatus == 1)
                             { 
-                                <input type="text" class="btn-finishTask" name="appDateTime" value="标记完成" />   
+                                <input type="text" class="btn-finishTask"  value="标记完成" readonly="readonly" />   
                             }
                         }
                     }
@@ -142,16 +135,7 @@
                     <div class="dy-info">
                         <a href="javascript:void(0);"><span class="iconfont mRight15">&#xe612;</span></a>
                         <span class="font16">
-                            @{
-                                if (task.orderType == 1)
-                                {
-                                    @("打样")
-                                }
-                                else if (task.orderType == 2)
-                                {
-                                    @("大货")
-                                }
-                             }
+                            @(task.orderType==1?"打样":task.orderType==2?"大货":"")
                         </span>
 
                     </div>

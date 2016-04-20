@@ -1,12 +1,11 @@
 ﻿/*头部*/
 body { background-color:#efefef;font-family:'Microsoft YaHei';}
 header { width:100%;background-color:#f8f8f8;line-height:60px;}
-header .task-text {color:#373737;text-align:center;font-size:1.0em;}
+header .task-text {color:#373737;text-align:center;font-size:24px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
-.task-text { font-size:24px;}
-.task-accept {padding:5px;cursor:pointer; position:absolute;right:10px;top:10px;line-height:30px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;}
-.task-accept input[type=text] { background:transparent;text-align:center;line-height:20px;color:#e0483e;cursor:pointer;border:none;outline:none;}
+.task-accept {padding:0px 5px 5px 0;cursor:pointer; position:absolute;right:10px;top:10px;line-height:30px;text-align:center;color:#e0483e;border:1px solid #e0483e; border-radius:5px;width:100px;}
+.task-accept input[type=text] { background:transparent;text-align:center;color:#e0483e;cursor:pointer;border:none;outline:none;font-size:18px;width:100%;}
 
 
 /*焦点图*/
