@@ -50,8 +50,7 @@
                 <div class="yellow-tag tag-make"></div> 
                 {% } %}
                 <div class="shape">                    
-                    <div class="style-i"><i class="iconfont-stage iconfont">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i></div>
-                    <div class="style-lable"><span class="DY">{%=item.orderType==1?"打样":"大货"%}</span></div>     
+                    <i class="iconfont-stage iconfont">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>{%=item.orderType==1?"打样":"大货"%}
                 </div>
             </li>     
         </ul>
