@@ -119,8 +119,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
     <Content Include="modules\css\base.css" />
-    <Content Include="modules\css\common.css" />
-    <Content Include="modules\css\home\layout.css" />
     <Content Include="modules\css\home\login.css" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\tasklist.css" />

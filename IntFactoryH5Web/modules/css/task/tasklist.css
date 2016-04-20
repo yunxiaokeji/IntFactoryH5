@@ -1,4 +1,5 @@
-﻿/*透明遮罩*/
+﻿
+/*透明遮罩*/
 .mask-shade {width:100%;height:100%;position:fixed;z-index:330;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
 /*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;color:#666;}

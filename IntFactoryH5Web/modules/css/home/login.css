@@ -52,7 +52,7 @@ border:none; font-weight:bold; cursor:pointer; display:inline-block; border-radi
 
 .error-msg { padding: 8px; background-color: #ffd0d0; color: red; position: absolute; left: 331px; top: 5px; z-index: 100; width: 120px; }
 
-.txtBoxPassword { position: absolute; top: 0px; left: 0px; width: 298px;padding:0 5px; height: 40px; line-height: 40px; color: #999; display: block; }
+.txtBoxPassword {font-size:12px; position: absolute; top: 0px; left: 0px; width: 298px;padding:0 5px; height: 40px; line-height: 40px; color: #999; display: block; }
 
 .login-title {
 line-height:25px;width:120px;margin:0 auto;

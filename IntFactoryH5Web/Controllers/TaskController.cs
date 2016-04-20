@@ -23,7 +23,6 @@ namespace IntFactoryH5Web.Controllers
         //页面加载获取任务详情
         public ActionResult Detail(string id)
         {
-            ViewBag.Title = "任务详情";
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
 
             var resultTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskDetail(id, CurrentUser.userID, CurrentUser.agentID);
