@@ -10,7 +10,7 @@
     {
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
-    string a = Server.UrlEncode(task.order.platemaking);
+    //string a = Server.UrlEncode(task.order.platemaking);
     
 }
 
@@ -135,6 +135,7 @@
                    
                     <div class="dy-info">
                         <a href="javascript:void(0);">
+                          
                             @{
                             if(task.orderType==1){
                             <i class="iconfont">&#xe612;</i>

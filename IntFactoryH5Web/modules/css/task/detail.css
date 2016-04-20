@@ -85,7 +85,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 
 /*材料采购计划显示区域*/
 .shop-status .plan-info { margin:0 20px 10px 20px;overflow:hidden;}
-.shop-status .plan-info .material {font-size:0.9em;line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
+.shop-status .plan-info .material {line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
 .shop-status .plan-info .select-material {background-color:#4a98e7;color:#fff;}
 .shop-status .material ul { margin:0 10px;height:50px;}
 .shop-status .material .meterial-name {width:50%;float:left;font-size:18px;line-height:50px;}
@@ -96,9 +96,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .no-material { text-align:center;margin-left:20px;color:#666;margin-top:20px;}
 
 .shop-status .material-main { display:none;}
-.material-main .material-info li {padding:0 10px;line-height:50px;font-size:0.9em;}
-.material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;line-height:50px;border-bottom:1px solid #eee;}
-.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;line-height:50px;border-bottom:1px solid #eee;}
+.material-main .material-info li {padding:0 10px;line-height:50px;font-size:18px;border-bottom:1px solid #eee;clear:both;height:50px;}
+.material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;}
+.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;}
 
 
 /*制版信息显示区域*/
