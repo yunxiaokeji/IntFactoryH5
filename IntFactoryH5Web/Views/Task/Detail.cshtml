@@ -1,14 +1,14 @@
 ﻿@{
-    Layout = null;
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
     var userbase = (IntFactory.Sdk.UserBase)ViewBag.ID;
+    var materialList = ViewBag.MaterialList;
     var userStatus = userbase.userID == task.ownerUser.userID ? true : false;
     string[] imagesUrl = { };
     if(task.order.orderImages.Length!=0)
     {
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
-    
+    string a = Server.UrlEncode(task.order.platemaking);
     
 }
 
@@ -17,20 +17,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <title>任务详情</title>
-    <link href="~/modules/css/layout.css" rel="stylesheet" />
-    <link href="~/modules/css/common.css" rel="stylesheet" />
-    <link href="~/modules/css/task/detail.css" rel="stylesheet" />
-    <link href="~/modules/css/base.css" rel="stylesheet" />
+    <title></title>
+
+    <link href="~/modules/css/task/detail.css" rel="stylesheet" />    
     <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
-    <link href="~/modules/iconfont/ux_1460342755_7796638/iconfont.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
     <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
     <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
 </head>
-    <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/modules/scripts/font.js"></script>
-    <script src="~/modules/plug/doT.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="~/modules/plug/touchSlider/js/jquery.js"></script>
@@ -38,15 +33,11 @@
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
-    <script src="~/Scripts/sea.js"></script>
-    <script src="/Scripts/sea-config.js"></script>
-  
     <script type="text/javascript">
         $(function () {
-        
+            
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-
                     '@task.orderID',
                     '@task.stageID',
                     '@task.order.platemaking',
@@ -54,8 +45,9 @@
                     '@(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":task.order.plateRemark)',
                     '@task.taskID',
                     '@(imagesUrl.Length>1?"1":"0")',
-                    '@userbase.userID'
-                    
+                    '@userbase.userID',
+                    '@materialList',
+                    '@userStatus'
                  );
 
             });
@@ -70,7 +62,6 @@
         <div class="task-text">任务详情</div>
         <div class="task-accept">
             @{
-                
                     if(task.finishStatus==2){
                     <span>已完成</span>
                     }
@@ -99,15 +90,9 @@
                             }
                         }
                     }
-
-
-            
-                 
-                
              }  
         </div>
     </header>
-
 
     <!--焦点图-->
     <div class="main_visual">
@@ -119,14 +104,7 @@
                 {
                     for (int i = 0; i < imagesUrl.Length; i++)
                     {
-                        if (i == 0)
-                        {
-                            <a class="on" href="javascript:void(0);"></a>
-                        }
-                        else
-                        {
-                            <a href="javascript:void(0);"></a>
-                        }
+                        <a class="on" href="javascript:void(0);"></a>
                     }
                 }
             }
@@ -145,7 +123,6 @@
                 }
             </ul>
         </div>
-
     </div>
     
     <!--任务信息-->
@@ -157,14 +134,14 @@
                 <li><span>到期时间</span><span class="setindent">:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
                 <li><span>完成时间</span><span class="setindent">:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
             </ul>
-            
+
              <ul class="right-task-info">
                 <li>
                     <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span class="owner-name">@task.ownerUser.name</span></div>
                    
                     <div class="dy-info">
-                        <a href="javascript:void(0);"><span class="ico-dy iconfont">&#xe612;</span></a>
-                        <span class="order-type">
+                        <a href="javascript:void(0);"><span class="iconfont mRight15">&#xe612;</span></a>
+                        <span class="font16">
                             @{
                                 if (task.orderType == 1)
                                 {
@@ -179,25 +156,25 @@
 
                     </div>
                 </li>
-                <li><span>任务</span><span class="setindent">:</span><span class="mark">@task.title</span></li>
             </ul>
         </div>
+
         <div class="order-need">
-            <span>订单需求</span>
-            <span class="setindent">:</span>
-            <span class="order-text">@task.order.remark</span>
+            <div class="width100">订单需求&nbsp;:&nbsp;</div>
+            <div class="pBottom10 mTop10 lineHeight25">@task.order.remark</div>
         </div>
-        <div style="clear:both;"></div>
+        <div class="clear"></div>
     </div>
 
     <!--菜单-->
-    <nav class="row">
+    <nav>
         <ul>
             <li class="talk menuchecked" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
             <li class="buy-plan" data-classname="shop-status"><i class="iconfont">&#xe614;</i>材料采购计划</li>
             <li class="print " data-classname="print-status"><i class="iconfont">&#xe617;</i>制版</li>
             <li class="log" data-classname="log-status"><i class="iconfont">&#xe61a;</i>日志</li>
         </ul>
+        <div class="clear"></div>
     </nav>
 
     <!--显示区域-->
@@ -212,8 +189,8 @@
 
             </div>
         </div>
-       
-        <div class="noreply-msg">暂无数据！</div>         
+        <div style="clear:both;"></div>
+        <div class="noreply-msg">暂无数据</div>         
         <!--回复-->
         <div class="return-msg">
             <div class="box-returnmsg">
@@ -227,35 +204,25 @@
         </div>
 
         <!--材料采购计划模块-->
-        <div class="shop-status hide">
-
-
-        </div>
+        <div class="shop-status hide"></div>
 
         <!--制版模块-->
         <div class="print-status hide">
-            <h1 class="plate-remark-msg">制版信息</h1>
-            <div class="platemakingBody">
-                
 
-            </div>
+            <h1 class="plate-remark-msg">制版信息</h1>
+            <div class="platemakingBody"></div>
 
             <h1 class="plate-remark-msg">工艺说明</h1>
-            <div class="plate-remark">
-
-            </div>
+            <div class="plate-remark"></div>
             
         </div>
 
         <!--日志模块-->
-        <div class="log-status hide">
-            
-                
-        </div>
+        <div class="log-status hide"></div>
          
-        <div class="loading-lump"><img src="~/modules/images/img.gif" /></div>
+        <div class="loading-lump hide"><img src="~/modules/images/img.gif" /></div>
            
-
     </div>
+
 </body>
 </html>

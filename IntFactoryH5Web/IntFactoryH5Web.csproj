@@ -124,10 +124,10 @@
     <Content Include="modules\css\home\login.css" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\tasklist.css" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\demo.css" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\demo.html" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\iconfont.css" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\iconfont.svg" />
+    <Content Include="modules\iconfont\demo.css" />
+    <Content Include="modules\iconfont\demo.html" />
+    <Content Include="modules\iconfont\iconfont.css" />
+    <Content Include="modules\iconfont\iconfont.svg" />
     <Content Include="modules\images\10.jpg" />
     <Content Include="modules\images\2903.jpg" />
     <Content Include="modules\images\2e47.jpg" />
@@ -315,9 +315,9 @@
     <Content Include="Views\Task\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\iconfont\ux_1460958058_173974\iconfont.eot" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\iconfont.ttf" />
-    <Content Include="modules\iconfont\ux_1460958058_173974\iconfont.woff" />
+    <Content Include="modules\iconfont\iconfont.eot" />
+    <Content Include="modules\iconfont\iconfont.ttf" />
+    <Content Include="modules\iconfont\iconfont.woff" />
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
   </ItemGroup>
   <ItemGroup>

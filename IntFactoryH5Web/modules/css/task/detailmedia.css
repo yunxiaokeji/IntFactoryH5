@@ -5,10 +5,6 @@
 }
 @media screen and (max-width:620px) {
 
-    .main-info li { }
-
-    .task-info .order-need {}
-
     nav ul li { width:23.333%;}
 
     nav ul .buy-plan {width:30%; }
@@ -17,17 +13,9 @@
 
     .return-msg .box-submit { width:18%;}
 
-    .send-self .talk-self .text-talk { }
-
-    .send-other .talk-other .text-talk { }
-
 }
 
 @media screen and (max-width:414px) {
-
-    .main-info li { }
-
-    .task-info .order-need {}
 
     nav ul li { width:20%;}
 
@@ -44,8 +32,6 @@
 
     .main-info .right-task-info {margin-right:10px;}
 
-    .main-info li { }
-
     .task-info .order-need { margin-left:10px;margin-right:10px;}
 
     .shop-status .plan-info { margin:0 10px 10px 10px;}
@@ -61,8 +47,6 @@
     .send-other .talk-other,.send-self .talk-self { width:64%;}
 
     .send-other .return-other .iconfont,.talk-self .return-self .iconfont { font-size:1.0em;color:#a8a8a8;}
-
-    .material-main .material-info li {  }
 
 }
 
