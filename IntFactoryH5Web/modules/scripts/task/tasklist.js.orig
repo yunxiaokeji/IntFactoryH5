@@ -389,7 +389,11 @@
             if (data.items.length==0) {
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
                 List.keyWordsIsTrue = false;
+<<<<<<< HEAD
+            } else {
+=======
             } else {               
+>>>>>>> b3f4eca598e1332335bc3e20f43ed185e1b87b66
                 //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
