@@ -45,8 +45,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 
 /*讨论显示区域*/
 .main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:60px;}
-.main-box .talk-content { padding:10px 0;margin:0 20px;}
+.main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
 .main-box .talk-content li {list-style:none;}
+.main-box .more-reply { position:absolute;top:0;left:0;width:100%;text-align:center;}
 .main-box .talk-main { width:100%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk { font-size:16px;line-height:30px;padding:10px 0;}

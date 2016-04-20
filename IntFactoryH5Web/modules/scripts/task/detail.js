@@ -40,7 +40,7 @@
         Paras.stageID = stageID;
         Paras.taskID = taskID;
         TaskDetail.platemaking = platemaking;
-        TaskDetail.plateremark = plateremark;
+        TaskDetail.plateremark = plateremark == "" ? "暂无工艺说明" : plateremark;
         TaskDetail.imgStatus = imgStatus;
         TaskDetail.userID = userID;
         TaskDetail.operateStatus = operateStatus;
@@ -58,6 +58,8 @@
         //浏览器加载获取材料信息
         TaskDetail.getOrderList(TaskDetail.materialList);
         
+        TaskDetail.printBaseInfo();
+
         //调用绑定选择时间控件(绑定设置到期时间事件)
         if (TaskDetail.operateStatus) {
             TaskDetail.bindTimerPicker();
@@ -122,8 +124,6 @@
             //点击制版模块
             else if (classname == "print-status") {
                 $(window).unbind("scroll");
-                TaskDetail.printBaseInfo();
-                $(".main-box .loading-lump").hide();
             }
         })
 
@@ -451,14 +451,12 @@
 
     //获取制版信息
     TaskDetail.printBaseInfo = function () {
-        $(".main-box .loading-lump").show();
         $(".platemakingBody").html(decodeURI(TaskDetail.platemaking));
         $(".platemakingBody table tr td:last-child").remove();
         $(".plate-remark").html(decodeURI(TaskDetail.plateremark));
-        $(".main-box .loading-lump").hide();
     }
 
-    //设置接受任务、标记任务完成按钮弹出层位置
+    //接受任务、标记任务完成的弹出浮层
     TaskDetail.showConfirmForm = function (showStatus) {
 
         var alertMsg = "";
