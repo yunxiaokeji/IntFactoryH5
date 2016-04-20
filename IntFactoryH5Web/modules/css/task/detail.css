@@ -5,7 +5,7 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
 .task-accept {padding:5px 0;cursor:pointer; position:absolute;right:15px;top:10px;line-height:30px;text-align:center;color:#e0483e; border-radius:5px;}
-.task-accept span { color:#999;}
+.task-accept span { color:#999;font-size:18px;}
 .task-accept input[type=text] { background:transparent;text-align:center;color:#e0483e;cursor:pointer;border:none;outline:none;font-size:18px;height:30px;line-height:30px;}
 
 
@@ -26,11 +26,10 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .dy-info { text-align:left;}
 .setindent {margin:0 3px;}
 
-.right-task-info li div:last-child { margin-top:80px;}
+.right-task-info li div:last-child { margin-top:110px;}
 .right-task-info li .owner-msg {line-height:30px;text-align:right;}
 .right-task-info li .dy-info {margin-top:-7px;line-height:24px;text-align:right;}
-.right-task-info .dy-info a { text-decoration:none;color:#666;display:block;}
-
+.right-task-info .dy-info a { text-decoration:none;color:#666;}
 .task-info .order-need { line-height:40px;color:#666;padding:10px 20px;}
 .task-info .order-need div{display:table-cell;}
 
@@ -51,7 +50,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box .talk-main { width:100%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk { font-size:16px;line-height:30px;padding:10px 0;}
-.main-box img{ width:35px;height:35px;}
+.main-box img{ width:35px;height:35px;border-radius:50%;}
 .loading-lump {text-align:center;margin-bottom:10px;}
 .loading-lump img { width:35px;height:35px;}
 
@@ -102,7 +101,6 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;line-height:50px;border-bottom:1px solid #eee;}
 
 
-
 /*制版信息显示区域*/
 .print-status .print-header { color:#82cadb;display:block;height:40px;line-height:40px;margin:0 10px;border-bottom:2px solid #ddd;}
 .platemakingBody {margin:20px 10px 50px 10px;border-top:1px solid #eee;border-left:1px solid #eee;}
@@ -120,8 +118,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}
 .log-status li { float:left;line-height:45px;}
-.log-status .log-name { font-size:1em;color:#444040;}
-.log-status li:first-child{ width:45px;height:45px;border-radius:50%;margin-right:10px;overflow:hidden;}
+.log-status .log-name {color:#444040;}
+.log-status li:first-child{ width:35px;height:35px;margin-right:10px;}
 .log-status li:last-child { line-height:25px;margin-left:10px;}
 .log-status li:last-child p:first-child { color:#666;}
 .log-status li:last-child p:last-child { color:#999;}

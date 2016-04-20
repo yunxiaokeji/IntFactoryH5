@@ -20,7 +20,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
     <title></title>
-
     <link href="~/modules/css/task/detail.css" rel="stylesheet" />    
     <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
@@ -37,6 +36,7 @@
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
     <script type="text/javascript">
         $(function () {
+
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
                     '@task.orderID',
@@ -64,7 +64,7 @@
         <div class="task-accept">
             @{
                     if(task.finishStatus==2){
-                    <span class="font18">已完成</span>
+                    <span>已完成</span>
                     }
                     else
                     {
@@ -134,7 +134,17 @@
                     <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span class="owner-name">@task.ownerUser.name</span></div>
                    
                     <div class="dy-info">
-                        <a href="javascript:void(0);"><span class="iconfont mRight15">&#xe612;</span></a>
+                        <a href="javascript:void(0);">
+                            @{
+                            if(task.orderType==1){
+                            <i class="iconfont">&#xe612;</i>
+                            }
+                            else{
+                            <i class="iconfont">&#xe60f;</i>
+                            }
+                            }
+                        </a>
+
                         <span class="font16">
                             @(task.orderType==1?"打样":task.orderType==2?"大货":"")
                         </span>
