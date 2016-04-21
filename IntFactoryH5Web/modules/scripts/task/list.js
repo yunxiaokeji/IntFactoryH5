@@ -135,8 +135,7 @@
             $(".tab-screen").css("display", "none");
             $(".select-copy").data("select", "0");
             //判断data的值
-            var num = $(".type-LX").data("type");
-            console.log(num);
+            var num = $(".type-LX").data("type");            
             if (num == "0") {
                 $(".tab-type").slideDown("slow");
                 $(".type-LX").data("type", "1");
