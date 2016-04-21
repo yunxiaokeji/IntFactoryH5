@@ -1,21 +1,21 @@
 ﻿/*透明遮罩*/
 .mask-shade {width:100%;height:100%;position:fixed;z-index:330;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
 /*头部*/
-.header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:100;color:#666;}
+.header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
 .header li{float:left;width:33%;font-size:24px;height:50px;text-align:center;margin-top:30px;}
-.header li:last-child{float:right;margin-top:20px;text-align:right;}
+.header li:last-child{float:right;margin-top:23px;text-align:right;}
 .header li:first-child{margin-top:35px;}
 .header li:first-child div{font-size:21px;float:left;margin-left:30px;}
 .header li .login-name{float:left;line-height:25px;margin-left:10px;font-size:20px;width:150px;text-align:left;}
 /*遮罩*/
-.shade { width:100%;height:100%;position:fixed;z-index:402;background-color:rgba(143,143,143,0.6);display:none;}
-.search {width:100%;height:80px;background-color:#D5D5D5;line-height:80px;position:fixed;top:0;z-index:430;display:none;}
+.shade { width:100%;height:100%;position:fixed;z-index:1002;background-color:rgba(143,143,143,0.6);display:none;}
+.search {width:100%;height:80px;background-color:#D5D5D5;line-height:80px;position:fixed;top:0;z-index:1002;display:none;}
 .search span { float:left;display:block;}
 .search span:first-child {margin-left:20px;}
 .search span .txt-search {width:95%;height:60px;border-radius:5px;border:1px solid #CCC;font-size:22px;padding-left:40px; color:#999;background:url(/modules/images/Zoom.gif) no-repeat center left;background-color:#fff;margin-top:-3px;background-size:2em;}
 .search span:last-child {font-size:28px;color:#646464;height:30px;float:right;margin-right:30px;}
 /*登录下拉*/
-.login {height:50px;width:120px;position:fixed;z-index:550; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
+.login {height:50px;width:120px;position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
 .login li{text-align:center;height:25px;margin-top:15px;color:#666;}
 /*进行状态*/
 .task-status{width:100%;height:100px;border-bottom:1px solid #b2b2b2;margin-top:80px;}
