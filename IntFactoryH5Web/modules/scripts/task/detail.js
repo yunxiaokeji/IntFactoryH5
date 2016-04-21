@@ -34,21 +34,21 @@
 
     $logPageCount = 1;
     
-    TaskDetail.init = function (orderID, stageID, taskID, platemaking, plateremark, mark, imgStatus, userID, materialList,operateStatus,mytask) {
+    TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
 
-        Paras.orderID = orderID;
-        Paras.stageID = stageID;
-        Paras.taskID = taskID;
-        TaskDetail.platemaking = platemaking;
-        TaskDetail.plateremark = plateremark == "" ? "暂无工艺说明" : plateremark;
+        var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
+        Paras.orderID = jsonTask.orderID;
+        Paras.stageID = jsonTask.stageID;
+        Paras.taskID = jsonTask.taskID;
+
         TaskDetail.imgStatus = imgStatus;
         TaskDetail.userID = userID;
         TaskDetail.operateStatus = operateStatus;
         TaskDetail.materialList = JSON.parse(materialList.replace(/&quot;/g, '"'));
 
-        AddReplyParas.orderID = orderID;
-        AddReplyParas.stageID = stageID;
-        AddReplyParas.mark = mark;
+        AddReplyParas.orderID = jsonTask.orderID;
+        AddReplyParas.stageID = jsonTask.stageID;
+        AddReplyParas.mark = jsonTask.mark;
 
         TaskDetail.bindEvent();
 
@@ -58,12 +58,14 @@
         //浏览器加载获取材料信息
         TaskDetail.getOrderList(TaskDetail.materialList);
         
-        //浏览器加载获取制版信息
+        //浏览器加载删除制版信息操作列
         TaskDetail.printBaseInfo();
 
         //调用绑定选择时间控件(绑定设置到期时间事件)
         TaskDetail.bindTimerPicker();
-       
+        
+        TaskDetail.setImagesSize();
+
 
     }
    
@@ -124,6 +126,7 @@
             else if (classname == "print-status") {
                 $(window).unbind("scroll");
             }
+
         })
 
         //点击提交按钮
@@ -447,9 +450,8 @@
 
     //获取制版信息
     TaskDetail.printBaseInfo = function () {
-        $(".platemakingBody").html(decodeURI(TaskDetail.platemaking));
+        //$(".platemakingBody").html(decodeURI(TaskDetail.platemaking));
         $(".platemakingBody table tr td:last-child").remove();
-        $(".plate-remark").html(decodeURI(TaskDetail.plateremark));
     }
 
     //接受任务、标记任务完成的弹出浮层
@@ -467,6 +469,15 @@
 
     }
         
+    //设置图片宽高
+    TaskDetail.setImagesSize = function () {
+
+        $(".main_image").css("height", $(window).width() + "px");
+        $(".main_image li").css("height", $(window).width() + "px");
+        $(".main_image li img").css("height", $(window).width() + "px");
+
+    }
+
     module.exports = TaskDetail;
 
 })

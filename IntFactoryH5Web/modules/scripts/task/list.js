@@ -46,16 +46,21 @@
             $(".txt-search").focus();
         });
 
-        //个人信息     
-        
+        //用户退出下拉框    
         $(".login-menu").click(function () {
-            $(".mask-shade").show();;
+            $(".mask-shade").show();
+            //当点击此事件时,关闭其他下拉框
+            $(".dropdownlist").hide();
+            $(".type-LX").data("type", "0");
+            $(".flow-LC").data("flow", "0");
+            $(".screen-JD").data("screen", "0");
+            $(".select-copy").data("select", "0");
             var loginnum = $(".login").data("login");
             if (loginnum=="0") {
-                $(".login").show();
+                $(".login").slideDown("slow");
                 $(".login").data("login","1");
             } else {
-                $(".login").hide();
+                $(".login").slideUp("slow");
                 $(".login").data("login", "0");
             }           
         });
@@ -67,7 +72,7 @@
             if (name=="确定") {
                 var txt = $(".txt-search").val();
                 if (txt != "") {
-                    $(".shade").hide();
+                    $(".shade").slideUp("slow");
                     List.params.keyWords = txt;
                     List.getList();
                     $(this).text("取消");
@@ -79,19 +84,19 @@
                         }                        
                     });                    
                 } else {
-                    $(".search").hide();
+                    $(".search").slideUp("slow");
                 }
             } else {
-                $(".search").hide();
+                $(".search").slideUp("slow");
             }         
-            $(".shade").hide();
+            $(".shade").slideUp("slow");
             return false;
         });
 
         //(搜索框)点击空白区域
         $(".shade").click(function () {
-            $(".shade").hide();
-            $(".search").hide();
+            $(".shade").slideUp("slow");
+            $(".search").slideUp("slow");
         });
 
         //(下拉框)点击空白区域
@@ -104,23 +109,13 @@
             $(".login").hide();
             $(".login").data("login", "0");
             $(".mask-shade").hide();
-        });
-
+        });        
+        
         //(搜索框)冒泡事件
         $(".span-search").click(function () {
             return false;
         });
-
-        //退出事件
-        $(".login").click(function () {
-            
-            
-        });
-        //(下拉框)冒泡事件
-        $(".select-box").click(function () {
-            return false;
-        });        
-
+        
         //类型下拉 
         $(".type-LX").click(function () {        
             List.params.pageIndex = 1;
@@ -128,14 +123,14 @@
             $(".screen-type").empty();
             $(".dropdownlist").show();
             //当点击此事件时,关闭其他下拉框
-            $(".flow-type").css("display", "none");
+            $(".flow-type").hide();
             $(".flow-type").data("type", "0");
-            $(".screen-type").css("display", "none");
+            $(".screen-type").hide();
             $(".screen-JD").data("screen", "0");
-            $(".tab-screen").css("display", "none");
+            $(".tab-screen").hide();
             $(".select-copy").data("select", "0");
             //判断data的值
-            var num = $(".type-LX").data("type");
+            var num = $(".type-LX").data("type");            
             if (num == "0") {
                 $(".tab-type").slideDown("slow");
                 $(".type-LX").data("type", "1");
@@ -145,7 +140,7 @@
                         $(".screen-a").text("流程阶段");
                     }
                     $(".type-a").text($(this).text());
-                    $(".tab-type").css("display", "none");
+                    $(".tab-type").slideUp("slow");
                     $(".type-LX").data("type", "0");
                     $(".mask-shade").hide();
                 });
@@ -164,30 +159,33 @@
             //判断流程下面有没有li
             var liflow = $(".flow-type").find("li").length;
             if (liflow=="") {
-                $(".flow-type").hide();
+                $(".flow-type").slideUp("slow");
                 $(".flow-LC").data("flow", "0");
             } else {
                 //判读流程下拉框的类别
                 var name = $(".type-a").text();                       
                 if (name == "打样") {
-                    $(".DH").hide();               
+                    $(".DH").slideUp("slow");               
                 } else if(name=="大货") {
-                    $(".DY").hide();
+                    $(".DY").slideUp("slow");
                 }
                 //当点击此事件时,关闭其他下拉框
-                $(".tab-type").css("display", "none");
+                $(".tab-type").hide();
                 $(".type-LX").data("type", "0");
-                $(".screen-type").css("display", "none");
+                $(".screen-type").hide();
                 $(".screen-JD").data("screen", "0");
-                $(".tab-screen").css("display", "none");
+                $(".tab-screen").hide();
                 $(".select-copy").data("select", "0");
                 var num = $(".flow-LC").data("flow");
                 if (num == "0") {
                     $(".flow-type").slideDown("slow");
                     $(".flow-LC").data("flow", "1");
                     $(".all-flow").click(function () {
+                        if ($(this).text()!="") {
+                            $(".screen-a").text("流程阶段");
+                        }
                         $(".flow-a").text($(this).text());
-                        $(".flow-type").css("display", "none");
+                        $(".flow-type").slideUp("slow");
                         $(".flow-LC").data("flow", "0");
                         $(".mask-shade").hide();
                     });
@@ -206,18 +204,18 @@
             $(".mask-shade").show();
             $(".dropdownlist").show();
             //当点击此事件时,关闭其他下拉框
-            $(".tab-type").css("display", "none");
+            $(".tab-type").hide();
             $(".type-LX").data("type", "0");
-            $(".flow-type").css("display", "none");
+            $(".flow-type").hide();
             $(".flow-LC").data("flow", "0");
-            $(".tab-screen").css("display", "none");
+            $(".tab-screen").hide();
             $(".select-copy").data("select", "0");
             //判断流程阶段下面有没有li
             var linum = $(".screen-type").find("li").length;
             if (linum > 0) {
                 //判读流程下拉框的选项
                 var name = $(".flow-a").text();
-                if (name == "全部") {
+                if (name != "") {
                     $(".nodata").remove();
                 } 
                 var num = $(".screen-JD").data("screen");
@@ -226,7 +224,7 @@
                     $(".screen-JD").data("screen", "1");
                     $(".all-screen").click(function () {
                         $(".screen-a").text($(this).text());
-                        $(".screen-type").css("display", "none");
+                        $(".screen-type").slideUp("slow")
                         $(".screen-JD").data("screen", "0");
                         $(".mask-shade").hide();
                     });
@@ -236,7 +234,7 @@
                     $(".mask-shade").hide();
                 }
             } else {
-                $(".screen-type").css("display", "none");
+                $(".screen-type").slideUp("slow");
                 $(".mask-shade").hide();
             }
         });
@@ -247,11 +245,11 @@
             $(".mask-shade").show();
             $(".dropdownlist").show();
             //当点击此事件时,关闭其他下拉框
-            $(".tab-type").css("display", "none");
+            $(".tab-type").hide();
             $(".type-LX").data("type", "0");
-            $(".flow-type").css("display", "none");
+            $(".flow-type").hide();
             $(".flow-type").data("type", "0");
-            $(".screen-type").css("display", "none");
+            $(".screen-type").hide();
             $(".screen-JD").data("screen", "0");
             //滑动事件
             var num = $(".select-copy").data("select");
@@ -277,7 +275,7 @@
             //判断搜索结果
             if (List.keyWordsIsTrue == false) {
                 List.params.keyWords = "";
-                $(".search").hide();
+                $(".search").slideUp("slow");
             } else {
                 List.params.keyWords;
             }
@@ -295,7 +293,7 @@
             //判断搜索结果
             if (List.keyWordsIsTrue == false) {
                 List.params.keyWords = "";
-                $(".search").hide();
+                $(".search").slideUp("slow");
             } else {
                 List.params.keyWords;
             }
@@ -311,7 +309,7 @@
         $(".flow-type").on("click", ".all-flow", function () {
             if (List.keyWordsIsTrue == false) {
                 List.params.keyWords = "";
-                $(".search").hide();
+                $(".search").slideUp("slow");
             } else {
                 List.params.keyWords;
             }
@@ -327,7 +325,7 @@
             //判断搜索结果
             if (List.keyWordsIsTrue == false) {
                 List.params.keyWords = "";
-                $(".search").hide();
+                $(".search").slideUp("slow");
             } else {
                 List.params.keyWords;
             }
@@ -347,7 +345,7 @@
         //点击回到顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
-            $(".getback").css("display", "none");
+            $(".getback").hide();
         });
 
         //滚动条在最下面时增加数据
@@ -356,7 +354,7 @@
             if (document.body.scrollTop > 0) {
                 $(".getback").show();
             } else {
-                $(".getback").hide();
+                $(".getback").slideUp("slow");
             }
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();            
             if (bottom <= 1) {
@@ -364,6 +362,9 @@
                     List.params.pageIndex++;
                     if (List.params.pageIndex <= List.pageCount) {
                         List.getList(true);
+                    } else {
+                        $(".prompt").remove();
+                        $(".list").append('<div class="prompt">已经到页面底部啦</div>');
                     }
                 } 
             }
@@ -391,6 +392,7 @@
                 //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
+                //引用doT模板
                 doT.exec("../modules/template/task/List.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
