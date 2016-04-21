@@ -345,7 +345,7 @@
         //点击回到顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
-            $(".getback").slideUp("slow");
+            $(".getback").hide();
         });
 
         //滚动条在最下面时增加数据
@@ -392,6 +392,7 @@
                 //分页数据
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
+                //引用doT模板
                 doT.exec("../modules/template/task/List.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
