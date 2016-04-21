@@ -136,6 +136,7 @@
             $(".select-copy").data("select", "0");
             //判断data的值
             var num = $(".type-LX").data("type");
+            console.log(num);
             if (num == "0") {
                 $(".tab-type").slideDown("slow");
                 $(".type-LX").data("type", "1");
@@ -364,6 +365,9 @@
                     List.params.pageIndex++;
                     if (List.params.pageIndex <= List.pageCount) {
                         List.getList(true);
+                    } else {
+                        $(".prompt").remove();
+                        $(".list").append('<div class="prompt">已经到底啦</div>');
                     }
                 } 
             }
