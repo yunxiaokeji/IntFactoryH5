@@ -1,5 +1,6 @@
 ﻿define(function (require,exports,module) {
-    //var Global = require("global");
+    var Global = require("global");
+
     var List = {};
     List.params = {
         keyWords: "",
