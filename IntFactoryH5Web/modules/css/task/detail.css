@@ -10,9 +10,6 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 
 
 /*焦点图*/
-.main_image ul { width:100%;}
-.main_image ul li { width:100%;}
-.main_image ul li img { width:100%;}
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:40px;text-indent:1em;color:#fff;}
 
 
@@ -31,6 +28,7 @@ header .task-text {color:#373737;text-align:center;font-size:24px;}
 .right-task-info li .dy-info {margin-top:-7px;line-height:24px;text-align:right;}
 .right-task-info .dy-info a { text-decoration:none;color:#666;}
 .task-info .order-need { line-height:40px;color:#666;padding:10px 20px;}
+.task-info .order-need div:first-child { width:78px;}
 .task-info .order-need div{display:table-cell;}
 
 
@@ -46,11 +44,10 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:60px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
 .main-box .talk-content li {list-style:none;}
-.main-box .more-reply { position:absolute;top:0;left:0;width:100%;text-align:center;}
 .main-box .talk-main { width:100%;}
+.main-box .talk-main img { width:35px;height:35px;border-radius:50%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk { font-size:16px;line-height:30px;padding:10px 0;}
-.main-box img{ width:35px;height:35px;border-radius:50%;}
 .loading-lump {text-align:center;margin-bottom:10px;}
 .loading-lump img { width:35px;height:35px;}
 
@@ -117,6 +114,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .no-log {text-align:center;margin:20px 0;color:#666; }
 .log-status { margin:0 10px;}
 .log-box { border-bottom:1px solid #ccc;line-height:45px;width:100%;overflow:hidden;padding:10px 0;}
+.log-box img { width:35px;height:35px;border-radius:50%;}
 .log-status li { float:left;line-height:45px;}
 .log-status .log-name {color:#444040;}
 .log-status li:first-child{ width:35px;height:35px;margin-right:10px;}

@@ -1,7 +1,10 @@
-﻿@{
+﻿@using System.Web.Script.Serialization;
+@{
    
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
     ViewBag.Title = "任务详情-" + task.title;
+    JavaScriptSerializer serializer = new JavaScriptSerializer();
+    var JsonTask= serializer.Serialize(task);
     var UserID = ViewBag.UserID;
     var materialList = ViewBag.MaterialList;
     var userStatus = UserID == task.ownerUser.userID ? true : false;
@@ -10,8 +13,8 @@
     {
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
-    //string a = Server.UrlEncode(task.order.platemaking);
-    
+    string a = HttpUtility.UrlDecode(task.order.platemaking);
+
 }
 
 <!DOCTYPE html>
@@ -21,7 +24,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
     <title></title>
     <link href="~/modules/css/task/detail.css" rel="stylesheet" />
-    <link href="~/modules/plug/touchSlider/css/sytyle.css" rel="stylesheet" />
+    <link href="~/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
     <link href="~/modules/css/task/detailmedia.css" rel="stylesheet" />
     <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
     <link href="~/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
@@ -39,17 +42,11 @@
 
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@task.orderID',
-                    '@task.stageID',
-                    '@task.taskID',
-                    '@task.order.platemaking',
-                    '@task.order.plateRemark',
-                    '@task.mark',
                     '@(imagesUrl.Length>1?"1":"0")',
                     '@UserID',
                     '@materialList',
                     '@userStatus',
-                    '@task'
+                    '@JsonTask'
                  );
             });
            
@@ -57,6 +54,7 @@
     </script>
 
 <body>
+
     <!--头部-->
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{}"><i class="return-icon iconfont">&#xe60a;</i></a>
@@ -206,10 +204,10 @@
         <div class="print-status hide">
 
             <h1 class="plate-remark-msg">制版信息</h1>
-            <div class="platemakingBody"></div>
+            <div class="platemakingBody">@(new MvcHtmlString(Server.UrlDecode(task.order.platemaking)))</div>
 
             <h1 class="plate-remark-msg">工艺说明</h1>
-            <div class="plate-remark"></div>
+            <div class="plate-remark">@(new MvcHtmlString(String.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":Server.UrlDecode(task.order.plateRemark)))</div>
             
         </div>
 
