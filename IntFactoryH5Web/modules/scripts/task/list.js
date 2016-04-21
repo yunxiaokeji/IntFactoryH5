@@ -46,8 +46,7 @@
             $(".txt-search").focus();
         });
 
-        //个人信息     
-        
+        //用户退出    
         $(".login-menu").click(function () {
             $(".mask-shade").show();;
             var loginnum = $(".login").data("login");
@@ -110,12 +109,7 @@
         $(".span-search").click(function () {
             return false;
         });
-
-        //退出事件
-        $(".login").click(function () {
-            
-            
-        });
+                    
         //(下拉框)冒泡事件
         $(".select-box").click(function () {
             return false;
@@ -366,7 +360,7 @@
                         List.getList(true);
                     } else {
                         $(".prompt").remove();
-                        $(".list").append('<div class="prompt">已经到底啦</div>');
+                        $(".list").append('<div class="prompt">已经到页面底部啦</div>');
                     }
                 } 
             }
