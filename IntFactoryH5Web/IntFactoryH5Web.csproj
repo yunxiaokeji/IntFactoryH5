@@ -238,7 +238,7 @@
     <Content Include="modules\plug\dataTimePicker\dev\js\mobiscroll.wp-2.5.2.js" />
     <Content Include="modules\plug\dataTimePicker\js\mobiscroll.custom-2.5.2.min.js" />
     <Content Include="modules\plug\doT.js" />
-    <Content Include="modules\plug\touchSlider\css\sytyle.css" />
+    <Content Include="modules\plug\touchSlider\css\style.css" />
     <Content Include="modules\plug\touchSlider\images\20141206092732_4208.jpg" />
     <Content Include="modules\plug\touchSlider\images\20141206093851_5791.jpg" />
     <Content Include="modules\plug\touchSlider\images\20141206093912_0947.jpg" />
