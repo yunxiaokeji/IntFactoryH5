@@ -258,9 +258,9 @@
     <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
     <Content Include="modules\template\task\materList.html" />
-    <Content Include="modules\template\task\FlowStage.html" />
-    <Content Include="modules\template\task\Flow.html" />
-    <Content Include="modules\template\task\List.html" />
+    <Content Include="modules\template\task\flowStage.html" />
+    <Content Include="modules\template\task\flow.html" />
+    <Content Include="modules\template\task\list.html" />
     <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />

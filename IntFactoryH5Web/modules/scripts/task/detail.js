@@ -429,14 +429,14 @@
                         if (!$(".material-main").is(":animated")) {
                             $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
                             if ($(meterialLumpbox).data('status') == '0') {
-                                $(meterialLumpbox).css("-webkit-transform", "rotate(90deg)");
+                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
                                 $(meterialLumpbox).data('status', '1');
                                 $(meterialLumpbox).find('span').css("border-left-color", "#fff");
                                 $(meterialLumpbox).parent().parent().addClass("select-material");
 
                             }
                             else {
-                                $(meterialLumpbox).css("-webkit-transform", "rotate(0deg)");
+                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
                                 $(meterialLumpbox).data('status', '0');
                                 $(meterialLumpbox).find('span').css("border-left-color", "#999");
                                 $(meterialLumpbox).parent().parent().removeClass("select-material");
