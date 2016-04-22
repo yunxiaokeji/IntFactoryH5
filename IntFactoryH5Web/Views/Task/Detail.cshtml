@@ -207,7 +207,7 @@
             <div class="platemakingBody">@(new MvcHtmlString(Server.UrlDecode(task.order.platemaking)))</div>
 
             <h1 class="plate-remark-msg">工艺说明</h1>
-            <div class="plate-remark">@(new MvcHtmlString(String.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":Server.UrlDecode(task.order.plateRemark)))</div>
+            <div class="plate-remark">@(new MvcHtmlString(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":Server.UrlDecode(task.order.plateRemark)))</div>
             
         </div>
 
