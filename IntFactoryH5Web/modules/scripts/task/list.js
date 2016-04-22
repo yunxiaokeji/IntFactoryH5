@@ -39,9 +39,9 @@
         //遮罩
         $(".iconfont-search").click(function () {
             //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist").hide();
+            $(".potion").slideUp("slow");
             $(".dropdownlist li").data("id", "0");
-            $(".login").hide();
+            $(".login").slideUp("slow");
             $(".login").data("login", "0");
             $(".cencal").text("确定");
             $(".txt-search").val("");
@@ -103,9 +103,9 @@
 
         //(下拉框)点击空白区域
         $(".mask-shade").click(function () {
-            $(".dropdownlist").hide();
+            $(".potion").slideUp("slow");
             $(".dropdownlist li").data("id", "0");
-            $(".login").hide();
+            $(".login").slideUp("slow");
             $(".login").data("login", "0");
             $(".mask-shade").hide();
         });        
@@ -228,7 +228,7 @@
                 $(".screen-a").text("流程阶段");
             }
             $(".type-a").text($(this).text());
-            $(".tab-type").slideUp("slow");
+            $(".tab-type").hide();
             $(".type-LX").data("id", "0");
             $(".mask-shade").hide();
             //判断搜索结果
@@ -243,7 +243,7 @@
             List.params.orderStageID = -1;
             List.params.orderType = $(this).data("idtype");
             List.getList();
-            List.GetTaskFlow();
+            List.GetTaskFlow(); 
         });
 
         //获取订单流程的任务列表(+读取订单流程阶段的列表[不是详情])
@@ -252,7 +252,7 @@
                 $(".screen-a").text("流程阶段");
             }
             $(".flow-a").text($(this).text());
-            $(".flow-type").slideUp("slow");
+            $(".flow-type").hide();
             $(".flow-LC").data("id", "0");
             $(".mask-shade").hide();
             //数据
@@ -273,7 +273,7 @@
         //获得订单流程阶段的任务列表
         $(".screen-type").on("click", ".all-screen", function () {
             $(".screen-a").text($(this).text());
-            $(".screen-type").slideUp("slow")
+            $(".screen-type").hide();
             $(".screen-JD").data("id", "0");
             $(".mask-shade").hide();
             //判断搜索结果
@@ -291,7 +291,7 @@
         //获取排序的任务列表
         $(".tab-screen li").click(function () {
             $(".sort-a").text($(this).text());
-            $(".tab-screen").slideUp("slow");
+            $(".tab-screen").hide();
             $(".select-copy").data("id", "0");
             $(".mask-shade").hide();
             List.params.isAsc = $(this).data("takepo");
