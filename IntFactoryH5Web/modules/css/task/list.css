@@ -1,5 +1,5 @@
 ﻿/*透明遮罩*/
-.mask-shade {width:100%;height:100%;position:fixed;z-index:330;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
+.mask-shade {width:100%;height:100%;position:fixed;z-index:289;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
 /*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
 .header li{float:left;width:33%;font-size:24px;height:50px;text-align:center;margin-top:30px;}
@@ -69,7 +69,31 @@
 .getback span{right:10%;}
 /*提示*/
 .list .prompt { text-align:center;color:red;}
-
-
+/*图标*/
+.iconfont-search {
+  font-size:35px;
+  color:#666; 
+  margin-right:30px;
+  }
+.iconfont-status {
+  font-size:19px;
+  color:#666;
+}
+.iconfont-select {
+  color:#999;
+}
+.iconfont-details {
+  font-size:22px;
+  color:#e0183e;
+  margin-right:10px;
+}
+.iconfont-stage {
+  font-size:20px;
+  color:#999;
+}
+.iconfont-back {
+  font-size:30px;
+  text-align:center;
+}
 
 
