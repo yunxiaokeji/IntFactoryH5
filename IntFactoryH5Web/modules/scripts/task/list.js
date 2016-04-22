@@ -350,7 +350,7 @@
                 List.pageCount = data.pageCount;
                 List.totalCount = data.totalCount;
                 //引用doT模板
-                doT.exec("../modules/template/task/List.html", function (code) {
+                doT.exec("../modules/template/task/list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });
@@ -365,7 +365,7 @@
     List.GetTaskFlow = function () {
         $(".flow-type").empty();
         $.post("/Task/GetTaskFlow", null, function (data) {            
-            doT.exec("../modules/template/task/Flow.html", function (e) {
+            doT.exec("../modules/template/task/flow.html", function (e) {
                 var $res = e(data.items);
                 $(".flow-type").append($res);
             });
@@ -376,7 +376,7 @@
     List.GetTaskFlowStage = function () {
         $(".screen-type").empty();
         $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {            
-            doT.exec("../modules/template/task/FlowStage.html", function (code) {
+            doT.exec("../modules/template/task/flowStage.html", function (code) {
                 var $res = code(data.items);
                 $(".screen-type").append($res);
             });
