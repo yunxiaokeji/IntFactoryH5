@@ -13,11 +13,11 @@
                 <div class="details">        
                      <!-- 状态图标 -->           
                     {%   if (item.finishStatus==0) {      %}
-                        <i class="iconfont-details">&#xe61e;</i>
+                        <i class="iconfont-details iconfont">&#xe61e;</i>
                     {%   }  else if (item.finishStatus==1) {      %}
-                        <i class="iconfont-details status-proceed" >&#xe621;</i>
+                        <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
                     {%   }  else {      %}
-                        <i class="iconfont-details color999" >&#xe61f;</i>
+                        <i class="iconfont-details iconfont color999" >&#xe61f;</i>
                     {%   }  %}                                      
                    <a class="color666" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                 </div>                
