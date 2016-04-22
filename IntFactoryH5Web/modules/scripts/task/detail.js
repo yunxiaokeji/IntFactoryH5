@@ -264,7 +264,7 @@
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
-                $(".task-accept").html("<input type='text' class='btn-finishTask' name='appDateTime' value='标记完成' />");
+                $(".task-accept").html("<input type='text' class='btn-finishTask' name='appDateTime' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click',function () {
                     TaskDetail.finishTask();
                 });
