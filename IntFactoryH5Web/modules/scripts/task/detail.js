@@ -34,7 +34,12 @@
 
     $logPageCount = 1;
     
+    //默认绑定讨论下拉控件
     var bind = "talk-status";
+
+    //默认获取讨论列表
+    var GetOrAddReply = "GetReply";
+
     TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
         var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
@@ -122,11 +127,13 @@
         })
 
         //点击提交按钮
-        $(".btn-submit").bind("click",function () {
-            
+        $(".btn-submit").bind("click", function () {
+            GetOrAddReply = "AddReply";
             AddReplyParas.content = $(".txt-talkcontent").val().replace(Content, "");
 
             if (AddReplyParas.content == "") { return; }
+
+            if (AddReplyParas.content.length >= 999) { alert("您输入的文字超过500个"); return; }
 
             if ($(".txt-talkcontent").val().indexOf(Content) != 0) {
 
@@ -139,45 +146,14 @@
             }
             var msgReply = JSON.stringify(AddReplyParas);
             $(this).val("提交中...").attr("disabled", "disabled");
-
+           
             $.post("/Task/AddTaskReply", {
                 resultReply: msgReply
             }, function (data) {
+
                 $(".btn-submit").val("提交").removeAttr("disabled");
-
-                    doT.exec("/template/task/detailReply.html", function (templateFun) {
-                       
-                        var dataReplys = {};
-                        dataReplys.items = data.items;
-                        dataReplys.userID = TaskDetail.userID;
-                        var innerText = templateFun(dataReplys);
-
-                        if ($(".talk-main").find('div').length == 0) {
-                            $(".noreply-msg").hide();
-                        }
-                        innerText = $(innerText);
-                        $(".talk-main").prepend(innerText);
-
-                        $(".txt-talkcontent").val("");
-
-                        //点击回复把用户名写入文本框
-
-                        innerText.find(".iconfont").click(function () {
-                            AddReplyParas.fromReplyID = $(this).data("replyid");
-
-                            AddReplyParas.fromReplyUserID = $(this).data("userid");
-
-                            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
-
-                            Content = "@" + $(this).data("name") + " ";
-
-                            $(".txt-talkcontent").val(Content);
-
-                            $(".txt-talkcontent").focus();
-
-                        });
-
-                    });
+                
+                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
 
             })
 
@@ -321,12 +297,11 @@
 
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
-
+        GetOrAddReply = "GetReply";
         if ($replyPageCount >= Paras.replayPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
-
                 $replyPageCount = data.pagecount;
                 if ($replyPageCount == 0) {
                     $(".noreply-msg").show();
@@ -338,7 +313,6 @@
                         dataReplys.items = data.items;
                         dataReplys.userID = TaskDetail.userID;
                         var innerText = templateFun(dataReplys);
-                        //var innerText = templateFun(items);
                         innerText = $(innerText);
 
                         $(".talk-main").append(innerText);
@@ -480,6 +454,57 @@
             }
 
         })
+    }
+
+
+    //获取或添加任务讨论
+    TaskDetail.GetOrAddTaskReply = function (data,replyOperate) {
+
+        doT.exec("/template/task/detailReply.html", function (templateFun) {
+
+            var dataReplys = {};
+            dataReplys.items = data.items;
+            dataReplys.userID = TaskDetail.userID;
+            var innerText = templateFun(dataReplys);
+
+            innerText = $(innerText);
+
+            if (GetOrAddReply == "GetReply") {
+                $(".talk-main").append(innerText);
+                innerText.find(".text-talk").each(function () {
+                    $(this).html(Global.replaceQqface($(this).html()));
+                });
+            }
+            else {
+               
+                if ($(".talk-main").find('div').length == 0) {
+                    $(".noreply-msg").hide();
+                }
+                
+                $(".talk-main").prepend(innerText);
+
+                $(".txt-talkcontent").val("");
+            }
+
+            //点击回复把用户名写入文本框
+
+            innerText.find(".iconfont").click(function () {
+                AddReplyParas.fromReplyID = $(this).data("replyid");
+
+                AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+                Content = "@" + $(this).data("name") + " ";
+
+                $(".txt-talkcontent").val(Content);
+
+                $(".txt-talkcontent").focus();
+
+            });
+
+        });
+
     }
 
     module.exports = TaskDetail;
