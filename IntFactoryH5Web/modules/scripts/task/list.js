@@ -44,9 +44,7 @@
             //当点击此事件时,关闭其他下拉框
             $(".potion").slideUp("slow");
             $(".login").slideUp("slow");
-            $(".login").data("login", "0");
             $(".task-switch").slideUp("slow");
-            $(".task-switch").data("taskswitch", "0");
             $(".cencal").text("确定");
             $(".txt-search").val("");
             $(".shade").show();
@@ -61,7 +59,6 @@
             //当点击此事件时,关闭其他下拉框
             $(".dropdownlist").hide();
             $(".task-switch").slideUp("slow");
-            $(".task-switch").data("taskswitch", "0");
             $(".login").fadeToggle(400);               
         });
 
@@ -71,7 +68,6 @@
             //当点击此事件时,关闭其他下拉框
             $(".dropdownlist").hide();
             $(".login").slideUp("slow");
-            $(".login").data("login", "0");
             $(".task-switch").fadeToggle(400);            
         });
 
