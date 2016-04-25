@@ -29,10 +29,18 @@
     @* 头部 *@
     <ul class="header">
         <li class="login-menu"><div class="iconfont">&#xe60d;</div><span class="login-name long"></span></li>
-        <li><span>我的任务</span></li>
+        <li class="task">
+            <span>我的任务</span>
+            <div class="iconfont">&#xe61c;</div>
+        </li>
         <li><div class="iconfont iconfont-search">&#xe605;</div></li>
     </ul>
-
+    @* 切换任务 *@
+    <ul class="task-switch" data-taskswitch="0">
+        <li data-switch="0">我的任务</li>
+        <li data-switch="1">参与任务</li>
+    </ul>
+    @* 退出 *@
     <ul class="login" data-login="0">
         <li>
             <span>退出</span>
@@ -61,19 +69,19 @@
         
     @* 选项 *@  
     <ul class="select">
-        <li class="type-LX" data-id="0">
+        <li class="type" data-idnum="tab-type">
             <a class="type-a">类型</a>
             <i class="iconfont-select iconfont">&#xe61c;</i>
         </li>
-        <li class="flow-LC" data-id="0">
+        <li class="flow" data-idnum="flow-type">
             <a class="flow-a">流程</a>
             <i class="iconfont-select iconfont">&#xe61c;</i>
         </li>
-        <li class="screen-JD" data-id="0">
+        <li class="screen" data-idnum="screen-type">
             <a class="screen-a">流程阶段</a>
             <i class="iconfont-select iconfont">&#xe61c;</i>
         </li>
-        <li class="select-copy" data-id="0">
+        <li class="select-sort" data-idnum="screen-sort">
             <a class="sort-a">排序</a>        
             <i class="iconfont-select iconfont">&#xe61c;</i>    
         </li> 
@@ -89,14 +97,14 @@
         </ul>   
         @*流程下拉*@ 
         <ul class="potion flow-type">                     
-            <li class="all-flow" data-id="-1">全部</li>                            
+            <li class="all-flow" id="all-flow-drop" data-idflow="-1">全部</li>                
         </ul>  
         @* 流程阶段下拉 *@
         <ul class="potion screen-type"> 
-                           
+                   
         </ul>
         @* 排序 *@
-        <ul class="potion tab-screen">                                        
+        <ul class="potion screen-sort">                                        
             <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
             <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
             <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
