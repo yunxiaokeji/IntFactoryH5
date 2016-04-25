@@ -26,6 +26,11 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
+        public ActionResult Logout() {
+            Session["ClientManager"] = null;
+
+            return Redirect("/Home/Index");
+        }
 
         public JsonResult UserLogin(string userName, string pwd)
         {
