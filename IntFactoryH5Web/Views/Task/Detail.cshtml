@@ -1,8 +1,8 @@
 ﻿@using System.Web.Script.Serialization;
 @{
-   
     var task = (IntFactory.Sdk.TaskDetailEntity)ViewBag.Task;
     ViewBag.Title = "任务详情-" + task.title;
+    
     JavaScriptSerializer serializer = new JavaScriptSerializer();
     var JsonTask= serializer.Serialize(task);
     var UserID = ViewBag.UserID;
@@ -13,7 +13,7 @@
     {
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
-    string a = HttpUtility.UrlDecode(task.order.platemaking);
+
 
 }
 
@@ -61,27 +61,28 @@
         <div class="task-text">任务详情</div>
         <div class="task-accept">
             @{
-                    if(task.finishStatus==2){
+                if (task.finishStatus == 2)
+                {
                     <span>已完成</span>
+                }
+                else
+                {
+                    if (!userStatus)
+                    {
+                            <span>@(task.finishStatus == 0 ? "未接收" : task.finishStatus == 1 ? "进行中" : "")</span>
                     }
                     else
                     {
-                        if (!userStatus)
+                        if (task.finishStatus == 0)
                         {
-                            <span>@(task.finishStatus==0?"未接收":task.finishStatus==1?"进行中":"")</span>
+                                <input type="button"  class="btn-acceptTaskTime" value="接受任务"  />              
                         }
-                        else
-                        {
-                            if (task.finishStatus == 0)
-                            {
-                                <input type="text" class="btn-acceptTaskTime" value="接受任务" readonly="readonly" />              
-                            }
-                            else if (task.finishStatus == 1)
-                            { 
-                                <input type="text" class="btn-finishTask"  value="标记完成" readonly="readonly" />   
-                            }
+                        else if (task.finishStatus == 1)
+                        { 
+                                <input type="button" class="btn-finishTask"  value="标记完成"  />   
                         }
                     }
+                }
              }  
         </div>
     </header>
@@ -135,17 +136,19 @@
                         <a href="javascript:void(0);">
                             @{
                                
-                            if(task.orderType==1){
+                                if (task.orderType == 1)
+                                {
                             <i class="iconfont">&#xe612;</i>
-                            }
-                            else{
+                                }
+                                else
+                                {
                             <i class="iconfont">&#xe60f;</i>
-                            }
+                                }
                             }
                         </a>
 
                         <span class="font16">
-                            @(task.orderType==1?"打样":task.orderType==2?"大货":"")
+                            @(task.orderType == 1 ? "打样" : task.orderType == 2 ? "大货" : "")
                         </span>
 
                     </div>
