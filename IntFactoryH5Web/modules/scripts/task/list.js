@@ -24,7 +24,8 @@
         isAsc: 0,
         pageSize: 5,
         pageIndex: 1,
-        mark:0,
+        mark: 0,
+        isParticipate:false,
     };
     
     List.init = function () {
@@ -61,14 +62,7 @@
             $(".dropdownlist").hide();
             $(".task-switch").slideUp("slow");
             $(".task-switch").data("taskswitch", "0");
-            var loginnum = $(".login").data("login");
-            if (loginnum=="0") {
-                $(".login").slideDown("slow");
-                $(".login").data("login","1");
-            } else {
-                $(".login").slideUp("slow");
-                $(".login").data("login", "0");
-            }           
+            $(".login").fadeToggle(400);               
         });
 
         //切换用户任务
@@ -78,14 +72,7 @@
             $(".dropdownlist").hide();
             $(".login").slideUp("slow");
             $(".login").data("login", "0");
-            var tasknum = $(".task-switch").data("taskswitch");
-            if (tasknum==0) {
-                $(".task-switch").slideDown("slow");
-                $(".task-switch").data("taskswitch", "1");
-            } else {
-                $(".task-switch").slideUp("slow");
-                $(".task-switch").data("taskswitch", "0");
-            }
+            $(".task-switch").fadeToggle(400);            
         });
 
         $(".task-switch li").click(function () {
@@ -94,10 +81,10 @@
             $(".mask-shade").hide();
             var switchnum = $(this).data("switch");
             if (switchnum==0) {
-                List.params.isMy = true;
+                List.params.isParticipate = false;
                 List.getList();
             } else {
-                List.params.isMy = false;
+                List.params.isParticipate = true;
                 List.getList();
             }
         });
@@ -157,8 +144,7 @@
             List.params.pageIndex = 1;
             $(".mask-shade").show();
             $(".dropdownlist").show();
-            $("."+$(this).data('idnum')+").slideDown("slow");
-              
+            $("."+$(this).data("idnum")+"").slideDown("slow");
         });
 
         //获取全部状态的任务列表
