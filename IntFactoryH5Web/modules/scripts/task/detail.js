@@ -35,7 +35,6 @@
     $logPageCount = 1;
     
     TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
-
         var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.stageID = jsonTask.stageID;

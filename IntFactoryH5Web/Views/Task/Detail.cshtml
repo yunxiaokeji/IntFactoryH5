@@ -144,7 +144,7 @@
                             }
                         </a>
 
-                        <span class="font16">
+                        <span>
                             @(task.orderType==1?"打样":task.orderType==2?"大货":"")
                         </span>
 
@@ -154,8 +154,8 @@
         </div>
 
         <div class="order-need">
-            <div>订单需求&nbsp;:</div>
-            <div class="pBottom10 mTop10 lineHeight25">@task.order.remark</div>
+            <div class="text-orderneed">订单需求</div><div class="setindent">:</div>
+            <div class="pBottom10 mTop10">@task.order.remark</div>
         </div>
         <div class="clear"></div>
     </div>
