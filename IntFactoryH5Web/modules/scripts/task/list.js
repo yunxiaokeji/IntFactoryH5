@@ -264,8 +264,8 @@
             }
             List.params.orderType = -1;
             List.params.pageIndex = 1;
-            List.params.orderStageID = -1;            
-            List.params.orderProcessID = $(this).data("id");
+            List.params.orderStageID = -1;
+            List.params.orderProcessID = $(this).data("idflow");
             List.getList();
             List.GetTaskFlowStage();
         });
