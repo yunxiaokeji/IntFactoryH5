@@ -71,6 +71,7 @@
             $(".task-switch").fadeToggle(400);            
         });
 
+        //选择用户任务类型
         $(".task-switch li").click(function () {
             $(".task span").text($(this).text());
             $(".task-switch").hide();
@@ -153,7 +154,7 @@
             List.getList();
         });
 
-        //获取类型的任务列表(+读取订单流程的列表[不是详情])
+        //获取类型的任务列表
         $(".tab-type li").click(function () {
             $(".flow-a").text("流程");
             $(".screen-a").text("流程阶段");
