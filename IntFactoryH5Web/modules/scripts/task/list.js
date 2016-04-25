@@ -1,6 +1,12 @@
 ﻿define(function (require,exports,module) {
     var Global = require("global");
+
     var List = {};
+
+    List.pageCount = 0;
+   
+    List.isLoading = false;
+
     List.params = {
         keyWords: "",
         isMy: true,
@@ -18,21 +24,18 @@
         isAsc: 0,
         pageSize: 5,
         pageIndex: 1,
-        mark:0,
+        mark: 0,
+        isParticipate:false,
     };
     
     List.init = function () {
-        List.getList();
         List.bindEvent();
+
+        List.getList();
+        List.GetTaskFlow();
+        
     };
 
-    List.pageCount = 0;
-
-    List.totalCount = 0;
-
-    List.isLoading = false;
-
-    List.keyWordsIsTrue = true;
 
     List.bindEvent = function () {
 
@@ -40,9 +43,8 @@
         $(".iconfont-search").click(function () {
             //当点击此事件时,关闭其他下拉框
             $(".potion").slideUp("slow");
-            $(".dropdownlist li").data("id", "0");
             $(".login").slideUp("slow");
-            $(".login").data("login", "0");
+            $(".task-switch").slideUp("slow");
             $(".cencal").text("确定");
             $(".txt-search").val("");
             $(".shade").show();
@@ -51,20 +53,37 @@
             $(".txt-search").focus();
         });
 
-        //用户退出下拉框    
+        //用户退出  
         $(".login-menu").click(function () {
             $(".mask-shade").show();
             //当点击此事件时,关闭其他下拉框
             $(".dropdownlist").hide();
-            $(".dropdownlist li").data("id", "0");
-            var loginnum = $(".login").data("login");
-            if (loginnum=="0") {
-                $(".login").slideDown("slow");
-                $(".login").data("login","1");
+            $(".task-switch").slideUp("slow");
+            $(".login").fadeToggle(400);               
+        });
+
+        //切换用户任务
+        $(".task").click(function () {
+            $(".mask-shade").show();
+            //当点击此事件时,关闭其他下拉框
+            $(".dropdownlist").hide();
+            $(".login").slideUp("slow");
+            $(".task-switch").fadeToggle(400);            
+        });
+
+        //选择用户任务类型
+        $(".task-switch li").click(function () {
+            $(".task span").text($(this).text());
+            $(".task-switch").hide();
+            $(".mask-shade").hide();
+            var switchnum = $(this).data("switch");
+            if (switchnum==0) {
+                List.params.isParticipate = false;
+                List.getList();
             } else {
-                $(".login").slideUp("slow");
-                $(".login").data("login", "0");
-            }           
+                List.params.isParticipate = true;
+                List.getList();
+            }
         });
 
         //搜索判断
@@ -90,6 +109,7 @@
                 }
             } else {
                 $(".search").slideUp("slow");
+                List.params.keyWords = "";
             }         
             $(".shade").slideUp("slow");
             return false;
@@ -104,9 +124,10 @@
         //(下拉框)点击空白区域
         $(".mask-shade").click(function () {
             $(".potion").slideUp("slow");
-            $(".dropdownlist li").data("id", "0");
             $(".login").slideUp("slow");
             $(".login").data("login", "0");
+            $(".task-switch").slideUp("slow");
+            $(".task-switch").data("taskswitch", "0");
             $(".mask-shade").hide();
         });        
         
@@ -115,154 +136,57 @@
             return false;
         });
         
-        //类型下拉 
-        $(".type-LX").click(function () {        
-            List.params.pageIndex = 1;
-            $(".mask-shade").show();
-            $(".screen-type").empty();
-            $(".dropdownlist").show();
-            //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist ul").siblings().hide();
-            $(this).data("id", "0");
-            var num = $(this).data("id");         
-            if (num == "0") {
-                $(".tab-type").slideDown("slow");
-            } 
-        });
-
-        //流程下拉 
-        $(".flow-LC").click(function () {
+        //下拉
+        $(".select li").click(function () {
             List.params.pageIndex = 1;
             $(".mask-shade").show();
             $(".dropdownlist").show();
-            //判断流程下面有没有li
-            var liflow = $(".flow-type").find("li").length;
-            if (liflow=="") {
-                $(".flow-type").slideUp("slow");
-                $(".flow-LC").data("id", "0");
-            } else {
-                //判读流程下拉框的类别
-                var name = $(".type-a").text();
-                if (name == "打样") {
-                    $(".DH").hide();
-                } else if (name == "大货") {
-                    $(".DY").hide();
-                }
-                //当点击此事件时,关闭其他下拉框
-                $(".dropdownlist ul").siblings().hide();
-                $(this).data("id", "0");
-                var num = $(this).data("id");
-                if (num == "0") {
-                    $(".flow-type").slideDown("slow");
-                } 
-            }
-        });
-
-        //流程阶段下拉        
-        $(".screen-JD").click(function () {
-            List.params.pageIndex = 1;
-            $(".mask-shade").show();
-            $(".dropdownlist").show();
-            //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist ul").siblings().hide();
-            $(this).data("id", "0");
-            //判断流程阶段下面有没有li
-            var linum = $(".screen-type").find("li").length;
-            if (linum > 0) {
-                //判读流程下拉框的选项
-                var name = $(".flow-a").text();
-                if (name != "") {
-                    $(".screen-type .nodata").remove();
-                } 
-                var num = $(this).data("id");
-                if (num == "0") {
-                    $(".screen-type").slideDown("slow");                    
-                }
-            } else {
-                $(".screen-type").slideUp("slow");
-                $(".mask-shade").hide();
-            }
-        });
-
-        //排序下拉       
-        $(".select-copy").click(function () {
-            List.params.pageIndex = 1;
-            $(".mask-shade").show();
-            $(".dropdownlist").show();
-            //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist ul").siblings().hide();
-            $(this).data("id", "0");
-            //滑动事件
-            var num = $(".select-copy").data("id");
-            if (num == "0") {
-                $(".tab-screen").slideDown("slow");
-            }
+            $("."+$(this).data("idnum")+"").slideDown("slow");
         });
 
         //获取全部状态的任务列表
         $(".task-status li").click(function () {
-            //判断搜索结果
-            if (List.keyWordsIsTrue == false) {
-                List.params.keyWords = "";
-                $(".search").slideUp("slow");
-            } else {
-                List.params.keyWords;
-            }
-            //初始化
+            $(this).siblings().find(".iconfont,a").css("color", "#666");
+            $(this).find(".iconfont,a").css("color", "#007aff");
+
             List.params.pageIndex = 1;
-            List.params.orderProcessID = -1;
-            List.params.orderStageID = -1;
-            List.params.orderType = -1;
-            $(".task-status li").find(".iconfont").css("color", "#666");
-            $(".task-status li").find("a").css("color", "#666");
-            $(this).find(".iconfont").css("color", "#007aff");
-            $(this).find("a").css("color", "#007aff");
             List.params.finishStatus = $(this).data("status");
             List.getList();
         });
 
-        //获取类型的任务列表(+读取订单流程的列表[不是详情])
+        //获取类型的任务列表
         $(".tab-type li").click(function () {
-            if ($(this).text() != "") {
-                $(".flow-a").text("流程");
-                $(".screen-a").text("流程阶段");
-            }
+            $(".flow-a").text("流程");
+            $(".screen-a").text("流程阶段");
+
             $(".type-a").text($(this).text());
-            $(".tab-type").hide();
-            $(".type-LX").data("id", "0");
+            $(this).parent().hide();
             $(".mask-shade").hide();
-            //判断搜索结果
-            if (List.keyWordsIsTrue == false) {
-                List.params.keyWords = "";
-                $(".search").slideUp("slow");
-            } else {
-                List.params.keyWords;
-            }
+
             List.params.pageIndex = 1;
+            List.params.orderType = $(this).data("idtype");
             List.params.orderProcessID = -1;
             List.params.orderStageID = -1;
-            List.params.orderType = $(this).data("idtype");
             List.getList();
-            List.GetTaskFlow(); 
+
+            //判断流程分类
+            if (List.params.orderType == 1) {
+                $(".flow-type .DH").hide();
+                $(".flow-type .DY").show();
+            } else if (List.params.orderType == 2) {
+                $(".flow-type .DH").show();
+                $(".flow-type .DY").hide();
+            }
         });
 
         //获取订单流程的任务列表(+读取订单流程阶段的列表[不是详情])
         $(".flow-type").on("click", ".all-flow", function () {
-            if ($(this).text() != "") {
-                $(".screen-a").text("流程阶段");
-            }
+            $(".screen-a").text("流程阶段");
             $(".flow-a").text($(this).text());
-            $(".flow-type").hide();
-            $(".flow-LC").data("id", "0");
+
+            $(this).parent().hide();
             $(".mask-shade").hide();
-            //数据
-            if (List.keyWordsIsTrue == false) {
-                List.params.keyWords = "";
-                $(".search").slideUp("slow");
-            } else {
-                List.params.keyWords;
-            }
-            List.params.orderType = -1;
+
             List.params.pageIndex = 1;
             List.params.orderStageID = -1;
             List.params.orderProcessID = $(this).data("idflow");
@@ -273,27 +197,20 @@
         //获得订单流程阶段的任务列表
         $(".screen-type").on("click", ".all-screen", function () {
             $(".screen-a").text($(this).text());
-            $(".screen-type").hide();
-            $(".screen-JD").data("id", "0");
+            $(this).parent().hide();
             $(".mask-shade").hide();
-            //判断搜索结果
-            if (List.keyWordsIsTrue == false) {
-                List.params.keyWords = "";
-                $(".search").slideUp("slow");
-            } else {
-                List.params.keyWords;
-            }
+
             List.params.pageIndex = 1;
             List.params.orderStageID = $(this).data("id");
             List.getList();
         });
 
         //获取排序的任务列表
-        $(".tab-screen li").click(function () {
+        $(".screen-sort li").click(function () {
             $(".sort-a").text($(this).text());
-            $(".tab-screen").hide();
-            $(".select-copy").data("id", "0");
+            $(this).parent().hide();
             $(".mask-shade").hide();
+
             List.params.isAsc = $(this).data("takepo");
             List.params.taskOrderColumn = $(this).data("id");
             List.getList();
@@ -321,7 +238,7 @@
                         List.getList(true);
                     } else {
                         $(".prompt").remove();
-                        $(".list").append('<div class="prompt">已经到页面底部啦</div>');
+                        $(".list").append('<div class="prompt">已经到最后一条啦</div>');
                     }
                 } 
             }
@@ -342,20 +259,18 @@
         $.post("/Task/GetTask", { filter: JSON.stringify(List.params) }, function (data) {
             //获取用户名
             $(".login-name").text(data.userName);
+            //判断有无数据
             if (data.items.length==0) {
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
-                List.keyWordsIsTrue = false;
             } else {               
                 //分页数据
                 List.pageCount = data.pageCount;
-                List.totalCount = data.totalCount;
                 //引用doT模板
                 doT.exec("../modules/template/task/list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });
                 List.isLoading = false;
-                List.keyWordsIsTrue = true;
             }            
             $(".listbg").remove();
         });        
@@ -364,7 +279,7 @@
     //获取订单流程的列表
     List.GetTaskFlow = function () {
         $(".flow-type").empty();
-        $.post("/Task/GetTaskFlow", null, function (data) {            
+        $.post("/Task/GetTaskFlow", null, function (data) {
             doT.exec("../modules/template/task/flow.html", function (e) {
                 var $res = e(data.items);
                 $(".flow-type").append($res);
@@ -375,9 +290,9 @@
     //获取订单流程的任务列表
     List.GetTaskFlowStage = function () {
         $(".screen-type").empty();
-        $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {            
+        $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {
             doT.exec("../modules/template/task/flowStage.html", function (code) {
-                var $res = code(data.items);
+                var $res = code(data.items);                
                 $(".screen-type").append($res);
             });
         });
