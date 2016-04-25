@@ -34,8 +34,8 @@
 
     $logPageCount = 1;
     
+    var bind = "bindReply";
     TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
-
         var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.stageID = jsonTask.stageID;
@@ -99,15 +99,15 @@
             //点击讨论模块
             if (classname == "talk-status") {
                 $(".main-box").css("margin-bottom", "60px");
-                $(window).unbind("scroll");
-                TaskDetail.bindScroll('bindReply');
+                //$(window).unbind("scroll");
+                //TaskDetail.bindScroll('bindReply');
             }
 
             //点击材料计划模块
             else if (classname == "shop-status")
             {
                 $(".main-box .loading-lump").hide();
-                $(window).unbind("scroll");
+                //$(window).unbind("scroll");
             }
 
             //点击日志模块
@@ -118,13 +118,13 @@
                     LogIsPageCount = false;
                 }
                 $(".main-box").css("margin-bottom", "0px");
-                $(window).unbind("scroll");
-                TaskDetail.bindScroll('bindLog');
+                //$(window).unbind("scroll");
+                //TaskDetail.bindScroll('bindLog');
             }
 
             //点击制版模块
             else if (classname == "print-status") {
-                $(window).unbind("scroll");
+                //$(window).unbind("scroll");
             }
 
         })
@@ -147,10 +147,14 @@
             }
             var msgReply = JSON.stringify(AddReplyParas);
             $(this).val("提交中...").attr("disabled", "disabled");
-            $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
+
+            $.post("/Task/AddTaskReply", {
+                resultReply: msgReply
+            }, function (data) {
+                $(".btn-submit").val("提交").removeAttr("disabled");
 
                     doT.exec("/template/task/detailReply.html", function (templateFun) {
-                        $(".btn-submit").val("提交").removeAttr("disabled");
+                       
                         var dataReplys = {};
                         dataReplys.items = data.items;
                         dataReplys.userID = TaskDetail.userID;
@@ -159,14 +163,14 @@
                         if ($(".talk-main").find('div').length == 0) {
                             $(".noreply-msg").hide();
                         }
-
+                        innerText = $(innerText);
                         $(".talk-main").prepend(innerText);
 
                         $(".txt-talkcontent").val("");
 
                         //点击回复把用户名写入文本框
-                        $(".talk-content .talk-main .iconfont").bind("click", function () {
 
+                        innerText.find(".iconfont").click(function () {
                             AddReplyParas.fromReplyID = $(this).data("replyid");
 
                             AddReplyParas.fromReplyUserID = $(this).data("userid");
@@ -180,6 +184,22 @@
                             $(".txt-talkcontent").focus();
 
                         });
+
+                        //$(".talk-content .talk-main .iconfont").bind("click", function () {
+
+                        //    AddReplyParas.fromReplyID = $(this).data("replyid");
+
+                        //    AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+                        //    AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+                        //    Content = "@" + $(this).data("name") + " ";
+
+                        //    $(".txt-talkcontent").val(Content);
+
+                        //    $(".txt-talkcontent").focus();
+
+                        //});
 
                     });
 
@@ -201,30 +221,32 @@
         else {
             $(".task-accept").css({ "border": "none"});
         }
+
+        TaskDetail.bindScroll();
     }
 
     //窗体加载绑定讨论下拉
-    TaskDetail.bindScroll = function (bind) {
+    TaskDetail.bindScroll = function () {
 
         $(window).bind("scroll", function () {
 
-            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+            if (bind == "bindReply" || bind == "bindLog") {
+                var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
 
-            if (bottom <= 20) {
-                //$("#tableLoad").attr("class", "");
-                setTimeout(function () {
-                    $(".main-box .loading-lump").show().css("margin-bottom", "10px");
-                    if (bind == "bindReply")
-                    {
-                        Paras.replayPageIndex++;
-                        TaskDetail.getTaskReplys();
-                    }
-                    else if (bind == "bindLog")
-                    {
-                        Paras.logPageIndex++;
-                        TaskDetail.getTaskLogs();
-                    }
-                }, 1000);
+                if (bottom <= 20) {
+                    //$("#tableLoad").attr("class", "");
+                    setTimeout(function () {
+                        $(".main-box .loading-lump").show().css("margin-bottom", "10px");
+                        if (bind == "bindReply") {
+                            Paras.replayPageIndex++;
+                            TaskDetail.getTaskReplys();
+                        }
+                        else if (bind == "bindLog") {
+                            Paras.logPageIndex++;
+                            TaskDetail.getTaskLogs();
+                        }
+                    }, 1000);
+                }
             }
 
         });
@@ -299,7 +321,6 @@
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
-                $(".task-accept").unbind('click');
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
                 $(".task-accept").css({ "border": "none" })
             }
@@ -324,63 +345,57 @@
 
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
-
+        if ($replyPageCount >= Paras.replayPageIndex) {
             $(".main-box .loading-lump").show();
+
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
-                $totalCount = data.totalcount;
+                $(".main-box .loading-lump").hide();
+
                 $replyPageCount = data.pagecount;
                 if ($replyPageCount == 0) {
                     $(".noreply-msg").show();
-                    $(".main-box .loading-lump").hide();
                 }
                 else {
-                    if ($replyPageCount >= Paras.replayPageIndex) {
-                        doT.exec("/template/task/detailReply.html", function (templateFun) {
+                    doT.exec("/template/task/detailReply.html", function (templateFun) {
 
-                            var dataReplys = {};
-                            dataReplys.items = data.items;
-                            dataReplys.userID = TaskDetail.userID;
-                            var innerText = templateFun(dataReplys);
-                            //var innerText = templateFun(items);
-                            innerText = $(innerText);
+                        var dataReplys = {};
+                        dataReplys.items = data.items;
+                        dataReplys.userID = TaskDetail.userID;
+                        var innerText = templateFun(dataReplys);
+                        //var innerText = templateFun(items);
+                        innerText = $(innerText);
 
-                            $(".talk-main").append(innerText);
+                        $(".talk-main").append(innerText);
 
-                            innerText.find(".text-talk").each(function () {
-                                $(this).html(Global.replaceQqface($(this).html()));
-                            });
+                        innerText.find(".text-talk").each(function () {
+                            $(this).html(Global.replaceQqface($(this).html()));
+                        });
 
-                            //点击回复把用户名写入文本框
-                            $(".talk-content .talk-main .iconfont").bind("click", function () {
+                        //点击回复把用户名写入文本框
+                        innerText.find(".iconfont").bind("click", function () {
 
-                                AddReplyParas.fromReplyID = $(this).data("replyid");
+                            AddReplyParas.fromReplyID = $(this).data("replyid");
 
-                                AddReplyParas.fromReplyUserID = $(this).data("userid");
+                            AddReplyParas.fromReplyUserID = $(this).data("userid");
 
-                                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+                            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
 
-                                Content = "@" + $(this).data("name") + " ";
+                            Content = "@" + $(this).data("name") + " ";
 
-                                $(".txt-talkcontent").val(Content);
+                            $(".txt-talkcontent").val(Content);
 
-                                $(".txt-talkcontent").focus();
-
-                            });
-
-                            $(".main-box .loading-lump").hide();
+                            $(".txt-talkcontent").focus();
 
                         });
-                    }
-                    else {
+
                         $(".main-box .loading-lump").hide();
-                    }
+
+                    });
                 }
-                if (ReplyIsPageCount)
-                {
-                    TaskDetail.bindScroll('bindReply');
-                    ReplyIsPageCount = false;
-                }
-            })
+
+            });
+        }
+
     }
     
     //获取任务详情日志列表

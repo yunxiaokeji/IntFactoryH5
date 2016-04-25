@@ -1,7 +1,7 @@
 ﻿body { background-color:#fff;}
 
 header { width:100%;background-color:#f8f8f8;line-height:60px;}
-header .task-text {color:#373737;text-align:center;font-size:1.0em;}
+header .task-text {color:#373737;text-align:center;}
 
 
 /*alert 弹出层样式*/
