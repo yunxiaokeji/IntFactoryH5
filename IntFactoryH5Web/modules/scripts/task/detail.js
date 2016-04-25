@@ -34,7 +34,7 @@
 
     $logPageCount = 1;
     
-    var bind = "bindReply";
+    var bind = "talk-status";
     TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
         var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
@@ -78,8 +78,6 @@
             $(".main_image").touchSlider({
                 flexible: true,
                 speed: 200,
-                //btn_prev: $("#btn_prev"),
-                //btn_next: $("#btn_next"),
                 paging: $(".flicking_con a"),
                 counter: function (e) {
                     $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
@@ -95,19 +93,17 @@
             $(this).find("i").css("color", "#4a98e7");
             var classname = $(this).data("classname");
             $(".main-box ." + classname).show().siblings().hide();
-
+            $(".main-box").css("margin-bottom", "0px");
+            bind = classname;
             //点击讨论模块
             if (classname == "talk-status") {
-                $(".main-box").css("margin-bottom", "60px");
-                //$(window).unbind("scroll");
-                //TaskDetail.bindScroll('bindReply');
+                $(".main-box").css("margin-bottom", "100px");
             }
 
             //点击材料计划模块
             else if (classname == "shop-status")
             {
                 $(".main-box .loading-lump").hide();
-                //$(window).unbind("scroll");
             }
 
             //点击日志模块
@@ -117,14 +113,10 @@
                     TaskDetail.getTaskLogs();
                     LogIsPageCount = false;
                 }
-                $(".main-box").css("margin-bottom", "0px");
-                //$(window).unbind("scroll");
-                //TaskDetail.bindScroll('bindLog');
             }
 
             //点击制版模块
             else if (classname == "print-status") {
-                //$(window).unbind("scroll");
             }
 
         })
@@ -185,22 +177,6 @@
 
                         });
 
-                        //$(".talk-content .talk-main .iconfont").bind("click", function () {
-
-                        //    AddReplyParas.fromReplyID = $(this).data("replyid");
-
-                        //    AddReplyParas.fromReplyUserID = $(this).data("userid");
-
-                        //    AddReplyParas.fromReplyAgentID = $(this).data("agentid");
-
-                        //    Content = "@" + $(this).data("name") + " ";
-
-                        //    $(".txt-talkcontent").val(Content);
-
-                        //    $(".txt-talkcontent").focus();
-
-                        //});
-
                     });
 
             })
@@ -230,18 +206,18 @@
 
         $(window).bind("scroll", function () {
 
-            if (bind == "bindReply" || bind == "bindLog") {
+            if (bind == "talk-status" || bind == "log-status") {
                 var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
 
                 if (bottom <= 20) {
                     //$("#tableLoad").attr("class", "");
                     setTimeout(function () {
-                        $(".main-box .loading-lump").show().css("margin-bottom", "10px");
-                        if (bind == "bindReply") {
+                        $(".main-box .loading-lump").show();
+                        if (bind == "talk-status") {
                             Paras.replayPageIndex++;
                             TaskDetail.getTaskReplys();
                         }
-                        else if (bind == "bindLog") {
+                        else if (bind == "log-status") {
                             Paras.logPageIndex++;
                             TaskDetail.getTaskLogs();
                         }
@@ -286,7 +262,7 @@
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
-                $(".task-accept").html("<input type='text' class='btn-finishTask' name='appDateTime' readonly='readonly' value='标记完成' />");
+                $(".task-accept").html("<input type='button' class='btn-finishTask' name='appDateTime' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click',function () {
                     TaskDetail.showConfirmForm(1);
                 });
@@ -345,9 +321,9 @@
 
     //获取任务讨论列表
     TaskDetail.getTaskReplys = function () {
+
         if ($replyPageCount >= Paras.replayPageIndex) {
             $(".main-box .loading-lump").show();
-
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
 
@@ -388,12 +364,16 @@
 
                         });
 
-                        $(".main-box .loading-lump").hide();
 
                     });
                 }
 
+                $(".main-box .loading-lump").hide();
+
             });
+        }
+        else {
+            $(".main-box .loading-lump").hide();
         }
 
     }
@@ -401,29 +381,29 @@
     //获取任务详情日志列表
     TaskDetail.getTaskLogs = function () {
     
-        $(".main-box .loading-lump").show();
+        if ($logPageCount >= Paras.logPageIndex) {
+            $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
+                $(".main-box .loading-lump").hide();
                 $logPageCount = data.pagecount;
                 if ($logPageCount == 0) {
                     $(".log-status").html("<div class='no-log'>暂无数据</div>");
                 }
                 else {
-                    if ($logPageCount >= Paras.logPageIndex) {
+                    doT.exec("/template/task/detailLog.html", function (templateFun) {
 
-                        doT.exec("/template/task/detailLog.html", function (templateFun) {
+                        var items = data.items;
 
-                            var items = data.items;
+                        var innerText = templateFun(items);
 
-                            var innerText = templateFun(items);
-
-                            $('.log-status').append(innerText);
-                        });
-
-                    }
+                        $('.log-status').append(innerText);
+                    });
                 }
-                $(".main-box .loading-lump").hide();
             })
-
+        }
+        else {
+            $(".main-box .loading-lump").hide();
+        }
     }
 
     //获取材料采购计划列表
@@ -493,31 +473,13 @@
         $(".main_image ul li").each(function () {
             
             if ($(this).find('img').width() > $(this).find('img').height()) {
-
-                //$(".main_image").css("height", $(".main_image li img").height()+"px");
                 $(this).find('img').css("height", $(window).width() + "px");
             }
             else {
                 $(this).find('img').css("width", $(window).width() + "px");
-                //$(".main_image li").css("height", $(window).width() + "px");
             }
 
         })
-
-       
-
-        //$(".main_image li img").css("height", $(window).width()+"px");
-        //if ($(".main_image li img").width() > $(".main_image li img").height()) {
-        //    $(".main_image li img").css("height", "100%");
-
-        //}
-        //else {
-        //    $(".main_image li img").css("width", "100%");
-        //}
-
-
-        //$(".main_image").css("height", $(window).width() + "px");
-
     }
 
     module.exports = TaskDetail;
