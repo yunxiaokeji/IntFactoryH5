@@ -42,7 +42,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .menuchecked i {color:#4a98e7;}
 
 /*讨论显示区域*/
-.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:80px;}
+.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:100px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
 .main-box .talk-content li {list-style:none;}
 .main-box .talk-main { width:100%;}

@@ -472,8 +472,35 @@
     TaskDetail.setImagesSize = function () {
 
         $(".main_image").css("height", $(window).width() + "px");
+        $(".main_image").css("width", $(window).width() + "px");
         $(".main_image li").css("height", $(window).width() + "px");
-        $(".main_image li img").css("height", $(window).width() + "px");
+        $(".main_image ul li").each(function () {
+            
+            if ($(this).find('img').width() > $(this).find('img').height()) {
+
+                //$(".main_image").css("height", $(".main_image li img").height()+"px");
+                $(this).find('img').css("height", $(window).width() + "px");
+            }
+            else {
+                $(this).find('img').css("width", $(window).width() + "px");
+                //$(".main_image li").css("height", $(window).width() + "px");
+            }
+
+        })
+
+       
+
+        //$(".main_image li img").css("height", $(window).width()+"px");
+        //if ($(".main_image li img").width() > $(".main_image li img").height()) {
+        //    $(".main_image li img").css("height", "100%");
+
+        //}
+        //else {
+        //    $(".main_image li img").css("width", "100%");
+        //}
+
+
+        //$(".main_image").css("height", $(window).width() + "px");
 
     }
 
