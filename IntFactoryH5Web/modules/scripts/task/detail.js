@@ -266,7 +266,7 @@
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
                 $(".task-accept").html("<input type='text' class='btn-finishTask' name='appDateTime' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click',function () {
-                    TaskDetail.finishTask();
+                    TaskDetail.showConfirmForm(1);
                 });
             }
             else if (data == 0)
