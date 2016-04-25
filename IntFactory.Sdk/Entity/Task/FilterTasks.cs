@@ -19,6 +19,11 @@ namespace IntFactory.Sdk
         public bool isMy = true;
 
         /// <summary>
+        /// 是否获取我参与的
+        /// </summary>
+        public bool isParticipate = false;
+
+        /// <summary>
         /// 负责人ID
         /// </summary>
         public string userID = string.Empty;
