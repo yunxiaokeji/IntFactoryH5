@@ -104,13 +104,13 @@
                         }                        
                     });                    
                 } else {
-                    $(".search").slideUp("slow");
+                    $(".search").hide();
                 }
             } else {
-                $(".search").slideUp("slow");
+                $(".search").hide();
                 List.params.keyWords = "";
             }         
-            $(".shade").slideUp("slow");
+            $(".shade").hide();
             return false;
         });
 
