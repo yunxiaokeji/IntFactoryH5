@@ -442,6 +442,7 @@
                 $(".talk-main").append(innerText);
                 innerText.find(".text-talk").each(function () {
                     $(this).html(Global.replaceQqface($(this).html()));
+                    $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
             }
             else {
