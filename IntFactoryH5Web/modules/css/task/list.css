@@ -7,10 +7,10 @@
 .header li:first-child{margin-top:35px;}
 .header li:first-child div{float:left;margin-left:30px;}
 .header li .login-name{float:left;line-height:27px;margin-left:5px;width:150px;text-align:left;}
-.header .task span{float:left;margin-left:40px;}
-.header .task .iconfont{font-size:28px;margin-right:40px;line-height:32px;}
+.header .task span{float:left;margin-left:30px;font-size:28px;}
+.header .task .iconfont{font-size:28px;margin-right:40px;line-height:40px;}
 /*切换任务*/
-.task-switch{position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;margin-left:250px;width:125px;text-align:center;display:none;}
+.task-switch{position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;margin-left:245px;width:125px;text-align:center;display:none;}
 .task-switch li{ padding-top:12px;padding-bottom:12px;color:#666;}
 /*遮罩*/
 .shade { width:100%;height:100%;position:fixed;z-index:1002;background-color:rgba(143,143,143,0.6);display:none;}
