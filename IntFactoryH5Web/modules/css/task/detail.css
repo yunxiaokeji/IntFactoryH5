@@ -1,12 +1,12 @@
 ﻿/*头部*/
-body { background-color:#efefef;font-family:'Microsoft YaHei';font-size:24px;color:#333;}
+body { background-color:#efefef;}
 header { width:100%;background-color:#f8f8f8;line-height:60px;}
 header .task-text {color:#373737;text-align:center;font-size:30px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
-.task-accept {padding:5px 20px;cursor:pointer; position:absolute;right:15px;top:10px;line-height:30px;text-align:center;color:#e0483e; border-radius:5px;}
+.task-accept {cursor:pointer; position:absolute;right:15px;top:-3px;text-align:center;color:#e0483e;}
 .task-accept span { color:#999;}
-.task-accept input[type=button] { background:transparent;text-align:center;color:#e0483e;cursor:pointer;border:none;outline:none;font-size:18px;height:30px;line-height:30px;}
+.task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{ background:transparent;text-align:center;color:#e0483e;cursor:pointer;outline:none;font-size:22px;height:40px;line-height:40px;border:1px solid #e0483e;padding:0 20px; border-radius:5px;width:130px;}
 
 
 /*焦点图*/
@@ -43,7 +43,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .menuchecked i {color:#4a98e7;}
 
 /*讨论显示区域*/
-.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:100px;}
+.main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:80px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
 .main-box .talk-content li {list-style:none;}
 .main-box .talk-main { width:100%;}
@@ -122,7 +122,5 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .log-status li:last-child p:first-child { color:#666;}
 .log-status li:last-child p:last-child { color:#999;}
 
-
-
-
-
+.getback { position:fixed;z-index:55555;color:#666;right:-5px;bottom:90px;display:none;}
+.getback .iconfont-back { font-size:60px;text-align:center;}
