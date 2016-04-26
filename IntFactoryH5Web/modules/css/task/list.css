@@ -1,6 +1,6 @@
 ﻿/*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
-.header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:30px;}
+.header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:25px;}
 .header li:last-child{float:right;margin-top:23px;text-align:right;}
 .header li:first-child{margin-top:30px;}
 .header li:first-child div{float:left;margin-left:30px;}
@@ -19,7 +19,7 @@
 .search span:last-child {color:#646464;height:30px;float:right;margin-right:30px;font-size:28px;}
 /*退出下拉*/
 .login {height:100px;line-height:100px;width:135px;position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
-.login li{text-align:center;font-size:22px;}
+.login li{text-align:center;}
 /*进行状态*/
 .task-status{width:100%;height:100px;border-bottom:1px solid #b2b2b2;margin-top:80px;}
 .task-status li{width:25%;float:left;}
