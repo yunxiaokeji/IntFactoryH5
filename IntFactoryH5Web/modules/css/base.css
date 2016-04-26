@@ -1,5 +1,5 @@
 ﻿/*全局样式*/
-*{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+*{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);font-size:24px;}
 html{min-height:100%;border:none;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
 li{ list-style-type:none;}
 a { color: #4a98e7; text-decoration: none;}
@@ -162,6 +162,4 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:non
 .width500 { width:500px !important; }
 .minwidth300 { min-width:300px !important; }
 
-/*任务列表*/
-.dropdownlist .potion{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none; }
-.list li .tag-make { width:10px;height:20px;margin-left:-12px;}
+
