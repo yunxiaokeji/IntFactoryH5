@@ -1,10 +1,10 @@
 ﻿/*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
-.header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:23px;}
+.header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:30px;}
 .header li:last-child{float:right;margin-top:23px;text-align:right;}
 .header li:first-child{margin-top:30px;}
 .header li:first-child div{float:left;margin-left:30px;}
-.header li .login-name{float:left;line-height:27px;margin-left:5px;width:100px;text-align:left;}
+.header li .login-name{float:left;line-height:27px;margin-left:5px;width:130px;text-align:left;}
 .header .task span{float:left;margin-left:30px;font-size:28px;}
 .header .task .iconfont{font-size:28px;margin-right:480px;line-height:40px;}
 /*切换任务*/
