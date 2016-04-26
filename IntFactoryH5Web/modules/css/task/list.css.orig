@@ -2,6 +2,15 @@
 .mask-shade {width:100%;height:100%;position:fixed;z-index:289;background-color:rgba(255,255,255,0);left:0px;top:0;display:none;}
 /*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
+<<<<<<< HEAD
+.header li{float:left;width:33%;height:50px;text-align:center;margin-top:30px;}
+.header li:last-child{float:right;margin-top:23px;text-align:right;}
+.header li:first-child{margin-top:35px;}
+.header li:first-child div{float:left;margin-left:30px;}
+.header li .login-name{float:left;line-height:25px;margin-left:10px;width:150px;text-align:left;}
+.header .task span{float:left;margin-left:40px;}
+.header .task .iconfont{font-size:28px;margin-right:40px;line-height:35px;}
+=======
 .header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:23px;}
 .header li:last-child{float:right;margin-top:23px;text-align:right;}
 .header li:first-child{margin-top:30px;}
@@ -9,6 +18,7 @@
 .header li .login-name{float:left;line-height:27px;margin-left:5px;width:100px;text-align:left;}
 .header .task span{float:left;margin-left:30px;font-size:28px;}
 .header .task .iconfont{font-size:28px;margin-right:480px;line-height:40px;}
+>>>>>>> dbc369d97d92fddb18593cd64be6864051056644
 /*切换任务*/
 .task-switch{position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;margin-left:38%;width:125px;text-align:center;display:none;}
 .task-switch li{ padding-top:12px;padding-bottom:12px;color:#888;font-size:20px;}
@@ -18,8 +28,13 @@
 .search span { float:left;display:block;}
 .search span:first-child {margin-left:20px;}
 .search span .txt-search {width:95%;height:60px;border-radius:5px;border:1px solid #CCC;padding-left:40px; color:#999;background:url(/modules/images/Zoom.gif) no-repeat center left;background-color:#fff;margin-top:-3px;background-size:2em;}
+<<<<<<< HEAD
+.search span:last-child {color:#646464;height:30px;float:right;margin-right:30px;}
+/*登录下拉*/
+=======
 .search span:last-child {color:#646464;height:30px;float:right;margin-right:30px;font-size:28px;}
 /*退出下拉*/
+>>>>>>> dbc369d97d92fddb18593cd64be6864051056644
 .login {height:50px;width:120px;position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
 .login li{text-align:center;font-size:18px;line-height:50px;}
 /*进行状态*/
@@ -30,13 +45,21 @@
 .task-status li a{height:30px;margin-top:12px;text-align:center;color:#666;display:inline-block;width:100%;}
 /*选择条件的css样式*/
 .select{width:100%;height:50px;border-bottom:1px solid #ccc;}
+<<<<<<< HEAD
+.select a{color:#999;}
+=======
 .select a{color:#999;font-size:20px;}
+>>>>>>> dbc369d97d92fddb18593cd64be6864051056644
 .select li{width:25%;float:left;border-right:1px solid #ccc;margin-left:-1px;text-align:center;line-height:50px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 /*选项下拉*/
 .dropdownlist { position:relative;}
 /*类型下拉*/
 .dropdownlist ul{box-shadow:2px 4px 10px #ccc;border-radius:5px;}/*边框阴影*/
+<<<<<<< HEAD
+.dropdownlist li{color:#999;padding-top:12px;padding-bottom:12px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+=======
 .dropdownlist li{font-size:18px;color:#999;padding-top:12px;padding-bottom:12px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+>>>>>>> dbc369d97d92fddb18593cd64be6864051056644
 .dropdownlist .tab-type{border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
 /*流程下拉*/
 .dropdownlist .flow-type{border:1px solid #ccc;border-top:0;left:25%;margin-left:-1px;}
@@ -65,7 +88,11 @@
 /*状态图标(不同的图标颜色不同)*/
 .list .details .status-proceed { color:#09aa4a;}
 /*信息文字*/
+<<<<<<< HEAD
+.list .center-list-task .details {margin-bottom:50px; }
+=======
 .list .center-list-task .details {margin-bottom:40px; }
+>>>>>>> dbc369d97d92fddb18593cd64be6864051056644
 .list .center-list-task .stage {height:30px;margin-top:21px;}
 /*无数据*/
 .list .nodata {color:#999; margin-top:20%;margin-left:45%;font-family:'Microsoft YaHei'; }
