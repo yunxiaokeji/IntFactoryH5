@@ -32,7 +32,7 @@
         List.bindEvent();
 
         List.getList();
-        List.GetTaskFlow();
+        List.getTaskFlow();
         
     };
 
@@ -71,7 +71,7 @@
             $(".task-switch").slideToggle(400);            
         });
 
-        //选择用户任务类型
+        //选择用户任务类型(判断是否是我参与的)
         $(".task-switch li").click(function () {
             $(".task span").text($(this).text());
             $(this).parent().hide();
@@ -85,7 +85,7 @@
             List.getList();
         });
 
-        //搜索判断
+        //(关键字)搜索判断
         $(".cencal").click(function () {
             List.params.pageIndex = 1;
             var name = $(this).text();
@@ -116,8 +116,8 @@
 
         //(搜索框)点击空白区域
         $(".shade").click(function () {
-            $(".shade").slideUp("slow");
-            $(".search").slideUp("slow");
+            $(".shade").hide();
+            $(".search").hide();
         });
 
         //(下拉框)点击空白区域
@@ -128,13 +128,8 @@
             $(".task-switch").slideUp("slow");
             $(".task-switch").data("taskswitch", "0");
             $(".mask-shade").hide();
-        });        
-        
-        //(搜索框)冒泡事件
-        $(".span-search").click(function () {
-            return false;
-        });
-        
+        });  
+       
         //下拉
         $(".select li").click(function () {
             List.params.pageIndex = 1;
@@ -155,10 +150,10 @@
 
         //获取类型的任务列表
         $(".tab-type li").click(function () {
-            $(".flow-a").text("流程");
-            $(".screen-a").text("流程阶段");
+            $(".flow-span").text("流程");
+            $(".screen-span").text("流程阶段");
 
-            $(".type-a").text($(this).text());
+            $(".type-span").text($(this).text());
             $(this).parent().hide();
             $(".mask-shade").hide();
 
@@ -180,8 +175,8 @@
 
         //获取订单流程的任务列表(+读取订单流程阶段的列表[不是详情])
         $(".flow-type").on("click", ".all-flow", function () {
-            $(".screen-a").text("流程阶段");
-            $(".flow-a").text($(this).text());
+            $(".screen-span").text("流程阶段");
+            $(".flow-span").text($(this).text());
 
             $(this).parent().hide();
             $(".mask-shade").hide();
@@ -190,12 +185,12 @@
             List.params.orderStageID = -1;
             List.params.orderProcessID = $(this).data("idflow");
             List.getList();
-            List.GetTaskFlowStage();
+            List.getTaskFlowStage();
         });
 
         //获得订单流程阶段的任务列表
         $(".screen-type").on("click", ".all-screen", function () {
-            $(".screen-a").text($(this).text());
+            $(".screen-span").text($(this).text());
             $(this).parent().hide();
             $(".mask-shade").hide();
 
@@ -206,7 +201,7 @@
 
         //获取排序的任务列表
         $(".screen-sort li").click(function () {
-            $(".sort-a").text($(this).text());
+            $(".sort-span").text($(this).text());
             $(this).parent().hide();
             $(".mask-shade").hide();
 
@@ -276,7 +271,7 @@
     }
 
     //获取订单流程的列表
-    List.GetTaskFlow = function () {
+    List.getTaskFlow = function () {
         $(".flow-type").empty();
         $.post("/Task/GetTaskFlow", null, function (data) {
             doT.exec("../modules/template/task/flow.html", function (e) {
@@ -287,7 +282,7 @@
     }
 
     //获取订单流程的任务列表
-    List.GetTaskFlowStage = function () {
+    List.getTaskFlowStage = function () {
         $(".screen-type").empty();
         $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {
             doT.exec("../modules/template/task/flowStage.html", function (code) {
