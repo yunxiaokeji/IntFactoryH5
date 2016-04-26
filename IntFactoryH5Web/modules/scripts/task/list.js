@@ -55,18 +55,15 @@
 
         //用户退出  
         $(".login-menu").click(function () {
-            $(".mask-shade").show();
-            //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist").hide();
+            $(".dropdownlist .potion").slideUp("slow");
             $(".task-switch").slideUp("slow");
             $(".login").slideToggle(400);               
         });
 
         //切换用户任务
         $(".task").click(function () {
-            $(".mask-shade").show();
             //当点击此事件时,关闭其他下拉框
-            $(".dropdownlist").hide();
+            $(".dropdownlist .potion").slideUp("slow");
             $(".login").slideUp("slow");
             $(".task-switch").slideToggle(400);            
         });
@@ -75,7 +72,6 @@
         $(".task-switch li").click(function () {
             $(".task span").text($(this).text());
             $(this).parent().hide();
-            $(".mask-shade").hide();
             var switchnum = $(this).data("switch");
             if (switchnum==0) {
                 List.params.isParticipate = false;
@@ -120,22 +116,11 @@
             $(".search").hide();
         });
 
-        //(下拉框)点击空白区域
-        $(".mask-shade").click(function () {
-            $(".potion").slideUp("slow");
-            $(".login").slideUp("slow");
-            $(".login").data("login", "0");
-            $(".task-switch").slideUp("slow");
-            $(".task-switch").data("taskswitch", "0");
-            $(".mask-shade").hide();
-        });  
-       
         //下拉
         $(".select li").click(function () {
             List.params.pageIndex = 1;
-            $(".mask-shade").show();
-            $(".dropdownlist").show();
-            $("."+$(this).data("idnum")+"").slideDown("slow");
+            var $slideUl = $("." + $(this).data("idnum") + "");
+            $slideUl.slideToggle(400).siblings().slideUp("slow");
         });
 
         //获取全部状态的任务列表
@@ -155,8 +140,7 @@
 
             $(".type-span").text($(this).text());
             $(this).parent().hide();
-            $(".mask-shade").hide();
-
+            
             List.params.pageIndex = 1;
             List.params.orderType = $(this).data("idtype");
             List.params.orderProcessID = -1;
@@ -179,8 +163,7 @@
             $(".flow-span").text($(this).text());
 
             $(this).parent().hide();
-            $(".mask-shade").hide();
-
+            
             List.params.pageIndex = 1;
             List.params.orderStageID = -1;
             List.params.orderProcessID = $(this).data("idflow");
@@ -192,8 +175,7 @@
         $(".screen-type").on("click", ".all-screen", function () {
             $(".screen-span").text($(this).text());
             $(this).parent().hide();
-            $(".mask-shade").hide();
-
+            
             List.params.pageIndex = 1;
             List.params.orderStageID = $(this).data("id");
             List.getList();
@@ -203,8 +185,7 @@
         $(".screen-sort li").click(function () {
             $(".sort-span").text($(this).text());
             $(this).parent().hide();
-            $(".mask-shade").hide();
-
+            
             List.params.isAsc = $(this).data("takepo");
             List.params.taskOrderColumn = $(this).data("id");
             List.getList();
@@ -237,6 +218,23 @@
                 } 
             }
         });
+
+        //监听页面click事件
+        $(document).click(function (e) {
+            if (!$(e.target).parents().hasClass("login-menu") && !$(e.target).hasClass("login-menu")) {
+                $(".login").slideUp(400);
+            }
+
+            if (!$(e.target).parents().hasClass("select") && !$(e.target).hasClass("select")) {
+                $(".potion").slideUp(400);
+            }
+
+            if (!$(e.target).parents().hasClass("task") && !$(e.target).hasClass("task")) {
+                $(".task-switch").slideUp(400);
+            }
+
+        });
+
 
     };
 
