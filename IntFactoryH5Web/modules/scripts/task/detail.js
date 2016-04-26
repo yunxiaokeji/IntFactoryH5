@@ -316,7 +316,7 @@
             });
         }
         else {
-            $(".main-box .send-other").length + $(".main-box .send-self").length == 0 ? "" : $(".alert-lastreplypage").length == 0 ? $(".main-box .talk-status").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条了</div>") : "";
+            $(".main-box .send-other").length + $(".main-box .send-self").length == 0 ? "" : $(".alert-lastreplypage").length == 0 ? $(".main-box .talk-status").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条啦</div>") : "";
         }
     }
     
@@ -344,7 +344,7 @@
             })
         }
         else {
-            $(".log-status .log-box").length == 0 ? "" : $(".alert-lastlogpage").length == 0 ? $(".main-box .log-status").append("<div class='alert-lastlogpage center mTop10 color999'>已经是最后一条了</div>") : "";
+            $(".log-status .log-box").length == 0 ? "" : $(".alert-lastlogpage").length == 0 ? $(".main-box .log-status").append("<div class='alert-lastlogpage center mTop10 color999'>已经是最后一条啦</div>") : "";
            
         }
     }
