@@ -213,7 +213,7 @@
                         List.getList(true);
                     } else {
                         $(".prompt").remove();
-                        $(".list").append('<div class="prompt">已经到最后一条啦</div>');
+                        $(".list").append('<div class="prompt">已经是最后一条啦</div>');
                     }
                 } 
             }
