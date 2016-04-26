@@ -59,7 +59,7 @@
             //当点击此事件时,关闭其他下拉框
             $(".dropdownlist").hide();
             $(".task-switch").slideUp("slow");
-            $(".login").fadeToggle(400);               
+            $(".login").slideToggle(400);               
         });
 
         //切换用户任务
@@ -68,22 +68,21 @@
             //当点击此事件时,关闭其他下拉框
             $(".dropdownlist").hide();
             $(".login").slideUp("slow");
-            $(".task-switch").fadeToggle(400);            
+            $(".task-switch").slideToggle(400);            
         });
 
         //选择用户任务类型
         $(".task-switch li").click(function () {
             $(".task span").text($(this).text());
-            $(".task-switch").hide();
+            $(this).parent().hide();
             $(".mask-shade").hide();
             var switchnum = $(this).data("switch");
             if (switchnum==0) {
                 List.params.isParticipate = false;
-                List.getList();
             } else {
                 List.params.isParticipate = true;
-                List.getList();
             }
+            List.getList();
         });
 
         //搜索判断
@@ -231,7 +230,7 @@
                 $(".getback").slideUp("slow");
             }
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();            
-            if (bottom <= 1) {
+            if (bottom <= 200) {
                 if (!List.isLoading) {
                     List.params.pageIndex++;
                     if (List.params.pageIndex <= List.pageCount) {
