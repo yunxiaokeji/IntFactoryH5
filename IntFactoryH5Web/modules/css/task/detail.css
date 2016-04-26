@@ -116,9 +116,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .log-status .log-box { border-bottom:1px solid #ccc;width:100%;overflow:hidden;padding:10px 0;display:table;}
 .log-status .log-box img { width:35px;height:35px;border-radius:50%;margin-top:22px;}
 .log-status .log-box li { display:table-cell;color:#666;}
-.log-status .log-box .log-name {color:#444040;width:90px;text-align:center;vertical-align:top;padding-top: 24px;}
-.log-status .log-box li:first-child{ width:35px;height:35px;}
-.log-status .log-box li:last-child {vertical-align:top;line-height:40px;}
+.log-status .log-box .log-name {color:#444040;vertical-align:top;padding-top: 24px;}
+.log-status .log-box li:first-child{ width:35px;height:35px;padding-right:10px;}
+.log-status .log-box li:last-child {vertical-align:top;line-height:40px;padding-left:10px;}
 .log-box li:last-child p:last-child { color:#999;}
 
 .getback { position:fixed;z-index:55555;color:#666;right:-5px;bottom:90px;display:none;}
