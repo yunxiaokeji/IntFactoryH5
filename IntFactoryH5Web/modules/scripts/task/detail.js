@@ -188,7 +188,6 @@
                 if (bottom <= 20) {
                     //$("#tableLoad").attr("class", "");
                     setTimeout(function () {
-                        $(".main-box .loading-lump").show();
                         if (bind == "talk-status") {
                             Paras.replayPageIndex++;
                             TaskDetail.getTaskReplys();
@@ -307,49 +306,11 @@
                     $(".noreply-msg").show();
                 }
                 else {
-                    doT.exec("/template/task/detailReply.html", function (templateFun) {
-
-                        var dataReplys = {};
-                        dataReplys.items = data.items;
-                        dataReplys.userID = TaskDetail.userID;
-                        var innerText = templateFun(dataReplys);
-                        innerText = $(innerText);
-
-                        $(".talk-main").append(innerText);
-
-                        innerText.find(".text-talk").each(function () {
-                            $(this).html(Global.replaceQqface($(this).html()));
-                        });
-
-                        //点击回复把用户名写入文本框
-                        innerText.find(".iconfont").bind("click", function () {
-
-                            AddReplyParas.fromReplyID = $(this).data("replyid");
-
-                            AddReplyParas.fromReplyUserID = $(this).data("userid");
-
-                            AddReplyParas.fromReplyAgentID = $(this).data("agentid");
-
-                            Content = "@" + $(this).data("name") + " ";
-
-                            $(".txt-talkcontent").val(Content);
-
-                            $(".txt-talkcontent").focus();
-
-                        });
-
-
-                    });
+                    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
                 }
-
-                $(".main-box .loading-lump").hide();
 
             });
         }
-        else {
-            $(".main-box .loading-lump").hide();
-        }
-
     }
     
     //获取任务详情日志列表
