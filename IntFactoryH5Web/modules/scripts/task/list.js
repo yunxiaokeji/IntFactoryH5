@@ -3,9 +3,9 @@
 
     var List = {};
 
-    List.pageCount = 0;
+    List.PageCount = 0;
    
-    List.isLoading = false;
+    List.IsLoading = false;
 
     List.params = {
         keyWords: "",
@@ -207,9 +207,9 @@
             }
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();            
             if (bottom <= 200) {
-                if (!List.isLoading) {
+                if (!List.IsLoading) {
                     List.params.pageIndex++;
-                    if (List.params.pageIndex <= List.pageCount) {
+                    if (List.params.pageIndex <= List.PageCount) {
                         List.getList(true);
                     } else {
                         $(".prompt").remove();
@@ -234,15 +234,15 @@
             }
 
         });
-
-
+        
+        
     };
 
     ///公共方法
    
     //页面加载获取列表
     List.getList = function (noEmpty) {
-        List.isLoading = true;
+        List.IsLoading = true;
         if (!noEmpty) {
             $(".list").empty();
         }        
@@ -256,13 +256,13 @@
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
             } else {               
                 //分页数据
-                List.pageCount = data.pageCount;
+                List.PageCount = data.pageCount;
                 //引用doT模板
                 doT.exec("../modules/template/task/list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });
-                List.isLoading = false;
+                List.IsLoading = false;
             }            
             $(".listbg").remove();
         });        

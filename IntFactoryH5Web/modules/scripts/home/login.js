@@ -3,6 +3,7 @@
 define(function (require, exports, module) {
 
     require("jquery");
+
     var Global = require("global")
 
     var Home = {};
@@ -13,6 +14,7 @@ define(function (require, exports, module) {
 
         Home.bindLoginEvent();
     }
+
     //绑定事件
     Home.bindLoginEvent = function () {
 
