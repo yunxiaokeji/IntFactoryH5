@@ -28,7 +28,7 @@ namespace IntFactoryH5Web.Controllers
 
         public ActionResult Logout() {
             Session["ClientManager"] = null;
-
+            
             return Redirect("/Home/Index");
         }
 
