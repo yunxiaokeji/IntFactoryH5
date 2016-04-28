@@ -7,6 +7,8 @@
    
     List.IsLoading = false;
 
+    List.changeBefone = "";
+
     List.params = {
         keyWords: "",
         isMy: true,
@@ -92,23 +94,43 @@
                     List.params.keyWords = txt;
                     List.getList();
                     $(this).text("取消");
-                    $(".txt-search").keyup(function () {
-                        if ($(".txt-search").val()=="") {
-                            $(".cencal").text("取消");
-                        } else {
-                            $(".cencal").text("确定");
-                        }                        
-                    });                    
                 } else {
                     $(".search").hide();
+                    List.params.keyWords = "";
+                    List.getList();
                 }
             } else {
                 $(".search").hide();
                 List.params.keyWords = "";
+                List.getList();
             }         
             $(".shade").hide();
             return false;
         });
+
+        //搜索内容发生变化
+        $(".txt-search").keyup(function () {
+            var changeAfter = $(".txt-search").val();
+            if (List.changeBefone == changeAfter) {
+                $(".cencal").text("确定");
+            } else if (changeAfter == "") {
+                $(".cencal").text("取消");
+            } else {
+                $(".cencal").text("确定");
+            }
+        })
+
+        $(".txt-search").change(function () {
+            alert("hello");
+            //var changeAfter = $(".txt-search").val();
+            //if (List.changeBefone == changeAfter) {
+            //    $(".cencal").text("确定");
+            //} else if (changeAfter == "") {
+            //    $(".cencal").text("取消");
+            //} else {
+            //    $(".cencal").text("确定");
+            //}
+        })
 
         //(搜索框)点击空白区域
         $(".shade").click(function () {
