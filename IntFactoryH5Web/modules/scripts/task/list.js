@@ -84,6 +84,7 @@
         //(关键字)搜索判断
         $(".cencal").click(function () {
             List.params.pageIndex = 1;
+            List.params.keyWords = "";
             var name = $(this).text();
             if (name=="确定") {
                 var txt = $(".txt-search").val();
@@ -91,23 +92,29 @@
                     $(".shade").slideUp("slow");
                     List.params.keyWords = txt;
                     List.getList();
-                    $(this).text("取消");
-                    $(".txt-search").keyup(function () {
-                        if ($(".txt-search").val()=="") {
-                            $(".cencal").text("取消");
-                        } else {
-                            $(".cencal").text("确定");
-                        }                        
-                    });                    
+                    $(this).text("取消");                    
                 } else {
                     $(".search").hide();
+                    List.params.keyWords = "";
+                    List.getList();
                 }
             } else {
                 $(".search").hide();
-                List.params.keyWords = "";
             }         
             $(".shade").hide();
             return false;
+        });
+
+        //搜索内容发生变化
+        $(".txt-search").keyup(function () {
+            var changeAfter = $(".txt-search").val();
+            if (changeAfter == "") {
+                $(".cencal").text("取消");
+            } else if (List.params.keyWords == changeAfter) {
+                $(".cencal").text("取消");
+            } else {
+                $(".cencal").text("确定");
+            }
         });
 
         //(搜索框)点击空白区域
@@ -245,16 +252,16 @@
         List.IsLoading = true;
         if (!noEmpty) {
             $(".list").empty();
-        }        
+        }
         //获取任务列表(页面加载)
         $(".list").append('<div class="listbg mTop20"></div>');
         $.post("/Task/GetTask", { filter: JSON.stringify(List.params) }, function (data) {
             //获取用户名
             $(".login-name").text(data.userName);
             //判断有无数据
-            if (data.items.length==0) {
+            if (data.items.length == 0) {
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
-            } else {               
+            } else {
                 //分页数据
                 List.PageCount = data.pageCount;
                 //引用doT模板
@@ -263,10 +270,10 @@
                     $(".list").append($result);
                 });
                 List.IsLoading = false;
-            }            
+            }
             $(".listbg").remove();
-        });        
-    }
+        });
+    };
 
     //获取订单流程的列表
     List.getTaskFlow = function () {
@@ -277,18 +284,18 @@
                 $(".flow-type").append($res);
             });
         });
-    }
+    };
 
     //获取订单流程的任务列表
     List.getTaskFlowStage = function () {
         $(".screen-type").empty();
         $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {
             doT.exec("../modules/template/task/flowStage.html", function (code) {
-                var $res = code(data.items);                
+                var $res = code(data.items);
                 $(".screen-type").append($res);
             });
         });
-    }
+    };
 
     module.exports = List;
 });
