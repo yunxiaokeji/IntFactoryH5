@@ -49,7 +49,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box .talk-main { width:100%;}
 .main-box .talk-main img { width:35px;height:35px;border-radius:50%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
-.main-box .text-talk {line-height:38px;padding:10px 0;word-wrap:break-word;width:100%;}
+.main-box .text-talk {line-height:38px;padding:10px 0;word-wrap:break-word;width:100%;min-height:38px;}
 .loading-lump {text-align:center;margin:10px 0;}
 .loading-lump img { width:35px;height:35px;}
 

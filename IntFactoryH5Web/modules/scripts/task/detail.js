@@ -332,7 +332,7 @@
                     $(".log-status").html("<div class='no-log'>暂无数据</div>");
                 }
                 else {
-                    doT.exec("/template/task/detailLog.html", function (templateFun) {
+                    doT.exec("/modules/template/task/detailLog.html", function (templateFun) {
 
                         var items = data.items;
 
@@ -356,7 +356,7 @@
                 $(".shop-status").html("<div class='no-material'>暂无材料</div>");
             }
             else {
-                doT.exec("/template/task/materList.html", function (templateFun) {
+                doT.exec("/modules/template/task/materList.html", function (templateFun) {
                     var innerText = templateFun(data);
                     innerText = $(innerText);
                     $(".shop-status").html(innerText);
@@ -429,7 +429,7 @@
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data,replyOperate) {
 
-        doT.exec("/template/task/detailReply.html", function (templateFun) {
+        doT.exec("/modules/template/task/detailReply.html", function (templateFun) {
 
             var dataReplys = {};
             dataReplys.items = data.items;
