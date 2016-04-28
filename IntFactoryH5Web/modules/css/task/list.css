@@ -70,7 +70,7 @@
 /*加载状态图片*/
 .list .listbg { background:url(/modules/images/img.gif) no-repeat left center;height:40px;margin-left:48%;width:40px;background-size:40px;}
 /*返回顶部*/
-.getback { position:fixed;z-index:555;color:#007aff;right:5%;bottom:8%;display:none;}
+.getback { position:fixed;z-index:555;color:#333;right:5%;bottom:8%;display:none;}
 .getback span{right:10%;}
 /*提示*/
 .list .prompt { text-align:center;color:#999;}
@@ -81,6 +81,6 @@
 .iconfont-select {color:#666;font-size:20px;}
 .iconfont-details {font-size:22px;color:#e0183e;margin-right:10px;}
 .iconfont-stage {font-size:26px;color:#999;}
-.iconfont-back {font-size:30px;text-align:center;}
+.iconfont-back {font-size:60px;text-align:center;}
 
 
