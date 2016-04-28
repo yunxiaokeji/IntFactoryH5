@@ -54,9 +54,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .loading-lump img { width:35px;height:35px;}
 
 
-.send-other { margin-top:20px;float:left;margin-left:48px;clear:both;width:71%;}
-.send-other .send-nameanddate{ text-align:left;margin-left:-56px; color:#666;padding-right:8px;}
-.send-other .send-nameanddate span:first-child {margin-right:10px;color:#308aef;}
+.send-other { margin-top:20px;float:left;margin-left:54px;clear:both;width:71%;}
+.send-other .send-nameanddate{ text-align:left;margin-left:-66px; color:#666;}
+.send-other .send-nameanddate span:first-child {margin-right:10px;color:#308aef;display:inline-block;min-width: 60px;text-align:center;}
 .send-other .talk-other {min-height:30px; border-radius:8px;color:#666;background-color:#F0F0F0;line-height:25px;padding:0 8px;position:relative;margin-top:8px;}
 .send-other .talk-other .other-pic {cursor:pointer;width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;left:-50px;top:-5px;}
 .send-other .talk-other .talk-lump {width:0;height:0;border-right:10px solid #F0F0F0; border-top:8px solid transparent;border-bottom:8px solid transparent;position:absolute;left:-10px;top:5px;}
@@ -64,8 +64,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .send-other .return-other .iconfont { font-size:1em;color:#a8a8a8;}
 
 .send-self { margin-top:20px;margin-right:55px;float:right;clear:both;width:71%;}
-.send-self .send-nameanddate{text-align:right;margin-right:-60px;}
-.send-self .send-nameanddate span:last-child {margin-left:5px;color:#308aef;}
+.send-self .send-nameanddate{text-align:right;margin-right:-60px;color:#666;}
+.send-self .send-nameanddate span:last-child {margin-left:5px;color:#308aef;display: inline-block;min-width: 60px;text-align:center;}
 .send-self .talk-self {min-height:30px; border-radius:8px;color:#666;background-color:#B5E0FE;line-height:25px;padding:0 8px;position:relative;margin-top:8px;}
 .send-self .talk-self .self-pic { width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;right:-50px;top:-5px;cursor:pointer;}
 .send-self .talk-self .talk-lump { width:0;height:0;border-left:10px solid #B5E0FE; border-top:8px solid transparent;border-bottom:8px solid transparent;position:absolute;right:-10px;top:5px;}
