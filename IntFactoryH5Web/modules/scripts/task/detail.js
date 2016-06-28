@@ -64,7 +64,7 @@
         TaskDetail.getOrderList(TaskDetail.materialList);
         
         //浏览器加载删除制版信息操作列
-        TaskDetail.printBaseInfo();
+        TaskDetail.initStyle();
 
         //调用绑定选择时间控件(绑定设置到期时间事件)
         TaskDetail.bindTimerPicker();
@@ -74,6 +74,22 @@
 
     }
    
+    //初始化样式信息
+    TaskDetail.initStyle = function () {
+        
+        var documentWidth = $(window).width();
+        var ducomentHeight = $(window).height();
+
+        //设置讨论内容高度
+        $(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
+
+        //设置图片显示宽高
+        $(".pic-list .pic-box img").css({ "width": (documentWidth - 20 - 20) / 2 + "px", "height": "200px" });
+        $(".pic-list .pic-box img").css({ "margin-right": "10px" });
+
+        $(".platemakingBody table tr td:last-child").remove();
+    }
+
     //绑定事件
     TaskDetail.bindEvent = function () {
 
@@ -174,6 +190,33 @@
                 }
             }
         }
+
+        //取消任务讨论发表
+        $(".cancel-reply").click(function () {
+            $("body,html").removeClass('layer');
+            $(".reply-layer").css("bottom", "-100%");
+        });
+
+        //完成任务讨论发表
+        $(".finish-reply").click(function () {
+            $("body,html").removeClass('layer');
+            $(".reply-layer").css("bottom", "-100%");
+            alert("ok");
+        });
+
+        //发表讨论
+        $(".txt-talkcontent").click(function () {
+            $("body,html").addClass('layer');
+            $(".reply-layer").css("bottom", "0");
+            setTimeout(function () { $(".reply-layer-content").focus() },1000);
+
+        })
+
+        //删除附件
+        $(".reply-layer .del").click(function () {
+            var _this = $(this);
+            _this.parents('.file').remove();
+        })
 
         TaskDetail.bindScroll();
     }
@@ -307,12 +350,13 @@
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
                 replyPageCount = data.pagecount;
-                if (replyPageCount == 0) {
-                    $(".noreply-msg").show();
-                }
-                else {
-                    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-                }
+                    //if (replyPageCount == 0) {
+                    //    $(".noreply-msg").show();
+                    //}
+                    //else {
+                    //    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                    //}
+                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
             });
         }
         else {
@@ -386,12 +430,6 @@
             }
     }
 
-    //获取制版信息
-    TaskDetail.printBaseInfo = function () {
-        //$(".platemakingBody").html(decodeURI(TaskDetail.platemaking));
-        $(".platemakingBody table tr td:last-child").remove();
-    }
-
     //接受任务、标记任务完成的弹出浮层
     TaskDetail.showConfirmForm = function (showStatus) {
 
@@ -428,14 +466,12 @@
 
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data,replyOperate) {
-
-        doT.exec("/modules/template/task/detailReply.html", function (templateFun) {
+        doT.exec("/modules/template/task/newDetailReply.html", function (templateFun) {
 
             var dataReplys = {};
             dataReplys.items = data.items;
             dataReplys.userID = TaskDetail.userID;
             var innerText = templateFun(dataReplys);
-
             innerText = $(innerText);
 
             if (GetOrAddReply == "GetReply") {
@@ -459,17 +495,26 @@
             //点击回复把用户名写入文本框
 
             innerText.find(".iconfont").click(function () {
-                AddReplyParas.fromReplyID = $(this).data("replyid");
 
-                AddReplyParas.fromReplyUserID = $(this).data("userid");
+                $(".reply-layer-content").html('');
 
-                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+                $(".reply-layer").css("bottom", "0");
 
-                Content = "@" + $(this).data("name") + " ";
+                $("body,html").addClass('layer');
 
-                $(".txt-talkcontent").val(Content);
+                setTimeout(function () { $(".reply-layer-content").focus() }, 1000);
 
-                $(".txt-talkcontent").focus();
+                //AddReplyParas.fromReplyID = $(this).data("replyid");
+
+                //AddReplyParas.fromReplyUserID = $(this).data("userid");
+
+                //AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+
+                //Content = "@" + $(this).data("name") + " ";
+
+                //$(".txt-talkcontent").val(Content);
+
+                //$(".txt-talkcontent").focus();
 
             });
 

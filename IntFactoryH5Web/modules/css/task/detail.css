@@ -1,5 +1,8 @@
 ﻿/*头部*/
 body { background-color:#efefef;}
+html.layer {height:100%;overflow:hidden;}
+body.layer {height:100%;overflow:hidden;}
+
 header { width:100%;background-color:#f8f8f8;line-height:60px;}
 header .task-text {color:#373737;text-align:center;font-size:30px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
@@ -47,14 +50,51 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
 .main-box .talk-content li {list-style:none;}
 .main-box .talk-main { width:100%;}
-.main-box .talk-main img { width:35px;height:35px;border-radius:50%;}
+
+.main-box .avatar img { width:40px;height:40px;border-radius:50%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk {line-height:38px;padding:10px 0;word-wrap:break-word;width:100%;min-height:38px;}
+.main-box .reply-attachment img{ width:100%;min-height:280px;}
+
+.reply-box { border-bottom:1px solid #ccc;padding-bottom:20px;margin-bottom:20px;}
+.reply-box .file-attachment { border:1px solid #ccc;background-color:#efefef; }
+.reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box { float:left;display:block;height:80px;line-height:80px;}
+.reply-box .file-attachment .lump-box {width:80px;}
+
+.file-attachment .lump-box .layer-type { width:50px;height:56px;background-color:#fff;text-align:center;line-height:56px;margin:12px 0 0 15px;border-radius:3px;position:relative;}
+.lump-box .layer-type .lump {position:absolute;right:-1px;top:-1px;}
+
+.file-attachment .lump-box.ppt { background-color:#f7630d;color:#f7630d;}
+.layer-type .lump.ppt { border-top:8px solid #f7630d;border-right:8px solid #f7630d;border-bottom:8px solid #e28328;border-left:8px solid #e28328;}
+
+.file-attachment .lump-box.zip { background-color:#5aacf0;color:#4a98e7;}
+.layer-type .lump.zip { border-top:8px solid #5aacf0;border-right:8px solid #5aacf0;border-bottom:8px solid #316de8;border-left:8px solid #316de8;}
+
+.file-attachment .describe-box {margin-left:18px;}
+
+.return-reply .iconfont { font-size:1em;color:#a8a8a8;}
+
+/*讨论弹出层*/
+.reply-layer { position:fixed;bottom:-100%;left:0;height:100%;width:100%;z-index:20000;background-color:#fff;transition:0.5s;-webkit-transition:0.5s;-moz-transition:0.5s;}
+.reply-layer .reply-layer-header { line-height:60px;background-color:#f8f8f8;font-size:26px;}
+.reply-layer-content {background-color:#fff;padding:10px;outline:none;overflow-y:scroll;margin-bottom:101px;}
+.reply-layer-addition {position:absolute;height:80px;z-index:30000;bottom:0;left:0;width:100%;border-top:1px solid #ccc;line-height:80px;}
+
+.reply-layer .pic-list .pic-box,.reply-layer .doc-list .doc-box { float:left;position:relative;margin-top:15px;}
+.reply-layer .del{ position:absolute;z-index:30022;font-size:28px;color:#aaa;background-color:#efefef;top:-17px;right:-3px;width:40px;height:40px;text-align:center;line-height:34px;border-radius:50%;}
+.reply-layer .doc-list .doc-box { padding:4px;background-color:#1DE9B6;width:150px;}
+
+/*讨论附加内容*/
+.addition { width:100%;}
+.addition li{float:right;font-size:38px;width:25%;text-align:center;color:#aaa;}
+
 .loading-lump {text-align:center;margin:10px 0;}
 .loading-lump img { width:35px;height:35px;}
 
 
-.send-other { margin-top:20px;float:left;margin-left:54px;clear:both;width:71%;}
+
+
+/*.send-other { margin-top:20px;float:left;margin-left:54px;clear:both;width:71%;}
 .send-other .send-nameanddate{ text-align:left;margin-left:-66px; color:#666;}
 .send-other .send-nameanddate span:first-child {margin-right:10px;color:#308aef;display:inline-block;min-width: 60px;text-align:center;}
 .send-other .talk-other {min-height:30px; border-radius:8px;color:#666;background-color:#F0F0F0;line-height:25px;padding:0 8px;position:relative;margin-top:8px;}
@@ -70,13 +110,15 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .send-self .talk-self .self-pic { width:35px;height:35px;border-radius:50%;overflow:hidden;position:absolute;right:-50px;top:-5px;cursor:pointer;}
 .send-self .talk-self .talk-lump { width:0;height:0;border-left:10px solid #B5E0FE; border-top:8px solid transparent;border-bottom:8px solid transparent;position:absolute;right:-10px;top:5px;}
 .send-self .talk-self .return-self {cursor:pointer;position:absolute;z-index:999;left:-80px;top:10px;}
-.talk-self .return-self .iconfont { font-size:1em;color:#a8a8a8;}
+.talk-self .return-self .iconfont { font-size:1em;color:#a8a8a8;}*/
 
-.talk-content .talk-main div:first-child { margin-top:0px;}
+/*.talk-content .talk-main div:first-child { margin-top:0px;}*/
 
 /*提交讨论信息*/
 .return-msg { background-color:#888888;width:100%;padding:10px 0;position:fixed;bottom:0;z-index:999;left:0;}
-.return-msg .box-returnmsg .txt-talkcontent{float:left;margin-left:10px;padding:20px 0;outline:none;border:1px solid #CCC;border-radius:3px;padding-left:10px;width:74.1%;color:#666;font-size:24px;}
+/*.return-msg .box-returnmsg .txt-talkcontent{float:left;padding:20px 0;outline:none;border:1px solid #CCC;border-radius:3px;padding-left:10px;width:74.1%;color:#666;font-size:24px;}*/
+.box-returnmsg { padding:0 10px;}
+.return-msg .box-returnmsg .txt-talkcontent{text-indent:10px;padding:20px 0;outline:none;border:1px solid #CCC;border-radius:3px;width:100%;color:#666;font-size:24px;}
 .return-msg .box-submit .btn-submit {margin:0 10px;border-radius:4px;float:right;padding:0 20px;padding:18px 0;background-color:#4b98e8;text-align:center;border:1px solid #68a9ed;color:#fff;width:14.8%;font-size:24px;}
 
 

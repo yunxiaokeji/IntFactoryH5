@@ -120,12 +120,12 @@
     <Content Include="Global.asax" />
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home\login.css" />
+    <Content Include="modules\css\iconfont\demo.css" />
+    <Content Include="modules\css\iconfont\demo.html" />
+    <Content Include="modules\css\iconfont\iconfont.css" />
+    <Content Include="modules\css\iconfont\iconfont.svg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\list.css" />
-    <Content Include="modules\iconfont\demo.css" />
-    <Content Include="modules\iconfont\demo.html" />
-    <Content Include="modules\iconfont\iconfont.css" />
-    <Content Include="modules\iconfont\iconfont.svg" />
     <Content Include="modules\images\ico-loading.jpg" />
     <Content Include="modules\images\img-noimg.png" />
     <Content Include="modules\images\qqface\1.gif" />
@@ -211,6 +211,7 @@
     <Content Include="modules\css\task\detail.css" />
     <Content Include="modules\css\task\detailmedia.css" />
     <Content Include="modules\images\Zoom.gif" />
+    <Content Include="modules\images\test.jpg" />
     <Content Include="modules\plug\dataTimePicker\css\mobiscroll.custom-2.5.2.min.css" />
     <Content Include="modules\plug\dataTimePicker\css\wp_icons.png" />
     <Content Include="modules\plug\dataTimePicker\css\wp_icons_light.png" />
@@ -261,6 +262,7 @@
     <Content Include="modules\template\task\flowStage.html" />
     <Content Include="modules\template\task\flow.html" />
     <Content Include="modules\template\task\list.html" />
+    <Content Include="modules\template\task\newDetailReply.html" />
     <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
@@ -302,9 +304,9 @@
     <Content Include="Views\Task\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\iconfont\iconfont.eot" />
-    <Content Include="modules\iconfont\iconfont.ttf" />
-    <Content Include="modules\iconfont\iconfont.woff" />
+    <Content Include="modules\css\iconfont\iconfont.eot" />
+    <Content Include="modules\css\iconfont\iconfont.ttf" />
+    <Content Include="modules\css\iconfont\iconfont.woff" />
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
   </ItemGroup>
   <ItemGroup>

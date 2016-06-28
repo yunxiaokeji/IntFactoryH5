@@ -83,7 +83,7 @@
                         }
                     }
                 }
-             }  
+                }  
         </div>
     </header>
 
@@ -110,7 +110,7 @@
                     {
                         for (int i = 0; i < imagesUrl.Length; i++)
                         {
-                           <li><img src="@ViewBag.DomainUrl@(imagesUrl[i])"></li>
+                            <li><img src="@ViewBag.DomainUrl@(imagesUrl[i])"></li>
                         }
                     }
                 }
@@ -122,14 +122,14 @@
     <!--任务信息-->
     <div class="task-info">
         <div class="main-info">
-             <ul class="left-task-info">
+                <ul class="left-task-info">
                 <li><span>任务编号</span><span class="setindent">:</span><span class="task-code">@task.taskCode</span></li>
                 <li><span>接受时间</span><span class="setindent">:</span><span class="accept-time">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
                 <li><span>到期时间</span><span class="setindent">:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
                 <li><span>完成时间</span><span class="setindent">:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
             </ul>
 
-             <ul class="right-task-info">
+                <ul class="right-task-info">
                 <li>
                     <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span class="owner-name">@task.ownerUser.name</span></div>
                    
@@ -188,15 +188,15 @@
             </div>
         </div>
         <div style="clear:both;"></div>
-        <div class="noreply-msg">暂无数据</div>         
+        @*<div class="noreply-msg">暂无数据</div>*@         
         <!--回复-->
         <div class="return-msg">
             <div class="box-returnmsg">
-                <input type="text" placeholder="输入讨论内容" class="txt-talkcontent" />
+                <input type="text" readonly="true" placeholder="点击发表评论" class="txt-talkcontent" />
             </div>
-            <div class="box-submit">
+@*            <div class="box-submit">
                 <input type="button" value="提交" class="btn-submit" />
-            </div>
+            </div>*@
         </div>
 
         </div>
@@ -222,9 +222,75 @@
            
     </div>
 
+    <!--返回顶部-->
     <div class="getback">
         <div class="iconfont-back iconfont">&#xe643;</div>
     </div>
 
+    <!--讨论浮层-->
+    <div class="reply-layer">
+        <div class="reply-layer-header center">
+            <div class="left mLeft20 cancel-reply">取消</div>
+            <span>发布讨论</span>
+            <div class="right mRight20 finish-reply">完成</div>
+        </div>
+        <div class="reply-layer-content" spellcheck="false" contenteditable="true">
+            <div style="display:block;height:40px;" class="text-content"></div>
+            <div class="pic-list mTop20" contenteditable="false">
+                <div class="pic-box file">
+                    <img src="/modules/images/test.jpg" />
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="pic-box file">
+                    <img src="/modules/images/test.jpg" /> 
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="pic-box file">
+                    <img src="/modules/images/test.jpg" />
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="pic-box file">
+                    <img src="/modules/images/test.jpg" /> 
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="doc-list mTop20" contenteditable="false">
+                <div class="doc-box file mRight10">
+                    <p class="mBottom10">测试.txt</p>
+                    <p>
+                        <span>txt</span>
+                        <span>100kb</span>
+                    </p>
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="doc-box file mRight10">
+                    <p class="mBottom10">测试.txt</p>
+                    <p>
+                        <span>txt</span>
+                        <span>100kb</span>
+                    </p>
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="doc-box file mRight10">
+                    <p class="mBottom10">测试.txt</p>
+                    <p>
+                        <span>txt</span>
+                        <span>100kb</span>
+                    </p>
+                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="reply-layer-addition">
+            <ul class="addition mRight20">
+                <li class="iconfont">&#xe65a;</li>
+                <li class="iconfont">&#xe65b;</li>
+                <li class="">@@</li>
+                <li class="iconfont">&#xe65a;</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
