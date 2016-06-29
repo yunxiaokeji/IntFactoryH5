@@ -6,7 +6,7 @@
 <div class="reply-box">
     <div class="reply-header">
         <div class="avatar left mTop10">
-            <img src="{%=item.createUser.avatar%}" />
+            <img onerror="$(this).attr('src','/modules/images/defaultavatar.png')" src="{%=item.createUser.avatar%}" />
         </div>
         <div class="left mLeft20">
             <p class="user-name blue">{%=item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
@@ -15,7 +15,7 @@
         <div class="clear"></div>
     </div>
     <div class="reply-content mTop10">
-        {%=decodeURI(item.content)%}
+        {%=item.content%}
     </div>
     <div class="reply-attachment mTop20">
         <ul>
@@ -86,7 +86,7 @@
         </ul>
     </div>
     <div class="return-reply right mTop10">
-        <i class="iconfont">&#xe611;回复</i>
+        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
     </div>
     <div class="clear"></div>
 </div>

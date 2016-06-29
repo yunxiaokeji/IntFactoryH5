@@ -25,6 +25,9 @@
 
     var TaskDetail = {};
 
+    //判断是否加载中
+    var IsLoading = false;
+
     //判断日志第一次加载
     var LogIsPageCount = true;
 
@@ -56,43 +59,32 @@
         AddReplyParas.mark = jsonTask.mark;
 
         TaskDetail.bindEvent();
-
         //浏览器加载获取讨论列表
         TaskDetail.getTaskReplys();
-
         //浏览器加载获取材料信息
         TaskDetail.getOrderList(TaskDetail.materialList);
-        
         //浏览器加载删除制版信息操作列
         TaskDetail.initStyle();
-
         //调用绑定选择时间控件(绑定设置到期时间事件)
         TaskDetail.bindTimerPicker();
-        
         TaskDetail.setImagesSize();
-
-
     }
    
     //初始化样式信息
     TaskDetail.initStyle = function () {
-        
         var documentWidth = $(window).width();
         var ducomentHeight = $(window).height();
 
         //设置讨论内容高度
         $(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
-
         //设置图片显示宽高
         $(".pic-list .pic-box img").css({ "width": (documentWidth - 20 - 20) / 2 + "px", "height": "200px" });
         $(".pic-list .pic-box img").css({ "margin-right": "10px" });
-
         $(".platemakingBody table tr td:last-child").remove();
     }
 
     //绑定事件
     TaskDetail.bindEvent = function () {
-
         //是否绑定滑屏控件事件
         if (TaskDetail.imgStatus == 1) {
             $dragBln = false;
@@ -108,7 +100,6 @@
 
         //菜单切换模块事件
         $("nav ul li").click(function () {
-            
             $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
             $(this).parent().parent().find("i").css("color", "#9e9e9e");
             $(this).find("i").css("color", "#4a98e7");
@@ -120,13 +111,10 @@
             if (classname == "talk-status") {
                 $(".main-box").css("margin-bottom", "80px");
             }
-
             //点击材料计划模块
-            else if (classname == "shop-status")
-            {
+            else if (classname == "shop-status") {
                 $(".main-box .loading-lump").hide();
             }
-
             //点击日志模块
             else if (classname == "log-status") {
 
@@ -135,12 +123,10 @@
                     LogIsPageCount = false;
                 }
             }
-
             //点击制版模块
             else if (classname == "print-status") {
             }
-
-        })
+        });
 
         //点击回到顶部
         $(".getback").click(function () {
@@ -167,18 +153,14 @@
             }
             var msgReply = JSON.stringify(AddReplyParas);
             $(this).val("提交中...").attr("disabled", "disabled");
-           
+
             $.post("/Task/AddTaskReply", {
                 resultReply: msgReply
             }, function (data) {
-
                 $(".btn-submit").val("提交").removeAttr("disabled");
-                
                 TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-
-            })
-
-        })
+            });
+        });
      
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
@@ -191,89 +173,101 @@
             }
         }
 
-        //取消任务讨论发表
+        //关闭任务讨论浮层
         $(".cancel-reply").click(function () {
             $("body,html").removeClass('layer');
             $(".reply-layer").css("bottom", "-100%");
             setTimeout(function () { $(".reply-layer").hide(); }, 500);
-
         });
 
-        //完成任务讨论发表
+        //发表任务讨论
         $(".finish-reply").click(function () {
             GetOrAddReply = "AddReply";
-
-            $("body,html").removeClass('layer');
-            
-            $(".reply-layer").css("bottom", "-100%");
-            setTimeout(function () { $(".reply-layer").hide(); }, 500);
+            var _this = $(this);
             //讨论内容
             var newHtml = $('.reply-layer-content').clone();
             newHtml.find('.pic-list,.doc-list').remove();
+            if (!newHtml.text().trim()) {
+                alert("讨论内容不能为空！");
+                return false;
+            }
 
+            _this.html('发表中...');
+            if (IsLoading) {
+                alert("发表中,请稍候再试.");
+                return false;
+            }
+           
             var divContent = "";
-            
             if (newHtml.find('div').length > 0) {
-
                 newHtml.find('div').each(function () {
                     var _this = $(this);
 
                     if (_this.index() != newHtml.find('div').length - 1) {
-                        divContent += _this.text() + "<br>";
+                        divContent += _this.text() + "<br/>";
                     } else {
                         /*如果是最后一个DIV则不换行*/
                         divContent += _this.text();
                     }
                 });
                 newHtml.find('div').remove();
-                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br>" : "") + divContent;
-            }
-            else {
+                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br/>" : "") + divContent;
+            }else {
                 divContent = newHtml.html();
             }
-
             AddReplyParas.content = divContent;
-
             var msgReply = JSON.stringify(AddReplyParas);
 
+            IsLoading = true;
             $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
-
-                $(".btn-submit").val("提交").removeAttr("disabled");
-
+                IsLoading = false;
                 TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-            });
 
+                _this.html('发表');
+                $('.reply-layer-content').html('');
+                $("body,html").removeClass('layer');
+                $(".reply-layer").css("bottom", "-100%");
+                setTimeout(function () { $(".reply-layer").hide(); }, 500);
+            });
         });
 
-        //发表讨论
+        //点击发表讨论出现弹出层
         $(".txt-talkcontent").click(function () {
+            if (IsLoading) {
+                alert("上一条评论发表中,请稍候再试.");
+                return false;
+            }
             $("body,html").addClass('layer');
+            $(".reply-title").html('发表讨论');
             $(".reply-layer").show();
             setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
-            
-            setTimeout(function () {
-                $(".reply-layer-content").focus();
-            }, 1000);
-
+            setTimeout(function () { $(".reply-layer-content").focus(); }, 1000);
             if ($(".reply-layer-content .text-content").length == 0) {
                 $(".reply-layer-content").prepend('<div class="text-content" style="display:block;height:40px;"></div>');
             }
-        })
+
+            AddReplyParas.fromReplyID = '';
+            AddReplyParas.fromReplyUserID = '';
+            AddReplyParas.fromReplyAgentID = '';
+        });
 
         //删除附件
         $(".reply-layer .del").click(function () {
             var _this = $(this);
             _this.parents('.file').remove();
-        })
+        });
+
+        /*显示表情浮层*/
+        $(".qqface").click(function () {
+            
+        });
 
         TaskDetail.bindScroll();
     }
 
     //窗体加载绑定讨论下拉
     TaskDetail.bindScroll = function () {
-
         $(window).bind("scroll", function () {
-
             //滚动条超过图片显示致顶图标
             if ($(document).scrollTop() >= 60 + $(window).width()) {
                 $(".getback").show();
@@ -298,9 +292,7 @@
                     }, 1000);
                 }
             }
-
         });
-
     }
 
     //绑定时间控件
@@ -314,13 +306,9 @@
             mode: 'scroller', //日期选择模式
             lang: 'zh',
             onSelect: function () {
-
                 Paras.endTime = $(".btn-acceptTaskTime").val();
-
                 TaskDetail.showConfirmForm(0);
-
                 $(".btn-acceptTaskTime").val("接受任务");
-
             }
         };
         $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
@@ -335,28 +323,18 @@
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
                 $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
-                $(".task-accept").find(".btn-finishTask").bind('click',function () {
+                $(".task-accept").find(".btn-finishTask").bind('click', function () {
                     TaskDetail.showConfirmForm(1);
                 });
-            }
-            else if (data == 0)
-            {
+            } else if (data == 0) {
                 alert("失败");
-            }
-            else if (data == 2)
-            {
+            } else if (data == 2) {
                 alert("有前面阶段任务未完成");
-            }
-            else if(data==3)
-            {    
-                 alert("没有权限");
-            }
-            else if (data == 4)
-            {
+            } else if (data == 3) {
+                alert("没有权限");
+            } else if (data == 4) {
                 alert("任务没有接受，不能设置完成");
-            }
-            else if (data == 5)
-            {
+            } else if (data == 5) {
                 alert("任务有未完成步骤");
             }
         });
@@ -365,29 +343,22 @@
 
     //标记完成任务
     TaskDetail.finishTask = function () {
-
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
-            }
-            else if (data == 0) {
+            }else if (data == 0) {
                 alert("失败");
-            }
-            else if (data == 2) {
+            }else if (data == 2) {
                 alert("有前面阶段任务未完成");
-            }
-            else if (data == 3) {
+            }else if (data == 3) {
                 alert("没有权限;");
-            }
-            else if (data == 4) {
+            }else if (data == 4) {
                 alert("任务没有接受，不能设置完成");
-            }
-            else if (data == 5) {
+            }else if (data == 5) {
                 alert("任务有未完成步骤");
             }
         });
-
     }
 
     //获取任务讨论列表
@@ -398,16 +369,19 @@
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
                 replyPageCount = data.pagecount;
-                    if (replyPageCount == 0) {
-                        $(".noreply-msg").show();
-                    }
-                    else {
-                        TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-                    }
+                if (replyPageCount == 0) {
+                    $(".noreply-msg").show();
+                }
+                else {
+                    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                }
             });
-        }
-        else {
-            $(".main-box .send-other").length + $(".main-box .send-self").length == 0 ? "" : $(".alert-lastreplypage").length == 0 ? $(".main-box .talk-status").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条啦</div>") : "";
+        } else {
+            if ($(".reply-box").length > 0) {
+                if ($(".alert-lastreplypage").length == 0) {
+                    $(".main-box .talk-main").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条啦</div>");
+                }
+            }
         }
     }
     
@@ -433,48 +407,46 @@
                     });
                 }
             })
-        }
-        else {
+        } else {
             $(".log-status .log-box").length == 0 ? "" : $(".alert-lastlogpage").length == 0 ? $(".main-box .log-status").append("<div class='alert-lastlogpage center mTop10 color999'>已经是最后一条啦</div>") : "";
-           
+
         }
     }
 
     //获取材料采购计划列表
     TaskDetail.getOrderList = function (data) {
         
-            if (data.length == 0) {
-                $(".shop-status").html("<div class='no-material'>暂无材料</div>");
-            }
-            else {
-                doT.exec("/modules/template/task/materList.html", function (templateFun) {
-                    var innerText = templateFun(data);
-                    innerText = $(innerText);
-                    $(".shop-status").html(innerText);
-                    //设置采购计划图标点击事件
-                    innerText.find(".material").click(function () {
-                        var meterialLumpbox = $(this).find(".meterial-lumpbox");
+        if (data.length == 0) {
+            $(".shop-status").html("<div class='no-material'>暂无材料</div>");
+        } else {
+            doT.exec("/modules/template/task/materList.html", function (templateFun) {
+                var innerText = templateFun(data);
+                innerText = $(innerText);
+                $(".shop-status").html(innerText);
+                //设置采购计划图标点击事件
+                innerText.find(".material").click(function () {
+                    var meterialLumpbox = $(this).find(".meterial-lumpbox");
 
-                        if (!$(".material-main").is(":animated")) {
-                            $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
-                            if ($(meterialLumpbox).data('status') == '0') {
-                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
-                                $(meterialLumpbox).data('status', '1');
-                                $(meterialLumpbox).find('span').css("border-left-color", "#fff");
-                                $(meterialLumpbox).parent().parent().addClass("select-material");
+                    if (!$(".material-main").is(":animated")) {
+                        $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
+                        if ($(meterialLumpbox).data('status') == '0') {
+                            $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
+                            $(meterialLumpbox).data('status', '1');
+                            $(meterialLumpbox).find('span').css("border-left-color", "#fff");
+                            $(meterialLumpbox).parent().parent().addClass("select-material");
 
-                            }
-                            else {
-                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
-                                $(meterialLumpbox).data('status', '0');
-                                $(meterialLumpbox).find('span').css("border-left-color", "#999");
-                                $(meterialLumpbox).parent().parent().removeClass("select-material");
-                            }
                         }
+                        else {
+                            $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
+                            $(meterialLumpbox).data('status', '0');
+                            $(meterialLumpbox).find('span').css("border-left-color", "#999");
+                            $(meterialLumpbox).parent().parent().removeClass("select-material");
+                        }
+                    }
 
-                    });
                 });
-            }
+            });
+        }
     }
 
     //接受任务、标记任务完成的弹出浮层
@@ -484,8 +456,7 @@
         confirm(alertMsg, function () {
             if (showStatus == 0) {
                 TaskDetail.setTaskEndTime();
-            }
-            else {
+            }   else {
                 TaskDetail.finishTask();
             }
         });
@@ -494,76 +465,55 @@
         
     //设置图片宽高
     TaskDetail.setImagesSize = function () {
-
         $(".main_image").css("height", $(window).width() + "px");
         $(".main_image").css("width", $(window).width() + "px");
         $(".main_image li").css("height", $(window).width() + "px");
         $(".main_image ul li").each(function () {
-            
             if ($(this).find('img').width() > $(this).find('img').height()) {
                 $(this).find('img').css("height", $(window).width() + "px");
-            }
-            else {
+            } else {
                 $(this).find('img').css("width", $(window).width() + "px");
             }
-
         })
     }
 
 
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
-
         doT.exec("/modules/template/task/newDetailReply.html", function (templateFun) {
-
             var innerText = templateFun(data.items);
             innerText = $(innerText);
 
             if (GetOrAddReply == "GetReply") {
                 $(".talk-main").append(innerText);
-                innerText.find(".text-talk").each(function () {
+                innerText.find(".reply-content").each(function () {
                     $(this).html(Global.replaceQqface($(this).html()));
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
-            }
-            else {
-               
+            }else {
                 if ($(".talk-main").find('div').length == 0) {
                     $(".noreply-msg").hide();
                 }
-                
                 $(".talk-main").prepend(innerText);
-
-                $(".txt-talkcontent").val("");
             }
 
             //点击回复把用户名写入文本框
-
             innerText.find(".iconfont").click(function () {
-
-                $(".reply-layer-content").html('<div class="text-content" style="display:block;height:40px;"></div>');
-
+                if (IsLoading) {
+                    alert("上一条评论发表中,请稍候再试.");
+                    return false;
+                }
                 $("body,html").addClass('layer');
                 $(".reply-layer").show();
                 setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
                 setTimeout(function () { $(".reply-layer-content").focus() }, 1000);
 
-                //AddReplyParas.fromReplyID = $(this).data("replyid");
-
-                //AddReplyParas.fromReplyUserID = $(this).data("userid");
-
-                //AddReplyParas.fromReplyAgentID = $(this).data("agentid");
-
-                //Content = "@" + $(this).data("name") + " ";
-
-                //$(".txt-talkcontent").val(Content);
-
-                //$(".txt-talkcontent").focus();
-
+                AddReplyParas.fromReplyID = $(this).data("replyid");
+                AddReplyParas.fromReplyUserID = $(this).data("userid");
+                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+                $(".reply-title").html('@' + $(this).data('name'));
             });
-
         });
-
     }
 
     module.exports = TaskDetail;

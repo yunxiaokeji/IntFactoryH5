@@ -60,6 +60,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .reply-box .file-attachment { border:1px solid #ccc;background-color:#efefef; }
 .reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box { float:left;display:block;height:80px;line-height:80px;}
 .reply-box .file-attachment .lump-box {width:80px;}
+.reply-content { word-break:break-all;}
 
 .file-attachment .lump-box .layer-type { width:50px;height:56px;background-color:#fff;text-align:center;line-height:56px;margin:12px 0 0 15px;border-radius:3px;position:relative;}
 .lump-box .layer-type .lump {position:absolute;right:-1px;top:-1px;}
