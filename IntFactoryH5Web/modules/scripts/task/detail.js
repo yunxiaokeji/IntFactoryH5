@@ -243,7 +243,7 @@
             setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
             setTimeout(function () { $(".reply-layer-content").focus(); }, 1000);
             if ($(".reply-layer-content .text-content").length == 0) {
-                $(".reply-layer-content").prepend('<div class="text-content" style="display:block;height:40px;"></div>');
+                $(".reply-layer-content").prepend('<div class="text-content" style="display:block;min-height:40px;"></div>');
             }
 
             AddReplyParas.fromReplyID = '';
@@ -486,10 +486,10 @@
 
             if (GetOrAddReply == "GetReply") {
                 $(".talk-main").append(innerText);
-                innerText.find(".reply-content").each(function () {
-                    $(this).html(Global.replaceQqface($(this).html()));
-                    $(this).find("img").css({ "width": "36px", "height": "36px" });
-                });
+                //innerText.find(".reply-content").each(function () {
+                //    $(this).html(Global.replaceQqface($(this).html()));
+                //    $(this).find("img").css({ "width": "36px", "height": "36px" });
+                //});
             }else {
                 if ($(".talk-main").find('div').length == 0) {
                     $(".noreply-msg").hide();
