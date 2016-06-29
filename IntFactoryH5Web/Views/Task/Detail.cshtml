@@ -13,8 +13,6 @@
     {
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
-
-
 }
 
 <!DOCTYPE html>
@@ -39,7 +37,6 @@
     <script src="~/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
     <script type="text/javascript">
         $(function () {
-
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
                     '@(imagesUrl.Length>1?"1":"0")',
@@ -188,7 +185,7 @@
             </div>
         </div>
         <div style="clear:both;"></div>
-        @*<div class="noreply-msg">暂无数据</div>*@         
+        <div class="noreply-msg">暂无数据</div>         
         <!--回复-->
         <div class="return-msg">
             <div class="box-returnmsg">
@@ -228,7 +225,7 @@
     </div>
 
     <!--讨论浮层-->
-    <div class="reply-layer">
+    <div class="reply-layer hide">
         <div class="reply-layer-header center">
             <div class="left mLeft20 cancel-reply">取消</div>
             <span>发布讨论</span>
@@ -241,37 +238,9 @@
                     <img src="/modules/images/test.jpg" />
                     <i class="iconfont del" contenteditable="false">&#xe606;</i> 
                 </div>
-                <div class="pic-box file">
-                    <img src="/modules/images/test.jpg" /> 
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
-                <div class="pic-box file">
-                    <img src="/modules/images/test.jpg" />
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
-                <div class="pic-box file">
-                    <img src="/modules/images/test.jpg" /> 
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
                 <div class="clear"></div>
             </div>
             <div class="doc-list mTop20" contenteditable="false">
-                <div class="doc-box file mRight10">
-                    <p class="mBottom10">测试.txt</p>
-                    <p>
-                        <span>txt</span>
-                        <span>100kb</span>
-                    </p>
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
-                <div class="doc-box file mRight10">
-                    <p class="mBottom10">测试.txt</p>
-                    <p>
-                        <span>txt</span>
-                        <span>100kb</span>
-                    </p>
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
                 <div class="doc-box file mRight10">
                     <p class="mBottom10">测试.txt</p>
                     <p>

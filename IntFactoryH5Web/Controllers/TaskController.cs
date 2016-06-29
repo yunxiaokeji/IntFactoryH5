@@ -130,16 +130,15 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //添加讨论信息
-        public JsonResult AddTaskReply()
+        [ValidateInput(false)]
+        public JsonResult AddTaskReply(string resultReply,string content)
         {
-            string result = Request["resultReply"].ToString();
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
             TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
 
-            taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(result);
-
+            taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(resultReply);
             TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, CurrentUser.userID, CurrentUser.agentID);
 
             JsonDictionary.Add("items", addResult.taskReplys);

@@ -195,21 +195,69 @@
         $(".cancel-reply").click(function () {
             $("body,html").removeClass('layer');
             $(".reply-layer").css("bottom", "-100%");
+            setTimeout(function () { $(".reply-layer").hide(); }, 500);
+
         });
 
         //完成任务讨论发表
         $(".finish-reply").click(function () {
+            GetOrAddReply = "AddReply";
+
             $("body,html").removeClass('layer');
+            
             $(".reply-layer").css("bottom", "-100%");
-            alert("ok");
+            setTimeout(function () { $(".reply-layer").hide(); }, 500);
+            //讨论内容
+            var newHtml = $('.reply-layer-content').clone();
+            newHtml.find('.pic-list,.doc-list').remove();
+
+            var divContent = "";
+            
+            if (newHtml.find('div').length > 0) {
+
+                newHtml.find('div').each(function () {
+                    var _this = $(this);
+
+                    if (_this.index() != newHtml.find('div').length - 1) {
+                        divContent += _this.text() + "<br>";
+                    } else {
+                        /*如果是最后一个DIV则不换行*/
+                        divContent += _this.text();
+                    }
+                });
+                newHtml.find('div').remove();
+                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br>" : "") + divContent;
+            }
+            else {
+                divContent = newHtml.html();
+            }
+
+            AddReplyParas.content = divContent;
+
+            var msgReply = JSON.stringify(AddReplyParas);
+
+            $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
+
+                $(".btn-submit").val("提交").removeAttr("disabled");
+
+                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+            });
+
         });
 
         //发表讨论
         $(".txt-talkcontent").click(function () {
             $("body,html").addClass('layer');
-            $(".reply-layer").css("bottom", "0");
-            setTimeout(function () { $(".reply-layer-content").focus() },1000);
+            $(".reply-layer").show();
+            setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
+            
+            setTimeout(function () {
+                $(".reply-layer-content").focus();
+            }, 1000);
 
+            if ($(".reply-layer-content .text-content").length == 0) {
+                $(".reply-layer-content").prepend('<div class="text-content" style="display:block;height:40px;"></div>');
+            }
         })
 
         //删除附件
@@ -350,13 +398,12 @@
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
                 replyPageCount = data.pagecount;
-                    //if (replyPageCount == 0) {
-                    //    $(".noreply-msg").show();
-                    //}
-                    //else {
-                    //    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-                    //}
-                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                    if (replyPageCount == 0) {
+                        $(".noreply-msg").show();
+                    }
+                    else {
+                        TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                    }
             });
         }
         else {
@@ -465,13 +512,11 @@
 
 
     //获取或添加任务讨论
-    TaskDetail.GetOrAddTaskReply = function (data,replyOperate) {
+    TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
+
         doT.exec("/modules/template/task/newDetailReply.html", function (templateFun) {
 
-            var dataReplys = {};
-            dataReplys.items = data.items;
-            dataReplys.userID = TaskDetail.userID;
-            var innerText = templateFun(dataReplys);
+            var innerText = templateFun(data.items);
             innerText = $(innerText);
 
             if (GetOrAddReply == "GetReply") {
@@ -496,12 +541,11 @@
 
             innerText.find(".iconfont").click(function () {
 
-                $(".reply-layer-content").html('');
-
-                $(".reply-layer").css("bottom", "0");
+                $(".reply-layer-content").html('<div class="text-content" style="display:block;height:40px;"></div>');
 
                 $("body,html").addClass('layer');
-
+                $(".reply-layer").show();
+                setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
                 setTimeout(function () { $(".reply-layer-content").focus() }, 1000);
 
                 //AddReplyParas.fromReplyID = $(this).data("replyid");

@@ -44,6 +44,7 @@ namespace IntFactory.Sdk
 
                     HttpWebResponse response = httpWebRequest.GetResponse() as HttpWebResponse;
                     Stream responseStream = response.GetResponseStream();
+ 
                     System.Text.Encoding encode = Encoding.UTF8;
                     StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
                     strResult = reader.ReadToEnd();
