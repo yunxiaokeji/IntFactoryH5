@@ -76,9 +76,9 @@
         var ducomentHeight = $(window).height();
 
         //设置讨论内容高度
-        $(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
+        //$(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
         //设置图片显示宽高
-        $(".pic-list .pic-box img").css({ "width": (documentWidth - 20 - 20) / 2 + "px", "height": "200px" });
+        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
         $(".pic-list .pic-box img").css({ "margin-right": "10px" });
         $(".platemakingBody table tr td:last-child").remove();
     }
