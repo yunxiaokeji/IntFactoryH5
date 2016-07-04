@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Qiniu.4.0">
+      <HintPath>DLL\Qiniu.4.0.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -106,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlugController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -239,6 +243,19 @@
     <Content Include="modules\plug\dataTimePicker\dev\js\mobiscroll.wp-2.5.2.js" />
     <Content Include="modules\plug\dataTimePicker\js\mobiscroll.custom-2.5.2.min.js" />
     <Content Include="modules\plug\doT.js" />
+    <Content Include="modules\plug\qiniustorage\css\highlight.css" />
+    <Content Include="modules\plug\qiniustorage\css\main.css" />
+    <Content Include="modules\plug\qiniustorage\plupload\moxie.js" />
+    <Content Include="modules\plug\qiniustorage\plupload\moxie.min.js" />
+    <Content Include="modules\plug\qiniustorage\plupload\Moxie.swf" />
+    <Content Include="modules\plug\qiniustorage\plupload\plupload.dev.js" />
+    <Content Include="modules\plug\qiniustorage\plupload\plupload.full.min.js" />
+    <Content Include="modules\plug\qiniustorage\plupload\plupload.min.js" />
+    <Content Include="modules\plug\qiniustorage\qiniu\highlight.js" />
+    <Content Include="modules\plug\qiniustorage\qiniu\main.js" />
+    <Content Include="modules\plug\qiniustorage\qiniu\multiple.js" />
+    <Content Include="modules\plug\qiniustorage\qiniu\qiniu.js" />
+    <Content Include="modules\plug\qiniustorage\qiniu\ui.js" />
     <Content Include="modules\plug\touchSlider\css\style.css" />
     <Content Include="modules\plug\touchSlider\images\20141206092732_4208.jpg" />
     <Content Include="modules\plug\touchSlider\images\20141206093851_5791.jpg" />
@@ -263,6 +280,8 @@
     <Content Include="modules\template\task\flow.html" />
     <Content Include="modules\template\task\list.html" />
     <Content Include="modules\template\task\newDetailReply.html" />
+    <Content Include="modules\template\task\task-file-upload-img.html" />
+    <Content Include="modules\template\task\task-file-upload.html" />
     <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />

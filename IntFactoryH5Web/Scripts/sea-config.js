@@ -18,4 +18,13 @@ seajs.config({
     ]
 });
 
+seajs.config({
+    alias: {
+        //上传
+        //"upload": "plug/upload/upload.js",
+        "upload": "plug/qiniustorage/qiniu/qiniu.js"
+    }
+});
+
+
 
