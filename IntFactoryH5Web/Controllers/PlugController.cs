@@ -1,4 +1,5 @@
-﻿using Qiniu.RS;
+﻿using Qiniu.RPC;
+using Qiniu.RS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +37,15 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        //删除附件
+        public int DeleteAttachment(string key)
+        {
+            String bucket = "zngc-intfactory";
+            //实例化一个RSClient对象，用于操作BucketManager里面的方法
+            RSClient client = new RSClient();
+            CallRet ret = client.Delete(new EntryPath(bucket, key));
+
+            return ret.OK ? 1 : 0;
+        }
     }
 }

@@ -1,0 +1,15 @@
+﻿{%
+for(var i=0;i<$data.length;i++)
+{
+	    var item = $data[i];
+        var extension=item.name.split('.');
+%}
+        <li id="li_{%=item.id%}" class="doc-box file mRight10"  data-isimg="2">
+            <p class="mBottom10">{%=item.name%}</p>
+            <p>
+                <span>{%=extension[extension.length-1]%}</span>
+                <span>{%=item.size/1024/1024<1?(item.size/1024).toFixed(2)+"KB":(item.size/1024/1024).toFixed(2)+"MB"%}</span>
+            </p>
+            <i class="iconfont delete" contenteditable="false">&#xe606;</i> 
+        </li>
+{%}%}

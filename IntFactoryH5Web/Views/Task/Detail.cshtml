@@ -230,28 +230,18 @@
         </div>
         <div class="reply-layer-content" spellcheck="false" contenteditable="true">
             <div style="display:block;min-height:40px;" class="text-content"></div>
-            <div class="pic-list mTop20" contenteditable="false">
-                <div class="pic-box file">
-                    <img src="/modules/images/test.jpg" />
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="doc-list mTop20" contenteditable="false">
-                <div class="doc-box file mRight10">
-                    <p class="mBottom10">测试.txt</p>
-                    <p>
-                        <span>txt</span>
-                        <span>100kb</span>
-                    </p>
-                    <i class="iconfont del" contenteditable="false">&#xe606;</i> 
-                </div>
-                <div class="clear"></div>
-            </div>
+            <ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false">
+                
+            </ul>
+            <div class="clear"></div>
+
+            <ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false">
+            </ul>
+            <div class="clear"></div>
         </div>
         <div class="reply-layer-addition">
-            <ul class="addition mRight20">
-                <li class="iconfont">&#xe65a;</li>
+            <ul class="addition mRight20" id="addition">
+                <li class="iconfont" id="reply-attachment">&#xe65a;</li>
                 <li class="iconfont qqface">&#xe65b;</li>
                 <li class="">@@</li>
                 <li class="iconfont">&#xe65a;</li>

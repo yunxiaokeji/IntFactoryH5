@@ -1,7 +1,8 @@
 ﻿define(function (require, exports, module) {
 
-    var Global = require("global");
-        
+    var Global = require("global"),
+        Upload = require("upload");
+
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -98,6 +99,20 @@
             });
         }
 
+        var uploader = Upload.uploader({
+            browse_button: 'reply-attachment',
+            container: 'addition',
+            drop_element: 'addition',
+            file_path: "/Content/UploadFiles/Task/",
+            picture_container: "pic-list",
+            file_container: "doc-list",
+            maxQuantity: 5,
+            maxSize: 5,
+            successItems: '.file li',
+            fileType: 3,
+            init: {}
+        });
+
         //菜单切换模块事件
         $("nav ul li").click(function () {
             $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
@@ -191,6 +206,10 @@
                 alert("讨论内容不能为空！");
                 return false;
             }
+            if ($('.task-file li').find('.mark-progress').length > 0) {
+                alert("文件上传中，请稍等");
+                return false;
+            }
 
             _this.html('发表中...');
             if (IsLoading) {
@@ -198,6 +217,19 @@
                 return false;
             }
            
+            var attachments = [];
+            $('.task-file li').each(function () {
+                var _this = $(this);
+                attachments.push({
+                    "Type": _this.data('isimg'),
+                    "FilePath": _this.data('filepath'),
+                    "FileName": _this.data('filename'),
+                    "OriginalName": _this.data('originalname'),
+                    "Size": _this.data("filesize"),
+                    "ThumbnailName": ""
+                });
+            });
+            console.log(attachments);
             var divContent = "";
             if (newHtml.find('div').length > 0) {
                 newHtml.find('div').each(function () {
