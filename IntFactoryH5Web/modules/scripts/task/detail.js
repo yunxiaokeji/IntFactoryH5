@@ -229,7 +229,6 @@
                     "ThumbnailName": ""
                 });
             });
-            console.log(attachments);
             var divContent = "";
             if (newHtml.find('div').length > 0) {
                 newHtml.find('div').each(function () {
