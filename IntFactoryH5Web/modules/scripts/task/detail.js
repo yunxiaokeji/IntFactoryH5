@@ -110,7 +110,17 @@
             maxSize: 5,
             successItems: '.file li',
             fileType: 3,
-            init: {}
+            init: {
+                'FilesAdded': function (up, files) {
+                    if ($("#pic-list").length == 0) {
+                        $(".reply-layer-content").append('<div class="text-content" style="display:block;min-height:40px;"></div>');
+                        $(".reply-layer-content").append('<ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul><div class="clear"></div>');
+                    }
+                    if ($("#doc-list").length == 0) {
+                        $(".reply-layer-content").append('<ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul><div class="clear"></div>');
+                    }
+                }
+            }
         });
 
         //菜单切换模块事件
