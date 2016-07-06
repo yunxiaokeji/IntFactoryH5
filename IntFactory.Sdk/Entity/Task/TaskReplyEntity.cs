@@ -43,6 +43,7 @@ namespace IntFactory.Sdk
         /// </summary>
         public UserBase createUser { get; set; }
 
+        public List<Attachment> attachments { get; set; }
         /// <summary>
         /// 来源讨论人
         /// </summary>

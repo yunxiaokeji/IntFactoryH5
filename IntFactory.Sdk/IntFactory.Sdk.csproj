@@ -52,6 +52,7 @@
     <Compile Include="Business\OauthBusiness.cs" />
     <Compile Include="Business\TaskBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
+    <Compile Include="Entity\Common\AttachmentEntity.cs" />
     <Compile Include="Entity\Product\ProductBaseEntity.cs" />
     <Compile Include="Entity\Order\OrderBaseEntity.cs" />
     <Compile Include="Entity\Order\ProcessEntity.cs" />
