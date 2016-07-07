@@ -1,8 +1,9 @@
 ﻿define(function (require, exports, module) {
 
     var Global = require("global"),
-        Upload = require("upload");
-        
+        Upload = require("upload"),
+        doT = require("dot");
+
     var Paras = {
         orderID: "",
         stageID: "",     
@@ -109,6 +110,7 @@
             maxQuantity: 5,
             maxSize: 5,
             successItems: '.file li',
+            image_view: "?imageView2/1/w/120/h/80",
             fileType: 3,
             init: {
                 'FilesAdded': function (up, files) {
@@ -230,6 +232,7 @@
             var attachments = [];
             $('.task-file li').each(function () {
                 var _this = $(this);
+                console.log(_this.data('originalname'));
                 attachments.push({
                     "ServerUrl": _this.data("server"),
                     "Type": _this.data('isimg'),
@@ -240,6 +243,7 @@
                     "ThumbnailName": ""
                 });
             });
+            console.log(attachments);
             var divContent = "";
             if (newHtml.find('div').length > 0) {
                 newHtml.find('div').each(function () {
@@ -261,7 +265,7 @@
             var msgReply = JSON.stringify(AddReplyParas);
 
             IsLoading = true;
-            $.post("/Task/AddTaskReply", { resultReply: msgReply }, function (data) {
+            $.post("/Task/AddTaskReply", { resultReply: msgReply, taskID: Paras.taskID, entityAttachments: JSON.stringify(attachments) }, function (data) {
                 IsLoading = false;
                 TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
 
@@ -439,7 +443,7 @@
                     $(".log-status").html("<div class='no-log'>暂无数据</div>");
                 }
                 else {
-                    doT.exec("/modules/template/task/detailLog.html", function (templateFun) {
+                    doT.exec("template/task/detailLog.html", function (templateFun) {
 
                         var items = data.items;
 
@@ -461,7 +465,7 @@
         if (data.length == 0) {
             $(".shop-status").html("<div class='no-material'>暂无材料</div>");
         } else {
-            doT.exec("/modules/template/task/materList.html", function (templateFun) {
+            doT.exec("template/task/materList.html", function (templateFun) {
                 var innerText = templateFun(data);
                 innerText = $(innerText);
                 $(".shop-status").html(innerText);
@@ -522,7 +526,7 @@
 
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
-        doT.exec("/modules/template/task/newDetailReply.html", function (templateFun) {
+        doT.exec("template/task/newDetailReply.html", function (templateFun) {
             var innerText = templateFun(data.items);
             innerText = $(innerText);
 

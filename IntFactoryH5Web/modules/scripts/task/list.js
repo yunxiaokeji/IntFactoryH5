@@ -1,5 +1,6 @@
 ﻿define(function (require,exports,module) {
-    var Global = require("global");
+    var Global = require("global"),
+        doT = require("dot");
 
     var List = {};
 
@@ -265,7 +266,7 @@
                 //分页数据
                 List.PageCount = data.pageCount;
                 //引用doT模板
-                doT.exec("../modules/template/task/list.html", function (code) {
+                doT.exec("template/task/list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });
@@ -279,7 +280,7 @@
     List.getTaskFlow = function () {
         $(".flow-type").empty();
         $.post("/Task/GetTaskFlow", null, function (data) {
-            doT.exec("../modules/template/task/flow.html", function (e) {
+            doT.exec("template/task/flow.html", function (e) {
                 var $res = e(data.items);
                 $(".flow-type").append($res);
             });
@@ -290,7 +291,7 @@
     List.getTaskFlowStage = function () {
         $(".screen-type").empty();
         $.post("/Task/GetTaskFlowStage", { processID: List.params.orderProcessID }, function (data) {
-            doT.exec("../modules/template/task/flowStage.html", function (code) {
+            doT.exec("template/task/flowStage.html", function (code) {
                 var $res = code(data.items);
                 $(".screen-type").append($res);
             });

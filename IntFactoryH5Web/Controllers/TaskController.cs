@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using IntFactory.Sdk;
+using IntFactory.Sdk.Entity.Common;
 namespace IntFactoryH5Web.Controllers
 {
     [IntFactoryH5Web.Common.UserAuthorize]
@@ -131,16 +132,17 @@ namespace IntFactoryH5Web.Controllers
 
         //添加讨论信息
         [ValidateInput(false)]
-        public JsonResult AddTaskReply(string resultReply,string content)
+        public JsonResult AddTaskReply(string resultReply,string taskID,string entityAttachments)
         {
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
             TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
-
+            List<Attachment> attachments = new List<Attachment>();
             taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(resultReply);
-            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, CurrentUser.userID, CurrentUser.agentID);
-
+            taskReplyEntity.attachments = serializer.Deserialize<List<Attachment>>(entityAttachments);
+            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, taskID, CurrentUser.userID, CurrentUser.agentID);
+           
             JsonDictionary.Add("items", addResult.taskReplys);
 
             return new JsonResult { 

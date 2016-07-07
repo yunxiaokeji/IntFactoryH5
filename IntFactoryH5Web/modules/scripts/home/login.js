@@ -11,8 +11,6 @@ define(function (require, exports, module) {
     //登陆初始化
     Home.initLogin = function (returnUrl) {
         Home.returnUrl = returnUrl;
-        $("#iptUserName").val("yunxiaokeji");
-        $("#iptPwd").val("yunxiaokeji");
         Home.bindLoginEvent();
     }
 
