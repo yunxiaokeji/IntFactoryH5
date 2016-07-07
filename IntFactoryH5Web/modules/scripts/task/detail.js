@@ -80,13 +80,14 @@
         //设置讨论内容高度
         //$(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
         //设置图片显示宽高
-        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
-        $(".pic-list .pic-box img").css({ "margin-right": "10px" });
+        $(".pic-list li").css({"margin-right": "10px","border":"1px solid #ccc" });
+        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px"});
         $(".platemakingBody table tr td:last-child").remove();
     }
 
     //绑定事件
     TaskDetail.bindEvent = function () {
+
         //是否绑定滑屏控件事件
         if (TaskDetail.imgStatus == 1) {
             $dragBln = false;
@@ -214,6 +215,7 @@
             //讨论内容
             var newHtml = $('.reply-layer-content').clone();
             newHtml.find('.pic-list,.doc-list').remove();
+            newHtml.find('div.clear').remove();
             if (!newHtml.text().trim()) {
                 alert("讨论内容不能为空！");
                 return false;
@@ -232,7 +234,6 @@
             var attachments = [];
             $('.task-file li').each(function () {
                 var _this = $(this);
-                console.log(_this.data('originalname'));
                 attachments.push({
                     "ServerUrl": _this.data("server"),
                     "Type": _this.data('isimg'),
@@ -243,7 +244,7 @@
                     "ThumbnailName": ""
                 });
             });
-            console.log(attachments);
+
             var divContent = "";
             if (newHtml.find('div').length > 0) {
                 newHtml.find('div').each(function () {
@@ -520,13 +521,13 @@
             } else {
                 $(this).find('img').css("width", $(window).width() + "px");
             }
-        })
+        });
     }
 
 
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
-        doT.exec("template/task/newDetailReply.html", function (templateFun) {
+        doT.exec("template/task/detail-reply.html", function (templateFun) {
             var innerText = templateFun(data.items);
             innerText = $(innerText);
 

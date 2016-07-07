@@ -130,6 +130,13 @@
     <Content Include="modules\css\iconfont\iconfont.svg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\task\list.css" />
+    <Content Include="modules\images\ico-attachment-excel.png" />
+    <Content Include="modules\images\ico-attachment-pdf.png" />
+    <Content Include="modules\images\ico-attachment-ppt.png" />
+    <Content Include="modules\images\ico-attachment-psd.png" />
+    <Content Include="modules\images\ico-attachment-rar.png" />
+    <Content Include="modules\images\ico-attachment-txt.png" />
+    <Content Include="modules\images\ico-attachment-word.png" />
     <Content Include="modules\images\ico-delete.png" />
     <Content Include="modules\images\ico-loading.jpg" />
     <Content Include="modules\images\img-noimg.png" />
@@ -278,12 +285,9 @@
     <Content Include="modules\template\task\flowStage.html" />
     <Content Include="modules\template\task\flow.html" />
     <Content Include="modules\template\task\list.html" />
-    <Content Include="modules\template\task\newDetailReply.html" />
-    <Content Include="modules\template\task\new-task-file-upload-img.html" />
-    <Content Include="modules\template\task\new-task-file-upload.html" />
+    <Content Include="modules\template\task\detail-reply.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
     <Content Include="modules\template\task\task-file-upload.html" />
-    <Content Include="Scripts\doT.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

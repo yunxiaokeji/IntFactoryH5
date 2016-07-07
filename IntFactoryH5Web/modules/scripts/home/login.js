@@ -16,6 +16,8 @@ define(function (require, exports, module) {
 
     //绑定事件
     Home.bindLoginEvent = function () {
+        $("#iptUserName").val("yunxiaokeji");
+        $("#iptPwd").val("yunxiaokeji");
 
         $(document).on("keypress", function (e) {
             if (e.keyCode == 13) {
