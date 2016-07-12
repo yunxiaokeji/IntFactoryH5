@@ -27,7 +27,7 @@
 
     var TaskDetail = {};
 
-    //判断是否加载中
+    //判断是否发表评论中
     var IsLoading = false;
 
     //判断日志第一次加载
@@ -160,35 +160,6 @@
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
-
-        //点击提交按钮
-        $(".btn-submit").bind("click", function () {
-            GetOrAddReply = "AddReply";
-            AddReplyParas.content = $(".txt-talkcontent").val().replace(Content, "");
-
-            if (AddReplyParas.content == "") { return; }
-
-            if (AddReplyParas.content.length >= 999) { alert("您输入的文字超过500个"); return; }
-
-            if ($(".txt-talkcontent").val().indexOf(Content) != 0) {
-
-                AddReplyParas.fromReplyID = "";
-
-                AddReplyParas.fromReplyUserID = "";
-
-                AddReplyParas.fromReplyAgentID = "";
-
-            }
-            var msgReply = JSON.stringify(AddReplyParas);
-            $(this).val("提交中...").attr("disabled", "disabled");
-
-            $.post("/Task/AddTaskReply", {
-                resultReply: msgReply
-            }, function (data) {
-                $(".btn-submit").val("提交").removeAttr("disabled");
-                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
-            });
-        });
      
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
@@ -266,7 +237,11 @@
             var msgReply = JSON.stringify(AddReplyParas);
 
             IsLoading = true;
-            $.post("/Task/AddTaskReply", { resultReply: msgReply, taskID: Paras.taskID, entityAttachments: JSON.stringify(attachments) }, function (data) {
+            $.post("/Task/AddTaskReply", {
+                resultReply: msgReply,
+                taskID: Paras.taskID,
+                entityAttachments: JSON.stringify(attachments)
+            }, function (data) {
                 IsLoading = false;
                 TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
 
@@ -533,10 +508,10 @@
 
             if (GetOrAddReply == "GetReply") {
                 $(".talk-main").append(innerText);
-                //innerText.find(".reply-content").each(function () {
-                //    $(this).html(Global.replaceQqface($(this).html()));
-                //    $(this).find("img").css({ "width": "36px", "height": "36px" });
-                //});
+                innerText.find(".reply-content").each(function () {
+                    $(this).html(Global.replaceQqface($(this).html()));
+                    $(this).find("img").css({ "width": "36px", "height": "36px" });
+                });
             }else {
                 if ($(".talk-main").find('div').length == 0) {
                     $(".noreply-msg").hide();
