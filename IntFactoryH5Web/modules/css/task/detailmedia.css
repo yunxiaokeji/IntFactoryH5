@@ -1,9 +1,4 @@
-﻿@media screen and (max-width:736px) {
-
-    
-
-}
-@media screen and (max-width:620px) {
+﻿@media screen and (max-width:620px) {
 
     nav ul li { width:23.333%;}
 
@@ -38,11 +33,7 @@
 
     nav ul li { width:20%;}
 
-    nav ul .buy-plan {width:40%; }
-
-    .return-msg .box-returnmsg { width:60%;}
-
-    .return-msg .box-submit { width:24%;}
+    nav ul .buy-plan { width: 40%; }
 
     .send-other .talk-other,.send-self .talk-self { width:64%;}
 

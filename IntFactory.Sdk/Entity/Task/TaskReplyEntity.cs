@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntFactory.Sdk.Entity.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,5 +55,7 @@ namespace IntFactory.Sdk
         public string fromReplyUserID { get; set; }
 
         public string fromReplyAgentID { get; set; }
+
+        public List<Attachment> attachments { get; set; }
     }
 }

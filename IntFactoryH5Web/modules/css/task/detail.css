@@ -54,10 +54,10 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .main-box .avatar img { width:40px;height:40px;border-radius:50%;}
 .main-box .noreply-msg { display:none;margin-left:20px;text-align:center;color:#666;}
 .main-box .text-talk {line-height:38px;padding:10px 0;word-wrap:break-word;width:100%;min-height:38px;}
-.main-box .reply-attachment img{ width:100%;min-height:280px;}
+.main-box .reply-attachment img{ width:100%;max-height:280px;}
 
 .reply-box { border-bottom:1px solid #ccc;padding-bottom:20px;margin-bottom:20px;}
-.reply-box .file-attachment { border:1px solid #ccc;background-color:#efefef; }
+.reply-box .file-attachment { border:1px solid #ccc;background-color:#fcfcfc; }
 .reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box { float:left;display:block;height:80px;line-height:80px;}
 .reply-box .file-attachment .lump-box {width:80px;}
 .reply-content { word-break:break-all;}
@@ -99,9 +99,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .information-upload .filename{color:#222;margin-top:7px;}
 
 /*图片样式*/
-.pic-list li{ position:relative;float:left;margin-right:40px;border:1px solid #ddd;width:120px;height:80px;text-align:center;font-size:0;line-height:80px;margin-bottom:20px;padding:1px;}
-.pic-list li img{ max-width:120px;max-height:80px;vertical-align:middle;}
-.pic-list li .delete{ background: url(/modules/images/ico-delete.png) no-repeat;height: 20px;min-width: 20px;line-height: 20px;cursor: pointer;position:absolute;right:-10px;top:-10px;}
+.pic-list li{ position:relative;float:left;margin-right:40px;border:1px solid #ddd;width:120px;height:80px;text-align:center;line-height:80px;margin-bottom:20px;padding:1px;}
+.pic-list li img{ max-width:120px;max-height:80px;}
 
 /*讨论附加内容*/
 .addition { width:100%;}

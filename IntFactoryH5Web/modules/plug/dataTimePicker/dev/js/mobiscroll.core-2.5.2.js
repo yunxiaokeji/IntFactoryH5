@@ -880,7 +880,7 @@
             moved = true;
         },
         defaults = {
-            // Options
+            // Optionsdisplay
             width: 70,
             height: 40,
             rows: 3,

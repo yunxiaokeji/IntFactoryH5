@@ -1,0 +1,83 @@
+﻿{%
+    for(var i=0;i<$data.length;i++)
+    {
+        var item=$data[i];
+        var attachments=item.attachments;
+        var images=[];
+        var files=[];
+        for(var j=0;j<attachments.length;j++){
+           var attachment=attachments[j];
+           if(attachment.Type==1){
+                images.push(attachment);
+            }else{
+                files.push(attachment);
+            }
+        }
+%}
+<div class="reply-box">
+    <div class="reply-header">
+        <div class="avatar left mTop10">
+            <img onerror="$(this).attr('src','/modules/images/defaultavatar.png')" src="{%=item.createUser.avatar%}" />
+        </div>
+        <div class="left mLeft20">
+            <p class="user-name blue">{%=item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
+            <p class="create-time color999">{%=item.createTime%}</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="reply-content mTop10">
+        {%=item.content%}
+    </div>
+    {%
+    if(images.length>0||files.length>0)
+    {
+    %}
+    <div class="reply-attachment mTop10">
+        <ul>
+            {%if(images.length>0){
+                for(var k=0;k<images.length;k++){
+                    var imageItem=images[k];
+                    %}
+                    <li class="mTop10">
+                        <img src="{%=imageItem.ServerUrl+imageItem.FileName%}" data-src="{%=imageItem.FileName%}" />
+                    </li>                
+            {%}}%}
+
+            {%if(files.length>0){
+                for(var l=0;l<files.length;l++){
+                    var fileItem=files[l];
+                    var extension=fileItem.OriginalName.split('.');
+                    var extensionName=extension[extension.length-1];
+                                var attachmentUrl="/modules/images/"+(
+                                                                    extensionName=="pdf"?"ico-attachment-pdf.png":
+                                                                    extensionName=="ppt"?"ico-attachment-ppt.png":
+                                                                    extensionName=="psd"?"ico-attachment-psd.png":
+                                                                    extensionName=="txt"?"ico-attachment-txt.png":
+                                                                    extensionName=="xls"||extensionName=="xlsx"?"ico-attachment-excel.png":
+                                                                    extensionName=="rar"||extensionName=="zip"?"ico-attachment-rar.png":
+                                                                    extensionName=="doc"||extensionName=="docx"?"ico-attachment-word.png":""
+                                                                    );
+                    %}
+                    <li class="file-attachment mTop10">
+                        <a href="{%=fileItem.ServerUrl+fileItem.FileName+'?attname='+fileItem.OriginalName%}">
+                            <div class="lump-box" style="background:url('{%=attachmentUrl%}') no-repeat 16px 14px;background-size:50px;background-color:#efefef;border-right:1px solid #ddd;">
+                            </div>
+                            <div class="describe-box color333">
+                                {%=fileItem.OriginalName%}
+                            </div>
+                            <div class="right iconfont" style="font-size:30px;margin:20px 30px 0 10px;">
+                                &#xe655;
+                            </div>
+                            <div class="clear"></div>
+                        </a>
+                    </li>             
+            {%}}%}
+        </ul>
+    </div>
+    {%}%}
+    <div class="return-reply right mTop10">
+        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
+    </div>
+    <div class="clear"></div>
+</div>
+{%}%}
