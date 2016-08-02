@@ -1,5 +1,4 @@
-﻿using IntFactory.Sdk.Entity.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +43,6 @@ namespace IntFactory.Sdk
         /// </summary>
         public UserBase createUser { get; set; }
 
-        public List<Attachment> attachments { get; set; }
         /// <summary>
         /// 来源讨论人
         /// </summary>
@@ -56,6 +54,6 @@ namespace IntFactory.Sdk
 
         public string fromReplyAgentID { get; set; }
 
-        public List<Attachment> attachments { get; set; }
+        public List<AttachmentEntity> attachments { get; set; }
     }
 }

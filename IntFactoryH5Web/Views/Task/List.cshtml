@@ -1,13 +1,10 @@
 ﻿@{
     ViewBag.Title="我的任务";
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <title></title>
     <link href="~/modules/css/task/list.css" rel="stylesheet" />        
     <script src="~/modules/scripts/font.js"></script>
     <script type="text/javascript">
@@ -17,42 +14,35 @@
     </script>
 </head>
 <body>
-    @* 遮罩 *@
     <div class="shade"></div>
     <div class="search"> 
         <span class="span-search"><input type="text" class="txt-search" placeholder="请输入任务名称搜索" /></span>
-        <span class="cencal">确定</span>
+        <span class="btn-search">确定</span>
     </div>
     
-    @* 头部 *@
     <ul class="header">
-        <li class="login-menu">
+        <li class="btn-menu header-li">
             <div class="iconfont iconfont-menu">&#xe60d;</div>
             <span class="login-name long"></span>
+            <ul class="menu-box">
+                <li>
+                    <a href="/Home/Logout">退出</a>
+                </li>
+            </ul>
         </li>
-        <li class="task">
+        <li class="btn-task-filtertype header-li">
             <span>我的任务</span>
             <div class="iconfont">&#xe61c;</div>
+            <ul class="task-filtertype">
+                <li data-filtertype="0">我的任务</li>
+                <li data-filtertype="1">参与任务</li>
+            </ul>
         </li>
-        <li>
+        <li class="header-li">
             <div class="iconfont iconfont-search">&#xe605;</div>
         </li>
     </ul>
-
-    @* 切换任务 *@
-    <ul class="task-switch">
-        <li data-switch="0">我的任务</li>
-        <li data-switch="1">参与任务</li>
-    </ul>
-
-    @* 退出 *@
-    <ul class="login">
-        <li>
-            <a href="/Home/Logout">退出</a>
-        </li>
-    </ul>
-
-    @* 选择状态 *@
+   
     <ul class="task-status">
         <li data-status="-1">
             <div class="ico-status iconfont">&#xe61b;</div>
@@ -71,62 +61,50 @@
             <a>已完成</a>
         </li>
     </ul>
-        
-    @* 选项 *@  
-    <ul class="select">
-        <li class="type" data-idnum="tab-type">
+
+    <ul class="filter-task">
+        <li class="type" data-id="order-type">
             <a class="type-span">类型</a>
             <i class="iconfont-select iconfont">&#xe61c;</i>
         </li>
-        <li class="flow" data-idnum="flow-type">
-            <a class="flow-span">流程</a>
+        <li class="type" data-id="task-mark">
+            <a class="type-span">模块</a>
             <i class="iconfont-select iconfont">&#xe61c;</i>
         </li>
-        <li class="screen" data-idnum="screen-type">
-            <a class="screen-span">流程阶段</a>
-            <i class="iconfont-select iconfont">&#xe61c;</i>
-        </li>
-        <li class="select-sort" data-idnum="screen-sort">
+        <li class="select-sort" data-id="task-sort">
             <a class="sort-span">排序</a>        
             <i class="iconfont-select iconfont">&#xe61c;</i>    
         </li> 
     </ul>
-
-    @* 选项下拉 *@    
-    <div class="dropdownlist">
-        @* 类型下拉 *@   
-        <ul class="potion tab-type">                    
-            <li data-idtype="-1">全部</li>                 
-            <li data-idtype="1">打样</li>
-            <li data-idtype="2">大货</li>                        
-        </ul>   
-        @*流程下拉*@ 
-        <ul class="potion flow-type">                     
-            <li class="all-flow" id="all-flow-drop" data-idflow="-1">全部</li>                
-        </ul>  
-        @* 流程阶段下拉 *@
-        <ul class="potion screen-type"> 
-            <li class="all-screen" data-id="-1">全部</li>      
+    <div class="dropdownlist"> 
+        <ul class="potion order-type">             
+            <li data-id="-1">全部</li>                 
+            <li data-id="1">打样</li>
+            <li data-id="2">大货</li>                        
         </ul>
-        @* 排序 *@
-        <ul class="potion screen-sort">                                        
+        <ul class="potion task-mark">             
+            <li data-mark="-1">全部</li>                 
+            <li data-mark="1">材料</li>
+            <li data-mark="2">制版</li>
+             <li data-mark="3">裁剪</li>
+            <li data-mark="4">车缝</li>
+             <li data-mark="5">发货</li>
+            <li data-mark="6">手工成本</li>
+            <li data-mark="0">其他</li>                   
+        </ul>   
+        <ul class="potion task-sort">                                        
             <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
             <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
             <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
             <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
         </ul>  
-    </div> 
-
-    @* 任务列表 *@
-    <div class="list">
-        
-    </div>    
-    @* 回到顶部 *@
+    </div>
+    <div class="clear"></div>
+    <div class="list"></div>
+    
     <div class="getback">
         <div class="iconfont-back iconfont">&#xe643;</div>
     </div>
-
-
 </body>
 </html>
 

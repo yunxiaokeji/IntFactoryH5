@@ -43,7 +43,6 @@ define(function (require, exports, module) {
             function (data)
             {
                 $("#btnLogin").html("登录").removeAttr("disabled");
-
                 if (data.result == 1)
                 {
                     if (Home.returnUrl != '') {
@@ -77,6 +76,11 @@ define(function (require, exports, module) {
             });
         });
 
+        $("#sendPush2").click(function () {
+            Global.post("/Home/SendPush", null, function (data) {
+                alert(data.result);
+            });
+        });
 
         $(".txtBoxPassword").click(function () {
             $(this).hide();

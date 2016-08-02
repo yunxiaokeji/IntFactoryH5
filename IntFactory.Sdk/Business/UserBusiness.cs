@@ -21,13 +21,13 @@ namespace IntFactory.Sdk
 
         }
 
-        public static UserLoginResult UserLogin(string userName, string pwd,string userID,string agentID) 
+        public static UserLoginResult UserLogin(string userName, string pwd,string userID,string clientID) 
         {
             var paras = new Dictionary<string, object>();
             paras.Add("userName", userName);
             paras.Add("pwd", pwd);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<UserLoginResult>(ApiOption.userLogin, paras);
         }
