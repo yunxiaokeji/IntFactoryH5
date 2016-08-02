@@ -1,17 +1,16 @@
 ﻿@{
     ViewBag.Title="我的任务";
+    var UserID=ViewBag.UserID;
+    var v = DateTime.Now.Ticks;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <link href="~/modules/css/task/list.css" rel="stylesheet" />        
-    <script src="~/modules/scripts/font.js"></script>
-    <script type="text/javascript">
-        seajs.use("/modules/scripts/task/list.js", function (data) {
-            data.init();
-        });
-    </script>
+    <link href="/modules/css/task/list.css" rel="stylesheet" />        
+    <script src="/modules/scripts/font.js"></script>
+    <script src="/modules/scripts/api.js?v=@v" type="text/javascript"></script>
+    <script src="/modules/scripts/sha1.js?v=@v"  type="text/javascript"></script>
 </head>
 <body>
     <div class="shade"></div>
@@ -100,11 +99,33 @@
         </ul>  
     </div>
     <div class="clear"></div>
+
     <div class="list"></div>
     
     <div class="getback">
         <div class="iconfont-back iconfont">&#xe643;</div>
     </div>
+    <input type="hidden" id="txt-userID" value="@UserID" />
 </body>
+<script type="text/javascript">
+        seajs.use("/modules/scripts/task/list.js", function (data) {
+            data.init();
+        });
+
+        apiready = function () {
+            var userId = $("#txt-userID").val();
+            var push = api.require('push');
+            push.bind({
+                userName: 'testName',
+                userId: userId
+            }, function (ret, err) {
+                if (ret.status) {
+                    api.alert({ msg: '绑定成功' });
+                } else {
+                    api.alert({ msg: err.msg });
+                }
+            });
+        }
+    </script>
 </html>
 

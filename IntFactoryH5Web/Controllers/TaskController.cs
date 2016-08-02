@@ -10,13 +10,9 @@ namespace IntFactoryH5Web.Controllers
     [IntFactoryH5Web.Common.UserAuthorize]
     public class TaskController : BaseController
     {
-        //
-        // GET: /Task/
-
-        //string processID = "791902e5-27e1-4bb8-a4eb-f7214cdca593";
-
         public ActionResult List()
         {
+            ViewBag.UserID = CurrentUser.userID;
             return View();
         }
         

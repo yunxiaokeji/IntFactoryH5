@@ -57,7 +57,7 @@ namespace IntFactoryH5Web.Controllers
              paras.Add("content", "content");
              paras.Add("type", 2);
              paras.Add("platform", 2);
-             paras.Add("userIds", "865758026597275333");
+             paras.Add("userIds", "63227a7c-955a-4b65-9477-66df0d078dc0,5ef4141c-ac6d-4acf-af8e-abd9db6aaf53");
              string paraStr = string.Empty;
              JavaScriptSerializer serializer = new JavaScriptSerializer();
              string result = push.Message(serializer.Serialize(paras));

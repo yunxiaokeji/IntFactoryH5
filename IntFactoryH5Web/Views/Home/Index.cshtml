@@ -19,8 +19,7 @@
 
     <script src="/Scripts/sea.js?v=@v" type="text/javascript"></script>
     <script src="/Scripts/sea-config.js?v=@v" type="text/javascript"></script>
-    <script src="/modules/scripts/api.js?v=@v" type="text/javascript"></script>
-    <script src="/modules/scripts/sha1.js?v=@v"  type="text/javascript"></script>
+    
     <script type="text/javascript">
         seajs.use(["scripts/home/login"], function (login) {
             login.initLogin('@ViewBag.ReturnUrl');
@@ -92,6 +91,7 @@
                     <div class="txtBoxPassword">请输入密码</div>
                 </div>
                 <div class="btnLogin mTop20" id="btnLogin">登录</div>
+                @*<div class="btnLogin mTop20" id="sendPush2">behind send push</div>*@
            @*     <div class="btnLogin mTop20" id="sendPush">send push</div>
                 <div class="btnLogin mTop20" id="sendPush2">behind send push</div>*@
             </div>
