@@ -39,6 +39,7 @@ namespace IntFactoryH5Web.Controllers
                     JavaScriptSerializer serializer=new JavaScriptSerializer();
                     ViewBag.MaterialList =serializer.Serialize(resultTask.materialList);
                     ViewBag.UserID = CurrentUser.userID;
+                    ViewBag.ModuleName = resultTask.moduleName;
                 }
             }
             return View();
@@ -129,21 +130,16 @@ namespace IntFactoryH5Web.Controllers
         [ValidateInput(false)]
         public JsonResult AddTaskReply(string resultReply,string taskID,string entityAttachments)
         {
-
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-
             TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
             List<AttachmentEntity> attachments = new List<AttachmentEntity>();
             taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(resultReply);
             taskReplyEntity.attachments = serializer.Deserialize<List<AttachmentEntity>>(entityAttachments);
             TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, taskID, CurrentUser.userID, CurrentUser.clientID);
-           
             JsonDictionary.Add("items", addResult.taskReplys);
 
             return new JsonResult { 
-            
                 Data=JsonDictionary,
-
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
 
             };

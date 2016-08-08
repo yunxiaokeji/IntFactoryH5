@@ -2,17 +2,18 @@
 
     var Global = require("global"),
         Upload = require("upload"),
-        doT = require("dot");
+        doT = require("dot"),
+        OrderGoods = require("/modules/scripts/task/ordergoods");
 
     var Paras = {
         orderID: "",
-        stageID: "",     
+        stageID: "",
         replayPageIndex: 1,
-        logPageIndex:1,
+        logPageIndex: 1,
         endTime: "",
-        taskID:""
+        taskID: ""
     };
-    
+
     var AddReplyParas = {
         orderID: "",
         stageID: "",
@@ -20,33 +21,27 @@
         content: "",
         fromReplyID: "",
         fromReplyUserID: "",
-        fromReplyAgentID:""
+        fromReplyAgentID: ""
     };
 
     var Content = "";
-
-    var TaskDetail = {};
-
     //判断是否发表评论中
     var IsLoading = false;
-
     //判断日志第一次加载
     var LogIsPageCount = true;
-
     var ReplyIsPageCount = true;
-    
     var replyPageCount = 1;
-
     var logPageCount = 1;
-    
     //默认绑定讨论下拉控件
     var bind = "talk-status";
-
     //默认获取讨论列表
     var GetOrAddReply = "GetReply";
 
+    var TaskDetail = {};
     TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
         var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
+        TaskDetail.task = jsonTask;
+        TaskDetail.order = jsonTask.order;
         Paras.orderID = jsonTask.orderID;
         Paras.stageID = jsonTask.stageID;
         Paras.taskID = jsonTask.taskID;
@@ -60,28 +55,25 @@
         AddReplyParas.stageID = jsonTask.stageID;
         AddReplyParas.mark = jsonTask.mark;
 
+        OrderGoods.init(Global, doT);
+        OrderGoods.orderid = jsonTask.orderID;
+        OrderGoods.taskid = jsonTask.taskID;
+
         TaskDetail.bindEvent();
-        //浏览器加载获取讨论列表
-        TaskDetail.getTaskReplys();
-        //浏览器加载获取材料信息
-        TaskDetail.getOrderList(TaskDetail.materialList);
-        //浏览器加载删除制版信息操作列
         TaskDetail.initStyle();
-        //调用绑定选择时间控件(绑定设置到期时间事件)
+        TaskDetail.getOrderList(TaskDetail.materialList);
         TaskDetail.bindTimerPicker();
         TaskDetail.setImagesSize();
     }
-   
+
     //初始化样式信息
     TaskDetail.initStyle = function () {
         var documentWidth = $(window).width();
         var ducomentHeight = $(window).height();
 
-        //设置讨论内容高度
-        //$(".reply-layer-content").css({ "height": ducomentHeight - 20 - 60 - 81 - 30 + "px" });
         //设置图片显示宽高
-        $(".pic-list li").css({"margin-right": "10px","border":"1px solid #ccc" });
-        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px"});
+        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
+        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
         $(".platemakingBody table tr td:last-child").remove();
     }
 
@@ -131,36 +123,61 @@
             $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
             $(this).parent().parent().find("i").css("color", "#9e9e9e");
             $(this).find("i").css("color", "#4a98e7");
+
             var classname = $(this).data("classname");
+            bind = classname;
             $(".main-box ." + classname).show().siblings().hide();
             $(".main-box").css("margin-bottom", "0px");
-            bind = classname;
-            //点击讨论模块
+
+            //讨论
             if (classname == "talk-status") {
                 $(".main-box").css("margin-bottom", "80px");
+                TaskDetail.getTaskReplys();
             }
-            //点击材料计划模块
+                //材料
             else if (classname == "shop-status") {
                 $(".main-box .loading-lump").hide();
             }
-            //点击日志模块
+                //工艺说明
+            else if (classname == "print-status") {
+                TaskDetail.getPlateMakings();
+            }
+                //日志
             else if (classname == "log-status") {
-
                 if (LogIsPageCount) {
                     TaskDetail.getTaskLogs();
                     LogIsPageCount = false;
                 }
             }
-            //点击制版模块
-            else if (classname == "print-status") {
+                //手工成本
+            else if (classname === "navCosts") {
+                TaskDetail.getOrderCosts();
+            }
+                //打样发货
+            else if (classname === "navSendDYDoc") {
+                OrderGoods.getGetGoodsDoc(classname, 2);
+            }
+                //裁剪
+            else if (classname == "navCutoutDoc") {
+                OrderGoods.getGetGoodsDoc(classname, 1);
+            }
+                //车缝
+            else if (classname == "navSewnDoc") {
+                OrderGoods.getGetGoodsDoc(classname, 11);
+            }
+                //发货
+            else if (classname == "navSendDoc") {
+                OrderGoods.getGetGoodsDoc(classname, 22);
             }
         });
+
+        $("nav ul li.menuchecked").click();
 
         //点击回到顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
-     
+
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
             if ($('.btn-finishTask').val() == "标记完成") {
@@ -201,7 +218,7 @@
                 alert("发表中,请稍候再试.");
                 return false;
             }
-           
+
             var attachments = [];
             $('.task-file li').each(function () {
                 var _this = $(this);
@@ -230,7 +247,7 @@
                 });
                 newHtml.find('div').remove();
                 divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br/>" : "") + divContent;
-            }else {
+            } else {
                 divContent = newHtml.html();
             }
             AddReplyParas.content = divContent;
@@ -281,7 +298,7 @@
 
         /*显示表情浮层*/
         $(".qqface").click(function () {
-            
+
         });
 
         TaskDetail.bindScroll();
@@ -337,10 +354,10 @@
     }
 
     //设置任务到期时间
-    TaskDetail.setTaskEndTime =function() {
+    TaskDetail.setTaskEndTime = function () {
 
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
-            
+
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
@@ -369,16 +386,42 @@
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
-            }else if (data == 0) {
+            } else if (data == 0) {
                 alert("失败");
-            }else if (data == 2) {
+            } else if (data == 2) {
                 alert("有前面阶段任务未完成");
-            }else if (data == 3) {
+            } else if (data == 3) {
                 alert("没有权限;");
-            }else if (data == 4) {
+            } else if (data == 4) {
                 alert("任务没有接受，不能设置完成");
-            }else if (data == 5) {
+            } else if (data == 5) {
                 alert("任务有未完成步骤");
+            }
+        });
+    }
+
+    //接受任务、标记任务完成的弹出浮层
+    TaskDetail.showConfirmForm = function (showStatus) {
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
+        confirm(alertMsg, function () {
+            if (showStatus == 0) {
+                TaskDetail.setTaskEndTime();
+            } else {
+                TaskDetail.finishTask();
+            }
+        });
+
+    }
+
+    //设置图片宽高
+    TaskDetail.setImagesSize = function () {
+        var windowWidth = $(window).width();
+        $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth +"px"});
+        $(".main_image ul li").each(function () {
+            if ($(this).find('img').width() > $(this).find('img').height()) {
+                $(this).find('img').css("height", windowWidth + "px");
+            } else {
+                $(this).find('img').css("width", windowWidth + "px");
             }
         });
     }
@@ -406,10 +449,10 @@
             }
         }
     }
-    
+
     //获取任务详情日志列表
     TaskDetail.getTaskLogs = function () {
-    
+
         if (logPageCount >= Paras.logPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
@@ -437,7 +480,6 @@
 
     //获取材料采购计划列表
     TaskDetail.getOrderList = function (data) {
-        
         if (data.length == 0) {
             $(".shop-status").html("<div class='no-material'>暂无材料</div>");
         } else {
@@ -471,35 +513,6 @@
         }
     }
 
-    //接受任务、标记任务完成的弹出浮层
-    TaskDetail.showConfirmForm = function (showStatus) {
-
-        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
-        confirm(alertMsg, function () {
-            if (showStatus == 0) {
-                TaskDetail.setTaskEndTime();
-            }   else {
-                TaskDetail.finishTask();
-            }
-        });
-
-    }
-        
-    //设置图片宽高
-    TaskDetail.setImagesSize = function () {
-        $(".main_image").css("height", $(window).width() + "px");
-        $(".main_image").css("width", $(window).width() + "px");
-        $(".main_image li").css("height", $(window).width() + "px");
-        $(".main_image ul li").each(function () {
-            if ($(this).find('img').width() > $(this).find('img').height()) {
-                $(this).find('img').css("height", $(window).width() + "px");
-            } else {
-                $(this).find('img').css("width", $(window).width() + "px");
-            }
-        });
-    }
-
-
     //获取或添加任务讨论
     TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
         doT.exec("template/task/detail-reply.html", function (templateFun) {
@@ -512,7 +525,7 @@
                     $(this).html(Global.replaceQqface($(this).html()));
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
-            }else {
+            } else {
                 if ($(".talk-main").find('div').length == 0) {
                     $(".noreply-msg").hide();
                 }
@@ -538,6 +551,57 @@
         });
     }
 
-    module.exports = TaskDetail;
+    //获取手工成本
+    TaskDetail.getOrderCosts = function () {
+        var _self = this;
+        $("#navCosts .tr-header").nextAll().remove();
+        $("#navCosts .tr-header").after("<tr><td colspan='10'><div class='data-loading' ><div></td></tr>");
+        Global.post("/Orders/GetOrderCosts", {
+            orderid: Paras.orderID
+        }, function (data) {
+            $("#navCosts .tr-header").nextAll().remove();
+            data = JSON.parse(data);
+            if (data.items.length > 0) {
+                doT.exec("template/task/task-costs.html", function (template) {
+                    var innerhtml = template(data.items);
+                    innerhtml = $(innerhtml);
 
-})
+                    innerhtml.find(".cost-price").each(function () {
+                        $(this).text($(this).text() * $("#navCosts").data("quantity"))
+                    });
+                    $("#navCosts .tr-header").after(innerhtml);
+                });
+            } else {
+                $("#navCosts .tr-header").after("<tr><td colspan='10'><div class='nodata-txt' >暂无数据!</div></td></tr>");
+            }
+        });
+    };
+
+    //获取制版工艺说明
+    TaskDetail.getPlateMakings = function () {
+        var _self = this;
+        $(".tb-plates .tr-header").nextAll().remove();
+        $(".tb-plates .tr-header").after("<tr><td colspan='5'><div class='data-loading'><div></td></tr>");
+
+        Global.post("/Orders/GetPlateMakings", {
+            orderID: _self.order.orderType == 1 ? _self.order.orderID : _self.order.originalID
+        }, function (data) {
+            $(".tb-plates .tr-header").nextAll().remove();
+            data = JSON.parse(data);
+            if (data.items.length > 0) {
+                doT.exec("template/orders/platematrings.html", function (template) {
+                    PlateMakings = data.items;
+                    var html = template(data.items);
+                    html = $(html);
+                    html.find(".dropdown").remove();
+                    $(".tb-plates").append(html);
+                });
+            }
+            else {
+                $(".tb-plates").append("<tr><td colspan='5'><div class='nodata-txt'>暂无工艺说明<div></td></tr>");
+            }
+        });
+    };
+
+    module.exports = TaskDetail;
+});

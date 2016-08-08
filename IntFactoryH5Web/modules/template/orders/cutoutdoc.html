@@ -1,0 +1,60 @@
+﻿{%
+    for(var i=0;i<$data.length;i++)
+    {
+        var item=$data[i];
+    if(i>0){
+    %}
+%}
+<tr class="line-item">
+    <td></td>
+</tr>
+{%}%}
+<tr class="item-header">
+    <td class="tLeft bLeft">规格</td>
+    <td>数量</td>
+    {%if(item.DocType==11){%}
+    <td class="tLeft btn-swen-box-{%=item.DocID%}">
+        {%=$data.taskDesc%}退回
+    </td>
+    {%}%}
+    <td>小计</td>
+    <td>登记人</td>
+</tr>
+{%
+for(var j=0;j<item.Details.length;j++)
+{
+    var detail=item.Details[j];
+%}
+<tr class="item" data-id="{%=detail.GoodsDetailID%}">
+    <td class="tLeft bBottom bLeft">
+        {%=detail.Remark%}
+    </td>
+    <td class="center bBottom swen-total">
+        {%=detail.Quantity%}
+    </td>
+    {%if(item.DocType==11){%}
+    <td class="tLeft bBottom input-swen-box-{%=item.DocID%}">
+        <div class="mLeft2" style="display:inline-block;">{%=detail.ReturnQuantity%}</div>
+    </td>
+    {%}%}
+    {%
+    if(j==0)
+    {
+    %}
+    <td class="center bBottom bLeft cut1" rowspan="{%=item.Details.length%}">
+        {%=item.Quantity%}
+    </td>
+    <td class="center bBottom bLeft" rowspan="{%=item.Details.length%}">
+        {%=item.CreateUser.Name%}
+    </td>
+    {%}%}
+</tr>
+{%}%}
+{%}%}
+<tr class="line-item">
+    <td colspan="6"></td>
+</tr>
+<tr class="item">
+    <td colspan="1"></td>
+    <td class="center font16">合计：<span class="total-count font16"></span></td>
+</tr>

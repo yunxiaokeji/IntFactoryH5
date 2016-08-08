@@ -19,57 +19,10 @@
 
     <script src="/Scripts/sea.js?v=@v" type="text/javascript"></script>
     <script src="/Scripts/sea-config.js?v=@v" type="text/javascript"></script>
-    
     <script type="text/javascript">
         seajs.use(["scripts/home/login"], function (login) {
             login.initLogin('@ViewBag.ReturnUrl');
         });
-
-        //apiready = function () {
-        //    var userId = api.deviceId + "333";
-        //    $("#btnLogin").click(function () {
-        //        var push = api.require('push');
-        //        push.bind({
-        //            userName: 'testName',
-        //            userId: userId
-        //        }, function (ret, err) {
-        //            if (ret.status) {
-        //                api.alert({ msg: '绑定成功' });
-        //            } else {
-        //                api.alert({ msg: err.msg });
-        //            }
-        //        });
-        //    });
-
-        //    $("#sendPush").click(function () {
-        //        var now = Date.now();
-        //        var appKey = SHA1("A6925589056031" + "UZ" + "97A4C2DD-D654-ACE3-CF21-5D8874D2ACF4" + "UZ" + now) + "." + now;
-        //        api.ajax({
-        //            url: 'https://p.apicloud.com/api/push/message',
-        //            method: "post",
-        //            headers: {
-        //                "X-APICloud-AppId": "A6925589056031",
-        //                "X-APICloud-AppKey": appKey
-        //            },
-        //            dataType: "json",
-        //            data: {
-        //                "values": {
-        //                    "title": "智能工厂消息",
-        //                    "content": "消息内容" + now,
-        //                    "type": 2, //– 消息类型，1:消息 2:通知
-        //                    "platform": 2, //0:全部平台，1：ios, 2：android
-        //                    //    "groupName" : "department", //推送组名，多个组用英文逗号隔开.默认:全部组。eg.group1,group2 .
-        //                    "userIds": userId //推送用户id, 多个用户用英文逗号分隔，eg. user1,user2。
-        //                }
-        //            }
-        //        }, function (ret, err) {
-        //            if (err == "") {
-        //                alert("发送成功")
-        //            }
-        //        });
-
-        //    });
-        //}
     </script>
 </head>
 <body>
@@ -91,9 +44,6 @@
                     <div class="txtBoxPassword">请输入密码</div>
                 </div>
                 <div class="btnLogin mTop20" id="btnLogin">登录</div>
-                @*<div class="btnLogin mTop20" id="sendPush2">behind send push</div>*@
-           @*     <div class="btnLogin mTop20" id="sendPush">send push</div>
-                <div class="btnLogin mTop20" id="sendPush2">behind send push</div>*@
             </div>
         </div>
     </div>

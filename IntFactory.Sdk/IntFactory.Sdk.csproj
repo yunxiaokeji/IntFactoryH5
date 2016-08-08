@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\OrderBusiness.cs" />
     <Compile Include="Common\ApiOption.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="Business\OauthBusiness.cs" />

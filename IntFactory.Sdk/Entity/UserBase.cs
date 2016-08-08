@@ -5,6 +5,7 @@ using System.Text;
 
 namespace IntFactory.Sdk
 {
+    [Serializable]
     public class UserBase
     {
         /// <summary>

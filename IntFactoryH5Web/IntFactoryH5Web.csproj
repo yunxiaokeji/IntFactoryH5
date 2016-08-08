@@ -110,6 +110,7 @@
     <Compile Include="Common\Push.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PlugController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -284,6 +285,11 @@
     <Content Include="modules\scripts\sha1.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\list.js" />
+    <Content Include="modules\scripts\task\ordergoods.js" />
+    <Content Include="modules\template\orders\cutoutdoc.html" />
+    <Content Include="modules\template\orders\platematrings.html" />
+    <Content Include="modules\template\orders\senddocs.html" />
+    <Content Include="modules\template\orders\senddydocs.html" />
     <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
     <Content Include="modules\template\task\materList.html" />
@@ -291,6 +297,7 @@
     <Content Include="modules\template\task\flow.html" />
     <Content Include="modules\template\task\list.html" />
     <Content Include="modules\template\task\detail-reply.html" />
+    <Content Include="modules\template\task\task-costs.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
     <Content Include="modules\template\task\task-file-upload.html" />
     <Content Include="Qiniu.4.0.dll" />
@@ -322,7 +329,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\List.cshtml" />
@@ -339,6 +346,11 @@
     <Content Include="modules\css\iconfont\iconfont.ttf" />
     <Content Include="modules\css\iconfont\iconfont.woff" />
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
+    <Content Include="Views\Task\CutoutDoc.cshtml" />
+    <Content Include="Views\Task\SendDoc.cshtml" />
+    <Content Include="Views\Task\SendDYDoc.cshtml" />
+    <Content Include="Views\Task\SewnDoc.cshtml" />
+    <Content Include="Views\Task\ProcessCostDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">

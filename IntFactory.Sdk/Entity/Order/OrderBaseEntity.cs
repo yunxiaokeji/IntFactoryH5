@@ -12,6 +12,10 @@ namespace IntFactory.Sdk
         /// </summary>
         public string orderID;
 
+        public string originalID;
+
+        public int orderType;
+
         /// <summary>
         /// 订单编码
         /// </summary>

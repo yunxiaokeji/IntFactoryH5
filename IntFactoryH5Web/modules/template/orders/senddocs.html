@@ -1,0 +1,47 @@
+﻿{%
+    for(var i=0;i<$data.length;i++)
+    {
+        var item=$data[i];
+    if(i>0){
+    %}
+%}
+<tr class="line-item">
+    <td></td>
+</tr>
+{%}%}
+<tr class="item-header">
+    <td class="tLeft">规格</td>
+    <td class="">数量</td>
+    <td>小计</td>
+    <td class="">发货人</td>
+</tr>
+{%
+for(var j=0,jj=item.Details.length;j<jj;j++)
+{
+    var detail=item.Details[j];
+%}
+<tr class="item">
+    <td class="tLeft bBottom">
+        {%=detail.Remark%}
+    </td>
+    <td class="center bBottom">
+        {%=detail.Quantity%}
+    </td>
+    {%
+    if(j==0)
+   {
+    %}
+    <td class="center bBottom bLeft cut1" rowspan="{%=jj%}">
+        {%=item.Quantity%}
+    </td>
+    <td class="center bBottom bLeft" rowspan="{%=jj%}">{%=item.CreateUser.Name%}</td>
+    {%}%}
+</tr>
+{%}}%}
+<tr class="line-item">
+    <td></td>
+</tr>
+<tr>
+    <td colspan="2"></td>
+    <td class="center font16">合计：<span class="total-count font16"></span></td>
+</tr>

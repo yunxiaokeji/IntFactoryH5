@@ -9,37 +9,68 @@ namespace IntFactoryH5Web.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         string userID = "BC6802E9-285C-471C-8172-3867C87803E2";
         string clientID = "9F8AF979-8A3B-4E23-B19C-AB8702988466";
-
-        public ActionResult Index(string ReturnUrl)
+        public ActionResult Index()
         {
-            if (Session["ClientManager"] != null) {
+            return Redirect("/Home/Login");
+        }
+
+        public ActionResult Login(string ReturnUrl)
+        {
+            if (Session["ClientManager"] != null)
+            {
                 return Redirect("/Task/List");
             }
-
+            else
+            {
+                HttpCookie userinfo = Request.Cookies["m_intfactory_userinfo"];
+                if (userinfo != null)
+                {
+                    var result = IntFactory.Sdk.UserBusiness.UserLogin(userinfo["username"], userinfo["pwd"], userID, clientID);
+                    if (result.error_code == 0)
+                    {
+                        Session["ClientManager"] = result.user;
+                        return Redirect("/Task/List");
+                    }
+                }
+            }
             ReturnUrl = ReturnUrl ?? string.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
 
             return View();
         }
 
-        public ActionResult Logout() {
+        public ActionResult Logout() 
+        {
             Session["ClientManager"] = null;
-            
-            return Redirect("/Home/Index");
+            //Request.Cookies.Remove("m_intfactory_userinfo");
+            //Request.Cookies.Clear();
+            HttpCookie mycookie = Request.Cookies["m_intfactory_userinfo"];
+            TimeSpan ts = new TimeSpan(0, 0, 0, 0); //时间跨度
+            mycookie.Expires = DateTime.Now.Add(ts); //立即过期
+            Response.Cookies.Remove("m_intfactory_userinfo");//清除
+            Response.Cookies.Add(mycookie); //写入立即过期的*/
+            Response.Cookies["m_intfactory_userinfo"].Expires = DateTime.Now.AddDays(-1);
+
+
+            return Redirect("/Home/Login");
         }
 
+        #region ajax
         public JsonResult UserLogin(string userName, string pwd)
         {
             Dictionary<string, object> resultObj = new Dictionary<string, object>();
             var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,clientID);
-
-            if (result.error_code == 0) {
+            if (result.error_code == 0) 
+            {
                 Session["ClientManager"] = result.user;
+                //保持登录状态
+                HttpCookie cook = new HttpCookie("m_intfactory_userinfo");
+                cook["username"] = userName;
+                cook["pwd"] = pwd;
+                cook.Expires = DateTime.Now.AddMonths(1);
+                Response.Cookies.Add(cook);
             }
 
             return new JsonResult()
@@ -48,6 +79,7 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
             };
         }
+
         public JsonResult SendPush()
         {
              Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
@@ -69,6 +101,7 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        #endregion
 
     }
 }

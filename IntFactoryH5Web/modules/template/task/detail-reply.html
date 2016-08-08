@@ -20,7 +20,7 @@
             <img onerror="$(this).attr('src','/modules/images/defaultavatar.png')" src="{%=item.createUser.avatar%}" />
         </div>
         <div class="left mLeft20">
-            <p class="user-name blue">{%=item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
+            <p class="user-name blue">{%=item.createUser.name==null?"--":item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
             <p class="create-time color999">{%=item.createTime%}</p>
         </div>
         <div class="clear"></div>
