@@ -1,5 +1,4 @@
 ﻿define(function (require, exports, module) {
-
     var Global = require("global"),
         Upload = require("upload"),
         doT = require("dot"),
@@ -38,18 +37,17 @@
     var GetOrAddReply = "GetReply";
 
     var TaskDetail = {};
-    TaskDetail.init = function (imgStatus, userID, materialList, operateStatus, jsonTask) {
-        var jsonTask = JSON.parse(jsonTask.replace(/&quot;/g, '"'));
+    TaskDetail.init = function (haveImg, isOwner, userID, task) {
+        var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         TaskDetail.task = jsonTask;
         TaskDetail.order = jsonTask.order;
         Paras.orderID = jsonTask.orderID;
         Paras.stageID = jsonTask.stageID;
         Paras.taskID = jsonTask.taskID;
 
-        TaskDetail.imgStatus = imgStatus;
+        TaskDetail.haveImg = haveImg;
         TaskDetail.userID = userID;
-        TaskDetail.operateStatus = operateStatus;
-        TaskDetail.materialList = JSON.parse(materialList.replace(/&quot;/g, '"'));
+        TaskDetail.isOwner = isOwner;
 
         AddReplyParas.orderID = jsonTask.orderID;
         AddReplyParas.stageID = jsonTask.stageID;
@@ -61,7 +59,7 @@
 
         TaskDetail.bindEvent();
         TaskDetail.initStyle();
-        TaskDetail.getOrderList(TaskDetail.materialList);
+        //TaskDetail.getOrderList(TaskDetail.materialList);
         TaskDetail.bindTimerPicker();
         TaskDetail.setImagesSize();
     }
@@ -79,9 +77,7 @@
 
     //绑定事件
     TaskDetail.bindEvent = function () {
-
-        //是否绑定滑屏控件事件
-        if (TaskDetail.imgStatus == 1) {
+        if (TaskDetail.haveImg == 1) {
             $dragBln = false;
             $(".main_image").touchSlider({
                 flexible: true,
@@ -181,7 +177,7 @@
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
             if ($('.btn-finishTask').val() == "标记完成") {
-                if (TaskDetail.operateStatus) {
+                if (TaskDetail.isOwner) {
                     $(".btn-finishTask").click(function () {
                         TaskDetail.showConfirmForm(1);
                     });
@@ -337,7 +333,7 @@
     //绑定时间控件
     TaskDetail.bindTimerPicker = function () {
         if ($(".btn-acceptTaskTime").length == 0) { return; }
-        if (!TaskDetail.operateStatus) { return; }
+        if (!TaskDetail.isOwner) { return; }
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式

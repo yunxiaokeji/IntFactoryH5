@@ -30,17 +30,17 @@
                             <label>上级进度:</label>     
                             <span>
                                  {%   if (item.finishStatus==0) {      %}
-                                    <i class="iconfont-details iconfont">&#xe61e;</i>
+                                    未接受
                                 {%   }  else if (item.finishStatus==1) {      %}
-                                    <i class="iconfont-details iconfont status-proceed" >&#xe621;</i>
+                                    进行中
                                 {%   }  else {      %}
-                                    <i class="iconfont-details iconfont color999" >&#xe61f;</i>
+                                    已完成
                                 {%   }  %} 
                             </span>                                
                         </div>  
                         <div class="stage">
                             <label>上级到期:</label>   
-                            <span>{%=item.pEndTime==""?"未完成":item.pEndTime%}</span>                              
+                            <span>{%=item.pEndTime==""?"未设置":item.pEndTime%}</span>                              
                         </div>       
                     {%   }  else if (item.finishStatus==1) {      %}
                         <div class="stage" >

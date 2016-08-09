@@ -14,10 +14,15 @@
 .task-filtertype li{height:50px;line-height:60px; color:#888;font-size:20px;}
 /*遮罩*/
 .shade { width:100%;height:100%;position:fixed;z-index:1002;background-color:rgba(143,143,143,0.6);display:none;}
-.search {width:100%;background-color:#D5D5D5;line-height:78px;position:fixed;top:0;z-index:1002;display:none;}
-.search span { float:left;display:block;}
-.search span .txt-search{font-size:28px; width:95%;border-radius:5px;border:1px solid #CCC;padding:20px 0px 20px 50px; color:#999;background:url(/modules/images/Zoom.gif) no-repeat center left;background-color:#fff;background-size:2em;}
-.search span:last-child {color:#646464;height:30px;float:right;margin-right:30px;font-size:28px;}
+.search {width:100%;background-color:rgb(143,143,143);position:fixed;top:0;z-index:1002;display:none;}
+.search .search-box { margin-right:150px;background-color:#fff;}
+.search .search-box .iconfont {
+    font-size:32px;
+    color:#999;
+    margin-left:10px;
+}
+.search .search-box .txt-search{font-size:28px;border:none; width:80%;padding:22px 0; color:#999;}
+.search .btn-search {color:#646464;height:30px;line-height:30px; font-size :28px;position:fixed;top:27px;right:30px;}
 /*退出下拉*/
 .menu-box {position:absolute;top:50px; height:80px;line-height:80px;width:100%;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
 .menu-box li{text-align:center;}

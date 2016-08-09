@@ -163,9 +163,19 @@
         $(".order-type li").click(function () {
             $(".type-span").text($(this).text());
             $(this).parent().hide();
+
+            Params.pageIndex = 1;
+            Params.orderType = $(this).data("id");
+            List.getList();
+        });
+
+        //任务类型切换
+        $(".task-mark li").click(function () {
+            $(".type-span").text($(this).text());
+            $(this).parent().hide();
             
             Params.pageIndex = 1;
-            Params.orderType = $(this).data("idtype");
+            Params.taskType = $(this).data("mark");
             List.getList();
         });
 

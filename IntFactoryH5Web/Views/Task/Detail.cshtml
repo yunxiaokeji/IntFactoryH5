@@ -4,11 +4,10 @@
     ViewBag.Title = "任务详情-" + task.title;
     
     JavaScriptSerializer serializer = new JavaScriptSerializer();
-    var JsonTask= serializer.Serialize(task);
+    var taskStr= serializer.Serialize(task);
     var UserID = ViewBag.UserID;
-    var materialList = ViewBag.MaterialList;
     var ModuleName=ViewBag.ModuleName;
-    var userStatus =task.ownerUser.userID.Equals(UserID,StringComparison.OrdinalIgnoreCase) ? true : false;
+    var isOwner = task.ownerUser.userID.Equals(UserID, StringComparison.OrdinalIgnoreCase) ? true : false;
     string[] imagesUrl = { };
     if(task.order.orderImages.Length!=0)
     {
@@ -16,18 +15,14 @@
     }
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <title></title>
+@section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
     <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
     <link href="/modules/css/task/detailmedia.css" rel="stylesheet" />
     <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
     <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
-</head>
+    }
+@section scripts{
     <script src="/modules/scripts/font.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
@@ -40,16 +35,15 @@
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@(imagesUrl.Length>1?"1":"0")',
+                    '@(imagesUrl.Length>1?1:0)',
+                     '@isOwner',
                     '@UserID',
-                    '@materialList',
-                    '@userStatus',
-                    '@JsonTask'
+                    '@taskStr'
                  );
             });
         })
     </script>
-<body>
+    }
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">任务详情</div>
@@ -61,23 +55,23 @@
                 }
                 else
                 {
-                    if (!userStatus)
+                    if (!isOwner)
                     {
-                            <span>@(task.finishStatus == 0 ? "未接收" : task.finishStatus == 1 ? "进行中" : "")</span>
+                        <span>@(task.finishStatus == 0 ? "未接收" : task.finishStatus == 1 ? "进行中" : "")</span>
                     }
                     else
                     {
                         if (task.finishStatus == 0)
                         {
-                                <input type="text" class="btn-acceptTaskTime" value="接受任务"  />              
+                            <input type="text" class="btn-acceptTaskTime" value="接受任务"  />              
                         }
                         else if (task.finishStatus == 1)
                         { 
-                                <input type="button" class="btn-finishTask"  value="标记完成"  />   
+                            <input type="button" class="btn-finishTask"  value="标记完成"  />   
                         }
                     }
                 }
-                }  
+            }  
         </div>
     </header>
 
@@ -101,7 +95,7 @@
                     {
                         for (int i = 0; i < imagesUrl.Length; i++)
                         {
-                            <li><img src="@ViewBag.DomainUrl@(imagesUrl[i])"></li>
+                            <li><img src="@(imagesUrl[i])"></li>
                         }
                     }
                 }
@@ -264,6 +258,3 @@
             </ul>
         </div>
     </div>
-
-</body>
-</html>

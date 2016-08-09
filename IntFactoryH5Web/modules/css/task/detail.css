@@ -3,7 +3,14 @@ body { background-color:#efefef;}
 html.layer {height:100%;overflow:hidden;}
 body.layer {height:100%;overflow:hidden;}
 
-header { width:100%;background-color:#f8f8f8;line-height:60px;}
+header {
+width: 100%;
+background-color: #f8f8f8;
+line-height: 70px;
+position: fixed;
+height: 70px;
+z-index: 1000;
+}
 header .task-text {color:#373737;text-align:center;font-size:30px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}

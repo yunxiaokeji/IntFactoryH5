@@ -17,13 +17,10 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
         
-        //页面加载获取任务详情
         public ActionResult Detail(string id)
         {
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
-
             var resultTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskDetail(id, CurrentUser.userID, CurrentUser.clientID);
-
             if (resultTask.error_code != 0)
             {
                 resultTaskInfoObj.Add("result", 0);
@@ -37,8 +34,6 @@ namespace IntFactoryH5Web.Controllers
                     var task = resultTask.task;
                     ViewBag.Task = task;
                     ViewBag.DomainUrl = resultTask.domainUrl;
-                    JavaScriptSerializer serializer=new JavaScriptSerializer();
-                    ViewBag.MaterialList =serializer.Serialize(resultTask.materialList);
                     ViewBag.UserID = CurrentUser.userID;
                     ViewBag.ModuleName = resultTask.moduleName;
                 }
