@@ -406,7 +406,6 @@
                 TaskDetail.finishTask();
             }
         });
-
     }
 
     //设置图片宽高
