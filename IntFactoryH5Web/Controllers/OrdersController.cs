@@ -52,6 +52,18 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        //获取订单材料列表
+        public JsonResult GetOrderDetailsByOrderID(string orderID)
+        {
+            var list = OrderBusiness.BaseBusiness.GetOrderDetailsByOrderID(orderID, CurrentUser.userID);
+
+            return new JsonResult
+            {
+                Data = list,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
     }
 }
