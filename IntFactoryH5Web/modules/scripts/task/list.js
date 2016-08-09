@@ -9,7 +9,7 @@
         taskType: -1,
         colorMark: -1,
         status: 1,
-        finishStatus: -1,
+        finishStatus: 0,
         beginDate: "",
         endDate: "",
         orderType: -1,
@@ -185,7 +185,6 @@
         });
     };
 
-    //页面加载获取列表
     List.getList = function (noEmpty) {
         List.IsLoading = true;
         if (!noEmpty) {
@@ -203,7 +202,7 @@
                 //分页数据
                 List.PageCount = data.pageCount;
                 //引用doT模板
-                doT.exec("template/task/list.html", function (code) {
+                doT.exec("template/task/task-list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });

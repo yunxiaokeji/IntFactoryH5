@@ -28,7 +28,7 @@ namespace IntFactoryH5Web.Controllers
                 if (userinfo != null)
                 {
                     var result = IntFactory.Sdk.UserBusiness.UserLogin(userinfo["username"], userinfo["pwd"], userID, clientID);
-                    if (result.error_code == 0)
+                    if (result.error_code == 0 && result.user!=null)
                     {
                         Session["ClientManager"] = result.user;
                         return Redirect("/Task/List");
@@ -90,7 +90,6 @@ namespace IntFactoryH5Web.Controllers
              paras.Add("type", 2);
              paras.Add("platform", 2);
              paras.Add("userIds", "63227a7c-955a-4b65-9477-66df0d078dc0,5ef4141c-ac6d-4acf-af8e-abd9db6aaf53");
-             string paraStr = string.Empty;
              JavaScriptSerializer serializer = new JavaScriptSerializer();
              string result = push.Message(serializer.Serialize(paras));
              JsonDictionary.Add("result", result);

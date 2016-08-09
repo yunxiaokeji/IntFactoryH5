@@ -3,111 +3,15 @@
     var UserID=ViewBag.UserID;
     var v = DateTime.Now.Ticks;
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <link href="/modules/css/task/list.css" rel="stylesheet" />        
+@section css{
+<link href="/modules/css/task/list.css" rel="stylesheet" />
+}
+@section scripts{
     <script src="/modules/scripts/font.js"></script>
     <script src="/modules/scripts/api.js?v=@v" type="text/javascript"></script>
     <script src="/modules/scripts/sha1.js?v=@v"  type="text/javascript"></script>
-</head>
-<body>
-    <div class="shade"></div>
-    <div class="search"> 
-        <span class="span-search"><input type="text" class="txt-search" placeholder="请输入任务名称搜索" /></span>
-        <span class="btn-search">确定</span>
-    </div>
-    
-    <ul class="header">
-        <li class="btn-menu header-li">
-            <div class="iconfont iconfont-menu">&#xe60d;</div>
-            <span class="login-name long"></span>
-            <ul class="menu-box">
-                <li>
-                    <a href="/Home/Logout">退出</a>
-                </li>
-            </ul>
-        </li>
-        <li class="btn-task-filtertype header-li">
-            <span>我的任务</span>
-            <div class="iconfont">&#xe61c;</div>
-            <ul class="task-filtertype">
-                <li data-filtertype="0">我的任务</li>
-                <li data-filtertype="1">参与任务</li>
-            </ul>
-        </li>
-        <li class="header-li">
-            <div class="iconfont iconfont-search">&#xe605;</div>
-        </li>
-    </ul>
-   
-    <ul class="task-status">
-        <li data-status="-1">
-            <div class="ico-status iconfont">&#xe61b;</div>
-            <a>全部</a>
-        </li>
-        <li data-status="0">
-            <div class="ico-status iconfont">&#xe61e;</div>
-            <a>未接受</a>
-        </li>
-        <li data-status="1">
-            <div class="ico-status iconfont">&#xe621;</div>
-            <a>进行中</a>
-        </li>
-        <li data-status="2">
-            <div class="ico-status iconfont">&#xe61f;</div>
-            <a>已完成</a>
-        </li>
-    </ul>
 
-    <ul class="filter-task">
-        <li class="type" data-id="order-type">
-            <a class="type-span">类型</a>
-            <i class="iconfont-select iconfont">&#xe61c;</i>
-        </li>
-        <li class="type" data-id="task-mark">
-            <a class="type-span">模块</a>
-            <i class="iconfont-select iconfont">&#xe61c;</i>
-        </li>
-        <li class="select-sort" data-id="task-sort">
-            <a class="sort-span">排序</a>        
-            <i class="iconfont-select iconfont">&#xe61c;</i>    
-        </li> 
-    </ul>
-    <div class="dropdownlist"> 
-        <ul class="potion order-type">             
-            <li data-id="-1">全部</li>                 
-            <li data-id="1">打样</li>
-            <li data-id="2">大货</li>                        
-        </ul>
-        <ul class="potion task-mark">             
-            <li data-mark="-1">全部</li>                 
-            <li data-mark="1">材料</li>
-            <li data-mark="2">制版</li>
-             <li data-mark="3">裁剪</li>
-            <li data-mark="4">车缝</li>
-             <li data-mark="5">发货</li>
-            <li data-mark="6">手工成本</li>
-            <li data-mark="0">其他</li>                   
-        </ul>   
-        <ul class="potion task-sort">                                        
-            <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
-            <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
-            <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
-            <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
-        </ul>  
-    </div>
-    <div class="clear"></div>
-
-    <div class="list"></div>
-    
-    <div class="getback">
-        <div class="iconfont-back iconfont">&#xe643;</div>
-    </div>
-    <input type="hidden" id="txt-userID" value="@UserID" />
-</body>
-<script type="text/javascript">
+    <script type="text/javascript">
         seajs.use("/modules/scripts/task/list.js", function (data) {
             data.init();
         });
@@ -120,12 +24,106 @@
                 userId: userId
             }, function (ret, err) {
                 if (ret.status) {
-                    api.alert({ msg: '绑定成功' });
+                    console.log("push bind successs:" + userId);
                 } else {
-                    api.alert({ msg: err.msg });
+                    console.log("push bind err:"+err.msg);
                 }
             });
         }
-    </script>
-</html>
+</script>
+}
+<div class="shade"></div>
+<div class="search"> 
+    <span class="span-search"><input type="text" class="txt-search" placeholder="请输入任务名称搜索" /></span>
+    <span class="btn-search">确定</span>
+</div>
+    
+<ul class="header">
+    <li class="btn-menu header-li">
+        <div class="iconfont iconfont-menu">&#xe60d;</div>
+        <span class="login-name long"></span>
+        <ul class="menu-box">
+            <li>
+                <a href="/Home/Logout">退出</a>
+            </li>
+        </ul>
+    </li>
+    <li class="btn-task-filtertype header-li">
+        <span>我的任务</span>
+        <div class="iconfont">&#xe61c;</div>
+        <ul class="task-filtertype">
+            <li data-filtertype="0">我的任务</li>
+            <li data-filtertype="1">参与任务</li>
+        </ul>
+    </li>
+    <li class="header-li">
+        <div class="iconfont iconfont-search">&#xe605;</div>
+    </li>
+</ul>
+   
+<ul class="task-status">
+    <li data-status="0">
+        <div class="ico-status iconfont">&#xe61e;</div>
+        <a>未接受</a>
+    </li>
+    <li data-status="1">
+        <div class="ico-status iconfont">&#xe621;</div>
+        <a>进行中</a>
+    </li>
+    <li data-status="2">
+        <div class="ico-status iconfont">&#xe61f;</div>
+        <a>已完成</a>
+    </li>
+    <li data-status="-1">
+        <div class="ico-status iconfont">&#xe61b;</div>
+        <a>全部</a>
+    </li>
+</ul>
+
+<ul class="filter-task">
+    <li class="type" data-id="order-type">
+        <a class="type-span">类型</a>
+        <i class="iconfont-select iconfont">&#xe61c;</i>
+    </li>
+    <li class="type" data-id="task-mark">
+        <a class="type-span">模块</a>
+        <i class="iconfont-select iconfont">&#xe61c;</i>
+    </li>
+    <li class="select-sort" data-id="task-sort">
+        <a class="sort-span">排序</a>        
+        <i class="iconfont-select iconfont">&#xe61c;</i>    
+    </li> 
+</ul>
+<div class="dropdownlist"> 
+    <ul class="potion order-type">             
+        <li data-id="-1">全部</li>                 
+        <li data-id="1">打样</li>
+        <li data-id="2">大货</li>                        
+    </ul>
+    <ul class="potion task-mark">             
+        <li data-mark="-1">全部</li>                 
+        <li data-mark="1">材料</li>
+        <li data-mark="2">制版</li>
+            <li data-mark="3">裁剪</li>
+        <li data-mark="4">车缝</li>
+            <li data-mark="5">发货</li>
+        <li data-mark="6">手工成本</li>
+        <li data-mark="0">其他</li>                   
+    </ul>   
+    <ul class="potion task-sort">                                        
+        <li class="tasktime" data-takepo="1" data-id="1">到期时间正序</li>
+        <li class="tasktime" data-takepo="0" data-id="1">到期时间倒序</li>
+        <li class="tasktime" data-takepo="1" data-id="0">创建时间正序</li>
+        <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
+    </ul>  
+</div>
+<div class="clear"></div>
+
+<div class="list"></div>
+    
+<div class="getback">
+    <div class="iconfont-back iconfont">&#xe643;</div>
+</div>
+<input type="hidden" id="txt-userID" value="@UserID" />
+
 

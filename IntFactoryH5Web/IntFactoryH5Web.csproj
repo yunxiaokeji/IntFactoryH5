@@ -295,7 +295,7 @@
     <Content Include="modules\template\task\materList.html" />
     <Content Include="modules\template\task\flowStage.html" />
     <Content Include="modules\template\task\flow.html" />
-    <Content Include="modules\template\task\list.html" />
+    <Content Include="modules\template\task\task-list.html" />
     <Content Include="modules\template\task\detail-reply.html" />
     <Content Include="modules\template\task\task-costs.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
