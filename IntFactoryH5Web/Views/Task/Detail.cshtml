@@ -4,10 +4,10 @@
     ViewBag.Title = "任务详情-" + task.title;
     
     JavaScriptSerializer serializer = new JavaScriptSerializer();
-    var JsonTask= serializer.Serialize(task);
+    var taskStr= serializer.Serialize(task);
     var UserID = ViewBag.UserID;
-    var materialList = ViewBag.MaterialList;
-    var userStatus = UserID == task.ownerUser.userID ? true : false;
+    var ModuleName=ViewBag.ModuleName;
+    var isOwner = task.ownerUser.userID.Equals(UserID, StringComparison.OrdinalIgnoreCase) ? true : false;
     string[] imagesUrl = { };
     if(task.order.orderImages.Length!=0)
     {
@@ -15,18 +15,14 @@
     }
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
-    <title></title>
+@section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
     <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
     <link href="/modules/css/task/detailmedia.css" rel="stylesheet" />
     <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
     <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
-</head>
+    }
+@section scripts{
     <script src="/modules/scripts/font.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
@@ -39,21 +35,17 @@
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@(imagesUrl.Length>1?"1":"0")',
+                    '@(imagesUrl.Length>1?1:0)',
+                     '@isOwner',
                     '@UserID',
-                    '@materialList',
-                    '@userStatus',
-                    '@JsonTask'
+                    '@taskStr'
                  );
             });
         })
     </script>
-
-<body>
-
-    <!--头部-->
+    }
     <header>
-        <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{}"><i class="return-icon iconfont">&#xe60a;</i></a>
+        <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">任务详情</div>
         <div class="task-accept">
             @{
@@ -63,30 +55,28 @@
                 }
                 else
                 {
-                    if (!userStatus)
+                    if (!isOwner)
                     {
-                            <span>@(task.finishStatus == 0 ? "未接收" : task.finishStatus == 1 ? "进行中" : "")</span>
+                        <span>@(task.finishStatus == 0 ? "未接收" : task.finishStatus == 1 ? "进行中" : "")</span>
                     }
                     else
                     {
                         if (task.finishStatus == 0)
                         {
-                                <input type="text" class="btn-acceptTaskTime" value="接受任务"  />              
+                            <input type="text" class="btn-acceptTaskTime" value="接受任务"  />              
                         }
                         else if (task.finishStatus == 1)
                         { 
-                                <input type="button" class="btn-finishTask"  value="标记完成"  />   
+                            <input type="button" class="btn-finishTask"  value="标记完成"  />   
                         }
                     }
                 }
-                }  
+            }  
         </div>
     </header>
 
-    <!--焦点图-->
     <div class="main_visual">
         <div class="task-msg">@task.title</div>
-        
         <div class="flicking_con">
             @{
                 if (imagesUrl.Length > 1)
@@ -98,7 +88,6 @@
                 }
             }
         </div>
-
         <div class="main_image">
             <ul>
                 @{
@@ -106,7 +95,7 @@
                     {
                         for (int i = 0; i < imagesUrl.Length; i++)
                         {
-                            <li><img src="@ViewBag.DomainUrl@(imagesUrl[i])"></li>
+                            <li><img src="@(imagesUrl[i])"></li>
                         }
                     }
                 }
@@ -119,10 +108,10 @@
     <div class="task-info">
         <div class="main-info">
                 <ul class="left-task-info">
-                <li><span>任务编号</span><span class="setindent">:</span><span class="task-code">@task.taskCode</span></li>
-                <li><span>接受时间</span><span class="setindent">:</span><span class="accept-time">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
-                <li><span>到期时间</span><span class="setindent">:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
-                <li><span>完成时间</span><span class="setindent">:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
+                <li><span>任务编号:</span><span class="task-code">@task.taskCode</span></li>
+                <li><span>接受时间:</span><span class="accept-time">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
+                <li><span>到期时间:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
+                <li><span>完成时间:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
             </ul>
 
                 <ul class="right-task-info">
@@ -132,7 +121,6 @@
                     <div class="dy-info">
                         <a href="javascript:void(0);">
                             @{
-                               
                                 if (task.orderType == 1)
                                 {
                                     <i class="iconfont">&#xe612;</i>
@@ -143,7 +131,6 @@
                                 }
                             }
                         </a>
-
                         <span>
                             @(task.orderType == 1 ? "打样" : task.orderType == 2 ? "大货" : "")
                         </span>
@@ -163,56 +150,86 @@
     <!--菜单-->
     <nav>
         <ul>
-            <li class="talk menuchecked" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
-            <li class="buy-plan" data-classname="shop-status"><i class="iconfont">&#xe647;</i>材料采购计划</li>
-            <li class="print " data-classname="print-status"><i class="iconfont">&#xe617;</i>制版</li>
-            <li class="log" data-classname="log-status"><i class="iconfont">&#xe633;</i>日志</li>
+            <li  class="@(task.mark==0?"menuchecked":"")" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
+            @{
+                if(task.mark==11){
+                <li  class="menuchecked" data-classname="shop-status"><i class="iconfont">&#xe647;</i>@ModuleName</li>
+                }
+                else if(task.mark==12){
+                <li class="menuchecked" data-classname="print-status"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                }
+                else if(task.mark==16){
+                <li class="menuchecked" data-classname="navCosts"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                }
+                 else if(task.mark==15 && task.orderType==1){
+                <li  class="menuchecked" data-classname="navSendDYDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                 }
+                  else if(task.mark==13 && task.orderType==2){
+                 <li  class="menuchecked" data-classname="navCutoutDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                  }
+                  else if(task.mark==14 && task.orderType==2){
+                 <li class="menuchecked" data-classname="navSewnDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                  }
+                  else if(task.mark==15 && task.orderType==2){
+                 <li class="menuchecked" data-classname="navSendDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
+                  }
+            }
+            <li  data-classname="log-status"><i class="iconfont">&#xe633;</i>日志</li>
         </ul>
         <div class="clear"></div>
     </nav>
 
     <!--显示区域-->
     <div class="main-box" data-status="4">
-
         <!--讨论模块-->
         <div class="talk-status">
-
-        <!--讨论内容-->
-        <div class="talk-content">
-            <div class="talk-main">
-
+            <!--讨论内容-->
+            <div class="talk-content">
+                <div class="talk-main"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="noreply-msg">暂无数据</div>         
+            <!--回复-->
+            <div class="return-msg">
+                <div class="box-returnmsg">
+                    <input type="text" readonly="true" placeholder="点击发表评论" class="txt-talkcontent" />
+                </div>
             </div>
         </div>
-        <div style="clear:both;"></div>
-        <div class="noreply-msg">暂无数据</div>         
-        <!--回复-->
-        <div class="return-msg">
-            <div class="box-returnmsg">
-                <input type="text" readonly="true" placeholder="点击发表评论" class="txt-talkcontent" />
+        @{
+            if(task.mark==11){
+            <div class="shop-status hide"></div>
+            }
+            else if(task.mark==12){
+             <div class="print-status hide">
+                <h1 class="plate-remark-msg">制版信息</h1>
+                <div class="platemakingBody">@(new MvcHtmlString(Server.UrlDecode(task.order.platemaking)))</div>
+
+                <h1 class="plate-remark-msg">工艺说明</h1>
+                <table class="table-items-detail mTop10 tb-plates"></table>
             </div>
-        </div>
-
-        </div>
-
-        <!--材料采购计划模块-->
-        <div class="shop-status hide"></div>
-
-        <!--制版模块-->
-        <div class="print-status hide">
-
-            <h1 class="plate-remark-msg">制版信息</h1>
-            <div class="platemakingBody">@(new MvcHtmlString(Server.UrlDecode(task.order.platemaking)))</div>
-
-            <h1 class="plate-remark-msg">工艺说明</h1>
-            <div class="plate-remark">@(new MvcHtmlString(string.IsNullOrEmpty(task.order.plateRemark)?"暂无工艺说明":Server.UrlDecode(task.order.plateRemark)))</div>
-            
-        </div>
-
-        <!--日志模块-->
+             }
+              else if(task.mark==16){
+                Html.RenderPartial("ProcessCostDoc", "");
+              }
+              else if(task.mark==15 && task.orderType==1){
+               Html.RenderPartial("SendDYDoc", "");
+              }
+            else if (task.mark == 13 && task.orderType == 2)
+            {
+              Html.RenderPartial("CutoutDoc", "");
+            }
+            else if (task.mark == 14 && task.orderType == 2)
+            {
+             Html.RenderPartial("SewnDoc", "");
+            }
+            else if (task.mark == 15 && task.orderType == 2)
+            {
+              Html.RenderPartial("SendDoc", "");
+            }
+        }
         <div class="log-status hide"></div>
-         
-        <div class="loading-lump hide"><img src="~/modules/images/img.gif" /></div>
-           
+        <div class="loading-lump hide"><img src="/modules/images/img.gif" /></div>
     </div>
 
     <!--返回顶部-->
@@ -229,9 +246,7 @@
         </div>
         <div class="reply-layer-content" spellcheck="false" contenteditable="true">
             <div style="display:block;min-height:40px;" class="text-content"></div>
-            <ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false">
-                
-            </ul>
+            <ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul>
             <div class="clear"></div>
             <ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false">
             </ul>
@@ -243,5 +258,3 @@
             </ul>
         </div>
     </div>
-</body>
-</html>

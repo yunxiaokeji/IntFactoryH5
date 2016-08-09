@@ -1,25 +1,31 @@
 ﻿/*头部*/
 .header{width:100%;height:80px;border-bottom:1px solid #b2b2b2;background-color:#F8F8F8;position:fixed;left:0;top:0;z-index:300;color:#666;}
-.header li{float:left;width:33.3%;height:50px;text-align:center;margin-top:25px;}
-.header li:last-child{float:right;margin-top:23px;text-align:right;}
-.header li:first-child{margin-top:30px;}
-.header li:first-child div{float:left;margin-left:30px;}
-.header li .login-name{float:left;line-height:27px;margin-left:5px;width:130px;text-align:left;}
-.header .task span{float:left;margin-left:30px;font-size:28px;}
-.header .task .iconfont{font-size:28px;margin-right:480px;line-height:40px;}
+.header li.header-li{float:left;width:33.3%;height:50px;text-align:center;margin-top:25px;}
+.header li.header-li:last-child{float:right;margin-top:23px;text-align:right;}
+.header li.header-li:first-child{margin-top:30px;}
+.header li.header-li:first-child div{float:left;margin-left:30px;}
+.header li.header-li .login-name{float:left;line-height:27px;margin-left:5px;width:130px;text-align:left;}
+.header .btn-task-filtertype {position:relative;}
+.header .btn-task-filtertype span{float:left;margin-left:30px;font-size:28px;}
+.header .btn-task-filtertype .iconfont{font-size:28px;margin-right:480px;line-height:40px;}
+.header .btn-menu {position:relative;}
 /*切换任务*/
-.task-switch{position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;margin-left:37%;width:150px;text-align:center;display:none;}
-.task-switch li{height:50px;line-height:60px; color:#888;font-size:20px;}
+.task-filtertype{position:absolute;left:30px; top:52px; z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;width:134px;text-align:center;display:none;}
+.task-filtertype li{height:50px;line-height:60px; color:#888;font-size:20px;}
 /*遮罩*/
 .shade { width:100%;height:100%;position:fixed;z-index:1002;background-color:rgba(143,143,143,0.6);display:none;}
-.search {width:100%;height:80px;background-color:#D5D5D5;line-height:80px;position:fixed;top:0;z-index:1002;display:none;}
-.search span { float:left;display:block;}
-.search span:first-child {margin-left:20px;}
-.search span .txt-search{font-size:28px; width:95%;line-height:60px;height:60px; border-radius:5px;border:1px solid #CCC;padding-left:50px; color:#999;background:url(/modules/images/Zoom.gif) no-repeat center left;background-color:#fff;margin-top:-3px;background-size:2em;}
-.search span:last-child {color:#646464;height:30px;float:right;margin-right:30px;font-size:28px;}
+.search {width:100%;background-color:rgb(143,143,143);position:fixed;top:0;z-index:1002;display:none;}
+.search .search-box { margin-right:150px;background-color:#fff;}
+.search .search-box .iconfont {
+    font-size:32px;
+    color:#999;
+    margin-left:10px;
+}
+.search .search-box .txt-search{font-size:28px;border:none; width:80%;padding:22px 0; color:#999;}
+.search .btn-search {color:#646464;height:30px;line-height:30px; font-size :28px;position:fixed;top:27px;right:30px;}
 /*退出下拉*/
-.login {height:80px;line-height:80px;width:33%;position:fixed;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
-.login li{text-align:center;}
+.menu-box {position:absolute;top:50px; height:80px;line-height:80px;width:100%;z-index:302; box-shadow:2px 4px 10px #ccc;background-color:#fff;border-radius:5px;display:none; }
+.menu-box li{text-align:center;}
 /*进行状态*/
 .task-status{width:100%;height:100px;border-bottom:1px solid #b2b2b2;margin-top:80px;}
 .task-status li{width:25%;float:left;}
@@ -27,23 +33,23 @@
 .task-status .ico-status{height:20px;margin-top:25px;text-align:center;color:#666;}
 .task-status li a{height:30px;margin-top:12px;text-align:center;color:#666;display:inline-block;width:100%;}
 /*选择条件的css样式*/
-.select{width:100%;height:50px;border-bottom:1px solid #ccc;}
-.select a{color:#666;font-size:20px;}
-.select li{width:25%;float:left;border-right:1px solid #ccc;margin-left:-1px;text-align:center;line-height:50px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.filter-task{width:100%;height:50px;border-bottom:1px solid #ccc;}
+.filter-task li{width:33%;float:left;border-right:1px solid #ccc;margin-left:-1px;text-align:center;line-height:50px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.filter-task a{color:#666;font-size:20px;}
 /*选项下拉*/
 .dropdownlist { position:relative;}
 /*类型下拉*/
 .dropdownlist ul{box-shadow:2px 4px 10px #ccc;border-radius:5px;}/*边框阴影*/
 .dropdownlist li{font-size:20px;color:#999;padding-top:15px;padding-bottom:15px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.dropdownlist .tab-type{border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
+.dropdownlist .order-type{border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
 /*流程下拉*/
-.dropdownlist .flow-type{border:1px solid #ccc;border-top:0;left:25%;margin-left:-1px;}
+.dropdownlist .task-mark{border:1px solid #ccc;border-top:0;left:33%;margin-left:-1px;}
 /*筛选下拉*/
 .dropdownlist .screen-type{border:1px solid #ccc;border-top:0;left:50%;margin-left:-1px;}
 /*排序下拉*/
-.dropdownlist .screen-sort{border:1px solid #ccc;border-top:0;left:75%;margin-left:-2px;}
+.dropdownlist .task-sort{border:1px solid #ccc;border-top:0;left:66%;margin-left:-2px;}
 /*列表*/
-.dropdownlist .potion{width:25%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none; }
+.dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none; }
 .list li .tag-make { width:10px;height:20px;}
 .list .listabove{width:100%;border-bottom:1px solid #dfdfdf;}
 .list .listabove li{float:left;margin-top:30px;}

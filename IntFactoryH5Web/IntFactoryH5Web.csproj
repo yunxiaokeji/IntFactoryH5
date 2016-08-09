@@ -107,8 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Push.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PlugController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -121,7 +123,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="config.xml" />
     <Content Include="Global.asax" />
+    <Content Include="modules\css\api.css" />
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home\login.css" />
     <Content Include="modules\css\iconfont\demo.css" />
@@ -274,24 +278,35 @@
     <Content Include="modules\plug\touchSlider\js\jquery-1.js" />
     <Content Include="modules\plug\touchSlider\js\jquery.js" />
     <Content Include="modules\plug\touchSlider\js\jquery_002.js" />
+    <Content Include="modules\scripts\api.js" />
     <Content Include="modules\scripts\font.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\login.js" />
+    <Content Include="modules\scripts\sha1.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\list.js" />
+    <Content Include="modules\scripts\task\ordergoods.js" />
+    <Content Include="modules\template\orders\cutoutdoc.html" />
+    <Content Include="modules\template\orders\platematrings.html" />
+    <Content Include="modules\template\orders\senddocs.html" />
+    <Content Include="modules\template\orders\senddydocs.html" />
     <Content Include="modules\template\task\alertPage.html" />
     <Content Include="modules\template\task\detailLog.html" />
     <Content Include="modules\template\task\materList.html" />
     <Content Include="modules\template\task\flowStage.html" />
     <Content Include="modules\template\task\flow.html" />
-    <Content Include="modules\template\task\list.html" />
+    <Content Include="modules\template\task\task-list.html" />
     <Content Include="modules\template\task\detail-reply.html" />
+    <Content Include="modules\template\task\task-costs.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
     <Content Include="modules\template\task\task-file-upload.html" />
+    <Content Include="Qiniu.4.0.dll" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -314,7 +329,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Task\List.cshtml" />
@@ -331,6 +346,11 @@
     <Content Include="modules\css\iconfont\iconfont.ttf" />
     <Content Include="modules\css\iconfont\iconfont.woff" />
     <None Include="Properties\PublishProfiles\IntFactoryH5Web.pubxml" />
+    <Content Include="Views\Task\CutoutDoc.cshtml" />
+    <Content Include="Views\Task\SendDoc.cshtml" />
+    <Content Include="Views\Task\SendDYDoc.cshtml" />
+    <Content Include="Views\Task\SewnDoc.cshtml" />
+    <Content Include="Views\Task\ProcessCostDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace IntFactory.Sdk
 {
+    [Serializable]
     public class UserBase
     {
         /// <summary>
@@ -15,7 +16,7 @@ namespace IntFactory.Sdk
         /// <summary>
         /// 
         /// </summary>
-        public string agentID;
+        public string clientID;
 
         /// <summary>
         /// 用户名称

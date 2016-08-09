@@ -24,7 +24,7 @@ namespace IntFactoryH5Web.Common
             base.OnAuthorization(filterContext);
             if (filterContext.HttpContext.Response.StatusCode == 401)
             {
-                filterContext.Result = new RedirectResult("/Home/Index?ReturnUrl=" + HttpContext.Current.Request.Url);
+                filterContext.Result = new RedirectResult("/Home/Login?ReturnUrl=" + HttpContext.Current.Request.Url);
                 return;
             }
 

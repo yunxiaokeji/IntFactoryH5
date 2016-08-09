@@ -16,13 +16,13 @@ namespace IntFactory.Sdk
         /// 获取任务列表
         /// </summary>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public TaskListResult GetTasks(FilterTasks filter, string userID, string agentID)
+        public TaskListResult GetTasks(FilterTasks filter, string userID, string clientID)
         { 
             var paras = new Dictionary<string, object>();
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
             paras.Add("filter",JsonConvert.SerializeObject(filter).ToString());
 
             return HttpRequest.RequestServer < TaskListResult>(ApiOption.GetTasks, paras);
@@ -32,13 +32,13 @@ namespace IntFactory.Sdk
         /// 获取订单流程列表
         /// </summary>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public ProcessListResult GetOrderProcess(string userID, string agentID)
+        public ProcessListResult GetOrderProcess(string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
 
 
@@ -50,14 +50,14 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="processID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public ProcessStageListResult GetOrderStages(string processID, string userID, string agentID)
+        public ProcessStageListResult GetOrderStages(string processID, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("processID", processID);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<ProcessStageListResult>(ApiOption.GetOrderStages, paras);
         }
@@ -67,14 +67,14 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="taskID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public TaskDetailResult GetTaskDetail(string taskID, string userID, string agentID)
+        public TaskDetailResult GetTaskDetail(string taskID, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("taskID", taskID);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<TaskDetailResult>(ApiOption.GetTaskDetail, paras);
         }
@@ -85,17 +85,17 @@ namespace IntFactory.Sdk
         /// <param name="orderID"></param>
         /// <param name="stageID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public TaskReplyListResult GetTaskReplys(string orderID, string stageID, string userID, string agentID, int pageIndex = 1)
+        public TaskReplyListResult GetTaskReplys(string orderID, string stageID, string userID, string clientID, int pageIndex = 1)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("orderID", orderID);
             paras.Add("stageID", stageID);
             paras.Add("pageIndex", pageIndex);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<TaskReplyListResult>(ApiOption.GetTaskReplys, paras);
         }
@@ -105,16 +105,16 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="taskID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <param name="pageindex"></param>
         /// <returns></returns>
-        public TaskLogListResult GetTaskLogs(string taskID, string userID, string agentID, int pageindex = 1)
+        public TaskLogListResult GetTaskLogs(string taskID, string userID, string clientID, int pageindex = 1)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("taskID", taskID);
             paras.Add("pageIndex", pageindex);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<TaskLogListResult>(ApiOption.GetTaskLogs, paras);
         }
@@ -124,14 +124,14 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="orderID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public OrderBaseResult GetOrderInfo(string orderID, string userID, string agentID)
+        public OrderBaseResult GetOrderInfo(string orderID, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("orderID", orderID);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<OrderBaseResult>(ApiOption.GetOrderInfo, paras);
         }
@@ -145,15 +145,15 @@ namespace IntFactory.Sdk
         /// <param name="taskID"></param>
         /// <param name="endTime"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns>result 0：失败，1：成功，2: 任务已接受,3:没有权限</returns>
-        public UpdateResult UpdateTaskEndTime(string taskID, string endTime, string userID, string agentID)
+        public UpdateResult UpdateTaskEndTime(string taskID, string endTime, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("taskID", taskID);
             paras.Add("endTime", endTime);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
             return HttpRequest.RequestServer<UpdateResult>(ApiOption.UpdateTaskEndTime, paras);
         }
 
@@ -162,14 +162,14 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="taskID"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns>result 0：失败，1：成功，2: 有前面阶段任务未完成,3:没有权限；4：任务没有接受，不能设置完成;5.任务有未完成步骤</returns>
-        public UpdateResult FinishTask(string taskID, string userID, string agentID)
+        public UpdateResult FinishTask(string taskID, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("taskID", taskID);
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
 
             return HttpRequest.RequestServer<UpdateResult>(ApiOption.FinishTask, paras);
         }
@@ -179,14 +179,14 @@ namespace IntFactory.Sdk
         /// </summary>
         /// <param name="reply"></param>
         /// <param name="userID"></param>
-        /// <param name="agentID"></param>
+        /// <param name="clientID"></param>
         /// <returns></returns>
-        public TaskReplyListResult SavaTaskReply(TaskReplyEntity reply,string taskID, string userID, string agentID)
+        public TaskReplyListResult SavaTaskReply(TaskReplyEntity reply,string taskID, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("reply", JsonConvert.SerializeObject(reply).ToString() );
             paras.Add("userID", userID);
-            paras.Add("agentID", agentID);
+            paras.Add("clientID", clientID);
             paras.Add("taskID", taskID);
 
             return HttpRequest.RequestServer<TaskReplyListResult>(ApiOption.SavaTaskReply, paras);

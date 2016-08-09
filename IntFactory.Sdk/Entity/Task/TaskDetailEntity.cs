@@ -53,6 +53,12 @@ namespace IntFactory.Sdk
         /// </summary>
         public int finishStatus { get; set; }
 
+        public string preTitle { get; set; }
+
+        public int preFinishStatus { get; set; }
+
+        public string pEndTime { get; set; }
+
         /// <summary>
         /// 订单类型 1：打样；2：大货
         /// </summary>

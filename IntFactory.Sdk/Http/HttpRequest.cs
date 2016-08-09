@@ -91,10 +91,88 @@ namespace IntFactory.Sdk
                         response.Close();
                     }
 
-
-
             return JsonConvert.DeserializeObject<T>(strResult);
+        }
 
+        public static string RequestServer(ApiOption apiOption, Dictionary<string, object> paras, RequestType requestType = RequestType.Post)
+        {
+            string urlPath = GetEnumDesc<ApiOption>(apiOption);
+            string url = AppConfig.ApiUrl + urlPath;
+            string paraStr = string.Empty;
+
+            if (paras != null && paras.Count > 0)
+                paraStr += CreateParameterStr(paras);
+
+            //签名认证
+            string userID = paras["userID"].ToString();
+            string signature = Signature.GetSignature(AppConfig.AppKey, AppConfig.AppSecret, userID);
+            paraStr += "signature=" + signature;
+
+            string strResult = string.Empty;
+            try
+            {
+                if (requestType == RequestType.Get)
+                {
+                    url += "?" + paraStr;
+                    Uri uri = new Uri(url);
+                    HttpWebRequest httpWebRequest = WebRequest.Create(uri) as HttpWebRequest;
+
+                    httpWebRequest.Method = "GET";
+                    httpWebRequest.KeepAlive = false;
+                    httpWebRequest.AllowAutoRedirect = true;
+                    httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                    httpWebRequest.UserAgent = "Ocean/NET-SDKClient";
+
+                    HttpWebResponse response = httpWebRequest.GetResponse() as HttpWebResponse;
+                    Stream responseStream = response.GetResponseStream();
+
+                    System.Text.Encoding encode = Encoding.UTF8;
+                    StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
+                    strResult = reader.ReadToEnd();
+
+                    reader.Close();
+                    response.Close();
+                }
+                else
+                {
+                    byte[] postData = Encoding.UTF8.GetBytes(paraStr);
+                    Uri uri = new Uri(url);
+                    HttpWebRequest httpWebRequest = WebRequest.Create(uri) as HttpWebRequest;
+
+                    httpWebRequest.Method = "POST";
+                    httpWebRequest.KeepAlive = false;
+                    httpWebRequest.AllowAutoRedirect = true;
+                    httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                    httpWebRequest.UserAgent = "Ocean/NET-SDKClient";
+                    httpWebRequest.ContentLength = postData.Length;
+
+                    System.IO.Stream outputStream = httpWebRequest.GetRequestStream();
+                    outputStream.Write(postData, 0, postData.Length);
+                    outputStream.Close();
+                    HttpWebResponse response = httpWebRequest.GetResponse() as HttpWebResponse;
+                    Stream responseStream = response.GetResponseStream();
+
+                    System.Text.Encoding encode = Encoding.UTF8;
+                    StreamReader reader = new StreamReader(response.GetResponseStream(), encode);
+                    strResult = reader.ReadToEnd();
+
+                    reader.Close();
+                    response.Close();
+
+                }
+            }
+            catch (System.Net.WebException webException)
+            {
+                HttpWebResponse response = webException.Response as HttpWebResponse;
+                Stream responseStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                strResult = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+            }
+
+            return strResult;
         }
 
         private static String CreateParameterStr(Dictionary<String, Object> parameters)

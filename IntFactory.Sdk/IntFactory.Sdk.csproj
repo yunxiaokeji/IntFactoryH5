@@ -47,12 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\OrderBusiness.cs" />
     <Compile Include="Common\ApiOption.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="Business\OauthBusiness.cs" />
     <Compile Include="Business\TaskBusiness.cs" />
     <Compile Include="Business\UserBusiness.cs" />
-    <Compile Include="Entity\Common\Attachment.cs" />
+    <Compile Include="Entity\Common\AttachmentEntity.cs" />
     <Compile Include="Entity\Product\ProductBaseEntity.cs" />
     <Compile Include="Entity\Order\OrderBaseEntity.cs" />
     <Compile Include="Entity\Order\ProcessEntity.cs" />

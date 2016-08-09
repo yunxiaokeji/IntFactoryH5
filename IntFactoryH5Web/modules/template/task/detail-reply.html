@@ -20,7 +20,7 @@
             <img onerror="$(this).attr('src','/modules/images/defaultavatar.png')" src="{%=item.createUser.avatar%}" />
         </div>
         <div class="left mLeft20">
-            <p class="user-name blue">{%=item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
+            <p class="user-name blue">{%=item.createUser.name==null?"--":item.createUser.name+(item.fromReplyUser?item.fromReplyUser.name?'&nbsp;@&nbsp;'+item.fromReplyUser.name:'':'')%}</p>
             <p class="create-time color999">{%=item.createTime%}</p>
         </div>
         <div class="clear"></div>
@@ -76,7 +76,7 @@
     </div>
     {%}%}
     <div class="return-reply right mTop10">
-        <i class="iconfont btn-reply" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
+        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.clientID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
     </div>
     <div class="clear"></div>
 </div>

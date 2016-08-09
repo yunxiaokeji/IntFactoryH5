@@ -12,6 +12,7 @@ namespace IntFactory.Sdk
 
         public string domainUrl;
 
+        public string moduleName;
         /// <summary>
         /// 材料列表
         /// </summary>

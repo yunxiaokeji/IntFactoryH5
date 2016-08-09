@@ -45,6 +45,15 @@ namespace IntFactory.Sdk
         FinishTask,
 
         [Description("/api/task/savaTaskReply")]
-        SavaTaskReply
+        SavaTaskReply,
+
+        [Description("/api/order/getGoodsDocByOrderID")]
+        GetGoodsDocByOrderID,
+
+        [Description("/api/order/getOrderCosts")]
+        GetOrderCosts,
+
+        [Description("/api/order/getPlateMakings")]
+        GetPlateMakings
     }
 }

@@ -42,3 +42,53 @@ header .task-text {color:#373737;text-align:center;}
     border: 0;
     margin-top: 5px;
 }
+
+/*表格样式*/
+.table-list { width: 100%; border-spacing: 0px;}
+
+.table-list .tr-header{ height:35px; text-align:center; }
+.table-list .tr-header td{ height:35px; border-bottom:solid 2px #e6e6e6; font-size:13px; font-weight:bold; color:#666; padding:0 5px;
+                           white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
+
+.table-list tr:not(:first-child){ height:35px; cursor:pointer; }
+.table-list tr:not(:first-child):hover { background-color: #f6f6f6; }
+.table-list tr:not(:first-child) td{ padding:5px; line-height:35px; border-bottom:solid 1px #eee; max-width:500px; color:#333; 
+                                     white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
+
+.table-list tr td:first-child{ text-indent:12px;}
+
+.table-list td a{ color:#4a98e7;  vertical-align:middle;}
+.table-list td a:hover{ color:red; text-decoration:underline; }
+
+.table-list td img{ width:80px; height:80px; display:inline-block;  vertical-align:middle;}
+
+.table-list .ico-check { vertical-align:middle; }
+.table-list .ico-checked { vertical-align:middle; }
+.table-list .show-all-txt { word-wrap: break-word; white-space: normal !important; }
+
+/*表格样式1-带详情*/
+.table-items-detail { width:100%; border-spacing:0px; box-sizing:border-box;}
+.table-items-detail td{ text-align:center; padding:0px 10px; }
+
+.table-items-detail .table-header { background-color:#f1f1f1; height:35px; }
+.table-items-detail .table-header td{ border-top:solid 1px #ddd;  border-bottom:solid 1px #ddd; color:#333; }
+
+.table-items-detail .item-header { background-color:#f1f1f1; height:40px; }
+.table-items-detail .item-header td{ border-top:solid 1px #ddd;  border-bottom:solid 1px #ddd; color:#333; }
+
+.table-items-detail .item { height:50px;}
+.table-items-detail .item.last td {  border-bottom:solid 1px #ddd; }
+
+.table-items-detail .first-line-item{ height:50px; }
+.table-items-detail .line-item { height:20px; }
+
+.table-items-detail .bLeft { border-left:solid 1px #ddd; }
+.table-items-detail .bRight { border-right:solid 1px #ddd; }
+.table-items-detail .bBottom { border-bottom:solid 1px #ddd; }
+
+.table-items-detail a { color:#333; }
+.table-items-detail a:hover { color:red; }
+.table-items-detail td img { max-width:120px;max-height:120px;}
+
+/*暂无数据*/
+.nodata-txt { padding: 60px 0px; font-size: 16px; text-align: center; color: #666; background-color:#fff; }

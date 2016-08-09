@@ -3,7 +3,14 @@ body { background-color:#efefef;}
 html.layer {height:100%;overflow:hidden;}
 body.layer {height:100%;overflow:hidden;}
 
-header { width:100%;background-color:#f8f8f8;line-height:60px;}
+header {
+width: 100%;
+background-color: #f8f8f8;
+line-height: 70px;
+position: fixed;
+height: 70px;
+z-index: 1000;
+}
 header .task-text {color:#373737;text-align:center;font-size:30px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:1.5em;color:#6a6a6a;width:40px;}
@@ -11,10 +18,8 @@ header .task-text {color:#373737;text-align:center;font-size:30px;}
 .task-accept span { color:#999;}
 .task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{ background:transparent;text-align:center;color:#e0483e;cursor:pointer;outline:none;font-size:22px;height:40px;line-height:40px;border:1px solid #e0483e;padding:0 20px; border-radius:5px;width:130px;}
 
-
 /*焦点图*/
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:60px;text-indent:1em;color:#fff;}
-
 
 /*任务详情信息*/
 .task-info { background-color:#fff;}
@@ -38,7 +43,7 @@ header .task-text {color:#373737;text-align:center;font-size:30px;}
 
 /*菜单*/
 nav { margin-top:20px;background-color:#fff;margin-bottom:10px; width:100%;}
-nav ul li {cursor:pointer;float:left;list-style:none;width:25%;line-height:55px;text-align:center;color:#666;border-right:1px solid #efefef;margin-right:-1px;height:60px;font-size:20px;}
+nav ul li {cursor:pointer;float:left;list-style:none;padding:0 15px;line-height:55px;text-align:center;color:#666;border-right:1px solid #efefef;margin-right:-1px;height:60px;font-size:20px;}
 nav ul li:last-child { border-right:none;}
 nav li i { margin-right:4px;color:#9e9e9e;}
 nav li .iconfont { font-size:20px;}
@@ -110,9 +115,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 .loading-lump img { width:35px;height:35px;}
 
 /*提交讨论信息*/
-.return-msg { background-color:#888888;width:100%;padding:10px 0;position:fixed;bottom:0;z-index:999;left:0;}
-/*.return-msg .box-returnmsg .txt-talkcontent{float:left;padding:20px 0;outline:none;border:1px solid #CCC;border-radius:3px;padding-left:10px;width:74.1%;color:#666;font-size:24px;}*/
-.box-returnmsg { padding:0 10px;}
+.return-msg { background-color:#888;width:100%;position:fixed;bottom:0;z-index:999;left:0;}
+.return-msg .box-returnmsg {margin:5px 7px;}
 .return-msg .box-returnmsg .txt-talkcontent{text-indent:10px;padding:20px 0;outline:none;border:1px solid #CCC;border-radius:3px;width:100%;color:#666;font-size:24px;}
 .return-msg .box-submit .btn-submit {margin:0 10px;border-radius:4px;float:right;padding:0 20px;padding:18px 0;background-color:#4b98e8;text-align:center;border:1px solid #68a9ed;color:#fff;width:14.8%;font-size:24px;}
 
