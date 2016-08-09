@@ -412,7 +412,9 @@
     //设置图片宽高
     TaskDetail.setImagesSize = function () {
         var windowWidth = $(window).width();
-        $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth +"px"});
+        $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
+        $(".main_image ul li").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
+
         $(".main_image ul li").each(function () {
             if ($(this).find('img').width() > $(this).find('img').height()) {
                 $(this).find('img').css("height", windowWidth + "px");
