@@ -219,7 +219,6 @@
 
     //查看结果
     Global.replaceQqface = function (str) {
-        str = str.replace(/<br>/g, '\n');
         str = str.replace(/\</g, '&lt;');
         str = str.replace(/\>/g, '&gt;');
         str = str.replace(/\n/g, '<br/>');
