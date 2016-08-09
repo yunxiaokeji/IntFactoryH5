@@ -44,5 +44,15 @@ namespace IntFactory.Sdk
 
             return HttpRequest.RequestServer(ApiOption.GetPlateMakings, paras);
         }
+
+        //获取订单材料列表
+        public string GetOrderDetailsByOrderID(string userID, string orderID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("orderID", orderID);
+            paras.Add("userID", userID);
+
+            return HttpRequest.RequestServer(ApiOption.GetOrderDetailsByOrderID, paras);
+        }
     }
 }
