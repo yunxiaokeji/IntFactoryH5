@@ -162,4 +162,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:non
 .width500 { width:500px !important; }
 .minwidth300 { min-width:300px !important; }
 
+/*定义弹性盒模型*/
+.dBox { display: -webkit-box; display: -moz-box; }
+.bFlex1 { -webkit-box-flex: 1; -moz-box-flex: 1; }
 

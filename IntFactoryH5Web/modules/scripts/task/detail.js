@@ -529,7 +529,7 @@
             }
 
             //点击回复把用户名写入文本框
-            innerText.find(".iconfont").click(function () {
+            innerText.find(".btn-reply").click(function () {
                 if (IsLoading) {
                     alert("上一条评论发表中,请稍候再试.");
                     return false;
