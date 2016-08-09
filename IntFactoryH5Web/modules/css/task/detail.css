@@ -58,7 +58,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:55px;}
 
 .reply-box { border-bottom:1px solid #ccc;padding-bottom:20px;margin-bottom:20px;}
 .reply-box .file-attachment { border:1px solid #ccc;background-color:#fcfcfc; }
-.reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box { float:left;display:block;height:80px;line-height:80px;}
+.reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box {height:80px;line-height:80px;}
 .reply-box .file-attachment .lump-box {width:80px;}
 .reply-content { word-break:break-all;}
 

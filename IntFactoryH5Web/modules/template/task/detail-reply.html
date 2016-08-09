@@ -59,13 +59,13 @@
                                                                     );
                     %}
                     <li class="file-attachment mTop10">
-                        <a href="{%=fileItem.ServerUrl+fileItem.FileName+'?attname='+fileItem.OriginalName%}">
+                        <a class="dBox" href="{%=fileItem.ServerUrl+fileItem.FileName+'?attname='+fileItem.OriginalName%}">
                             <div class="lump-box" style="background:url('{%=attachmentUrl%}') no-repeat 16px 14px;background-size:50px;background-color:#efefef;border-right:1px solid #ddd;">
                             </div>
-                            <div class="describe-box color333">
+                            <div class="bFlex1 describe-box color333 long" style="display:block !important;">
                                 {%=fileItem.OriginalName%}
                             </div>
-                            <div class="right iconfont" style="font-size:30px;margin:20px 30px 0 10px;">
+                            <div class="iconfont" style="font-size:30px;margin:20px 30px 0 10px;">
                                 &#xe655;
                             </div>
                             <div class="clear"></div>
@@ -76,7 +76,7 @@
     </div>
     {%}%}
     <div class="return-reply right mTop10">
-        <i class="iconfont" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
+        <i class="iconfont btn-reply" data-replyid="{%=item.replyID%}" data-agentid="{%=item.createUser.agentID%}"  data-userid="{%=item.createUser.userID%}" data-name="{%=item.createUser.name%}" >&#xe611;回复</i>
     </div>
     <div class="clear"></div>
 </div>
