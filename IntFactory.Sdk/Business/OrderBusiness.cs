@@ -46,7 +46,7 @@ namespace IntFactory.Sdk
         }
 
         //获取订单材料列表
-        public string GetOrderDetailsByOrderID(string userID, string orderID)
+        public string GetOrderDetailsByOrderID(string orderID, string userID)
         {
             var paras = new Dictionary<string, object>();
             paras.Add("orderID", orderID);

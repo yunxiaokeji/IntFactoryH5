@@ -133,6 +133,7 @@
                 //材料
             else if (classname == "shop-status") {
                 $(".main-box .loading-lump").hide();
+                TaskDetail.GetOrderDetailsByOrderID();
             }
                 //工艺说明
             else if (classname == "print-status") {
@@ -475,39 +476,42 @@
         }
     }
 
-    //获取材料采购计划列表
-    TaskDetail.getOrderList = function (data) {
-        if (data.length == 0) {
-            $(".shop-status").html("<div class='no-material'>暂无材料</div>");
-        } else {
-            doT.exec("template/task/materList.html", function (templateFun) {
-                var innerText = templateFun(data);
-                innerText = $(innerText);
-                $(".shop-status").html(innerText);
-                //设置采购计划图标点击事件
-                innerText.find(".material").click(function () {
-                    var meterialLumpbox = $(this).find(".meterial-lumpbox");
+    //获取获取订单材料列表
+    TaskDetail.GetOrderDetailsByOrderID = function () {
+        Global.post("/Orders/GetOrderDetailsByOrderID", { orderID: Paras.orderID }, function (data) {
+            data = JSON.parse(data);
+            if (data.items.length == 0) {
+                $(".shop-status").html("<div class='no-material'>暂无材料</div>");
+            } else {
+                doT.exec("template/task/materList.html", function (templateFun) {
+                    var innerText = templateFun(data.items);
+                    innerText = $(innerText);
+                    $(".shop-status").html(innerText);
+                    //设置采购计划图标点击事件
+                    innerText.find(".material").click(function () {
+                        var meterialLumpbox = $(this).find(".meterial-lumpbox");
 
-                    if (!$(".material-main").is(":animated")) {
-                        $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
-                        if ($(meterialLumpbox).data('status') == '0') {
-                            $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
-                            $(meterialLumpbox).data('status', '1');
-                            $(meterialLumpbox).find('span').css("border-left-color", "#fff");
-                            $(meterialLumpbox).parent().parent().addClass("select-material");
+                        if (!$(".material-main").is(":animated")) {
+                            $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
+                            if ($(meterialLumpbox).data('status') == '0') {
+                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
+                                $(meterialLumpbox).data('status', '1');
+                                $(meterialLumpbox).find('span').css("border-left-color", "#fff");
+                                $(meterialLumpbox).parent().parent().addClass("select-material");
 
+                            }
+                            else {
+                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
+                                $(meterialLumpbox).data('status', '0');
+                                $(meterialLumpbox).find('span').css("border-left-color", "#999");
+                                $(meterialLumpbox).parent().parent().removeClass("select-material");
+                            }
                         }
-                        else {
-                            $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
-                            $(meterialLumpbox).data('status', '0');
-                            $(meterialLumpbox).find('span').css("border-left-color", "#999");
-                            $(meterialLumpbox).parent().parent().removeClass("select-material");
-                        }
-                    }
 
+                    });
                 });
-            });
-        }
+            }
+        });
     }
 
     //获取或添加任务讨论

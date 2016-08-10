@@ -171,7 +171,7 @@
 
         //任务类型切换
         $(".task-mark li").click(function () {
-            $(".type-span").text($(this).text());
+            $(".mark-span").text($(this).text());
             $(this).parent().hide();
             
             Params.pageIndex = 1;
