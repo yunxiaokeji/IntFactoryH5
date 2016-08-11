@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
     var v = DateTime.Now.Ticks;
+    var BindAccountType = ViewBag.BindAccountType;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,20 +21,24 @@
     <script src="/Scripts/sea.js?v=@v" type="text/javascript"></script>
     <script src="/Scripts/sea-config.js?v=@v" type="text/javascript"></script>
     <script type="text/javascript">
-        seajs.use(["scripts/home/login"], function (login) {
-            login.initLogin('@ViewBag.ReturnUrl');
+        seajs.use(["scripts/login"], function (login) {
+            login.initLogin('@ViewBag.ReturnUrl', '@BindAccountType');
         });
     </script>
 </head>
 <body>
     <div class="login-body">
         <div class="main">
+            @{if (BindAccountType==0){
             <div class="login-title">
                  <div class="left"><img src="/modules/images/logo_login.png"  style="width:28px;"/></div>
-                 <div class="loginTitle left mLeft5">厂盟科技</div>
+                 <div class="loginTitle left mLeft5">厂盟智能 </div>
                  <div class="clear"></div>
             </div>
-
+            }
+            else{
+             <div class="login-bind">您的微信还未绑定 <span style="color:#000;font-size:20px;">厂盟智能</span> 帐号</div>
+            }}
             <div class="login">
                 <div class="registerErr hide"></div>
                 <div class="loginbar">
@@ -43,7 +48,7 @@
                     <input type="password" class="input" id="iptPwd"/>
                     <div class="txtBoxPassword">请输入密码</div>
                 </div>
-                <div class="btnLogin mTop20" id="btnLogin">登录</div>
+                <div class="btnLogin mTop20" id="btnLogin">@(BindAccountType==0?"登录":"绑定")</div>
             </div>
         </div>
     </div>

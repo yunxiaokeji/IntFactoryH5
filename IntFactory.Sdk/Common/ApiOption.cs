@@ -9,13 +9,19 @@ namespace IntFactory.Sdk
     public enum ApiOption
     {
         [Description("getToken")]
-        getToken,
+        GetToken,
 
         [Description("/api/user/userLogin")]
-        userLogin,
+        UserLogin,
+
+        [Description("/api/user/getUserByWeiXinMP")]
+        GetUserByWeiXinMP,
+
+        [Description("/api/user/bindWeiXinMP")]
+        BindWeiXinMP,
 
         [Description("member.get")]
-        memberDetail,
+        MemberDetail,
 
         [Description("/api/task/getTasks")]
         GetTasks,

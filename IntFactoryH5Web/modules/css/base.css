@@ -1,12 +1,10 @@
 ﻿/*全局样式*/
 *{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
-body {font-family:'Microsoft YaHei';color:#333;font-size:24px;}
-html{min-height:100%;border:none;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+body {font-family:'Microsoft YaHei';color:#333;font-size:14px;}
 li{ list-style-type:none;}
 a { color: #4a98e7; text-decoration: none;}
 
-input[type="text"] { border:solid 1px #ccc; border-radius:2px; padding:10px 5px; }
-input[type="text"]:focus { border:solid 1px #318ae4; }
+input[type="text"] { border:solid 1px #ccc; border-radius:2px; padding:10px 5px; font-size:14px;}
 
 input[type="password"] { border:solid 1px #ccc; border-radius:2px; padding:10px 5px; }
 input[type="password"]:focus { border:solid 1px #318ae4; }

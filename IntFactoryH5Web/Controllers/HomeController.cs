@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntFactory.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,7 @@ namespace IntFactoryH5Web.Controllers
             return Redirect("/Home/Login");
         }
 
-        public ActionResult Login(string ReturnUrl)
+        public ActionResult Login(string ReturnUrl, int BindAccountType=0)
         {
             if (Session["ClientManager"] != null)
             {
@@ -37,6 +38,7 @@ namespace IntFactoryH5Web.Controllers
             }
             ReturnUrl = ReturnUrl ?? string.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
+            ViewBag.BindAccountType = BindAccountType;
 
             return View();
         }
@@ -44,8 +46,6 @@ namespace IntFactoryH5Web.Controllers
         public ActionResult Logout() 
         {
             Session["ClientManager"] = null;
-            //Request.Cookies.Remove("m_intfactory_userinfo");
-            //Request.Cookies.Clear();
             HttpCookie mycookie = Request.Cookies["m_intfactory_userinfo"];
             TimeSpan ts = new TimeSpan(0, 0, 0, 0); //时间跨度
             mycookie.Expires = DateTime.Now.Add(ts); //立即过期
@@ -57,47 +57,90 @@ namespace IntFactoryH5Web.Controllers
             return Redirect("/Home/Login");
         }
 
+        //跳转微信公众号授权
+        public ActionResult WeiXinMPLogin(string returnUrl)
+        {
+            return Redirect(WeiXin.Sdk.Token.GetMPAuthorizeUrl(returnUrl));
+        }
+
+        //微信公众号授权回调地址
+        public ActionResult WeiXinMPCallBack(string code,string state)
+        {
+            string url = "/home/login";
+            if (!string.IsNullOrEmpty(code)) {
+                var userToken = WeiXin.Sdk.Token.GetMPAccessToken(code);
+                if (!string.IsNullOrEmpty(userToken.errcode)) {
+                    var result = IntFactory.Sdk.UserBusiness.GetUserByWeiXinMP(userToken.unionid, userToken.openid, userID);
+                    if (result.result == 1)
+                    {
+                        Session["ClientManager"] = result.user;
+                        return Redirect("/Task/List");
+                    }
+                    else  if (result.result == 0)
+                    {
+                        url += "?BindAccountType=4";
+                        Session["WeiXinTokenInfo"] = userToken.access_token + "|" + userToken.openid + "|" + userToken.unionid;
+                    }
+                }
+            }
+
+            return Redirect(url);
+        }
+
+        //绑定微信公众号账户
+        public int BindWeiXinMP(UserBase user)
+        {
+            int result = 0;
+            if (Session["WeiXinTokenInfo"] != null)
+            {
+                string tokenInfo = Session["WeiXinTokenInfo"].ToString();
+                string[] tokenArr = tokenInfo.Split('|');
+                if (tokenArr.Length == 3)
+                {
+                    string access_token = tokenArr[0];
+                    string openid = tokenArr[1];
+                    string unionid = tokenArr[2];
+                    var resultObj = IntFactory.Sdk.UserBusiness.BindWeiXinMP(unionid,openid, user.userID,user.clientID);
+                    if (resultObj.result == 1)
+                    {
+                        Session.Remove("WeiXinTokenInfo");
+                        result = 1;
+                    }
+                }
+            }
+            else
+            {
+                result = 5;
+            }
+
+            return result;
+        }
+
         #region ajax
-        public JsonResult UserLogin(string userName, string pwd)
+        public JsonResult UserLogin(string userName, string pwd, int bindAccountType=0)
         {
             Dictionary<string, object> resultObj = new Dictionary<string, object>();
             var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,clientID);
             if (result.error_code == 0) 
             {
-                Session["ClientManager"] = result.user;
-                //保持登录状态
-                HttpCookie cook = new HttpCookie("m_intfactory_userinfo");
-                cook["username"] = userName;
-                cook["pwd"] = pwd;
-                cook.Expires = DateTime.Now.AddMonths(1);
-                Response.Cookies.Add(cook);
+                if (bindAccountType == 4) {
+                    result.result=BindWeiXinMP(result.user);
+                }
+                if (result.result == 1) {
+                    Session["ClientManager"] = result.user;
+                    //保持登录状态
+                    HttpCookie cook = new HttpCookie("m_intfactory_userinfo");
+                    cook["username"] = userName;
+                    cook["pwd"] = pwd;
+                    cook.Expires = DateTime.Now.AddMonths(1);
+                    Response.Cookies.Add(cook);
+                }
             }
 
             return new JsonResult()
             {
                 Data = result,
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
-            };
-        }
-
-        public JsonResult SendPush()
-        {
-             Dictionary<string, object> JsonDictionary = new Dictionary<string, object>();
-             IntFactoryH5Web.Common.Push push = new Common.Push("A6925589056031", "97A4C2DD-D654-ACE3-CF21-5D8874D2ACF4");
-             Dictionary<string, object> paras = new Dictionary<string, object>();
-             paras.Add("title", "title");
-             paras.Add("content", "content");
-             paras.Add("type", 2);
-             paras.Add("platform", 2);
-             paras.Add("userIds", "63227a7c-955a-4b65-9477-66df0d078dc0,5ef4141c-ac6d-4acf-af8e-abd9db6aaf53");
-             JavaScriptSerializer serializer = new JavaScriptSerializer();
-             string result = push.Message(serializer.Serialize(paras));
-             JsonDictionary.Add("result", result);
-
-            return new JsonResult
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
         #endregion

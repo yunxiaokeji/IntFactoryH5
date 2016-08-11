@@ -5,7 +5,7 @@
 %}
         <ul class="listabove row">
             <li>
-                <a href="/Task/Detail/{%=item.taskID%}"><img src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img onerror="this.src='/modules/images/img-noimg.png'" src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->
@@ -81,9 +81,7 @@
                 {% }else if(item.colorMark==4){  %}      
                 <div class="orange-tag tag-make"></div> 
                 {% } %}
-                <div class="shape">                    
-                    <i class="iconfont-stage iconfont">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>{%=item.orderType==1?"打样":"大货"%}
-                </div>
+               
             </li>     
         </ul>
 {%}%}

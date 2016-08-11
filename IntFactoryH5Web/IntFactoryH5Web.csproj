@@ -281,7 +281,7 @@
     <Content Include="modules\scripts\api.js" />
     <Content Include="modules\scripts\font.js" />
     <Content Include="modules\scripts\global.js" />
-    <Content Include="modules\scripts\home\login.js" />
+    <Content Include="modules\scripts\login.js" />
     <Content Include="modules\scripts\sha1.js" />
     <Content Include="modules\scripts\task\detail.js" />
     <Content Include="modules\scripts\task\list.js" />
@@ -356,6 +356,10 @@
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">
       <Project>{bc180ed7-4c16-4974-89fb-0894016f58ff}</Project>
       <Name>IntFactory.Sdk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeiXin.Sdk\WeiXin.Sdk.csproj">
+      <Project>{a01e43b8-fabf-4601-8894-4374026aa08c}</Project>
+      <Name>WeiXin.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

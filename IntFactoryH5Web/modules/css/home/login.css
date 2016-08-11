@@ -7,6 +7,9 @@ body { background-color: #fff; }
 .login-body .login-title {
 line-height:25px;width:127px;margin:0 auto;
 }
+.login-body .login-bind {
+line-height:25px;color:#333; text-align:center; font-size:18px;
+}
 .login-body .headerTitle {margin-left:5px; color:#4a98e7; text-align:center; font-size:16px;font-weight:bold; line-height:24px;}
 .login-body .main .login{margin-top:25px;}
 .login-body .main .login .loginbar{ width:100%;height:40px; margin:10px 0px; background-color:#fff;position:relative;}
