@@ -17,22 +17,30 @@ namespace IntFactoryH5Web.Controllers
             return Redirect("/Home/Login");
         }
 
+        public ActionResult Code()
+        {
+            return View();
+        }
+
         public ActionResult Login(string ReturnUrl, int BindAccountType=0)
         {
-            if (Session["ClientManager"] != null)
+            if (BindAccountType == 0)
             {
-                return Redirect("/Task/List");
-            }
-            else
-            {
-                HttpCookie userinfo = Request.Cookies["m_intfactory_userinfo"];
-                if (userinfo != null)
+                if (Session["ClientManager"] != null)
                 {
-                    var result = IntFactory.Sdk.UserBusiness.UserLogin(userinfo["username"], userinfo["pwd"], userID, clientID);
-                    if (result.error_code == 0 && result.user!=null)
+                    return Redirect("/Task/List");
+                }
+                else
+                {
+                    HttpCookie userinfo = Request.Cookies["m_intfactory_userinfo"];
+                    if (userinfo != null)
                     {
-                        Session["ClientManager"] = result.user;
-                        return Redirect("/Task/List");
+                        var result = IntFactory.Sdk.UserBusiness.UserLogin(userinfo["username"], userinfo["pwd"], userID, clientID);
+                        if (result.error_code == 0 && result.user != null)
+                        {
+                            Session["ClientManager"] = result.user;
+                            return Redirect("/Task/List");
+                        }
                     }
                 }
             }
@@ -69,7 +77,7 @@ namespace IntFactoryH5Web.Controllers
             string url = "/home/login";
             if (!string.IsNullOrEmpty(code)) {
                 var userToken = WeiXin.Sdk.Token.GetMPAccessToken(code);
-                if (!string.IsNullOrEmpty(userToken.errcode)) {
+                if (string.IsNullOrEmpty(userToken.errcode)) {
                     var result = IntFactory.Sdk.UserBusiness.GetUserByWeiXinMP(userToken.unionid, userToken.openid, userID);
                     if (result.result == 1)
                     {
@@ -121,7 +129,7 @@ namespace IntFactoryH5Web.Controllers
         {
             Dictionary<string, object> resultObj = new Dictionary<string, object>();
             var result= IntFactory.Sdk.UserBusiness.UserLogin(userName, pwd,userID,clientID);
-            if (result.error_code == 0) 
+            if (result.result == 1) 
             {
                 if (bindAccountType == 4) {
                     result.result=BindWeiXinMP(result.user);

@@ -127,7 +127,7 @@
     <Content Include="Global.asax" />
     <Content Include="modules\css\api.css" />
     <Content Include="modules\css\base.css" />
-    <Content Include="modules\css\home\login.css" />
+    <Content Include="modules\css\login.css" />
     <Content Include="modules\css\iconfont\demo.css" />
     <Content Include="modules\css\iconfont\demo.html" />
     <Content Include="modules\css\iconfont\iconfont.css" />
@@ -351,6 +351,7 @@
     <Content Include="Views\Task\SendDYDoc.cshtml" />
     <Content Include="Views\Task\SewnDoc.cshtml" />
     <Content Include="Views\Task\ProcessCostDoc.cshtml" />
+    <Content Include="Views\Home\Code.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">
