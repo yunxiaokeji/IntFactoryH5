@@ -214,7 +214,7 @@
             </div>
              }
               else if(task.mark==16){
-                Html.RenderPartial("ProcessCostDoc", "");
+                Html.RenderPartial("OrderCostDoc", "");
               }
               else if(task.mark==15 && task.orderType==1){
                Html.RenderPartial("SendDYDoc", "");
@@ -246,7 +246,7 @@
         <div class="reply-layer-header center">
             <div class="left mLeft20 cancel-reply">取消</div>
             <span class="reply-title">发表讨论</span>
-            <div class="right mRight20 finish-reply">发表</div>
+            <div class="right mRight20 finish-reply" style="font-size:16px;color:#fff;">发表</div>
         </div>
         <div class="reply-layer-content" spellcheck="false" contenteditable="true">
             <div style="display:block;min-height:40px;" class="text-content"></div>

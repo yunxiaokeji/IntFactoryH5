@@ -7,7 +7,6 @@
 <link href="/modules/css/task/list.css" rel="stylesheet" />
 }
 @section scripts{
-    @*<script src="/modules/scripts/font.js"></script>*@
     <script src="/modules/scripts/api.js?v=@v" type="text/javascript"></script>
     <script src="/modules/scripts/sha1.js?v=@v"  type="text/javascript"></script>
 
@@ -40,7 +39,7 @@
     </div>
     <div class="btn-search">确定</div>
 </div>
-    
+<div class="topbar">
 <ul class="header">
     <li class="btn-menu header-li">
         <div class="iconfont iconfont-menu">&#xe60d;</div>
@@ -66,7 +65,6 @@
     </li>
 </ul>
  
-
 <ul class="task-status">
     <li data-status="0">
         <div class="ico-status iconfont">&#xe61e;</div>
@@ -95,11 +93,13 @@
         <a class="mark-span">任务模块</a>
         <i class="iconfont-select iconfont">&#xe61c;</i>
     </li>
-    <li class="select-sort" data-id="task-sort" style="border-right:none;">
+    <li class="select-sort" data-id="task-sort" style="border-right:none;width:34%">
         <a class="sort-span">排序</a>        
         <i class="iconfont-select iconfont">&#xe61c;</i>    
     </li> 
+    <div class="clear"></div>
 </ul>
+
 <div class="dropdownlist"> 
     <ul class="potion order-type">             
         <li data-id="-1">全部</li>                 
@@ -123,9 +123,9 @@
         <li class="tasktime" data-takepo="0" data-id="0">创建时间倒序</li>
     </ul>  
 </div>
-<div class="clear"></div>
+</div>
 
-<div class="list"></div>
+<div class="list"><div class="clear"></div></div>
     
 <div class="getback">
     <div class="iconfont-back iconfont">&#xe643;</div>

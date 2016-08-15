@@ -290,11 +290,8 @@
     <Content Include="modules\template\orders\platematrings.html" />
     <Content Include="modules\template\orders\senddocs.html" />
     <Content Include="modules\template\orders\senddydocs.html" />
-    <Content Include="modules\template\task\alertPage.html" />
-    <Content Include="modules\template\task\detailLog.html" />
-    <Content Include="modules\template\task\materList.html" />
-    <Content Include="modules\template\task\flowStage.html" />
-    <Content Include="modules\template\task\flow.html" />
+    <Content Include="modules\template\task\task-log.html" />
+    <Content Include="modules\template\task\task-maters.html" />
     <Content Include="modules\template\task\task-list.html" />
     <Content Include="modules\template\task\detail-reply.html" />
     <Content Include="modules\template\task\task-costs.html" />
@@ -350,7 +347,7 @@
     <Content Include="Views\Task\SendDoc.cshtml" />
     <Content Include="Views\Task\SendDYDoc.cshtml" />
     <Content Include="Views\Task\SewnDoc.cshtml" />
-    <Content Include="Views\Task\ProcessCostDoc.cshtml" />
+    <Content Include="Views\Task\OrderCostDoc.cshtml" />
     <Content Include="Views\Home\Code.cshtml" />
   </ItemGroup>
   <ItemGroup>

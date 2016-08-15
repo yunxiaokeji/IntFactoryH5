@@ -450,7 +450,6 @@
 
     //获取任务详情日志列表
     TaskDetail.getTaskLogs = function () {
-
         if (logPageCount >= Paras.logPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
@@ -460,7 +459,7 @@
                     $(".log-status").html("<div class='no-log'>暂无数据</div>");
                 }
                 else {
-                    doT.exec("template/task/detailLog.html", function (templateFun) {
+                    doT.exec("template/task/task-log.html", function (templateFun) {
 
                         var items = data.items;
 
@@ -483,7 +482,7 @@
             if (data.items.length == 0) {
                 $(".shop-status").html("<div class='no-material'>暂无材料</div>");
             } else {
-                doT.exec("template/task/materList.html", function (templateFun) {
+                doT.exec("template/task/task-maters.html", function (templateFun) {
                     var innerText = templateFun(data.items);
                     innerText = $(innerText);
                     $(".shop-status").html(innerText);

@@ -5,51 +5,52 @@ body.layer {height:100%;overflow:hidden;}
 
 header {
 width: 100%;
-background:rgba(0,0,0,0.6);
+background-color:#2F73B8;
 line-height: 50px;
 position: fixed;
 height: 50px;
 z-index: 1000;
 left:0;
 top:0;
+color:#BFD2F2;
 }
-header .task-text {color:#fff;text-align:center;font-size:16px;margin-right:100px;}
+header .task-text {color:#BFD2F2;text-align:center;font-size:16px;margin-right:100px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
-.return-icon { font-size:20px;color:#fff;width:40px;}
+.return-icon { font-size:20px;color:#BFD2F2;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
-.task-accept span { color:#fff;font-size:16px;}
-.task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{background-color:#fff;text-align:center;font-size:16px;padding:6px 10px; border-radius:2px;width:80px;}
+.task-accept span { color:#BFD2F2;font-size:16px;}
+.task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{background-color:#2F73B8;border:1px solid #fff; color:#fff; text-align:center;font-size:16px;padding:6px 10px; border-radius:2px;width:80px;}
 
 /*焦点图*/
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:50px;text-indent:1em;color:#fff;}
 
 /*任务详情信息*/
 .task-info { background-color:#fff;}
-.main-info { border-bottom:1px solid #CCC;height:170px;padding:10px 0;display:table;width:100%;}
+.main-info { border-bottom:1px solid #CCC;padding:10px 0;display:table;width:100%;}
 .main-info .left-task-info {text-align:left;display:table-cell;padding-left:10px;}
 .main-info .right-task-info {text-align:right;display:table-cell;padding-right:10px;}
 .main-info .left-task-info .accept-time  {color:#e0483e;}
-.main-info li { color:#666;line-height:50px;list-style:none;}
+.main-info li { color:#666;line-height:40px;list-style:none;}
 .dy-info { text-align:left;}
 .dy-info .iconfont { font-size:22px;}
 .setindent {margin:0 3px;}
 
-.right-task-info li div:last-child { margin-top:106px;}
+.right-task-info li div:last-child { margin-top:84px;}
 .right-task-info li .owner-msg {line-height:30px;text-align:right;}
 .right-task-info li .dy-info {margin-top:-7px;line-height:40px;text-align:right;}
 .right-task-info .dy-info a { text-decoration:none;color:#666;}
-.task-info .order-need { line-height:40px;color:#666;padding:10px}
+.task-info .order-need { line-height:30px;color:#666;padding:10px}
 .task-info .order-need div:first-child { width:98px;}
 .task-info .order-need div{display:table-cell;}
 
 
 /*菜单*/
 nav { margin-top:20px;background-color:#fff;margin-bottom:10px; width:100%;}
-nav ul li {cursor:pointer;float:left;list-style:none;padding:0 20px;line-height:45px;text-align:center;color:#666;border-right:1px solid #efefef;margin-right:-1px;height:50px;}
+nav ul li {cursor:pointer;float:left;list-style:none;padding:0 20px;line-height:41px;text-align:center;color:#666;border-right:1px solid #efefef;margin-right:-1px;height:46px;}
 nav ul li:last-child { border-right:none;}
 nav li i { margin-right:4px;color:#9e9e9e;}
 nav li .iconfont { }
-nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:45px;}
+nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .menuchecked i {color:#4a98e7;}
 
 /*讨论显示区域*/
@@ -85,7 +86,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:45px;}
 /*讨论弹出层*/
 .reply-layer { position:fixed;bottom:-100%;left:0;height:100%;width:100%;z-index:20000;background-color:#fff;transition:bottom 0.5s;-webkit-transition:bottom 0.5s;-moz-transition:bottom 0.5s;
                     -webkit-box-orient:vertical;-moz-box-orient:vertical;display:-webkit-box;display:-moz-box;}
-.reply-layer .reply-layer-header { line-height:50px;background:rgba(0,0,0,0.6);height:50px;color:#fff;}
+.reply-layer .reply-layer-header { line-height:50px;background-color:#2F73B8;height:50px;color:#BFD2F2;}
 .reply-layer-content {background-color:#fff;padding:10px;outline:none;overflow-y:scroll;-webkit-box-flex:1;-moz-box-flex:1;}
 .reply-layer-addition {height:50px;width:100%;border-top:1px solid #ccc;line-height:50px;}
 

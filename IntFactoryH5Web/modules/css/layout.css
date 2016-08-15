@@ -92,3 +92,7 @@ header .task-text {color:#373737;text-align:center;}
 
 /*暂无数据*/
 .nodata-txt { padding: 40px 0px; font-size: 16px; text-align: center; color: #666; background-color:#fff; }
+
+.prompt {
+line-height:60px;
+}
