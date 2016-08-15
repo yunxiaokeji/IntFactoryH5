@@ -143,8 +143,8 @@
 
         //任务状态切换
         $(".task-status li").click(function () {
-            $(this).siblings().find(".iconfont,a").css("color", "#666");
-            $(this).find(".iconfont,a").css("color", "#007aff");
+            $(this).siblings().find(".iconfont,a").css("color", "#777");
+            $(this).find(".iconfont,a").css("color", "#4a98e7");
 
             Params.pageIndex = 1;
             Params.finishStatus = $(this).data("status");

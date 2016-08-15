@@ -91,4 +91,4 @@ header .task-text {color:#373737;text-align:center;}
 .table-items-detail td img { max-width:120px;max-height:120px;}
 
 /*暂无数据*/
-.nodata-txt { padding: 60px 0px; font-size: 16px; text-align: center; color: #666; background-color:#fff; }
+.nodata-txt { padding: 40px 0px; font-size: 16px; text-align: center; color: #666; background-color:#fff; }

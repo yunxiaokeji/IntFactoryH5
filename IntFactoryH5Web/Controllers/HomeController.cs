@@ -68,7 +68,24 @@ namespace IntFactoryH5Web.Controllers
         //跳转微信公众号授权
         public ActionResult WeiXinMPLogin(string returnUrl)
         {
-            return Redirect(WeiXin.Sdk.Token.GetMPAuthorizeUrl(returnUrl));
+            if (Session["ClientManager"] != null)
+            {
+                return Redirect("/Task/List");
+            }
+            else
+            {
+                HttpCookie userinfo = Request.Cookies["m_intfactory_userinfo"];
+                if (userinfo != null)
+                {
+                    var result = IntFactory.Sdk.UserBusiness.UserLogin(userinfo["username"], userinfo["pwd"], userID, clientID);
+                    if (result.error_code == 0 && result.user != null)
+                    {
+                        Session["ClientManager"] = result.user;
+                        return Redirect("/Task/List");
+                    }
+                }
+                return Redirect(WeiXin.Sdk.Token.GetMPAuthorizeUrl(returnUrl));
+            }
         }
 
         //微信公众号授权回调地址
