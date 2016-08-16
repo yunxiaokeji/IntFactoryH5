@@ -48,6 +48,8 @@ namespace IntFactory.Sdk
         /// </summary>
         public int colorMark { get; set; }
 
+        public string colorValue { get; set; }
+
         /// <summary>
         /// 完成状态 0：为开始；1：进行中，2：已结束
         /// </summary>

@@ -14,7 +14,7 @@ left:0;
 top:0;
 color:#BFD2F2;
 }
-header .task-text {color:#BFD2F2;text-align:center;font-size:16px;margin-right:100px;}
+header .task-text {color:#BFD2F2;text-align:center;font-size:16px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:20px;color:#BFD2F2;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
@@ -28,6 +28,11 @@ header .task-text {color:#BFD2F2;text-align:center;font-size:16px;margin-right:1
 .task-info { background-color:#fff;}
 .main-info { border-bottom:1px solid #CCC;padding:10px 0;display:table;width:100%;}
 .main-info .left-task-info {text-align:left;display:table-cell;padding-left:10px;}
+.main-info  .base-info {
+    color:#333!important;
+    padding-left:5px;
+    font-size:16px;
+}
 .main-info .right-task-info {text-align:right;display:table-cell;padding-right:10px;}
 .main-info .left-task-info .accept-time  {color:#e0483e;}
 .main-info li { color:#666;line-height:40px;list-style:none;}

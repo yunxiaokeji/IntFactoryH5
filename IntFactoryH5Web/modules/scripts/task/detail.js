@@ -6,14 +6,13 @@
 
     var Paras = {
         orderID: "",
-        stageID: "",
-        replayPageIndex: 1,
+        taskID: "",
+        replyPageIndex: 1,
         logPageIndex: 1,
-        endTime: "",
-        taskID: ""
+        endTime: ""
     };
 
-    var AddReplyParas = {
+    var TaskReplyParas = {
         taskID: "",
         content: "",
         fromReplyID: "",
@@ -21,59 +20,39 @@
         fromReplyAgentID: ""
     };
 
-    var Content = "";
-    //判断是否发表评论中
     var IsLoading = false;
-    //判断日志第一次加载
-    var LogIsPageCount = true;
-    var ReplyIsPageCount = true;
     var replyPageCount = 1;
     var logPageCount = 1;
-    //默认绑定讨论下拉控件
-    var bind = "talk-status";
-    //默认获取讨论列表
+    var ModuleType = "talk-status";
     var GetOrAddReply = "GetReply";
+    var WindowScrollTop = 0;
 
-    var TaskDetail = {};
-    TaskDetail.init = function (haveImg, isOwner, userID, task) {
+    var ObjectJS = {};
+    ObjectJS.init = function (haveImg, isOwner, userID, task) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
-        TaskDetail.task = jsonTask;
-        TaskDetail.order = jsonTask.order;
         Paras.orderID = jsonTask.orderID;
-        Paras.stageID = jsonTask.stageID;
         Paras.taskID = jsonTask.taskID;
 
-        TaskDetail.haveImg = haveImg;
-        TaskDetail.userID = userID;
-        TaskDetail.isOwner = isOwner;
+        ObjectJS.task = jsonTask;
+        ObjectJS.order = jsonTask.order;
+        ObjectJS.haveImg = haveImg;
+        ObjectJS.userID = userID;
+        ObjectJS.isOwner = isOwner;
 
-        AddReplyParas.taskID = jsonTask.taskID;
+        TaskReplyParas.taskID = jsonTask.taskID;
 
         OrderGoods.init(Global, doT);
         OrderGoods.orderid = jsonTask.orderID;
         OrderGoods.taskid = jsonTask.taskID;
 
-        TaskDetail.bindEvent();
-        TaskDetail.initStyle();
-        //TaskDetail.getOrderList(TaskDetail.materialList);
-        TaskDetail.bindTimerPicker();
-        TaskDetail.setImagesSize();
-    }
-
-    //初始化样式信息
-    TaskDetail.initStyle = function () {
-        var documentWidth = $(window).width();
-        var ducomentHeight = $(window).height();
-
-        //设置图片显示宽高
-        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
-        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
-        $(".platemakingBody table tr td:last-child").remove();
+        ObjectJS.bindEvent();
+        ObjectJS.bindTimerPicker();
+        ObjectJS.setImagesSize();
     }
 
     //绑定事件
-    TaskDetail.bindEvent = function () {
-        if (TaskDetail.haveImg == 1) {
+    ObjectJS.bindEvent = function () {
+        if (ObjectJS.haveImg == 1) {
             $dragBln = false;
             $(".main_image").touchSlider({
                 flexible: true,
@@ -112,59 +91,80 @@
 
         //菜单切换模块事件
         $("nav ul li").click(function () {
-            $(this).addClass("menuchecked").siblings().removeClass("menuchecked");
-            $(this).parent().parent().find("i").css("color", "#9e9e9e");
-            $(this).find("i").css("color", "#4a98e7");
-
-            var classname = $(this).data("classname");
-            bind = classname;
+            var _self = $(this);
+            _self.addClass("menuchecked").siblings().removeClass("menuchecked");
+            _self.parent().parent().find("i").css("color", "#9e9e9e");
+            _self.find("i").css("color", "#4a98e7");
+            var classname = _self.data("classname");
+            ModuleType = classname;
             $(".main-box ." + classname).show().siblings().hide();
-            $(".main-box").css("margin-bottom", "0px");
-
+            $(".main-box .loading-lump").hide();
+            var isGet = _self.data("isget");
             //讨论
             if (classname == "talk-status") {
-                $(".main-box").css("margin-bottom", "80px");
-                TaskDetail.getTaskReplys();
+                if (!isGet) {
+                    ObjectJS.getTaskReplys();
+                    _self.data("isget","1");
+                }
             }
                 //材料
             else if (classname == "shop-status") {
-                $(".main-box .loading-lump").hide();
-                TaskDetail.GetOrderDetailsByOrderID();
+                if (!isGet) {
+                    ObjectJS.GetOrderDetailsByOrderID();
+                    _self.data("isget", "1");
+                }
             }
                 //工艺说明
             else if (classname == "print-status") {
-                TaskDetail.getPlateMakings();
+                if (!isGet) {
+                    ObjectJS.getPlateMakings();
+                    _self.data("isget", "1");
+                }
             }
                 //日志
             else if (classname == "log-status") {
-                if (LogIsPageCount) {
-                    TaskDetail.getTaskLogs();
-                    LogIsPageCount = false;
+                if (!isGet) {
+                    ObjectJS.getTaskLogs();
+                    _self.data("isget", "1");
                 }
+                    
             }
                 //手工成本
             else if (classname === "navCosts") {
-                TaskDetail.getOrderCosts();
+                if (!isGet) {
+                    ObjectJS.getOrderCosts();
+                    _self.data("isget", "1");
+                }
             }
                 //打样发货
             else if (classname === "navSendDYDoc") {
-                OrderGoods.getGetGoodsDoc(classname, 2);
+                if (!isGet) {
+                    ObjectJS.getTaskReplys();
+                    OrderGoods.getGetGoodsDoc(classname, 2);
+                }
             }
                 //裁剪
             else if (classname == "navCutoutDoc") {
-                OrderGoods.getGetGoodsDoc(classname, 1);
+                if (!isGet) {
+                    ObjectJS.getTaskReplys();
+                    OrderGoods.getGetGoodsDoc(classname, 1);
+                }
             }
                 //车缝
             else if (classname == "navSewnDoc") {
-                OrderGoods.getGetGoodsDoc(classname, 11);
+                if (!isGet) {
+                    OrderGoods.getGetGoodsDoc(classname, 11);
+                    _self.data("isget", "1");
+                }
             }
                 //发货
             else if (classname == "navSendDoc") {
-                OrderGoods.getGetGoodsDoc(classname, 22);
+                if (!isGet) {
+                    OrderGoods.getGetGoodsDoc(classname, 22);
+                    _self.data("isget", "1");
+                }
             }
         });
-
-        $("nav ul li.menuchecked").click();
 
         //点击回到顶部
         $(".getback").click(function () {
@@ -174,9 +174,9 @@
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
             if ($('.btn-finishTask').val() == "标记完成") {
-                if (TaskDetail.isOwner) {
+                if (ObjectJS.isOwner) {
                     $(".btn-finishTask").click(function () {
-                        TaskDetail.showConfirmForm(1);
+                        ObjectJS.showConfirmForm(1);
                     });
                 }
             }
@@ -186,7 +186,11 @@
         $(".cancel-reply").click(function () {
             $("body,html").removeClass('layer');
             $(".reply-layer").css("bottom", "-100%");
-            setTimeout(function () { $(".reply-layer").hide(); }, 500);
+            setTimeout(function () {
+                $(".reply-layer").hide();
+                
+                $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
+            }, 500);
         });
 
         //发表任务讨论
@@ -243,8 +247,8 @@
             } else {
                 divContent = newHtml.html();
             }
-            AddReplyParas.content = divContent;
-            var msgReply = JSON.stringify(AddReplyParas);
+            TaskReplyParas.content = divContent;
+            var msgReply = JSON.stringify(TaskReplyParas);
 
             IsLoading = true;
             $.post("/Task/AddTaskReply", {
@@ -252,7 +256,7 @@
                 entityAttachments: JSON.stringify(attachments)
             }, function (data) {
                 IsLoading = false;
-                TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                ObjectJS.GetOrAddTaskReply(data, GetOrAddReply);
 
                 _this.html('发表');
                 $('.reply-layer-content').html('');
@@ -268,6 +272,7 @@
                 alert("上一条评论发表中,请稍候再试.");
                 return false;
             }
+            WindowScrollTop = $(document).scrollTop();
             $("body,html").addClass('layer');
             $(".reply-title").html('发表讨论');
             $(".reply-layer").show();
@@ -277,9 +282,9 @@
                 $(".reply-layer-content").prepend('<div class="text-content" style="display:block;min-height:40px;"></div>');
             }
 
-            AddReplyParas.fromReplyID = '';
-            AddReplyParas.fromReplyUserID = '';
-            AddReplyParas.fromReplyAgentID = '';
+            TaskReplyParas.fromReplyID = '';
+            TaskReplyParas.fromReplyUserID = '';
+            TaskReplyParas.fromReplyAgentID = '';
         });
 
         //删除附件
@@ -293,11 +298,13 @@
 
         });
 
-        TaskDetail.bindScroll();
+        ObjectJS.bindScroll();
+
+        $("nav ul li.menuchecked").click();
     }
 
     //窗体加载绑定讨论下拉
-    TaskDetail.bindScroll = function () {
+    ObjectJS.bindScroll = function () {
         $(window).bind("scroll", function () {
             //滚动条超过图片显示致顶图标
             if ($(document).scrollTop() >= 60 + $(window).width()) {
@@ -306,19 +313,17 @@
                 $(".getback").hide();
             }
 
-            if (bind == "talk-status" || bind == "log-status") {
+            if (ModuleType == "talk-status" || ModuleType == "log-status") {
                 var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-
                 if (bottom <= 20) {
-                    //$("#tableLoad").attr("class", "");
                     setTimeout(function () {
-                        if (bind == "talk-status") {
-                            Paras.replayPageIndex++;
-                            TaskDetail.getTaskReplys();
+                        if (ModuleType == "talk-status") {
+                            Paras.replyPageIndex++;
+                            ObjectJS.getTaskReplys();
                         }
-                        else if (bind == "log-status") {
+                        else if (ModuleType == "log-status") {
                             Paras.logPageIndex++;
-                            TaskDetail.getTaskLogs();
+                            ObjectJS.getTaskLogs();
                         }
                     }, 1000);
                 }
@@ -327,9 +332,9 @@
     }
 
     //绑定时间控件
-    TaskDetail.bindTimerPicker = function () {
+    ObjectJS.bindTimerPicker = function () {
         if ($(".btn-acceptTaskTime").length == 0) { return; }
-        if (!TaskDetail.isOwner) { return; }
+        if (!ObjectJS.isOwner) { return; }
         var defaultParas = {
             preset: 'datetime',
             theme: 'android-ics light', //皮肤样式
@@ -338,7 +343,7 @@
             lang: 'zh',
             onSelect: function () {
                 Paras.endTime = $(".btn-acceptTaskTime").val();
-                TaskDetail.showConfirmForm(0);
+                ObjectJS.showConfirmForm(0);
                 $(".btn-acceptTaskTime").val("接受任务");
             }
         };
@@ -346,7 +351,7 @@
     }
 
     //设置任务到期时间
-    TaskDetail.setTaskEndTime = function () {
+    ObjectJS.setTaskEndTime = function () {
 
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
 
@@ -355,7 +360,7 @@
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
                 $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click', function () {
-                    TaskDetail.showConfirmForm(1);
+                    ObjectJS.showConfirmForm(1);
                 });
             } else if (data == 0) {
                 alert("失败");
@@ -373,7 +378,7 @@
     }
 
     //标记完成任务
-    TaskDetail.finishTask = function () {
+    ObjectJS.finishTask = function () {
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
@@ -393,19 +398,27 @@
     }
 
     //接受任务、标记任务完成的弹出浮层
-    TaskDetail.showConfirmForm = function (showStatus) {
+    ObjectJS.showConfirmForm = function (showStatus) {
         var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
         confirm(alertMsg, function () {
             if (showStatus == 0) {
-                TaskDetail.setTaskEndTime();
+                ObjectJS.setTaskEndTime();
             } else {
-                TaskDetail.finishTask();
+                ObjectJS.finishTask();
             }
         });
     }
 
     //设置图片宽高
-    TaskDetail.setImagesSize = function () {
+    ObjectJS.setImagesSize = function () {
+        var documentWidth = $(window).width();
+        var ducomentHeight = $(window).height();
+
+        //设置图片显示宽高
+        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
+        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
+        $(".platemakingBody table tr td:last-child").remove();
+
         var windowWidth = $(window).width();
         $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
         $(".main_image ul li").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
@@ -420,9 +433,9 @@
     }
 
     //获取任务讨论列表
-    TaskDetail.getTaskReplys = function () {
+    ObjectJS.getTaskReplys = function () {
         GetOrAddReply = "GetReply";
-        if (replyPageCount >= Paras.replayPageIndex) {
+        if (replyPageCount >= Paras.replyPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
@@ -431,7 +444,7 @@
                     $(".noreply-msg").show();
                 }
                 else {
-                    TaskDetail.GetOrAddTaskReply(data, GetOrAddReply);
+                    ObjectJS.GetOrAddTaskReply(data, GetOrAddReply);
                 }
             });
         } else {
@@ -444,7 +457,7 @@
     }
 
     //获取任务详情日志列表
-    TaskDetail.getTaskLogs = function () {
+    ObjectJS.getTaskLogs = function () {
         if (logPageCount >= Paras.logPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
@@ -471,13 +484,13 @@
     }
 
     //获取获取订单材料列表
-    TaskDetail.GetOrderDetailsByOrderID = function () {
+    ObjectJS.GetOrderDetailsByOrderID = function () {
         Global.post("/Orders/GetOrderDetailsByOrderID", { orderID: Paras.orderID }, function (data) {
             data = JSON.parse(data);
             if (data.items.length == 0) {
                 $(".shop-status").html("<div class='no-material'>暂无材料</div>");
             } else {
-                doT.exec("template/task/task-maters.html", function (templateFun) {
+                doT.exec("template/task/task-products.html", function (templateFun) {
                     var innerText = templateFun(data.items);
                     innerText = $(innerText);
                     $(".shop-status").html(innerText);
@@ -509,7 +522,7 @@
     }
 
     //获取或添加任务讨论
-    TaskDetail.GetOrAddTaskReply = function (data, replyOperate) {
+    ObjectJS.GetOrAddTaskReply = function (data, replyOperate) {
         doT.exec("template/task/detail-reply.html", function (templateFun) {
             var innerText = templateFun(data.items);
             innerText = $(innerText);
@@ -525,6 +538,7 @@
                     $(".noreply-msg").hide();
                 }
                 $(".talk-main").prepend(innerText);
+                $('body,html').animate({ WindowScrollTop: WindowScrollTop }, 100);
             }
 
             //点击回复把用户名写入文本框
@@ -538,16 +552,16 @@
                 setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
                 setTimeout(function () { $(".reply-layer-content").focus() }, 1000);
 
-                AddReplyParas.fromReplyID = $(this).data("replyid");
-                AddReplyParas.fromReplyUserID = $(this).data("userid");
-                AddReplyParas.fromReplyAgentID = $(this).data("agentid");
+                TaskReplyParas.fromReplyID = $(this).data("replyid");
+                TaskReplyParas.fromReplyUserID = $(this).data("userid");
+                TaskReplyParas.fromReplyAgentID = $(this).data("agentid");
                 $(".reply-title").html('@' + $(this).data('name'));
             });
         });
     }
 
     //获取手工成本
-    TaskDetail.getOrderCosts = function () {
+    ObjectJS.getOrderCosts = function () {
         var _self = this;
         $("#navCosts .tr-header").nextAll().remove();
         $("#navCosts .tr-header").after("<tr><td colspan='10'><div class='data-loading' ><div></td></tr>");
@@ -573,7 +587,7 @@
     };
 
     //获取制版工艺说明
-    TaskDetail.getPlateMakings = function () {
+    ObjectJS.getPlateMakings = function () {
         var _self = this;
         $(".tb-plates .tr-header").nextAll().remove();
         $(".tb-plates .tr-header").after("<tr><td colspan='5'><div class='data-loading'><div></td></tr>");
@@ -598,5 +612,5 @@
         });
     };
 
-    module.exports = TaskDetail;
+    module.exports = ObjectJS;
 });

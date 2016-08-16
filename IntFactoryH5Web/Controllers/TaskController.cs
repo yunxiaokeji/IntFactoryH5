@@ -42,9 +42,9 @@ namespace IntFactoryH5Web.Controllers
         }
 
         //获取讨论列表   
-        public JsonResult GetDiscussInfo(string taskID, string stageID, int replayPageIndex)
+        public JsonResult GetDiscussInfo(string taskID, string stageID, int replyPageIndex)
         {
-            var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskReplys(taskID, stageID, CurrentUser.userID, CurrentUser.clientID, replayPageIndex);
+            var result = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskReplys(taskID, stageID, CurrentUser.userID, CurrentUser.clientID, replyPageIndex);
 
             List<IntFactory.Sdk.TaskReplyEntity> listReplys = result.taskReplys;
 
@@ -117,6 +117,17 @@ namespace IntFactoryH5Web.Controllers
                 Data=JsonDictionary,
                 JsonRequestBehavior=JsonRequestBehavior.AllowGet
 
+            };
+        }
+
+        public JsonResult GetTaskLableColors()
+        {
+            var lables = TaskBusiness.BaseBusiness.GetTaskLableColors(CurrentUser.userID,CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = lables,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
 

@@ -44,6 +44,9 @@ namespace IntFactory.Sdk
         [Description("/api/task/getOrderInfo")]
         GetOrderInfo,
 
+        [Description("/api/task/getTaskLableColors")]
+        GetTaskLableColors,
+
         [Description("/api/task/updateTaskEndTime")]
         UpdateTaskEndTime,
 

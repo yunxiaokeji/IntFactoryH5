@@ -3,7 +3,7 @@
 }
 /*头部*/
 .header{width:100%;height:50px;background-color:#2F73B8;color:#BFD2F2;}
-.header .header-li{float:left;height:50px;text-align:center;margin-top:15px;}
+.header .header-li{float:left;text-align:center;margin-top:15px;}
 .header .btnsearch{float:right;text-align:right;}
 .header .header-li{margin-top:15px;}
 .header .header-li:first-child div{float:left;margin-left:10px;font-size:16px;}
@@ -35,11 +35,11 @@
 .menu-box li{text-align:center;color:#333;}
 .menu-box li a{text-align:center;color:#666;}
 /*进行状态*/
-.task-status{width:100%;background-color:#fff;}
+.task-status{width:100%;background-color:#fff;padding:8px 0;}
 .task-status li{width:25%;float:left;}
 .task-status li:first-child div,.task-status li:first-child a{color:#4a98e7;cursor:pointer; }
 .task-status .ico-status{text-align:center;color:#777;font-size:20px;}
-.task-status li a{margin-top:5px;text-align:center;color:#777;display:inline-block;width:100%;font-size:14px;margin-bottom:5px;}
+.task-status li a{margin-top:5px;text-align:center;color:#777;display:inline-block;width:100%;font-size:14px;}
 /*选择条件的css样式*/
 .filter-task{width:100%;background-color:#fff;}
 .filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -52,7 +52,15 @@
 .dropdownlist li{color:#666;padding-top:12px;padding-bottom:12px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .dropdownlist .order-type{border-bottom:1px solid #ccc;border-right:1px solid #ccc;}
 /*流程下拉*/
-.dropdownlist .task-mark{border:1px solid #ccc;border-top:0;left:33%;}
+.dropdownlist .task-colormark{border:1px solid #ccc;border-top:0;left:33%;}
+.dropdownlist .task-colormark .lable-color {
+    width:16px;
+    height:16px;
+    border-radius:8px;
+    margin-right:5px;
+    display:inline-block;
+    vertical-align:bottom;
+}
 /*筛选下拉*/
 .dropdownlist .screen-type{border:1px solid #ccc;border-top:0;left:50%;}
 /*排序下拉*/

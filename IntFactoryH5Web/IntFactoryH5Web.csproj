@@ -290,7 +290,7 @@
     <Content Include="modules\template\orders\senddocs.html" />
     <Content Include="modules\template\orders\senddydocs.html" />
     <Content Include="modules\template\task\task-log.html" />
-    <Content Include="modules\template\task\task-maters.html" />
+    <Content Include="modules\template\task\task-products.html" />
     <Content Include="modules\template\task\task-list.html" />
     <Content Include="modules\template\task\detail-reply.html" />
     <Content Include="modules\template\task\task-costs.html" />
@@ -331,7 +331,6 @@
     <Content Include="Views\Task\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="modules\plug\touchSlider\.DS_Store" />
     <Content Include="modules\plug\touchSlider\images\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>

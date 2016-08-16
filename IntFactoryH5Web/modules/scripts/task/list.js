@@ -19,18 +19,18 @@
         isAsc: 0,
         pageSize: 5,
         pageIndex: 1,
-        mark: 0,
         isParticipate: false,
     };
-    var List = {};
-    List.PageCount = 0;
-    List.IsLoading = false;
-    List.init = function () {
-        List.bindEvent();
-        List.getList();
+    var ObjectJS = {};
+    ObjectJS.PageCount = 0;
+    ObjectJS.IsLoading = false;
+    ObjectJS.init = function () {
+        ObjectJS.bindEvent();
+        ObjectJS.getList();
+        ObjectJS.getTaskLableColors();
     };
 
-    List.bindEvent = function () {
+    ObjectJS.bindEvent = function () {
         //滚动加载数据
         $(window).scroll(function () {
             if (document.body.scrollTop > 30) {
@@ -40,10 +40,10 @@
             }
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
             if (bottom <= 200) {
-                if (!List.IsLoading) {
+                if (!ObjectJS.IsLoading) {
                     Params.pageIndex++;
-                    if (Params.pageIndex <= List.PageCount) {
-                        List.getList(true);
+                    if (Params.pageIndex <= ObjectJS.PageCount) {
+                        ObjectJS.getList(true);
                     } else {
                         $(".prompt").remove();
                         $(".list").append('<div class="prompt">已经是最后一条啦</div>');
@@ -85,16 +85,16 @@
                     $(this).text("取消");
 
                     Params.keyWords = txt;
-                    List.getList();
+                    ObjectJS.getList();
                     
                 } else {
                     $(".search").hide();
-
-                    Params.keyWords = "";
-                    List.getList();
                 }
             } else {
                 $(".search").hide();
+
+                Params.keyWords = "";
+                ObjectJS.getList();
             }
             $(".shade").hide();
         });
@@ -138,7 +138,7 @@
             } else {
                 Params.isParticipate = true;
             }
-            List.getList();
+            ObjectJS.getList();
         });
 
         //任务状态切换
@@ -148,7 +148,7 @@
 
             Params.pageIndex = 1;
             Params.finishStatus = $(this).data("status");
-            List.getList();
+            ObjectJS.getList();
         });
 
         //显示过滤下拉框
@@ -166,17 +166,7 @@
 
             Params.pageIndex = 1;
             Params.orderType = $(this).data("id");
-            List.getList();
-        });
-
-        //任务类型切换
-        $(".task-mark li").click(function () {
-            $(".mark-span").text($(this).text());
-            $(this).parent().hide();
-            
-            Params.pageIndex = 1;
-            Params.taskType = $(this).data("mark");
-            List.getList();
+            ObjectJS.getList();
         });
 
         //任务排序
@@ -186,7 +176,7 @@
             
             Params.isAsc = $(this).data("takepo");
             Params.taskOrderColumn = $(this).data("id");
-            List.getList();
+            ObjectJS.getList();
         });
 
         //返回顶部
@@ -195,8 +185,8 @@
         });
     };
 
-    List.getList = function (noEmpty) {
-        List.IsLoading = true;
+    ObjectJS.getList = function (noEmpty) {
+        ObjectJS.IsLoading = true;
         if (!noEmpty) {
             $(".list").empty();
         }
@@ -210,17 +200,41 @@
                 $(".list").append("<div class='nodata'>暂无数据 !</div>");
             } else {
                 //分页数据
-                List.PageCount = data.pageCount;
+                ObjectJS.PageCount = data.pageCount;
                 //引用doT模板
                 doT.exec("template/task/task-list.html", function (code) {
                     var $result = code(data.items);
                     $(".list").append($result);
                 });
-                List.IsLoading = false;
+                ObjectJS.IsLoading = false;
             }
             $(".listbg").remove();
         });
     };
 
-    module.exports = List;
+    ObjectJS.getTaskLableColors=function(){
+        $.post("/Task/GetTaskLableColors", null, function (data) {
+            data = JSON.parse(data);
+            var items = data.items;
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var html = '';
+                html += '<li data-id="' + item.ColorID + '"><span class="lable-color" style="background-color:' + item.ColorValue + '"></span><span>' + item.ColorName + '</span></li>';
+
+                $(".task-colormark").append(html);
+            }
+            //任务颜色标记切换
+            $(".task-colormark li").click(function () {
+                $(".colormark-span").text($(this).text());
+                $(this).parent().hide();
+
+                Params.pageIndex = 1;
+                Params.colorMark = $(this).data("id");
+                ObjectJS.getList();
+            });
+            
+        });
+    };
+
+    module.exports = ObjectJS;
 });

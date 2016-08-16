@@ -4,7 +4,7 @@
     ViewBag.Title = "任务详情-" + task.title;
     
     JavaScriptSerializer serializer = new JavaScriptSerializer();
-    var taskStr= serializer.Serialize(task);
+    var taskJson= serializer.Serialize(task);
     var UserID = ViewBag.UserID;
     var ModuleName=ViewBag.ModuleName;
     var isOwner = task.ownerUser.userID.Equals(UserID, StringComparison.OrdinalIgnoreCase) ? true : false;
@@ -14,22 +14,27 @@
         imagesUrl = task.order.orderImages.Trim(',').Split(',');      
     }
 }
-
 @section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
     <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
-    <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
-    <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
+    @{
+        if(task.finishStatus==0){
+        <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
+        <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
+        }
+      }
     }
 @section scripts{
-    @*<script src="/modules/scripts/font.js"></script>*@
     <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery.js"></script>
-    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
-    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
-    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
-    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
+     @{
+        if(task.finishStatus==0){
+        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
+        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
+        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
+        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
+     }}
     <script type="text/javascript">
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
@@ -37,7 +42,7 @@
                     '@(imagesUrl.Length>1?1:0)',
                      '@isOwner',
                     '@UserID',
-                    '@taskStr'
+                    '@taskJson'
                  );
             });
         })
@@ -75,7 +80,6 @@
     </header>
 
     <div class="main_visual mTop50">
-     @*   <div class="task-msg">@task.title</div>*@
         <div class="flicking_con">
             @{
                 if (imagesUrl.Length > 1)
@@ -107,15 +111,15 @@
     <div class="task-info">
         <div class="main-info">
                 <ul class="left-task-info">
-                <li><span>任务编号:</span><span class="task-code">@task.taskCode</span></li>
-                <li><span>接受时间:</span><span class="accept-time">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
-                <li><span>到期时间:</span><span class="end-time">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
-                <li><span>完成时间:</span><span class="complete-time">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
+                <li><span>任务编号:</span><span class="task-code base-info">@task.taskCode</span></li>
+                <li><span>接受时间:</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
+                <li><span>到期时间:</span><span class="end-time base-info">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
+                <li><span>完成时间:</span><span class="complete-time base-info">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
             </ul>
 
                 <ul class="right-task-info">
                 <li>
-                    <div class="owner-msg"><span>负责人</span><span class="setindent">:</span><span class="owner-name">@task.ownerUser.name</span></div>
+                    <div class="owner-msg"><span>负责人:</span><span class="owner-name base-info">@task.ownerUser.name</span></div>
                    
                     <div class="dy-info">
                         <a href="javascript:void(0);">
@@ -130,7 +134,7 @@
                                 }
                             }
                         </a>
-                        <span>
+                        <span class="base-info">
                             @(task.orderType == 1 ? "打样" : task.orderType == 2 ? "大货" : "")
                         </span>
 

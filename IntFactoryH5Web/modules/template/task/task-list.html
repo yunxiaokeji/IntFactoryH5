@@ -72,16 +72,7 @@
             </li>
             <li class="last-stage">    
                 <!-- 标记颜色 -->
-                {% if(item.colorMark==1){ %}            
-                <div class="red-tag tag-make"></div>   
-                {% }else if(item.colorMark==2){  %}      
-                <div class="green-tag tag-make"></div> 
-                {% }else if(item.colorMark==3){  %}      
-                <div class="purple-tag tag-make"></div> 
-                {% }else if(item.colorMark==4){  %}      
-                <div class="orange-tag tag-make"></div> 
-                {% } %}
-               
+                <div class="tag-make" style="background-color:{%=item.colorValue%}"></div>  
             </li>     
         </ul>
 {%}%}

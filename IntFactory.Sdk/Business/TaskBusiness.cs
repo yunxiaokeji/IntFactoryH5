@@ -135,6 +135,15 @@ namespace IntFactory.Sdk
 
             return HttpRequest.RequestServer<OrderBaseResult>(ApiOption.GetOrderInfo, paras);
         }
+
+        public string GetTaskLableColors(string userID,string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetTaskLableColors, paras);
+        }
         #endregion
 
         #region update
