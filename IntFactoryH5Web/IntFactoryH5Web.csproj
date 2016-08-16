@@ -225,7 +225,6 @@
     <Content Include="modules\images\logo_login.png" />
     <Content Include="modules\images\times.jpg" />
     <Content Include="modules\css\task\detail.css" />
-    <Content Include="modules\css\task\detailmedia.css" />
     <Content Include="modules\images\Zoom.gif" />
     <Content Include="modules\images\test.jpg" />
     <Content Include="modules\plug\dataTimePicker\css\mobiscroll.custom-2.5.2.min.css" />
