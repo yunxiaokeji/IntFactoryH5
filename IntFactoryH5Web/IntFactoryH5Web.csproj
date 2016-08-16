@@ -40,7 +40,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Qiniu.4.0">
+    <Reference Include="Qiniu.4.0, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Qiniu.4.0.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -123,7 +124,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="config.xml" />
+    <Content Include="DLL\Qiniu.4.0.dll" />
     <Content Include="Global.asax" />
     <Content Include="modules\css\api.css" />
     <Content Include="modules\css\base.css" />
@@ -296,7 +297,6 @@
     <Content Include="modules\template\task\task-costs.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
     <Content Include="modules\template\task\task-file-upload.html" />
-    <Content Include="Qiniu.4.0.dll" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />
@@ -314,6 +314,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

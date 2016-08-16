@@ -537,8 +537,8 @@
                 if ($(".talk-main").find('div').length == 0) {
                     $(".noreply-msg").hide();
                 }
+                $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
                 $(".talk-main").prepend(innerText);
-                $('body,html').animate({ WindowScrollTop: WindowScrollTop }, 100);
             }
 
             //点击回复把用户名写入文本框
