@@ -14,9 +14,7 @@
     };
 
     var AddReplyParas = {
-        orderID: "",
-        stageID: "",
-        mark: "",
+        taskID: "",
         content: "",
         fromReplyID: "",
         fromReplyUserID: "",
@@ -49,9 +47,7 @@
         TaskDetail.userID = userID;
         TaskDetail.isOwner = isOwner;
 
-        AddReplyParas.orderID = jsonTask.orderID;
-        AddReplyParas.stageID = jsonTask.stageID;
-        AddReplyParas.mark = jsonTask.mark;
+        AddReplyParas.taskID = jsonTask.taskID;
 
         OrderGoods.init(Global, doT);
         OrderGoods.orderid = jsonTask.orderID;
@@ -253,7 +249,6 @@
             IsLoading = true;
             $.post("/Task/AddTaskReply", {
                 resultReply: msgReply,
-                taskID: Paras.taskID,
                 entityAttachments: JSON.stringify(attachments)
             }, function (data) {
                 IsLoading = false;

@@ -122,14 +122,14 @@ namespace IntFactoryH5Web.Controllers
 
         //添加讨论信息
         [ValidateInput(false)]
-        public JsonResult AddTaskReply(string resultReply,string taskID,string entityAttachments)
+        public JsonResult AddTaskReply(string resultReply,string entityAttachments)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             TaskReplyEntity taskReplyEntity = new TaskReplyEntity();
             List<AttachmentEntity> attachments = new List<AttachmentEntity>();
             taskReplyEntity = serializer.Deserialize<TaskReplyEntity>(resultReply);
             taskReplyEntity.attachments = serializer.Deserialize<List<AttachmentEntity>>(entityAttachments);
-            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, taskID, CurrentUser.userID, CurrentUser.clientID);
+            TaskReplyListResult addResult = TaskBusiness.BaseBusiness.SavaTaskReply(taskReplyEntity, taskReplyEntity.taskID, CurrentUser.userID, CurrentUser.clientID);
             JsonDictionary.Add("items", addResult.taskReplys);
 
             return new JsonResult { 
