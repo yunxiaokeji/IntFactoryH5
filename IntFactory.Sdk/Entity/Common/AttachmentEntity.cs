@@ -23,6 +23,6 @@ namespace IntFactory.Sdk
 
         public string OriginalName { get; set; }
 
-
+        public string ThumbnailName { get; set; }
     }
 }
