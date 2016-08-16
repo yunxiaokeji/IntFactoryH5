@@ -13,7 +13,7 @@ namespace IntFactory.Sdk
 {
     public class HttpRequest
     {
-        public static T RequestServer<T>(ApiOption apiOption, Dictionary<string, object> paras,RequestType requestType = RequestType.Post)
+        public static T RequestServer<T>(ApiOption apiOption, Dictionary<string, object> paras,RequestType requestType = RequestType.Get)
         {
             string urlPath = GetEnumDesc<ApiOption>(apiOption);
             string url = AppConfig.ApiUrl+ urlPath;
@@ -57,7 +57,7 @@ namespace IntFactory.Sdk
                     byte[] postData = Encoding.UTF8.GetBytes(paraStr);
                     Uri uri = new Uri(url);
                     HttpWebRequest httpWebRequest = WebRequest.Create(uri) as HttpWebRequest;
-
+                    
                     httpWebRequest.Method = "POST";
                     httpWebRequest.KeepAlive = false;
                     httpWebRequest.AllowAutoRedirect = true;
@@ -93,7 +93,7 @@ namespace IntFactory.Sdk
 
             return JsonConvert.DeserializeObject<T>(strResult);
         }
-
+        
         public static string RequestServer(ApiOption apiOption, Dictionary<string, object> paras, RequestType requestType = RequestType.Post)
         {
             string urlPath = GetEnumDesc<ApiOption>(apiOption);

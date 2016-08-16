@@ -88,10 +88,10 @@ namespace IntFactory.Sdk
         /// <param name="clientID"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public TaskReplyListResult GetTaskReplys(string orderID, string stageID, string userID, string clientID, int pageIndex = 1)
+        public TaskReplyListResult GetTaskReplys(string taskID, string stageID, string userID, string clientID, int pageIndex = 1)
         {
             var paras = new Dictionary<string, object>();
-            paras.Add("orderID", orderID);
+            paras.Add("taskID", taskID);
             paras.Add("stageID", stageID);
             paras.Add("pageIndex", pageIndex);
             paras.Add("userID", userID);
