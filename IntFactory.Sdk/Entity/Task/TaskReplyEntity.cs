@@ -16,17 +16,7 @@ namespace IntFactory.Sdk
         /// <summary>
         /// 订单ID
         /// </summary>
-        public string orderID { get; set; }
-
-        /// <summary>
-        /// 阶段ID
-        /// </summary>
-        public string stageID { get; set; }
-
-        /// <summary>
-        /// 讨论标记 0：其他；1：材料 2 制版 3大货材料
-        /// </summary>
-        public int mark { get; set; }
+        public string taskID { get; set; }
 
         /// <summary>
         /// 讨论内容
