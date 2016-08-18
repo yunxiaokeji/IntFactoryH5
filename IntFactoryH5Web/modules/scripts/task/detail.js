@@ -45,8 +45,8 @@
         OrderGoods.orderid = jsonTask.orderID;
         OrderGoods.taskid = jsonTask.taskID;
 
-        ObjectJS.bindEvent();
         ObjectJS.bindTimerPicker();
+        ObjectJS.bindEvent();
         ObjectJS.setImagesSize();
     }
 
@@ -77,15 +77,6 @@
             image_view: "?imageView2/1/w/120/h/80",
             fileType: 3,
             init: {
-                'FilesAdded': function (up, files) {
-                    if ($("#pic-list").length == 0) {
-                        $(".reply-layer-content").append('<div class="text-content" style="display:block;min-height:40px;"></div>');
-                        $(".reply-layer-content").append('<ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul><div class="clear"></div>');
-                    }
-                    if ($("#doc-list").length == 0) {
-                        $(".reply-layer-content").append('<ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul><div class="clear"></div>');
-                    }
-                }
             }
         });
 
@@ -272,6 +263,14 @@
                 alert("上一条评论发表中,请稍候再试.");
                 return false;
             }
+            if ($("#pic-list").length == 0) {
+                $(".reply-layer-content").append('<div class="text-content" style="display:block;min-height:40px;"></div>');
+                $(".reply-layer-content").append('<ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul><div class="clear"></div>');
+            }
+            if ($("#doc-list").length == 0) {
+                $(".reply-layer-content").append('<ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul><div class="clear"></div>');
+            }
+
             WindowScrollTop = $(document).scrollTop();
             $("body,html").addClass('layer');
             $(".reply-title").html('发表讨论');
@@ -354,7 +353,6 @@
     ObjectJS.setTaskEndTime = function () {
 
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
-
             if (data == 1) {
                 $(".end-time").html(Paras.endTime);
                 $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
@@ -546,6 +544,13 @@
                 if (IsLoading) {
                     alert("上一条评论发表中,请稍候再试.");
                     return false;
+                }
+                if ($("#pic-list").length == 0) {
+                    $(".reply-layer-content").append('<div class="text-content" style="display:block;min-height:40px;"></div>');
+                    $(".reply-layer-content").append('<ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul><div class="clear"></div>');
+                }
+                if ($("#doc-list").length == 0) {
+                    $(".reply-layer-content").append('<ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul><div class="clear"></div>');
                 }
                 $("body,html").addClass('layer');
                 $(".reply-layer").show();
