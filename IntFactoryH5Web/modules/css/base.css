@@ -1,5 +1,5 @@
 ﻿/*全局样式*/
-*{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+*{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);font-size:14px;}
 body {font-family:'Microsoft YaHei';color:#333;font-size:14px;}
 li{ list-style-type:none;}
 a { color: #4a98e7; text-decoration: none;}

@@ -23,11 +23,11 @@
 
                  {%   if (item.finishStatus==0) {      %}
                         <div class="stage" >
-                            <label>上级任务:</label>     
+                            <span>上级任务:</span>     
                             <span>{%=item.preTitle%}</span>                    
                         </div>
                         <div class="stage">
-                            <label>上级进度:</label>     
+                            <span>上级进度:</span>     
                             <span>
                                  {%   if (item.finishStatus==0) {      %}
                                     未接受
@@ -39,33 +39,33 @@
                             </span>                                
                         </div>  
                         <div class="stage">
-                            <label>上级到期:</label>   
+                            <span>上级到期:</span>   
                             <span>{%=item.pEndTime==""?"未设置":item.pEndTime%}</span>                              
                         </div>       
                     {%   }  else if (item.finishStatus==1) {      %}
                         <div class="stage" >
-                            <label>接受:</label>     
+                            <span>接受:</span>     
                             <span>{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
                         </div>
                         <div class="stage">
-                            <label>到期:</label>     
+                            <span>到期:</span>     
                             <span>{%=item.endTime==""?"未设置":item.endTime%}</span>                                
                         </div>  
                         <div class="stage">
-                            <label>上级任务:</label>   
+                            <span>上级任务:</span>   
                             <span>{%=item.preTitle%}</span>                              
                         </div>
                     {%   }  else {      %}
                         <div class="stage" >
-                            <label>接受:</label>     
+                            <span>接受:</span>     
                             <span>{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
                         </div>
                         <div class="stage">
-                            <label>到期:</label>     
+                            <span>到期:</span>     
                             <span>{%=item.endTime==""?"未设置":item.endTime%}</span>                                
                         </div>  
                         <div class="stage">
-                            <label>完成:</label>   
+                            <span>完成:</span>   
                             <span>{%=item.completeTime==""?"未完成":item.completeTime%}</span>                              
                         </div>
                     {%   }  %}                                                 

@@ -68,11 +68,8 @@ namespace IntFactoryH5Web.Controllers
         //跳转微信公众号授权
         public ActionResult WeiXinMPLogin(string returnUrl)
         {
-            if (Session["ClientManager"] != null)
-            {
-                return Redirect("/Task/List");
-            }
-            else
+            string url = "/Task/List";
+            if (Session["ClientManager"] == null)
             {
                 HttpCookie userinfo = Request.Cookies["m_intfactory_userinfo"];
                 if (userinfo != null)
@@ -81,11 +78,17 @@ namespace IntFactoryH5Web.Controllers
                     if (result.error_code == 0 && result.user != null)
                     {
                         Session["ClientManager"] = result.user;
-                        return Redirect("/Task/List");
                     }
                 }
-                return Redirect(WeiXin.Sdk.Token.GetMPAuthorizeUrl(returnUrl));
+                else {
+                    return Redirect( WeiXin.Sdk.Token.GetMPAuthorizeUrl(returnUrl) );
+                }
             }
+            if (!string.IsNullOrEmpty(returnUrl)) {
+                url = returnUrl;
+            }
+
+            return Redirect(url);
         }
 
         //微信公众号授权回调地址
@@ -99,7 +102,14 @@ namespace IntFactoryH5Web.Controllers
                     if (result.result == 1)
                     {
                         Session["ClientManager"] = result.user;
-                        return Redirect("/Task/List");
+                        if (!string.IsNullOrEmpty(state))
+                        {
+                            url = state;
+                        }
+                        else
+                        {
+                            url = "/Task/List";
+                        }
                     }
                     else  if (result.result == 0)
                     {
