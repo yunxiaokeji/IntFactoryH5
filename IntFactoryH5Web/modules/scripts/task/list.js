@@ -4,22 +4,18 @@
 
     var Params = {
         keyWords: "",
-        isMy: true,
+        filtertype: 1,
         userID: "",
         taskType: -1,
         colorMark: -1,
-        status: 1,
         finishStatus: 0,
         beginDate: "",
         endDate: "",
         orderType: -1,
-        orderProcessID: "-1",
-        orderStageID: "-1",
         taskOrderColumn: 0,
         isAsc: 0,
         pageSize: 5,
-        pageIndex: 1,
-        isParticipate: false,
+        pageIndex: 1
     };
     var ObjectJS = {};
     ObjectJS.PageCount = 0;
@@ -132,12 +128,7 @@
             $(".task span").text($(this).text());
             $(this).parent().hide();
 
-            var filtertype = $(this).data("filtertype");
-            if (filtertype == 0) {
-                Params.isParticipate = false;
-            } else {
-                Params.isParticipate = true;
-            }
+            Params.filtertype = $(this).data("filtertype");
             ObjectJS.getList();
         });
 

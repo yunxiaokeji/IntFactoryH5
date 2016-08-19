@@ -14,14 +14,9 @@ namespace IntFactory.Sdk
         public string keyWords = string.Empty;
 
         /// <summary>
-        /// 是否获取我的
+        /// 1:我的任务；2：参与任务；-1：所有任务
         /// </summary>
-        public bool isMy = true;
-
-        /// <summary>
-        /// 是否获取我参与的
-        /// </summary>
-        public bool isParticipate = false;
+        public int filtertype = 1;
 
         /// <summary>
         /// 负责人ID
@@ -34,14 +29,9 @@ namespace IntFactory.Sdk
         public int taskType = -1;
 
         /// <summary>
-        /// 颜色标记 ["#FFF", "#FF7C7C", "#3BB3FF", "#9F74FF", "#FFC85D", "#FFF65F"]
+        /// 颜色标记 
         /// </summary>
         public int colorMark = -1;
-
-        /// <summary>
-        /// 任务状态
-        /// </summary>
-        public int status = 1;
 
         /// <summary>
         /// 任务进行状态
@@ -62,16 +52,6 @@ namespace IntFactory.Sdk
         /// 订单类型
         /// </summary>
         public int orderType = -1;
-
-        /// <summary>
-        /// 订单流程ID
-        /// </summary>
-        public string orderProcessID = "-1";
-
-        /// <summary>
-        /// 订单流程阶段ID
-        /// </summary>
-        public string orderStageID = "-1";
 
         /// <summary>
         /// 排序列 0:创建时间；1：到期时间
