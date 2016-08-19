@@ -47,6 +47,15 @@ namespace IntFactoryH5Web.Controllers
             ReturnUrl = ReturnUrl ?? string.Empty;
             ViewBag.ReturnUrl = ReturnUrl;
             ViewBag.BindAccountType = BindAccountType;
+            string ApiUrl = System.Configuration.ConfigurationManager.AppSettings["ApiUrl"] ?? "http://dev.intfactory.cn";
+            string RegisterUrl = ApiUrl + "/home/register?source=app";
+            string FindPasswordUrl = ApiUrl + "/home/findpassword?source=app";
+            if (BindAccountType == 4) {
+                RegisterUrl = ApiUrl + "/home/register?source=wxmp";
+                FindPasswordUrl = ApiUrl + "/home/findpassword?source=wxmp";
+            }
+            ViewBag.RegisterUrl = RegisterUrl;
+            ViewBag.FindPasswordUrl = FindPasswordUrl;
 
             return View();
         }

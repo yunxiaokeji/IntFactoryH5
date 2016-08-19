@@ -16,7 +16,6 @@
     <link href="/modules/css/base.css?v=@v" rel="stylesheet" />
     <link href="/modules/css/layout.css?v=@v" rel="stylesheet" />
     <link href="/modules/css/login.css?v=@v" rel="stylesheet" />
-    <link href="/modules/css/api.css?v=@v" rel="stylesheet" />
 
     <script src="/Scripts/sea.js?v=@v" type="text/javascript"></script>
     <script src="/Scripts/sea-config.js?v=@v" type="text/javascript"></script>
@@ -30,10 +29,10 @@
     <div class="login-body">
         <div class="main">
             @{if (BindAccountType==0){
-            <div class="login-title">
-                 <div class="left"><img src="/modules/images/logo_login.png"  style="width:28px;"/></div>
-                 <div class="loginTitle left mLeft5">厂盟智能 </div>
-                 <div class="clear"></div>
+            <div class="login-title">厂盟
+                @* <div class="left"><img src="/modules/images/logo_login.png"  style="width:28px;"/></div>*@
+@*                 <div class="loginTitle left mLeft5"> </div>
+                 <div class="clear"></div>*@
             </div>
             }
             else{
@@ -49,6 +48,12 @@
                     <div class="txtBoxPassword">请输入密码</div>
                 </div>
                 <div class="btnLogin mTop15" id="btnLogin">@(BindAccountType==0?"登录":"绑定")</div>
+                <div class="mTop30">
+                    <div class="right">
+                        <a href="@ViewBag.FindPasswordUrl">忘记密码？</a><a style="padding:0 3px;">|</a>
+                        <a href="@ViewBag.RegisterUrl">新用户注册</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
