@@ -128,25 +128,6 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .return-msg .box-returnmsg .txt-talkcontent{text-indent:10px;padding:12px 0;outline:none;border:1px solid #CCC;border-radius:3px;width:100%;color:#666;}
 .return-msg .box-submit .btn-submit {margin:0 10px;border-radius:4px;float:right;padding:0 20px;padding:18px 0;background-color:#4b98e8;text-align:center;border:1px solid #68a9ed;color:#fff;width:14.8%;font-size:24px;}
 
-
-/*材料采购计划显示区域*/
-.shop-status .plan-info { margin:0 20px 10px 20px;overflow:hidden;}
-.shop-status .plan-info .material {line-height:50px;width:100%;position:relative; background-color:#efefef;color:#666;cursor:pointer;}
-.shop-status .plan-info .select-material {background-color:#4a98e7;color:#fff;}
-.shop-status .material ul { margin:0 10px;height:70px;}
-.shop-status .material .meterial-name {width:50%;float:left;line-height:70px;}
-.shop-status .material .meterial-size { width:50%;float:left;}
-.material ul li:first-child { position:absolute;right:25px;}
-.material ul .meterial-lumpbox { width:10px;height:10px;-webkit-transition-duration:0.5s;transition-duration:0.5s; position: absolute;right:5px;top:26px;}
-.material ul .meterial-lump { width: 0; height: 0; border-left: 7px solid #999; border-top:7px solid transparent; border-bottom:7px solid transparent;cursor:pointer;display:block;}
-
-.no-material { text-align:center;margin-left:20px;color:#666;margin-top:20px;}
-
-.shop-status .material-main { display:none;}
-.material-main .material-info li {padding:0 10px;line-height:64px;border-bottom:1px solid #eee;clear:both;height:64px;}
-.material-main .material-info li span:first-child { display:block;color:#999;width:50%;float:left;}
-.material-main .material-info li span:last-child { display:block;color:#666;width:50%;float:right;white-space:nowrap;}
-
 /*制版信息显示区域*/
 .print-status .print-header { color:#82cadb;display:block;height:40px;line-height:40px;margin:0 10px;border-bottom:2px solid #ddd;}
 .platemakingBody {margin:20px 10px 50px 10px;border-top:1px solid #eee;border-left:1px solid #eee;}
@@ -158,6 +139,20 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 /*工艺说明*/
 .print-status h1 { color:#666;line-height:50px;margin:0 10px;border-bottom:1px solid #ddd;font-size:18px;}
 .plate-remark { margin:10px;color:#666;}
+
+/*下拉显示单据详情*/
+.doc-content ul, .doc-item .doc-header { padding:0 10px;box-sizing:border-box;-webkit-box-sizing:border-box;}
+
+.doc-item {margin:5px 10px;}
+.doc-item .doc-header { background-color: #efefef; color: #666;position:relative;line-height:50px;}
+.doc-item .doc-header.hover { background-color: #4a98e7; color: #fff; }
+.doc-item .doc-header .lump { width:0;height:0;border-left:7px solid #888;border-top:7px solid transparent;border-bottom:7px solid transparent;position:absolute;right:10px;top:18px;
+                              transition:transform 0.8s;-moz-transition:-moz-transform 0.8s;-webkit-transition:-webkit-transform 0.8s;}
+.doc-item .doc-header .lump.hover { transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);border-left-color:#fff;}
+/*translateZ开启动画加速*/
+.doc-item .doc-content { transform:translateZ(0);-webkit-transform:translateZ(0);-moz-transform:translateZ(0);}
+.doc-item .doc-content ul{ border-bottom:1px solid #efefef;}
+.doc-item .doc-content ul li { line-height:36px;}
 
 /*日志显示区域*/
 .no-log {text-align:center;margin:20px 0;color:#666; }

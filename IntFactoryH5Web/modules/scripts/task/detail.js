@@ -132,6 +132,7 @@
                 if (!isGet) {
                     ObjectJS.getTaskReplys();
                     OrderGoods.getGetGoodsDoc(classname, 2);
+                    
                 }
             }
                 //裁剪
@@ -156,12 +157,10 @@
                 }
             }
         });
-
         //点击回到顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
-
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
             if ($('.btn-finishTask').val() == "标记完成") {
@@ -300,6 +299,7 @@
         ObjectJS.bindScroll();
 
         $("nav ul li.menuchecked").click();
+
     }
 
     //窗体加载绑定讨论下拉
@@ -434,12 +434,12 @@
     ObjectJS.getTaskReplys = function () {
         GetOrAddReply = "GetReply";
         if (replyPageCount >= Paras.replyPageIndex) {
-            $(".main-box .loading-lump").show();
+            $(".main-box .talk-main").append('<div class="data-loading"></div>');
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
-                $(".main-box .loading-lump").hide();
+                $(".main-box .talk-status .data-loading").remove();
                 replyPageCount = data.pagecount;
                 if (replyPageCount == 0) {
-                    $(".noreply-msg").show();
+                    $(".main-box .talk-main").append('<div class="nodata-txt">暂无数据</div>');
                 }
                 else {
                     ObjectJS.GetOrAddTaskReply(data, GetOrAddReply);
@@ -462,7 +462,7 @@
                 $(".main-box .loading-lump").hide();
                 logPageCount = data.pagecount;
                 if (logPageCount == 0) {
-                    $(".log-status").html("<div class='no-log'>暂无数据</div>");
+                    $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
                 }
                 else {
                     doT.exec("template/task/task-log.html", function (templateFun) {
@@ -486,34 +486,30 @@
         Global.post("/Orders/GetOrderDetailsByOrderID", { orderID: Paras.orderID }, function (data) {
             data = JSON.parse(data);
             if (data.items.length == 0) {
-                $(".shop-status").html("<div class='no-material'>暂无材料</div>");
+                $(".shop-status").html("<div class='nodata-txt'>暂无材料</div>");
             } else {
                 doT.exec("template/task/task-products.html", function (templateFun) {
                     var innerText = templateFun(data.items);
                     innerText = $(innerText);
-                    $(".shop-status").html(innerText);
-                    //设置采购计划图标点击事件
-                    innerText.find(".material").click(function () {
-                        var meterialLumpbox = $(this).find(".meterial-lumpbox");
+                    //展开详情
+                    innerText.find('.doc-header').click(function () {
+                        var _this = $(this);
+                        if (!_this.next().is(":animated")) {
+                            if (!_this.hasClass('hover')) {
+                                _this.addClass('hover');
+                                _this.find('.lump').addClass('hover');
+                                _this.next().slideDown(400, function () {
+                                });
+                            } else {
+                                _this.removeClass('hover');
+                                _this.find('.lump').removeClass('hover');
+                                _this.next().slideUp(400, function () {
 
-                        if (!$(".material-main").is(":animated")) {
-                            $(meterialLumpbox).parent().parent().siblings().slideToggle(500);
-                            if ($(meterialLumpbox).data('status') == '0') {
-                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(90deg)", "transform": "rotate(90deg)" });
-                                $(meterialLumpbox).data('status', '1');
-                                $(meterialLumpbox).find('span').css("border-left-color", "#fff");
-                                $(meterialLumpbox).parent().parent().addClass("select-material");
-
-                            }
-                            else {
-                                $(meterialLumpbox).css({ "-webkit-transform": "rotate(0deg)", "transform": "rotate(0deg)" });
-                                $(meterialLumpbox).data('status', '0');
-                                $(meterialLumpbox).find('span').css("border-left-color", "#999");
-                                $(meterialLumpbox).parent().parent().removeClass("select-material");
+                                });
                             }
                         }
-
                     });
+                    $(".shop-status").html(innerText);
                 });
             }
         });
@@ -532,8 +528,8 @@
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
             } else {
-                if ($(".talk-main").find('div').length == 0) {
-                    $(".noreply-msg").hide();
+                if ($(".talk-main").find('.nodata-txt').length > 0) {
+                    $(".talk-main .nodata-txt").remove();
                 }
                 $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
                 $(".talk-main").prepend(innerText);
@@ -594,25 +590,40 @@
     //获取制版工艺说明
     ObjectJS.getPlateMakings = function () {
         var _self = this;
-        $(".tb-plates .tr-header").nextAll().remove();
-        $(".tb-plates .tr-header").after("<tr><td colspan='5'><div class='data-loading'><div></td></tr>");
+        $(".tb-plates").html("<div class='data-loading'><div>");
 
         Global.post("/Orders/GetPlateMakings", {
             orderID: _self.order.orderType == 1 ? _self.order.orderID : _self.order.originalID
         }, function (data) {
-            $(".tb-plates .tr-header").nextAll().remove();
+            $(".tb-plates").html('');
             data = JSON.parse(data);
             if (data.items.length > 0) {
                 doT.exec("template/orders/platematrings.html", function (template) {
                     PlateMakings = data.items;
                     var html = template(data.items);
                     html = $(html);
-                    html.find(".dropdown").remove();
+                    html.find('.doc-header').click(function () {
+                        var _this = $(this);
+                        if (!_this.next().is(":animated")) {
+                            if (!_this.hasClass('hover')) {
+                                _this.addClass('hover');
+                                _this.find('.lump').addClass('hover');
+                                _this.next().slideDown(400, function () {
+                                });
+                            } else {
+                                _this.removeClass('hover');
+                                _this.find('.lump').removeClass('hover');
+                                _this.next().slideUp(400, function () {
+
+                                });
+                            }
+                        }
+                    });
                     $(".tb-plates").append(html);
                 });
             }
             else {
-                $(".tb-plates").append("<tr><td colspan='5'><div class='nodata-txt'>暂无工艺说明<div></td></tr>");
+                $(".tb-plates").append("<div class='nodata-txt'>暂无工艺说明<div>");
             }
         });
     };

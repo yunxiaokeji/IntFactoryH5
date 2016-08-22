@@ -2,45 +2,39 @@
     for(var i=0;i<$data.length;i++)
     {
         var item=$data[i];
-    if(i>0){
-    %}
 %}
-<tr class="line-item">
-    <td></td>
-</tr>
+<div class="doc-item">
+    <div class="doc-header" style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+        <span class="">{%=(!item.ExpressCode?item.Express.Name:item.ExpressCode+'&nbsp;&nbsp;('+item.Express.Name+')')%}</span>
+        <div class="clear"></div>
+        <div class="lump"></div>
+    </div>
+    <div class="doc-content hide">
+        {%
+        for(var j=0;j<item.Details.length;j++)
+        {
+            var detail=item.Details[j];
+        %}
+        <ul>
+            <li class="mRight10 long" style="width:100%;">
+                <span style="display:inline-block;width:60px;">规&nbsp;&nbsp;&nbsp;格：</span>{%=detail.Remark%}    
+            </li>
+            <li>
+                <span style="display:inline-block;width:60px;">发货数：</span>{%=detail.Quantity%}
+            </li>
+            <div class="clear"></div>
+        </ul>
+            {%
+            if(item.Details.length-1==j){
+            %}
+            <ul>
+                <li>
+                    <span class="right">{%=item.CreateUser.Name+'&nbsp;&nbsp;'+(item.CreateTime.toDate('yyyy/MM/dd'))%}</span>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+            {%}%}
+        {%}%}
+    </div>
+</div>
 {%}%}
-<tr class="item-header">
-    <td class="tLeft">规格</td>
-    <td class="">数量</td>
-    <td>小计</td>
-    <td class="">发货人</td>
-</tr>
-{%
-for(var j=0,jj=item.Details.length;j<jj;j++)
-{
-    var detail=item.Details[j];
-%}
-<tr class="item">
-    <td class="tLeft bBottom">
-        {%=detail.Remark%}
-    </td>
-    <td class="center bBottom">
-        {%=detail.Quantity%}
-    </td>
-    {%
-    if(j==0)
-   {
-    %}
-    <td class="center bBottom bLeft cut1" rowspan="{%=jj%}">
-        {%=item.Quantity%}
-    </td>
-    <td class="center bBottom bLeft" rowspan="{%=jj%}">{%=item.CreateUser.Name%}</td>
-    {%}%}
-</tr>
-{%}}%}
-<tr class="line-item">
-    <td></td>
-</tr>
-<tr>
-    <td class="center font16" colspan="4">合计：<span class="total-count font16"></span></td>
-</tr>

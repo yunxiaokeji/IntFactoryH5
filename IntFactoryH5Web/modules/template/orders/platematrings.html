@@ -2,18 +2,39 @@
     var TypeName="";
 	for(var i=0, j=$data.length; i < j; i++){
 	var item = $data[i];
+    var isLast=0;
+    if($data[i+1]){
+        if($data[i+1].TypeName!=item.TypeName){
+            isLast=1;
+        }
+    }else{
+        isLast=1;
+    }
 %}
-    {% if(TypeName!=item.TypeName){ %}
-    <tr class="mTop20 item-header">
-        <td class="font14 pLeft10 tLeft bold width300">工艺类型：{%=item.TypeName%}</td>
-        <td class="width200 bold">名称</td>                    
-        <td class="bold tLeft">描述</td>
-    </tr>
-    {% TypeName=item.TypeName } %}
-    
-    <tr class="list-item" id="tr-plate-{%=item.PlateID%}">
-        <td class="tLeft item bBottom"><img style="width:30px;height:30px;" src="{%=item.Icon?item.Icon:'/modules/images/img-noimg.png'%}" /></td>
-        <td class="center item bBottom">{%=item.Title%}</td>        
-        <td class="item bBottom tLeft" style="line-height:150%;word-break:break-all;">{%=item.Remark%}</td>
-    </tr>
-{% } %}
+{%if(TypeName!=item.TypeName){ %}
+<div class="doc-item">
+    <div class="doc-header">
+        <span class="">工艺类型：{%=item.TypeName%}</span>
+        <div class="lump"></div>
+    </div>
+    <div class="doc-content hide">
+    {% TypeName=item.TypeName;}%}
+        <ul>
+            <li class="">
+                <span style="display:inline-block;width:60px;">图标：</span>
+                <img style="width:30px;height:30px;vertical-align:middle" src="{%=item.Icon?item.Icon:'/modules/images/img-noimg.png'%}" />
+            </li>
+            <li class="mRight10 long" style="width:100%;word-break:break-all;">
+                <span style="display:inline-block;width:60px;">名称：</span>
+                {%=item.Title%} 
+            </li>
+            <li style="width:100%;word-break:break-all;">
+                <span style="display:inline-block;width:60px;">描述：</span>
+                {%=item.Remark%}
+            </li>
+            <div class="clear"></div>
+        </ul>
+{%if(isLast==1){%}
+    </div>
+</div>
+{%}}%}
