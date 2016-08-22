@@ -22,11 +22,16 @@
                 </div>
 
                  {%   if (item.finishStatus==0) {      %}
+                        <div class="stage">
+                            <span>订单款号:</span>
+                            <span></span>
+                        </div>
                         <div class="stage" >
                             <span>上级任务:</span>     
-                            <span>{%=item.preTitle%}</span>                    
+                            <span>{%=item.preTitle%}</span>
+                            <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>                    
                         </div>
-                        <div class="stage">
+                       <!-- <div class="stage">
                             <span>上级进度:</span>     
                             <span>
                                  {%   if (item.finishStatus==0) {      %}
@@ -37,9 +42,9 @@
                                     已完成
                                 {%   }  %} 
                             </span>                                
-                        </div>  
+                        </div>  -->
                         <div class="stage">
-                            <span>上级到期:</span>   
+                            <span>交货日期:</span>   
                             <span>{%=item.pEndTime==""?"未设置":item.pEndTime%}</span>                              
                         </div>       
                     {%   }  else if (item.finishStatus==1) {      %}
@@ -48,7 +53,7 @@
                             <span>{%=item.acceptTime==""?"未接受":item.acceptTime%}</span>                    
                         </div>
                         <div class="stage">
-                            <span>到期:</span>     
+                            <span>交货:</span>     
                             <span>{%=item.endTime==""?"未设置":item.endTime%}</span>                                
                         </div>  
                         <div class="stage">
@@ -70,9 +75,17 @@
                         </div>
                     {%   }  %}                                                 
             </li>
-            <li class="last-stage">    
-                <!-- 标记颜色 -->
-                <div class="tag-make" style="background-color:{%=item.colorValue%}"></div>  
+            <li class="last-stage"> 
+                {%   if (item.finishStatus==0) {      %}
+                    <div class="btn-acceptTaskTime" data-id="{%=item.taskID%}" data-num="0">接受任务</div>
+                {%   }  else if (item.finishStatus==1) {      %}
+                    <div class="btn-acceptTaskTime" data-id="{%=item.taskID%}" data-num="1">完成任务</div>
+                {% }%}
+                    <i class="iconfont left">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+                    <div class="order-type">{%=item.orderType==1?"打样":"大货"%}</div>
+                    <!-- 标记颜色 -->
+                    <div class="tag-make" style="background-color:{%=item.colorValue%}"></div>  
+                    
             </li>     
         </ul>
 {%}%}

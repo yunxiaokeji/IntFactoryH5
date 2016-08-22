@@ -31,11 +31,11 @@
 .search .search-box .txt-search{border:none; width:80%;padding:15px 0; color:#666;font-size:16px;}
 .search .btn-search {color:#333;height:30px;line-height:30px; position:fixed;top:11px;right:15px;font-size:20px;}
 /*退出下拉*/
-.menu-box {position:absolute;top:33px; height:60px;line-height:60px;width:100%;z-index:302; box-shadow:0 0 5px #ccc;background-color:#fff;border-radius:2px;display:none; }
+.menu-box {position:absolute;top:33px; height:44px;line-height:60px;width:100%;z-index:302; box-shadow:0 0 5px #ccc;background-color:#fff;border-radius:2px;display:none; }
 .menu-box li{text-align:center;color:#333;}
 .menu-box li a{text-align:center;color:#666;}
 /*进行状态*/
-.task-status{width:100%;background-color:#fff;padding:8px 0;}
+.task-status{width:100%;background-color:#fff;padding:8px 0;position:fixed;bottom:0;z-index:300;border-top:1px solid #ddd;}
 .task-status li{width:25%;float:left;}
 .task-status li:first-child div,.task-status li:first-child a{color:#4a98e7;cursor:pointer; }
 .task-status .ico-status{text-align:center;color:#777;font-size:20px;}
@@ -67,8 +67,11 @@
 .dropdownlist .task-sort{border:1px solid #ccc;border-top:0;left:66%;width:34%!important;}
 /*列表*/
 .dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none;top:-1px; }
-.list {margin-top:160px;}
-.list li .tag-make { width:10px;height:20px;margin-right:5px;}
+.list {margin-top:100px;}
+.list .last-stage .iconfont{margin-top:75px;margin-left:20px;}
+.list li .btn-acceptTaskTime{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center}
+.list li .tag-make { width:10px;height:20px;margin-left:85px;margin-top:75px;margin-right:10px;}
+.list li .order-type{margin-left:5px;float:left;margin-top:75px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;}
 .list .listabove li{float:left;margin-top:15px;}
 .list li:first-child img{width:120px;height:120px;margin-bottom:15px;margin-left:10px;margin-right:15px;}
@@ -95,7 +98,7 @@
 /*加载状态图片*/
 .list .listbg { background:url(/modules/images/img.gif) no-repeat left center;height:40px;margin-left:48%;width:40px;background-size:40px;}
 /*返回顶部*/
-.getback { position:fixed;z-index:555;color:#666;right:5%;bottom:8%;display:none;}
+.getback { position:fixed;z-index:555;color:#666;right:12px;bottom:20px;display:none;}
 .getback span{right:10%;}
 /*提示*/
 .list .prompt { text-align:center;color:#999;}

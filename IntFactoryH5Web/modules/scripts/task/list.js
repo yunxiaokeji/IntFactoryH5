@@ -15,15 +15,23 @@
         taskOrderColumn: 0,
         isAsc: 0,
         pageSize: 5,
-        pageIndex: 1
+        pageIndex: 1        
     };
+    
+    var taskParms = {
+        endTime: "",
+        taskID:""
+    }
     var ObjectJS = {};
+
     ObjectJS.PageCount = 0;
     ObjectJS.IsLoading = false;
+
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
         ObjectJS.getList();
         ObjectJS.getTaskLableColors();
+        ObjectJS.bindTimerPicker();
     };
 
     ObjectJS.bindEvent = function () {
@@ -176,6 +184,78 @@
         });
     };
 
+    //绑定时间控件
+    ObjectJS.bindTimerPicker = function () {        
+        var defaultParas = {
+            preset: 'datetime',
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            lang: 'zh',
+            onSelect: function () {
+                taskParms.endTime = $(".btn-acceptTaskTime").html();                
+                ObjectJS.showConfirmForm(0);
+            }
+        };
+        $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
+    }
+
+    //设置任务到期时间
+    ObjectJS.setTaskEndTime = function () {
+        $.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
+            if (data == 1) {
+                $(".end-time").html(Paras.endTime);
+                $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+                $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
+                $(".task-accept").find(".btn-finishTask").bind('click', function () {
+                    ObjectJS.showConfirmForm(1);
+                });
+            } else if (data == 0) {
+                alert("失败");
+            } else if (data == 2) {
+                alert("有前面阶段任务未完成");
+            } else if (data == 3) {
+                alert("没有权限");
+            } else if (data == 4) {
+                alert("任务没有接受，不能设置完成");
+            } else if (data == 5) {
+                alert("任务有未完成步骤");
+            }
+        });
+    }
+
+    //标记完成任务
+    ObjectJS.finishTask = function () {
+        $.post("/Task/FinishTask", taskParms, function (data) {
+            if (data == 1) {
+                $(".task-accept").html("<span>已完成</span>");
+                $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+            } else if (data == 0) {
+                alert("失败");
+            } else if (data == 2) {
+                alert("有前面阶段任务未完成");
+            } else if (data == 3) {
+                alert("没有权限;");
+            } else if (data == 4) {
+                alert("任务没有接受，不能设置完成");
+            } else if (data == 5) {
+                alert("任务有未完成步骤");
+            }
+        });
+    }
+
+    //接受任务、标记任务完成的弹出浮层
+    ObjectJS.showConfirmForm = function (showStatus) {
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
+        confirm(alertMsg, function () {
+            if (showStatus == 0) {
+                ObjectJS.setTaskEndTime();
+            } else {
+                ObjectJS.finishTask();
+            }
+        });
+    }
+
     ObjectJS.getList = function (noEmpty) {
         ObjectJS.IsLoading = true;
         if (!noEmpty) {
@@ -194,9 +274,15 @@
                 ObjectJS.PageCount = data.pageCount;
                 //引用doT模板
                 doT.exec("template/task/task-list.html", function (code) {
-                    var $result = code(data.items);
+                    var $result = code(data.items);                        
                     $(".list").append($result);
+                    
+                    $(".btn-acceptTaskTime").click(function () {
+                        var _this = $(this);
+                        taskParms.taskID= _this.data("id");
+                    });
                 });
+                
                 ObjectJS.IsLoading = false;
             }
             $(".listbg").remove();
