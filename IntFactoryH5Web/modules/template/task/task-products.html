@@ -3,28 +3,37 @@
     {
         var data=$data[i];
 %}
-
-    <div class="plan-info">
-        <div class="material">
-            <ul>
-                <li class="meterial-lumpbox" data-status="0"><span class="meterial-lump"></span></li>
-                <li class="meterial-name">{%=data.ProductName==""?"未设置":data.ProductName%}</li>
-            </ul>
-        </div>
-                 
-        <div class="material-main">
-            <ul class="material-info">
-                <li><span>编码</span><span>{%=data.DetailsCode==""?"未设置":data.DetailsCode%}</span></li>
-                <li><span>规格</span><span class="remark-content">{%=data.Remark==""?"未设置":data.Remark%}</span></li>
-                <li><span>单位</span><span>{%=data.UnitName==""?"未设置":data.UnitName%}</span></li>
-                <li><span>单价</span><span>{%=data.Price%}</span></li>
-                <li><span>消耗量</span><span>{%=data.Quantity%}</span></li>
-                <li><span>损耗量</span><span>{%=data.Loss%}</span></li>
-                <li><span>小计</span><span>{%=data.TotalMoney%}</span></li>
-            </ul>
-        </div>
-
-        <div style="clear:both;"></div>
-      </div>
-
+<div class="doc-item">
+    <div class="doc-header">
+        <span class="left">{%=data.ProductName==""?"未设置":data.ProductName%}</span>
+        <div class="clear"></div>
+        <div class="lump"></div>
+    </div>
+    <div class="doc-content hide">
+        <ul>
+            <li class="mRight10 long" style="width:100%;">
+                <span style="display:inline-block;width:60px;">编&nbsp;&nbsp;&nbsp;码：</span>{%=data.DetailsCode==""?"--":data.DetailsCode%}
+            </li>
+            <li class="mRight10 long" style="width:100%;">
+                <span style="display:inline-block;width:60px;">规&nbsp;&nbsp;&nbsp;格：</span>{%=data.Remark==""?"--":data.Remark%}    
+            </li>
+            <li>
+                <span style="display:inline-block;width:60px;">单&nbsp;&nbsp;&nbsp;位：</span>{%=data.UnitName==""?"--":data.UnitName%}
+            </li>
+            <li>
+                <span style="display:inline-block;width:60px;">单&nbsp;&nbsp;&nbsp;价：</span>{%=data.Price%}
+            </li>
+            <li class="mRight10 long" style="width:100%;">
+                <span style="display:inline-block;width:60px;">消耗量：</span>{%=data.Quantity%}    
+            </li>
+            <li>
+                <span style="display:inline-block;width:60px;">损耗量：</span>{%=data.Loss%}
+            </li>
+            <li class="mRight10 long" style="width:100%;">
+                <span style="display:inline-block;width:60px;">小&nbsp;&nbsp;&nbsp;计：</span>{%=data.TotalMoney%}    
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
 {%}%}

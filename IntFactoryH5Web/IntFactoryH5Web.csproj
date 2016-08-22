@@ -143,6 +143,7 @@
     <Content Include="modules\images\ico-attachment-txt.png" />
     <Content Include="modules\images\ico-attachment-word.png" />
     <Content Include="modules\images\ico-delete.png" />
+    <Content Include="modules\images\ico-loading.gif" />
     <Content Include="modules\images\ico-loading.jpg" />
     <Content Include="modules\images\img-noimg.png" />
     <Content Include="modules\images\qqface\1.gif" />
