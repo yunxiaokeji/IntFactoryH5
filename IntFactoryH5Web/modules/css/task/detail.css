@@ -68,8 +68,8 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 
 .reply-box { border-bottom:1px solid #ccc;padding-bottom:20px;margin-bottom:20px;}
 .reply-box .file-attachment { border:1px solid #ccc;background-color:#fcfcfc; }
-.reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box {height:80px;line-height:80px;}
-.reply-box .file-attachment .lump-box {width:80px;}
+.reply-box .file-attachment .lump-box,.reply-box .file-attachment .describe-box {height:50px;line-height:50px;}
+.reply-box .file-attachment .lump-box {width:50px;}
 .reply-content { word-break:break-all;}
 
 .file-attachment .lump-box .layer-type { width:50px;height:56px;background-color:#fff;text-align:center;line-height:56px;margin:12px 0 0 15px;border-radius:3px;position:relative;}
