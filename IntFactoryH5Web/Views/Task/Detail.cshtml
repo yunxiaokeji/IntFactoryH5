@@ -27,14 +27,13 @@
 @section scripts{
     <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery.js"></script>
-     @{
-        if(task.finishStatus==0){
+    <script src="/modules/plug/touchSlider/js/jquery.js"></script> 
+    @if(task.finishStatus==0){
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
-     }}
+    }
     <script type="text/javascript">
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
@@ -47,10 +46,10 @@
             });
         })
     </script>
-    }
+}
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
-        <div class="task-text">@task.title</div>
+        <div class="task-text">@(task.title+"-"+task.ownerUser.name)</div>
         <div class="task-accept">
             @{
                 if (task.finishStatus == 2)
@@ -110,41 +109,50 @@
     <!--任务信息-->
     <div class="task-info">
         <div class="main-info">
-                <ul class="left-task-info">
-                <li><span>任务编号:</span><span class="task-code base-info">@task.taskCode</span></li>
-                <li><span>接受时间:</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.acceptTime) ? "未接收" : task.acceptTime)</span></li>
-                <li><span>到期时间:</span><span class="end-time base-info">@(string.IsNullOrEmpty(task.endTime) ? "未设置" : task.endTime)</span></li>
-                <li><span>完成时间:</span><span class="complete-time base-info">@(string.IsNullOrEmpty(task.completeTime) ? "未完成" : task.completeTime)</span></li>
-            </ul>
-
-                <ul class="right-task-info">
+            <ul class="left-task-info mLeft10 mRight10">
+                <li class="long" style="display:block;">
+                    <span>订单款式：</span><span class="task-code base-info"></span>
+                </li>
                 <li>
-                    <div class="owner-msg"><span>负责人:</span><span class="owner-name base-info">@task.ownerUser.name</span></div>
-                   
-                    <div class="dy-info">
-                        <a href="javascript:void(0);">
-                            @{
-                                if (task.orderType == 1)
-                                {
-                                    <i class="iconfont">&#xe612;</i>
-                                }
-                                else
-                                {
-                                    <i class="iconfont">&#xe60f;</i>
-                                }
+                    <span>发货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.acceptTime) ? "--" : DateTime.Parse(task.acceptTime).ToString("yyyy-MM-dd"))</span>
+                </li>
+                <li>
+                    <span>到期日期：</span><span class="end-time base-info">@(string.IsNullOrEmpty(task.endTime) ? "--" : DateTime.Parse(task.endTime).ToString("yyyy-MM-dd"))</span>
+                </li>
+                <li>
+                    <div class="left">
+                        <span>完成日期：</span><span class="complete-time base-info">@(string.IsNullOrEmpty(task.completeTime) ? "--" : DateTime.Parse(task.completeTime).ToString("yyyy-MM-dd"))</span>
+                    </div>
+                    <div class="right">
+                        <span>
+                            @if (task.orderType == 1)
+                            {
+                                <i class="iconfont">&#xe612;</i>
                             }
-                        </a>
+                            else
+                            {
+                                <i class="iconfont">&#xe60f;</i>
+                            }
+                        </span>
                         <span class="base-info">
                             @(task.orderType == 1 ? "打样" : task.orderType == 2 ? "大货" : "")
                         </span>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+            <ul class="right-task-info mRight10">
+                <li>
+                    <div class="dy-info">
 
                     </div>
                 </li>
             </ul>
+            <div class="clear"></div>
         </div>
 
         <div class="order-need">
-            <div class="text-orderneed">订单需求:</div>
+            <div class="text-orderneed" style="width:75px;">订单需求：</div>
             <div class="pBottom10 mTop10" style="word-break:break-all;">@task.order.remark</div>
         </div>
         <div class="clear"></div>

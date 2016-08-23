@@ -26,26 +26,23 @@ header .task-text {color:#BFD2F2;text-align:center;font-size:16px;}
 
 /*任务详情信息*/
 .task-info { background-color:#fff;}
-.main-info { border-bottom:1px solid #CCC;padding:10px 0;display:table;width:100%;}
-.main-info .left-task-info {text-align:left;display:table-cell;padding-left:10px;}
+.main-info { border-bottom:1px solid #CCC;padding:10px 0;width:100%;}
 .main-info  .base-info {
     color:#333!important;
     padding-left:5px;
     font-size:16px;
 }
-.main-info .right-task-info {text-align:right;display:table-cell;padding-right:10px;}
+.main-info .right-task-info {text-align:right;display:table-cell;padding-right:10px;vertical-align:bottom;}
 .main-info .left-task-info .accept-time  {color:#e0483e;}
 .main-info li { color:#666;line-height:40px;list-style:none;}
 .dy-info { text-align:left;}
 .dy-info .iconfont { font-size:22px;}
 .setindent {margin:0 3px;}
 
-.right-task-info li div:last-child { margin-top:84px;}
 .right-task-info li .owner-msg {line-height:30px;text-align:right;}
 .right-task-info li .dy-info {margin-top:-7px;line-height:40px;text-align:right;}
 .right-task-info .dy-info a { text-decoration:none;color:#666;}
 .task-info .order-need { line-height:30px;color:#666;padding:10px}
-.task-info .order-need div:first-child { width:98px;}
 .task-info .order-need div{display:table-cell;}
 
 
@@ -117,7 +114,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 
 /*讨论附加内容*/
 .addition { width:100%;}
-.addition li{float:left;font-size:19px;width:25%;text-align:center;color:#aaa;}
+.addition li{float:left;font-size:19px;width:25%;text-indent:20px;color:#aaa;}
 
 .loading-lump {text-align:center;margin:10px 0;}
 .loading-lump img { width:35px;height:35px;}

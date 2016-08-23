@@ -351,11 +351,9 @@
 
     //设置任务到期时间
     ObjectJS.setTaskEndTime = function () {
-
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
             if (data == 1) {
-                $(".end-time").html(Paras.endTime);
-                $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+                $(".end-time").html(new Date(Paras.endTime).toString('yyyy-MM-dd'));
                 $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click', function () {
                     ObjectJS.showConfirmForm(1);
@@ -372,7 +370,6 @@
                 alert("任务有未完成步骤");
             }
         });
-
     }
 
     //标记完成任务
@@ -380,7 +377,7 @@
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
-                $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+                $(".complete-time").html(new Date().toString("yyyy-MM-dd"));
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
