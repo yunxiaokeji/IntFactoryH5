@@ -91,6 +91,7 @@
             $(".main-box ." + classname).show().siblings().hide();
             $(".main-box .loading-lump").hide();
             var isGet = _self.data("isget");
+
             //讨论
             if (classname == "talk-status") {
                 if (!isGet) {
@@ -130,15 +131,13 @@
                 //打样发货
             else if (classname === "navSendDYDoc") {
                 if (!isGet) {
-                    ObjectJS.getTaskReplys();
                     OrderGoods.getGetGoodsDoc(classname, 2);
-                    
                 }
             }
                 //裁剪
             else if (classname == "navCutoutDoc") {
                 if (!isGet) {
-                    ObjectJS.getTaskReplys();
+                    $(".talk-status").data('isget', '1');
                     OrderGoods.getGetGoodsDoc(classname, 1);
                 }
             }
@@ -199,7 +198,6 @@
                 alert("文件上传中，请稍等");
                 return false;
             }
-
             _this.html('发表中...');
             if (IsLoading) {
                 alert("发表中,请稍候再试.");
@@ -224,7 +222,6 @@
             if (newHtml.find('div').length > 0) {
                 newHtml.find('div').each(function () {
                     var _this = $(this);
-
                     if (_this.index() != newHtml.find('div').length - 1) {
                         divContent += _this.text() + "<br/>";
                     } else {
