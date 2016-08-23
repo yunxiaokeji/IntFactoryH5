@@ -340,8 +340,8 @@
             display: 'modal', //显示方式 
             mode: 'scroller', //日期选择模式
             lang: 'zh',
-            onSelect: function () {
-                Paras.endTime = $(".btn-acceptTaskTime").val();
+            onSelect: function (date) {
+                Paras.endTime = date;
                 ObjectJS.showConfirmForm(0);
                 $(".btn-acceptTaskTime").val("接受任务");
             }
