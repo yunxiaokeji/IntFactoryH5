@@ -29,12 +29,11 @@
                                 <input class="btn-finishTask" id="btn-finishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                             {% }%}
                         </div>
-                    </div>
-                
+                    </div>                
                  {%   if (item.finishStatus==0) {      %}
                         <div class="stage">
-                            <span>订单款式:</span>
-                            <span>{%=item.order.goodsCode%}-{%=item.order.goodsName%}</span>
+                            <span class="left">订单款式:</span>
+                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
@@ -44,7 +43,9 @@
                             <div class="left">
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%  if (item.preTitle!="") {      %}
+                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%   }  %} 
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
@@ -57,9 +58,9 @@
                         </div>   
                     {%   }  else if (item.finishStatus==1) {      %}
                         <div class="stage">
-                            <span>订单款式:</span>
-                            <span>{%=item.order.goodsCode%}-{%=item.order.goodsName%}</span>
-                        </div>                                              
+                            <span class="left">订单款式:</span>
+                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
+                        </div>                                               
                         <div class="stage">
                             <span>交货日期:</span>   
                             <span>{%=item.order.planTime%}</span>                              
@@ -68,7 +69,9 @@
                             <div class="left">
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%  if (item.preTitle!="") {      %}
+                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%   }  %} 
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
@@ -81,8 +84,8 @@
                         </div>
                     {%   }  else {      %}
                         <div class="stage">
-                            <span>订单款式:</span>
-                            <span>{%=item.order.goodsCode%}-{%=item.order.goodsName%}</span>
+                            <span class="left">订单款式:</span>
+                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
@@ -92,7 +95,9 @@
                             <div class="left">
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%  if (item.preTitle!="") {      %}
+                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                {%   }  %} 
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
