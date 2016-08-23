@@ -69,7 +69,7 @@
 .dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none;top:-1px; }
 .list {margin-top:100px;}
 .list .last-stage .iconfont{margin-left:20px;}
-.list li .btn-acceptTaskTime,.list li .btn-finishTask{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center;width:60px;}
+.list li .btn-acceptTaskTime,.list li .btn-finishTask{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center;width:60px;border:0;}
 .list li .tag-make { width:10px;height:20px;margin:5px 10px 0px 0px;float:right;}
 .list li .order-type-label{margin-left:5px;float:right;margin-right:15px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;}
