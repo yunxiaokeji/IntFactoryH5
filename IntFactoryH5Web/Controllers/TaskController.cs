@@ -70,6 +70,7 @@ namespace IntFactoryH5Web.Controllers
             JavaScriptSerializer java = new JavaScriptSerializer();
             var model = java.Deserialize<FilterTasks>(filter);
             var list = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, CurrentUser.userID, CurrentUser.clientID);
+            
             JsonDictionary.Add("items", list.tasks);
             JsonDictionary.Add("pageCount",list.pageCount);
             JsonDictionary.Add("totalCount",list.totalCount);
