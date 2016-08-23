@@ -82,12 +82,16 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .layer-type .lump.zip { border-top:8px solid #5aacf0;border-right:8px solid #5aacf0;border-bottom:8px solid #316de8;border-left:8px solid #316de8;}
 
 .file-attachment .describe-box {margin-left:18px;}
-
 .return-reply .iconfont { color:#a8a8a8;}
 
 /*讨论弹出层*/
-.reply-layer { position:fixed;bottom:-100%;left:0;height:100%;width:100%;z-index:20000;background-color:#fff;transition:bottom 0.5s;-webkit-transition:bottom 0.5s;-moz-transition:bottom 0.5s;
-                    -webkit-box-orient:vertical;-moz-box-orient:vertical;display:-webkit-box;display:-moz-box;}
+.reply-layer { position:fixed;bottom:0;left:0;height:100%;width:100%;z-index:20000;background-color:#fff;
+               -webkit-box-orient:vertical;-moz-box-orient:vertical;display:-webkit-box;display:-moz-box;
+               transition:transform 0.5s;-webkit-transition:-webkit-transform 0.5s;-moz-transition:-moz-transform 0.5s;
+               transform:translateY(100%);-moz-transform:translateY(100%);-webkit-transform:translateY(100%);
+                }
+.reply-layer.show {transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0); }
+
 .reply-layer .reply-layer-header { line-height:50px;background-color:#2F73B8;height:50px;color:#BFD2F2;}
 .reply-layer-content {background-color:#fff;padding:10px;outline:none;overflow-y:scroll;-webkit-box-flex:1;-moz-box-flex:1;}
 .reply-layer-addition {height:50px;width:100%;border-top:1px solid #ccc;line-height:50px;}
@@ -131,7 +135,6 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .platemakingBody table {width:100%;}
 .platemakingBody table tr td{padding:15px 0px 15px 10px;text-align:center;color:#666;}
 .platemakingBody td {border-bottom:1px solid #eee;border-right:1px solid #eee;text-align:center !important; }
-.platemakingBody table .tr-header { }
 
 /*工艺说明*/
 .print-status h1 { color:#666;line-height:50px;margin:0 10px;border-bottom:1px solid #ddd;font-size:18px;}

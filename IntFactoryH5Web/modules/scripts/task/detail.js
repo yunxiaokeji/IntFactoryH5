@@ -174,10 +174,9 @@
         //关闭任务讨论浮层
         $(".cancel-reply").click(function () {
             $("body,html").removeClass('layer');
-            $(".reply-layer").css("bottom", "-100%");
+            $(".reply-layer").removeClass('show');
             setTimeout(function () {
                 $(".reply-layer").hide();
-                
                 $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
             }, 500);
         });
@@ -248,7 +247,7 @@
                 _this.html('发表');
                 $('.reply-layer-content').html('');
                 $("body,html").removeClass('layer');
-                $(".reply-layer").css("bottom", "-100%");
+                $(".reply-layer").removeClass('show');
                 setTimeout(function () { $(".reply-layer").hide(); }, 500);
             });
         });
@@ -271,7 +270,7 @@
             $("body,html").addClass('layer');
             $(".reply-title").html('发表讨论');
             $(".reply-layer").show();
-            setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
+            setTimeout(function () { $(".reply-layer").addClass('show') }, 10);
             setTimeout(function () { $(".reply-layer-content").focus(); }, 1000);
             if ($(".reply-layer-content .text-content").length == 0) {
                 $(".reply-layer-content").prepend('<div class="text-content" style="display:block;min-height:40px;"></div>');
@@ -544,7 +543,7 @@
                 }
                 $("body,html").addClass('layer');
                 $(".reply-layer").show();
-                setTimeout(function () { $(".reply-layer").css("bottom", "0") }, 10);
+                setTimeout(function () { $(".reply-layer").addClass('show'); }, 10);
                 setTimeout(function () { $(".reply-layer-content").focus() }, 1000);
 
                 TaskReplyParas.fromReplyID = $(this).data("replyid");
