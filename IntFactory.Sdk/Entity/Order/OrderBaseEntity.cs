@@ -20,7 +20,7 @@ namespace IntFactory.Sdk
 
         public string goodsCode;
 
-        public DateTime planTime;
+        public string planTime;
 
         public string orderCode;
 
