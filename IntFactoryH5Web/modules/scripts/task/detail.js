@@ -177,7 +177,6 @@
             $(".reply-layer").removeClass('show');
             setTimeout(function () {
                 $(".reply-layer").hide();
-                
                 $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
             }, 500);
         });
