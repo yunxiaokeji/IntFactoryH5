@@ -111,10 +111,10 @@
         <div class="main-info">
             <ul class="left-task-info mLeft10 mRight10">
                 <li class="long" style="display:block;">
-                    <span>订单款式：</span><span class="task-code base-info"></span>
+                    <span>订单款式：</span><span class="task-code base-info">@(string.IsNullOrEmpty(task.order.goodsName)?"--":task.order.goodsName)</span>
                 </li>
                 <li>
-                    <span>发货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.acceptTime) ? "--" : DateTime.Parse(task.acceptTime).ToString("yyyy-MM-dd"))</span>
+                    <span>发货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.order.planTime) ? "--" : DateTime.Parse(task.order.planTime).ToString("yyyy-MM-dd"))</span>
                 </li>
                 <li>
                     <span>到期日期：</span><span class="end-time base-info">@(string.IsNullOrEmpty(task.endTime) ? "--" : DateTime.Parse(task.endTime).ToString("yyyy-MM-dd"))</span>
