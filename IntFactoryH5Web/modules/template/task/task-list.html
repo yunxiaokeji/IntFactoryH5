@@ -16,9 +16,9 @@
                             {%   if (item.finishStatus==0) {      %}
                                 <i class="iconfont-details iconfont" id="iconfont-details_{%=item.taskID%}">&#xe61e;</i>
                             {%   }  else if (item.finishStatus==1) {      %}
-                                <i class="iconfont-details iconfont color333" id="i1" >&#xe621;</i>
+                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe621;</i>
                             {%   }  else {      %}
-                                <i class="iconfont-details iconfont color333" id="i2" >&#xe61f;</i>
+                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe61f;</i>
                             {%   }  %}                                      
                             <a class="color333" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                         </div>     
