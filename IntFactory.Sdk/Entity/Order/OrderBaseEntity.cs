@@ -16,9 +16,12 @@ namespace IntFactory.Sdk
 
         public int orderType;
 
-        /// <summary>
-        /// 订单编码
-        /// </summary>
+        public string goodsName;
+
+        public string goodsCode;
+
+        public DateTime planTime;
+
         public string orderCode;
 
         /// <summary>
