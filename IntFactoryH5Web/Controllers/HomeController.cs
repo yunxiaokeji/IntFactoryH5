@@ -64,12 +64,14 @@ namespace IntFactoryH5Web.Controllers
         {
             Session["ClientManager"] = null;
             HttpCookie mycookie = Request.Cookies["m_intfactory_userinfo"];
-            TimeSpan ts = new TimeSpan(0, 0, 0, 0); //时间跨度
-            mycookie.Expires = DateTime.Now.Add(ts); //立即过期
-            Response.Cookies.Remove("m_intfactory_userinfo");//清除
-            Response.Cookies.Add(mycookie); //写入立即过期的*/
-            Response.Cookies["m_intfactory_userinfo"].Expires = DateTime.Now.AddDays(-1);
-
+            if (mycookie != null)
+            {
+                TimeSpan ts = new TimeSpan(0, 0, 0, 0); //时间跨度
+                mycookie.Expires = DateTime.Now.Add(ts); //立即过期
+                Response.Cookies.Remove("m_intfactory_userinfo");//清除
+                Response.Cookies.Add(mycookie); //写入立即过期的*/
+                Response.Cookies["m_intfactory_userinfo"].Expires = DateTime.Now.AddDays(-1);
+            }
 
             return Redirect("/Home/Login");
         }
@@ -123,6 +125,9 @@ namespace IntFactoryH5Web.Controllers
                     else  if (result.result == 0)
                     {
                         url += "?BindAccountType=4";
+                        if (!string.IsNullOrEmpty(state)) {
+                            url += "&ReturnUrl="+state;
+                        }
                         Session["WeiXinTokenInfo"] = userToken.access_token + "|" + userToken.openid + "|" + userToken.unionid;
                     }
                 }

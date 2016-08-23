@@ -22,16 +22,23 @@
     //获取订单明细
     ObjectJS.getGetGoodsDoc = function (id, type, taskDesc) {
         var _self = this;
-        var $tr_header = $("#" + id + " .tr-header");
-        $tr_header.nextAll().remove();
-        $tr_header.after("<tr><td colspan='10'><div class='data-loading' ><div></td></tr>");
+        var objHtml = $("#" + id + "");
+        if (type == 2) {
+            objHtml.find('.tr-header').after($("<tr><td colspan=3><div class='data-loading'></div></td></tr>"));
+        } else {
+            objHtml.html("<div class='data-loading'></div>");
+        }
+        
         Global.post("/Orders/GetGoodsDocByOrderID", {
             orderid: _self.orderid,
             taskid: _self.taskid,
-            type: type==22?2:type
+            type: type == 22 ? 2 : type
         }, function (data) {
-            $tr_header.nextAll().remove();
-
+            if (type == 2) {
+                objHtml.find('.tr-header').nextAll().remove();
+            } else {
+                objHtml.html('');
+            }
             data = JSON.parse(data);
             data.items.taskDesc = "车缝";
             if (data.items.length > 0) {
@@ -46,19 +53,25 @@
                 DoT.exec(templateHtml, function (template) {
                     var innerhtml = template(data.items);
                     innerhtml = $(innerhtml);
-
-                    innerhtml.find(".ico-dropdown").click(function () {
+                    innerhtml.find('.doc-header').click(function () {
                         var _this = $(this);
-                        ObjectJS.docID = _this.data('id');
-                        var position = _this.position();
-                        $("#setReturnSewn li").data("columnname", _this.data("columnname"));
-                        $("#setReturnSewn").css({ "top": position.top + 20, "left": position.left - 70 }).show().mouseleave(function () {
-                            $(this).hide();
-                        });
-                        return false;
+                        if (!_this.next().is(":animated")) {
+                            if (!_this.hasClass('hover')) {
+                                _this.addClass('hover');
+                                _this.find('.lump').addClass('hover');
+                                _this.next().slideDown(400, function () {
+                                });
+                            } else {
+                                _this.removeClass('hover');
+                                _this.find('.lump').removeClass('hover');
+                                _this.next().slideUp(400, function () {
+                                
+                                });
+                            }
+                        }
                     });
 
-                    $tr_header.after(innerhtml);
+                    objHtml.append(innerhtml);
 
                     var total = 0;
                     innerhtml.find('.cut1').each(function () {
@@ -69,13 +82,11 @@
                 });
             }
             else {
-                $tr_header.after("<tr><td colspan='10'><div class='nodata-txt' >暂无数据!<div></td></tr>");
-            }
-            /*有数据隐藏表头*/
-            if (!$(".table-items-detail").find('div').hasClass('nodata-txt')) {
-                $(".table-header").hide();
-            } else {
-                $(".table-header").show();
+                if (type == 2) {
+                    objHtml.find('.tr-header').after($("<tr><td colspan=3><div class='nodata-txt' >暂无数据!</div></td></tr>"));
+                } else {
+                    objHtml.append("<div class='nodata-txt' >暂无数据!</div>");
+                }
             }
         });
     };
