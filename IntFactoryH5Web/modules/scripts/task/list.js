@@ -106,6 +106,7 @@
 
         //搜索内容发生变化
         $(".txt-search").keyup(function () {
+            
             var changeAfter = $(".txt-search").val();
             if (changeAfter == "") {
                 $(".cencal").text("取消");
@@ -262,13 +263,13 @@
             $(".list").empty();
         }
         //获取任务列表(页面加载)
-        $(".list").append('<div class="listbg mTop20"></div>');
+        $(".list").append('<div class="data-loading"></div>');
         $.post("/Task/GetTask", { filter: JSON.stringify(Params) }, function (data) {
             //获取用户名
             $(".login-name").text(data.userName);
             //判断有无数据
             if (data.items.length == 0) {
-                $(".list").append("<div class='nodata'>暂无数据 !</div>");
+                $(".list").append("<div class='nodata-txt'>暂无数据 !</div>");
             } else {
                 //分页数据
                 ObjectJS.PageCount = data.pageCount;
@@ -287,7 +288,7 @@
                 
                 ObjectJS.IsLoading = false;
             }
-            $(".listbg").remove();
+            $(".data-loading").remove();
         });
     };
 

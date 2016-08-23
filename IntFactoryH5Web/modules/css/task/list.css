@@ -93,10 +93,6 @@
 .list .center-list-task .details {margin-bottom:16px;height:20px; }
 .list .center-list-task .stage {line-height:30px;}
 .list .center-list-task a {font-size:16px; }
-/*无数据*/
-.list .nodata {color:#999; margin-top:20%;margin-left:45%;font-family:'Microsoft YaHei'; }
-/*加载状态图片*/
-.list .listbg { background:url(/modules/images/img.gif) no-repeat left center;height:40px;margin-left:48%;width:40px;background-size:40px;}
 /*返回顶部*/
 .getback { position:fixed;z-index:555;color:#666;right:12px;bottom:20px;display:none;}
 .getback span{right:10%;}
