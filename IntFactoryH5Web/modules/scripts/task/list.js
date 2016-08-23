@@ -198,6 +198,7 @@
                 var _this = $(this);
                 taskParms.taskID = _this.data("id");
                 ObjectJS.showConfirmForm(0);
+                _this.val("接受任务");
             }
         };
         $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
@@ -278,7 +279,7 @@
                     
                     ObjectJS.bindTimerPicker();
 
-                    $(".btn-finishTask").click(function () {
+                    $(".btn-finishTask").unbind().click(function () {
                         taskParms.taskID = $(this).data("id");
                         ObjectJS.showConfirmForm(1);
                     });
