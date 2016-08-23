@@ -19,19 +19,20 @@
     };
     
     var taskParms = {
-        endTime: "",
-        taskID:""
+        taskID: "",
+        replyPageIndex: 1,
+        logPageIndex: 1,
+        endTime: ""
     }
     var ObjectJS = {};
 
     ObjectJS.PageCount = 0;
     ObjectJS.IsLoading = false;
 
-    ObjectJS.init = function () {
+    ObjectJS.init = function () {       
         ObjectJS.bindEvent();
         ObjectJS.getList();
-        ObjectJS.getTaskLableColors();
-        ObjectJS.bindTimerPicker();
+        ObjectJS.getTaskLableColors();        
     };
 
     ObjectJS.bindEvent = function () {
@@ -177,7 +178,7 @@
             Params.taskOrderColumn = $(this).data("id");
             ObjectJS.getList();
         });
-
+        
         //返回顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
@@ -192,8 +193,10 @@
             display: 'modal', //显示方式 
             mode: 'scroller', //日期选择模式
             lang: 'zh',
-            onSelect: function () {
-                taskParms.endTime = $(".btn-acceptTaskTime").html();                
+            onSelect: function (date) {
+                taskParms.endTime = date;
+                var _this = $(this);
+                taskParms.taskID = _this.data("id");
                 ObjectJS.showConfirmForm(0);
             }
         };
@@ -202,14 +205,11 @@
 
     //设置任务到期时间
     ObjectJS.setTaskEndTime = function () {
-        $.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
-            if (data == 1) {
-                $(".end-time").html(Paras.endTime);
-                $(".accept-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
-                $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
-                $(".task-accept").find(".btn-finishTask").bind('click', function () {
-                    ObjectJS.showConfirmForm(1);
-                });
+        Global.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
+            if (data == 1) {                
+                $("#btn-acceptTaskTime_" + taskParms.taskID).remove();
+                $("#iconfont-details_" + taskParms.taskID).html("&#xe621;").addClass("color333");
+                $(".mark-add-type_" + taskParms.taskID).css("margin-top", "100px");                
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
@@ -226,10 +226,11 @@
 
     //标记完成任务
     ObjectJS.finishTask = function () {
-        $.post("/Task/FinishTask", taskParms, function (data) {
-            if (data == 1) {
-                $(".task-accept").html("<span>已完成</span>");
-                $(".complete-time").html(new Date().toString("yyyy-MM-dd hh:mm:ss"));
+        Global.post("/Task/FinishTask", taskParms, function (data) {
+            if (data == 1) {                
+                $("#btn-finishTask_" + taskParms.taskID).remove();
+                $("#iconfont-details_" + taskParms.taskID).html("&#xe61f;");
+                $(".mark-add-type_" + taskParms.taskID).css("margin-top", "100px");
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
@@ -277,9 +278,11 @@
                     var $result = code(data.items);                        
                     $(".list").append($result);
                     
-                    $(".btn-acceptTaskTime").click(function () {
-                        var _this = $(this);
-                        taskParms.taskID= _this.data("id");
+                    ObjectJS.bindTimerPicker();
+
+                    $(".btn-finishTask").click(function () {
+                        taskParms.taskID = $(this).data("id");
+                        ObjectJS.showConfirmForm(1);
                     });
                 });
                 

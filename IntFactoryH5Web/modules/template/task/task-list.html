@@ -12,11 +12,11 @@
                 <div class="details">        
                      <!-- 状态图标 -->           
                     {%   if (item.finishStatus==0) {      %}
-                        <i class="iconfont-details iconfont">&#xe61e;</i>
+                        <i class="iconfont-details iconfont" id="iconfont-details_{%=item.taskID%}">&#xe61e;</i>
                     {%   }  else if (item.finishStatus==1) {      %}
-                        <i class="iconfont-details iconfont color333" >&#xe621;</i>
+                        <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe621;</i>
                     {%   }  else {      %}
-                        <i class="iconfont-details iconfont color333" >&#xe61f;</i>
+                        <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe61f;</i>
                     {%   }  %}                                      
                    <a class="color333" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                 </div>
@@ -28,21 +28,9 @@
                         </div>
                         <div class="stage" >
                             <span>上级任务:</span>     
-                            <span>{%=item.preTitle%}</span>
+                            <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
                             <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>                    
-                        </div>
-                       <!-- <div class="stage">
-                            <span>上级进度:</span>     
-                            <span>
-                                 {%   if (item.finishStatus==0) {      %}
-                                    未接受
-                                {%   }  else if (item.finishStatus==1) {      %}
-                                    进行中
-                                {%   }  else {      %}
-                                    已完成
-                                {%   }  %} 
-                            </span>                                
-                        </div>  -->
+                        </div>                       
                         <div class="stage">
                             <span>交货日期:</span>   
                             <span>{%=item.pEndTime==""?"未设置":item.pEndTime%}</span>                              
@@ -77,14 +65,17 @@
             </li>
             <li class="last-stage"> 
                 {%   if (item.finishStatus==0) {      %}
-                    <div class="btn-acceptTaskTime" data-id="{%=item.taskID%}" data-num="0">接受任务</div>
+                    <input class="btn-acceptTaskTime" id="btn-acceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
                 {%   }  else if (item.finishStatus==1) {      %}
-                    <div class="btn-acceptTaskTime" data-id="{%=item.taskID%}" data-num="1">完成任务</div>
+                    <input class="btn-finishTask" id="btn-finishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                 {% }%}
-                    <i class="iconfont left">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
-                    <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                    <!-- 标记颜色 -->
-                    <div class="tag-make" style="background-color:{%=item.colorValue%}"></div>  
+                    <div class="mark-add-type_{%=item.taskID%}" style="margin-top:{%=item.finishStatus==2?"100px":""%}">
+                        <i class="iconfont left">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+                        <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                        <!-- 标记颜色 -->
+                        <div class="tag-make" style="background-color:{%=item.colorValue%}"></div>  
+                    </div>
+                    
                     
             </li>     
         </ul>
