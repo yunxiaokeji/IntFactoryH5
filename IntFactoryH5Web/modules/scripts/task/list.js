@@ -15,15 +15,24 @@
         taskOrderColumn: 0,
         isAsc: 0,
         pageSize: 5,
-        pageIndex: 1
+        pageIndex: 1        
     };
+    
+    var taskParms = {
+        taskID: "",
+        replyPageIndex: 1,
+        logPageIndex: 1,
+        endTime: ""
+    }
     var ObjectJS = {};
+
     ObjectJS.PageCount = 0;
     ObjectJS.IsLoading = false;
-    ObjectJS.init = function () {
+
+    ObjectJS.init = function () {       
         ObjectJS.bindEvent();
         ObjectJS.getList();
-        ObjectJS.getTaskLableColors();
+        ObjectJS.getTaskLableColors();        
     };
 
     ObjectJS.bindEvent = function () {
@@ -169,12 +178,84 @@
             Params.taskOrderColumn = $(this).data("id");
             ObjectJS.getList();
         });
-
+        
         //返回顶部
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
     };
+
+    //绑定时间控件
+    ObjectJS.bindTimerPicker = function () {        
+        var defaultParas = {
+            preset: 'datetime',
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式 
+            mode: 'scroller', //日期选择模式
+            lang: 'zh',
+            onSelect: function (date) {
+                taskParms.endTime = date;
+                var _this = $(this);
+                taskParms.taskID = _this.data("id");
+                ObjectJS.showConfirmForm(0);
+            }
+        };
+        $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
+    }
+
+    //设置任务到期时间
+    ObjectJS.setTaskEndTime = function () {
+        Global.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
+            if (data == 1) {                
+                $("#btn-acceptTaskTime_" + taskParms.taskID).remove();
+                $("#iconfont-details_" + taskParms.taskID).html("&#xe621;").addClass("color333");
+                $(".mark-add-type_" + taskParms.taskID).css("margin-top", "100px");                
+            } else if (data == 0) {
+                alert("失败");
+            } else if (data == 2) {
+                alert("有前面阶段任务未完成");
+            } else if (data == 3) {
+                alert("没有权限");
+            } else if (data == 4) {
+                alert("任务没有接受，不能设置完成");
+            } else if (data == 5) {
+                alert("任务有未完成步骤");
+            }
+        });
+    }
+
+    //标记完成任务
+    ObjectJS.finishTask = function () {
+        Global.post("/Task/FinishTask", taskParms, function (data) {
+            if (data == 1) {                
+                $("#btn-finishTask_" + taskParms.taskID).remove();
+                $("#iconfont-details_" + taskParms.taskID).html("&#xe61f;");
+                $(".mark-add-type_" + taskParms.taskID).css("margin-top", "100px");
+            } else if (data == 0) {
+                alert("失败");
+            } else if (data == 2) {
+                alert("有前面阶段任务未完成");
+            } else if (data == 3) {
+                alert("没有权限;");
+            } else if (data == 4) {
+                alert("任务没有接受，不能设置完成");
+            } else if (data == 5) {
+                alert("任务有未完成步骤");
+            }
+        });
+    }
+
+    //接受任务、标记任务完成的弹出浮层
+    ObjectJS.showConfirmForm = function (showStatus) {
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
+        confirm(alertMsg, function () {
+            if (showStatus == 0) {
+                ObjectJS.setTaskEndTime();
+            } else {
+                ObjectJS.finishTask();
+            }
+        });
+    }
 
     ObjectJS.getList = function (noEmpty) {
         ObjectJS.IsLoading = true;
@@ -194,9 +275,17 @@
                 ObjectJS.PageCount = data.pageCount;
                 //引用doT模板
                 doT.exec("template/task/task-list.html", function (code) {
-                    var $result = code(data.items);
+                    var $result = code(data.items);                        
                     $(".list").append($result);
+                    
+                    ObjectJS.bindTimerPicker();
+
+                    $(".btn-finishTask").click(function () {
+                        taskParms.taskID = $(this).data("id");
+                        ObjectJS.showConfirmForm(1);
+                    });
                 });
+                
                 ObjectJS.IsLoading = false;
             }
             $(".listbg").remove();

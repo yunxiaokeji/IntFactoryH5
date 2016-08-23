@@ -4,11 +4,18 @@
     var v = DateTime.Now.Ticks;
 }
 @section css{
-<link href="/modules/css/task/list.css" rel="stylesheet" />
+    <link href="/modules/css/task/list.css" rel="stylesheet" />
+    <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
+    <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
 }
+
 @section scripts{
     <script src="/modules/scripts/api.js?v=@v" type="text/javascript"></script>
     <script src="/modules/scripts/sha1.js?v=@v"  type="text/javascript"></script>
+    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
+    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
+    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
+    <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
 
     <script type="text/javascript">
         seajs.use("/modules/scripts/task/list.js", function (data) {
