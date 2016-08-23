@@ -70,12 +70,12 @@
 .list {margin-top:100px;}
 .list .last-stage .iconfont{margin-left:20px;}
 .list li .btn-acceptTaskTime,.list li .btn-finishTask{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center;width:60px;}
-.list li .tag-make { width:10px;height:20px;margin-left:80px;margin-top:70px;margin-right:10px;}
-.list li .order-type-label{margin-left:5px;float:left;}
+.list li .tag-make { width:10px;height:20px;margin:5px 10px 0px 0px;float:right;}
+.list li .order-type-label{margin-left:5px;float:right;margin-right:15px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;}
 .list .listabove li{float:left;margin-top:15px;}
 .list li:first-child img{width:120px;height:120px;margin-bottom:15px;margin-left:10px;margin-right:15px;}
-.list li:last-child { float:right;}
+/*.list li:last-child { float:right;}*/
 /*标记颜色*/
 .list li .write-tag{border:1px solid #ccc;background-color:#fff;}
 .list li .red-tag{background-color:#FF7C7C;}
@@ -86,11 +86,11 @@
 /*类型*/
 .list .last-stage .shape{ margin-top:150px;color:#999;margin-right:10px;}
 /*列表详情*/
-.list .listabove .center-list-task {color:#666;}
+.list .listabove .center-list-task {color:#666;width:100%;margin-left:-145px;}
 /*状态图标(不同的图标颜色不同)*/
 .list .details .status-proceed { color:#49b3f5;}
 /*信息文字*/
-.list .center-list-task .details {margin-bottom:16px; }
+.list .center-list-task .details {margin-bottom:16px;height:20px; }
 .list .center-list-task .stage {line-height:30px;}
 .list .center-list-task a {font-size:16px; }
 /*无数据*/
@@ -107,7 +107,7 @@
 .iconfont-search {font-size:26px;color:#fff;margin-right:10px;}
 .ico-status {color:#666;}
 .iconfont-select {color:#666;}
-.iconfont-details {color:#e0183e;margin-right:10px;font-size:18px;}
+.iconfont-details {color:#e0183e;font-size:18px;}
 .iconfont-stage {color:#999;}
 .iconfont-back {font-size:30px;text-align:center;}
 
