@@ -291,6 +291,11 @@
                         ObjectJS.showConfirmForm(1);
                     });
 
+                    if (Params.filtertype!=1) {
+                        $(".btn-acceptTaskTime").hide();
+                        $(".btn-finishTask").hide();
+                    }
+
                     //延迟加载图片
                     $(".task-list-img").each(function () {
                         var _this = $(this);
