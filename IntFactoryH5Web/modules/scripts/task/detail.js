@@ -47,7 +47,11 @@
 
         ObjectJS.bindTimerPicker();
         ObjectJS.bindEvent();
-        ObjectJS.setImagesSize();
+        
+        //设置图片显示宽高
+        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
+        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
+        $(".platemakingBody table tr td:last-child").remove();
     }
 
     //绑定事件
@@ -61,6 +65,11 @@
                     $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
                 }
             });
+
+            ObjectJS.setImagesSize();
+        }
+        else {
+
         }
 
         var uploader = Upload.uploader({
@@ -400,14 +409,6 @@
 
     //设置图片宽高
     ObjectJS.setImagesSize = function () {
-        var documentWidth = $(window).width();
-        var ducomentHeight = $(window).height();
-
-        //设置图片显示宽高
-        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
-        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
-        $(".platemakingBody table tr td:last-child").remove();
-
         var windowWidth = $(window).width();
         $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
         $(".main_image ul li").css({ "height": windowWidth + "px", "width": windowWidth + "px" });

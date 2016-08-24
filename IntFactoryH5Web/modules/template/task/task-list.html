@@ -4,89 +4,65 @@
     var item=$data[i];
 %}
         <ul class="listabove row">
-            <li style="position:relative;width:145px;margin-bottom:15px;height:124px;float:left;">
+            <li style="">
                 <a href="/Task/Detail/{%=item.taskID%}"><img class="task-list-img" onerror="this.src='/modules/images/img-noimg.png'" data-src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->
                 <div>
                     <div class="details">   
-                        <div class="left mTop10">
-                            <!-- 状态图标 -->           
-                            {%   if (item.finishStatus==0) {      %}
-                                <i class="iconfont-details iconfont" id="iconFontDetails_{%=item.taskID%}">&#xe61e;</i>
-                            {%   }  else if (item.finishStatus==1) {      %}
-                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe621;</i>
-                            {%   }  else {      %}
-                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe61f;</i>
-                            {%   }  %}                                      
-                            <a class="color333 Long width80" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
+                        <div class="left">
+                            <!--标记颜色--> 
+                                {% if(item.colorValue.length>0){ %}
+                                    <div class="tag-make left" style="background-color:{%=item.colorValue%}"></div> 
+                                {%   }  %}                                     
+                            <a class="color333 Long width100" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
+                            <div class="clear"></div>
                         </div>     
-                        <div class="right mTop10">
+                        <div class="right">
                             {%   if (item.finishStatus==0) {      %}
                                 <input class="btn-acceptTaskTime" id="btnAcceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
                             {%   }  else if (item.finishStatus==1) {      %}
                                 <input class="btn-finishTask" id="btnFinishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                             {% }%}
                         </div>
+                        <div class="clear"></div>
                     </div>   
                     <div class="stage">
                         <span class="left">订单款式:</span>
                         <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
                     </div>                                              
                     <div class="stage">
-                        <span>交货日期({%=item.orderType==1?"打样":"大货"%}):</span>   
+                        <span>{%=item.orderType==1?"打样":"大货"%}交货日期:</span>   
                         <span>{%=item.order.planTime%}</span>                                                         
                     </div>               
                  {%   if (item.finishStatus==0) {      %}                           
                         <div class="stage" >
-                            <div class="left">
-                                <span class="left">上级任务:
+                                <div class="left">上级任务(
                                     {%  if (item.preTitle!="") {      %}
-                                        <span class="iconfont mRight5" style='color:{%=item.preFinishStatus==0?"#e0183e":""%}'>{%=item.preFinishStatus==0?"&#xe61e;":item.preFinishStatus==1?"&#xe621;":"&#xe61f;" %}</span>
-                                    {%   }  %} 
-                                </span>     
-                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>                                
-                            </div>
-                            <div class="right">
-                                <!--标记颜色--> 
-                                {% if(item.colorValue.length>0){ %}
-                                    <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %}   
-                            </div>
+                                        <span>{%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成" %}</span>
+                                    {%   }  %}):
+                                </div>     
+                                <div class="Long left" style="width:100px;">{%=item.preTitle==""?"--":item.preTitle%}</div>
+                               <div class="clear"></div>                          
                         </div>   
                     {%   }  else if (item.finishStatus==1) {      %}                       
                         <div class="stage" >
-                            <div class="left">
-                                <div class="left">
-                                <span>到期日期: </span>     
-                                <span>{%=item.order.planTime%}</span>                               
-                            </div>                      
-                            </div>
-                            <div class="right">
-                                <!--标记颜色--> 
-                                {% if(item.colorValue.length>0){ %}
-                                    <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %}   
-                            </div>
+                            <div class="left">到期日期: </div>     
+                            <div class="left">{%=item.order.planTime%}</div>
+                            <div class="clear"></div>                                                               
                         </div>
                     {%   }  else {      %}                        
                         <div class="stage" >
-                            <div class="left">
-                                <span>完成日期: </span>     
-                                <span>{%=item.endTime%}</span>                               
-                            </div>
-                            <div class="right">
-                                <!--标记颜色--> 
-                                {% if(item.colorValue.length>0){ %}
-                                    <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %} 
-                            </div>
+                                <div class="left">完成日期: </div>     
+                                <div class="left">{%=item.endTime%}</div>
+                                <div class="clear"></div>                                       
                         </div>
                     {%   }  %} 
                     <div class="clear"></div>
                 </div>                                                
-            </li>           
+            </li>
+                 
         </ul>
 {%}%}
 

@@ -67,14 +67,15 @@
 .dropdownlist .task-sort{border:1px solid #ccc;border-top:0;left:66%;width:34%!important;}
 /*列表*/
 .dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none;top:-1px; }
-.list {margin-top:100px;}
-.list .listabove{width:100%;border-bottom:1px solid #eee;}
-.list .listabove li{margin-top:10px;}
+.list {margin-top:95px;}
+.list .listabove{width:100%;border-bottom:1px solid #eee;display:table;}
+    .list .listabove li { display:table-cell;vertical-align:top;}
+.list .listabove li:first-child{padding:15px 10px; width:110px;}
 .list .last-stage .iconfont{margin-left:20px;}
 .list li .btn-acceptTaskTime,.list li .btn-finishTask{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center;width:60px;border:0;}
-.list li .tag-make { width:10px;height:20px;margin:5px 10px 0px 0px;float:right;}
+.list li .tag-make { width:16px;height:16px;margin-right:10px;border-radius:8px;}
 .list li .order-type-label{margin-left:5px;float:right;margin-right:10px;}
-.list li:first-child img{width:120px;height:120px;margin-left:10px;margin-right:15px;}
+.list li:first-child img{width:110px;height:110px;}
 
 /*标记颜色*/
 .list li .write-tag{border:1px solid #ccc;background-color:#fff;}
@@ -88,7 +89,7 @@
 /*状态图标(不同的图标颜色不同)*/
 .list .details .status-proceed { color:#49b3f5;}
 /*信息文字*/
-.list .center-list-task .details {margin-bottom:26px;height:20px; }
+.list .center-list-task .details {margin-top:12px;height:35px;}
 .list .center-list-task .stage {line-height:30px;}
 .list .center-list-task a {font-size:16px; }
 /*返回顶部*/
