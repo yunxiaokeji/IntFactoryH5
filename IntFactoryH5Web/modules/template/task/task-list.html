@@ -20,7 +20,7 @@
                             {%   }  else {      %}
                                 <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe61f;</i>
                             {%   }  %}                                      
-                            <a class="color333 Long width100" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
+                            <a class="color333 Long width80" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                         </div>     
                         <div class="right mTop10">
                             {%   if (item.finishStatus==0) {      %}
@@ -29,17 +29,16 @@
                                 <input class="btn-finishTask" id="btnFinishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                             {% }%}
                         </div>
-                    </div>                
-                 {%   if (item.finishStatus==0) {      %}
-                        <div class="stage">
-                            <span class="left">订单款式:</span>
-                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
-                        </div>                                              
-                        <div class="stage">
-                            <span>交货日期({%=item.orderType==1?"打样":"大货"%}):</span>   
-                            <span>{%=item.order.planTime%}</span> 
-                                                        
-                        </div>     
+                    </div>   
+                    <div class="stage">
+                        <span class="left">订单款式:</span>
+                        <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
+                    </div>                                              
+                    <div class="stage">
+                        <span>交货日期({%=item.orderType==1?"打样":"大货"%}):</span>   
+                        <span>{%=item.order.planTime%}</span>                                                         
+                    </div>               
+                 {%   if (item.finishStatus==0) {      %}                           
                         <div class="stage" >
                             <div class="left">
                                 <span class="left">上级任务:
@@ -53,19 +52,10 @@
                                 <!--标记颜色--> 
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %}                              
-
+                                {%   }  %}   
                             </div>
                         </div>   
-                    {%   }  else if (item.finishStatus==1) {      %}
-                        <div class="stage">
-                            <span class="left">订单款式:</span>
-                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
-                        </div>                                               
-                        <div class="stage">
-                            <span>交货日期({%=item.orderType==1?"打样":"大货"%}):</span>   
-                            <span>{%=item.order.planTime%}</span>                                                      
-                        </div>  
+                    {%   }  else if (item.finishStatus==1) {      %}                       
                         <div class="stage" >
                             <div class="left">
                                 <div class="left">
@@ -77,20 +67,10 @@
                                 <!--标记颜色--> 
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %}                              
-                                
+                                {%   }  %}   
                             </div>
                         </div>
-                    {%   }  else {      %}
-                        <div class="stage">
-                            <span class="left">订单款式:</span>
-                            <span class="Long"">{%=item.order.goodsCode%}--{%=item.order.goodsName%}</span>
-                        </div>                                              
-                        <div class="stage">
-                            <span>交货日期({%=item.orderType==1?"打样":"大货"%}):</span>   
-                            <span>{%=item.order.planTime%}</span> 
-                           
-                        </div> 
+                    {%   }  else {      %}                        
                         <div class="stage" >
                             <div class="left">
                                 <span>完成日期: </span>     
@@ -100,8 +80,7 @@
                                 <!--标记颜色--> 
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
-                                {%   }  %}                              
-
+                                {%   }  %} 
                             </div>
                         </div>
                     {%   }  %} 
