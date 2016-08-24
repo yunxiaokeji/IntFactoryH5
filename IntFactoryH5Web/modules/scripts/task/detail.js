@@ -21,8 +21,8 @@
     };
 
     var IsLoading = false;
-    var replyPageCount = 1;
-    var logPageCount = 1;
+    var ReplyPageCount = 1;
+    var LogPageCount = 1;
     var ModuleType = "talk-status";
     var GetOrAddReply = "GetReply";
     var WindowScrollTop = 0;
@@ -424,12 +424,12 @@
     //获取任务讨论列表
     ObjectJS.getTaskReplys = function () {
         GetOrAddReply = "GetReply";
-        if (replyPageCount >= Paras.replyPageIndex) {
+        if (ReplyPageCount >= Paras.replyPageIndex) {
             $(".main-box .talk-main").append('<div class="data-loading"></div>');
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .talk-status .data-loading").remove();
-                replyPageCount = data.pagecount;
-                if (replyPageCount == 0) {
+                ReplyPageCount = data.pagecount;
+                if (ReplyPageCount == 0) {
                     $(".main-box .talk-main").append('<div class="nodata-txt">暂无数据</div>');
                 }
                 else {
@@ -447,12 +447,12 @@
 
     //获取任务详情日志列表
     ObjectJS.getTaskLogs = function () {
-        if (logPageCount >= Paras.logPageIndex) {
+        if (LogPageCount >= Paras.logPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
-                logPageCount = data.pagecount;
-                if (logPageCount == 0) {
+                LogPageCount = data.pagecount;
+                if (LogPageCount == 0) {
                     $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
                 }
                 else {
