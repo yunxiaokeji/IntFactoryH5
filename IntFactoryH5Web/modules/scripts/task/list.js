@@ -149,8 +149,11 @@
 
         //任务状态切换
         $(".task-status li").click(function () {
-            $(this).siblings().find(".iconfont,a").css("color", "#777");
-            $(this).find(".iconfont,a").css("color", "#4a98e7");
+            
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover").siblings().removeClass("hover");
+            }
 
             Params.pageIndex = 1;
             Params.finishStatus = $(this).data("status");
@@ -212,8 +215,8 @@
     ObjectJS.setTaskEndTime = function () {
         Global.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
             if (data == 1) {                
-                $("#btn-acceptTaskTime_" + taskParms.taskID).remove();
-                $("#iconfont-details_" + taskParms.taskID).html("&#xe621;").addClass("color333");                            
+                $("#btnAcceptTaskTime_" + taskParms.taskID).remove();
+                $("#iconFontDetails_" + taskParms.taskID).html("&#xe621;").addClass("color333");
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
@@ -232,8 +235,8 @@
     ObjectJS.finishTask = function () {
         Global.post("/Task/FinishTask", taskParms, function (data) {
             if (data == 1) {                
-                $("#btn-finishTask_" + taskParms.taskID).remove();
-                $("#iconfont-details_" + taskParms.taskID).html("&#xe61f;");                
+                $("#btnFinishTask_" + taskParms.taskID).remove();
+                $("#iconFontDetails_" + taskParms.taskID).html("&#xe61f;");
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
@@ -288,11 +291,16 @@
                         ObjectJS.showConfirmForm(1);
                     });
 
+                    if (Params.filtertype!=1) {
+                        $(".btn-acceptTaskTime").hide();
+                        $(".btn-finishTask").hide();
+                    }
+
                     //延迟加载图片
                     $(".task-list-img").each(function () {
                         var _this = $(this);
                         setTimeout(function () {
-                            _this.attr("src", _this.data("src"));
+                            _this.attr("src", _this.data("src") + "?imageView2/1/w/120/h/120");
                         }, 1000)
                     });
                 });

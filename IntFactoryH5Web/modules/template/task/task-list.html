@@ -4,29 +4,29 @@
     var item=$data[i];
 %}
         <ul class="listabove row">
-            <li style="position:relative;width:145px;margin-bottom:15px;height:124px;">
+            <li style="position:relative;width:145px;margin-bottom:15px;height:124px;float:left;">
                 <a href="/Task/Detail/{%=item.taskID%}"><img class="task-list-img" onerror="this.src='/modules/images/img-noimg.png'" data-src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->
-                <div style="margin-left:145px;">
+                <div>
                     <div class="details">   
-                        <div class="left">
+                        <div class="left mTop10">
                             <!-- 状态图标 -->           
                             {%   if (item.finishStatus==0) {      %}
-                                <i class="iconfont-details iconfont" id="iconfont-details_{%=item.taskID%}">&#xe61e;</i>
+                                <i class="iconfont-details iconfont" id="iconFontDetails_{%=item.taskID%}">&#xe61e;</i>
                             {%   }  else if (item.finishStatus==1) {      %}
-                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe621;</i>
+                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe621;</i>
                             {%   }  else {      %}
-                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe61f;</i>
+                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe61f;</i>
                             {%   }  %}                                      
                             <a class="color333" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                         </div>     
-                        <div class="right">
+                        <div class="right mTop10">
                             {%   if (item.finishStatus==0) {      %}
-                                <input class="btn-acceptTaskTime" id="btn-acceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
+                                <input class="btn-acceptTaskTime" id="btnAcceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
                             {%   }  else if (item.finishStatus==1) {      %}
-                                <input class="btn-finishTask" id="btn-finishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
+                                <input class="btn-finishTask" id="btnFinishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                             {% }%}
                         </div>
                     </div>                
@@ -37,12 +37,14 @@
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
+                            <span>{%=item.order.planTime%}</span>  
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>                            
                         </div>     
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -52,8 +54,7 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+
                             </div>
                         </div>   
                     {%   }  else if (item.finishStatus==1) {      %}
@@ -63,12 +64,14 @@
                         </div>                                               
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
+                            <span>{%=item.order.planTime%}</span> 
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>                             
                         </div>  
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -78,8 +81,7 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+                                
                             </div>
                         </div>
                     {%   }  else {      %}
@@ -89,12 +91,14 @@
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
-                        </div>  
+                            <span>{%=item.order.planTime%}</span>  
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i> 
+                        </div> 
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -104,12 +108,11 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+
                             </div>
                         </div>
                     {%   }  %} 
-
+                    <div class="clear"></div>
                 </div>                                                
             </li>           
         </ul>
