@@ -97,7 +97,7 @@
 .getback { position:fixed;z-index:555;color:#666;right:12px;bottom:20px;display:none;}
 .getback span{right:10%;}
 /*提示*/
-.list .prompt { text-align:center;color:#999;}
+.list .prompt { text-align:center;color:#999;margin-bottom:60px;}
 /*图标*/
 .iconfont-menu {}
 .iconfont-search {font-size:26px;color:#fff;margin-right:10px;}
