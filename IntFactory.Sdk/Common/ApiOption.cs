@@ -66,9 +66,6 @@ namespace IntFactory.Sdk
         GetPlateMakings,
 
         [Description("/api/order/getOrderDetailsByOrderID")]
-        GetOrderDetailsByOrderID,
-
-        [Description("/api/task/CreateOrderGoodsDoc")]
-        CreateOrderGoodsDoc
+        GetOrderDetailsByOrderID
     }
 }
