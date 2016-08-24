@@ -132,6 +132,17 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        public JsonResult CreateOrderGoodsDoc(string orderID, string taskID, int docType, int isOver,
+                string details, string remark, string ownerID, string expressID = "", string expressCode = "")
+        {
+            TaskBusiness.BaseBusiness.CreateOrderGoodsDoc(orderID, taskID, docType, isOver, details, remark, ownerID, CurrentUser.userID, CurrentUser.clientID, expressID, expressCode);
+            return new JsonResult
+            {
+                Data = null,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         //添加讨论信息
         [ValidateInput(false)]
         public JsonResult AddTaskReply(string resultReply,string entityAttachments)
