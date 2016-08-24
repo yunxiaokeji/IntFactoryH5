@@ -24,11 +24,10 @@
         logPageIndex: 1,
         endTime: ""
     }
-    var ObjectJS = {};
 
+    var ObjectJS = {};
     ObjectJS.PageCount = 0;
     ObjectJS.IsLoading = false;
-
     ObjectJS.init = function () {       
         ObjectJS.bindEvent();
         ObjectJS.getList();
@@ -80,8 +79,6 @@
 
         //关键字查询
         $(".btn-search").click(function () {
-            Params.pageIndex = 1;
-
             var name = $(this).text();
             if (name == "确定") {
                 var txt = $(".txt-search").val();
@@ -89,6 +86,7 @@
                     $(".shade").slideUp("slow");
                     $(this).text("取消");
 
+                    Params.pageIndex = 1;
                     Params.keyWords = txt;
                     ObjectJS.getList();
                     
@@ -161,10 +159,8 @@
 
         //显示过滤下拉框
         $(".filter-task li").click(function () {
-            Params.pageIndex = 1;
-
-            var $slideUl = $("." + $(this).data("id"));
-            $slideUl.slideToggle(400).siblings().slideUp("slow");
+            var slideLi = $("." + $(this).data("id"));
+            slideLi.slideToggle(400).siblings().slideUp("slow");
         });
 
         //订单类型切换

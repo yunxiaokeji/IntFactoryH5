@@ -19,7 +19,7 @@
         }
     };
 
-    //获取订单明细
+    //获取订单明细记录
     ObjectJS.getGetGoodsDoc = function (id, type, taskDesc) {
         var _self = this;
         var objHtml = $("#" + id + "");
@@ -45,8 +45,7 @@
                 var templateHtml = "template/orders/cutoutdoc.html";
                 if (type == 2) {
                     templateHtml = "template/orders/senddydocs.html"
-                }
-                else if (type == 22) {
+                }else if (type == 22) {
                     templateHtml = "template/orders/senddocs.html";
                 }
 
@@ -89,40 +88,6 @@
                 }
             }
         });
-    };
-
-    //获取单据明细
-    ObjectJS.getGoodsDocDetail = function (item, type) {
-        var _this = $(item), url = "";
-        if (type == 1) {
-            url = "template/orders/cutout-details.html";
-        }
-        else if (type == 2) {
-            url = "template/orders/send-details.html";
-        }
-
-        if (!_this.data("first") || _this.data("first") == 0) {
-            _this.data("first", 1).data("status", "open");
-
-            Global.post("/Orders/GetGoodsDocDetail", {
-                docid: _this.data("id")
-            }, function (data) {
-                DoT.exec(url, function (template) {
-                    var innerhtml = template(data.model.Details);
-                    innerhtml = $(innerhtml);
-                    _this.after(innerhtml);
-                });
-            });
-        }
-        else {
-            if (_this.data("status") == "open") {
-                _this.data("status", "close");
-                _this.nextAll("tr[data-pid='" + _this.data("id") + "']").hide();
-            } else {
-                _this.data("status", "open");
-                _this.nextAll("tr[data-pid='" + _this.data("id") + "']").show();
-            }
-        }
     };
 
     //获取订单明细
