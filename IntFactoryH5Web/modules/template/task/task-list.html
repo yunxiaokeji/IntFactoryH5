@@ -5,7 +5,7 @@
 %}
         <ul class="listabove row">
             <li style="position:relative;">
-                <a href="/Task/Detail/{%=item.taskID%}"><img onerror="this.src='/modules/images/img-noimg.png'" src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
+                <a href="/Task/Detail/{%=item.taskID%}"><img class="task-list-img" onerror="this.src='/modules/images/img-noimg.png'" data-src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->

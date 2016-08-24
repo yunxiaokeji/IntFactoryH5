@@ -284,6 +284,14 @@
                         taskParms.taskID = $(this).data("id");
                         ObjectJS.showConfirmForm(1);
                     });
+
+                    //延迟加载图片
+                    $(".task-list-img").each(function () {
+                        var _this = $(this);
+                        setTimeout(function () {
+                            _this.attr("src", _this.data("src"));
+                        }, 1000)
+                    });
                 });
                 
                 ObjectJS.IsLoading = false;
