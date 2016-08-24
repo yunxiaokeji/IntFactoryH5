@@ -151,8 +151,11 @@
 
         //任务状态切换
         $(".task-status li").click(function () {
-            $(this).siblings().find(".iconfont,a").css("color", "#777");
-            $(this).find(".iconfont,a").css("color", "#4a98e7");
+            
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover").siblings().removeClass("hover");
+            }
 
             Params.pageIndex = 1;
             Params.finishStatus = $(this).data("status");

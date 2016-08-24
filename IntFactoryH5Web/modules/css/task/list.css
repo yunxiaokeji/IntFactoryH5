@@ -37,9 +37,9 @@
 /*进行状态*/
 .task-status{width:100%;background-color:#fff;padding:8px 0;position:fixed;bottom:0;z-index:300;border-top:1px solid #ddd;}
 .task-status li{width:25%;float:left;}
-.task-status li:first-child div,.task-status li:first-child a{color:#4a98e7;cursor:pointer; }
 .task-status .ico-status{text-align:center;color:#777;font-size:20px;}
 .task-status li a{margin-top:5px;text-align:center;color:#777;display:inline-block;width:100%;font-size:14px;}
+.task-status .hover a,.task-status .hover div{color:#4a98e7;}
 /*选择条件的css样式*/
 .filter-task{width:100%;background-color:#fff;}
 .filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
@@ -94,12 +94,11 @@
 .list .center-list-task .stage {line-height:30px;}
 .list .center-list-task a {font-size:16px; }
 /*返回顶部*/
-.getback { position:fixed;z-index:555;color:#666;right:12px;bottom:20px;display:none;}
+.getback { position:fixed;z-index:555;color:#666;right:10px;bottom:20px;display:none;}
 .getback span{right:10%;}
 /*提示*/
 .list .prompt { text-align:center;color:#999;margin-bottom:60px;}
 /*图标*/
-.iconfont-menu {}
 .iconfont-search {font-size:26px;color:#fff;margin-right:10px;}
 .ico-status {color:#666;}
 .iconfont-select {color:#666;}
