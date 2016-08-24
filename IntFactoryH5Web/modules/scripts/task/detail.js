@@ -32,7 +32,17 @@
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
-
+        Global.post("/Task/CreateOrderGoodsDoc", {
+            orderID: "",
+            taskID: "",
+            docType: 1,
+            isOver: 1,
+            details: "",
+            remark: "",
+            ownerID: ""
+        }, function (data) {
+            console.log(data);
+        });
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
         ObjectJS.haveImg = haveImg;

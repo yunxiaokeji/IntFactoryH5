@@ -149,6 +149,7 @@ namespace IntFactory.Sdk
             paras.Add("ownerID", ownerID);
             paras.Add("operateID", operateID);
             paras.Add("clientID", clientID);
+            paras.Add("userID", operateID);
             paras.Add("expressID", expressID);
             paras.Add("expressCode", expressCode);
 

@@ -135,10 +135,17 @@ namespace IntFactoryH5Web.Controllers
         public JsonResult CreateOrderGoodsDoc(string orderID, string taskID, int docType, int isOver,
                 string details, string remark, string ownerID, string expressID = "", string expressCode = "")
         {
-            TaskBusiness.BaseBusiness.CreateOrderGoodsDoc(orderID, taskID, docType, isOver, details, remark, ownerID, CurrentUser.userID, CurrentUser.clientID, expressID, expressCode);
+            orderID = "2238a174-eccf-42ae-825f-bd6714706efa";
+            taskID = "995f8db7-412c-40f9-be86-ea583b599b58";
+            docType = 11;
+            isOver = 0;
+            details = "1200-1002";
+            remark = "";
+            ownerID = "bb84ea04-f49b-4382-b9d0-c959a681d86a";
+            string result = TaskBusiness.BaseBusiness.CreateOrderGoodsDoc(orderID, taskID, docType, isOver, details, remark, ownerID, CurrentUser.userID, CurrentUser.clientID, expressID, expressCode);
             return new JsonResult
             {
-                Data = null,
+                Data = result,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
