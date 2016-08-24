@@ -21,8 +21,8 @@
     };
 
     var IsLoading = false;
-    var replyPageCount = 1;
-    var logPageCount = 1;
+    var ReplyPageCount = 1;
+    var LogPageCount = 1;
     var ModuleType = "talk-status";
     var GetOrAddReply = "GetReply";
     var WindowScrollTop = 0;
@@ -53,7 +53,6 @@
     //绑定事件
     ObjectJS.bindEvent = function () {
         if (ObjectJS.haveImg == 1) {
-            $dragBln = false;
             $(".main_image").touchSlider({
                 flexible: true,
                 speed: 200,
@@ -82,42 +81,41 @@
 
         //菜单切换模块事件
         $("nav ul li").click(function () {
-            var _self = $(this);
-            _self.addClass("menuchecked").siblings().removeClass("menuchecked");
-            _self.parent().parent().find("i").css("color", "#9e9e9e");
-            _self.find("i").css("color", "#4a98e7");
-            var classname = _self.data("classname");
+            var _this = $(this);
+            _this.addClass("menuchecked").siblings().removeClass("menuchecked");
+            _this.parent().parent().find("i").css("color", "#9e9e9e");
+            _this.find("i").css("color", "#4a98e7");
+            var classname = _this.data("classname");
             ModuleType = classname;
             $(".main-box ." + classname).show().siblings().hide();
-            $(".main-box .loading-lump").hide();
-            var isGet = _self.data("isget");
+            var isGet = _this.data("isget");
 
             //讨论
             if (classname == "talk-status") {
                 if (!isGet) {
                     ObjectJS.getTaskReplys();
-                    _self.data("isget","1");
+                    _this.data("isget", "1");
                 }
             }
                 //材料
             else if (classname == "shop-status") {
                 if (!isGet) {
                     ObjectJS.GetOrderDetailsByOrderID();
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
             }
                 //工艺说明
             else if (classname == "print-status") {
                 if (!isGet) {
                     ObjectJS.getPlateMakings();
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
             }
                 //日志
             else if (classname == "log-status") {
                 if (!isGet) {
                     ObjectJS.getTaskLogs();
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
                     
             }
@@ -125,7 +123,7 @@
             else if (classname === "navCosts") {
                 if (!isGet) {
                     ObjectJS.getOrderCosts();
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
             }
                 //打样发货
@@ -145,14 +143,14 @@
             else if (classname == "navSewnDoc") {
                 if (!isGet) {
                     OrderGoods.getGetGoodsDoc(classname, 11);
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
             }
                 //发货
             else if (classname == "navSendDoc") {
                 if (!isGet) {
                     OrderGoods.getGetGoodsDoc(classname, 22);
-                    _self.data("isget", "1");
+                    _this.data("isget", "1");
                 }
             }
         });
@@ -426,12 +424,12 @@
     //获取任务讨论列表
     ObjectJS.getTaskReplys = function () {
         GetOrAddReply = "GetReply";
-        if (replyPageCount >= Paras.replyPageIndex) {
+        if (ReplyPageCount >= Paras.replyPageIndex) {
             $(".main-box .talk-main").append('<div class="data-loading"></div>');
             $.post("/Task/GetDiscussInfo", Paras, function (data) {
                 $(".main-box .talk-status .data-loading").remove();
-                replyPageCount = data.pagecount;
-                if (replyPageCount == 0) {
+                ReplyPageCount = data.pagecount;
+                if (ReplyPageCount == 0) {
                     $(".main-box .talk-main").append('<div class="nodata-txt">暂无数据</div>');
                 }
                 else {
@@ -449,12 +447,12 @@
 
     //获取任务详情日志列表
     ObjectJS.getTaskLogs = function () {
-        if (logPageCount >= Paras.logPageIndex) {
+        if (LogPageCount >= Paras.logPageIndex) {
             $(".main-box .loading-lump").show();
             $.post("/Task/GetLogInfo", Paras, function (data) {
                 $(".main-box .loading-lump").hide();
-                logPageCount = data.pagecount;
-                if (logPageCount == 0) {
+                LogPageCount = data.pagecount;
+                if (LogPageCount == 0) {
                     $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
                 }
                 else {
