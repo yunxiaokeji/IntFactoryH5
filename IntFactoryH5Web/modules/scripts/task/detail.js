@@ -347,7 +347,7 @@
     ObjectJS.setTaskEndTime = function () {
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
             if (data == 1) {
-                $(".end-time").html(new Date(Paras.endTime).toString('yyyy-MM-dd'));
+                $(".end-time").html(new Date(Paras.endTime.replace(/-/g, '/')).toString('yyyy-MM-dd'));
                 $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
                 $(".task-accept").find(".btn-finishTask").bind('click', function () {
                     ObjectJS.showConfirmForm(1);

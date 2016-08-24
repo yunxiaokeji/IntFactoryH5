@@ -43,11 +43,12 @@
                         </div>     
                         <div class="stage" >
                             <div class="left">
-                                <span class="left">上级任务:</span>     
-                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
-                                {%   }  %} 
+                                <span class="left">上级任务:
+                                    {%  if (item.preTitle!="") {      %}
+                                        <span class="iconfont mRight5" style='color:{%=item.preFinishStatus==0?"#e0183e":""%}'>{%=item.preFinishStatus==0?"&#xe61e;":item.preFinishStatus==1?"&#xe621;":"&#xe61f;" %}</span>
+                                    {%   }  %} 
+                                </span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>                                
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
@@ -70,11 +71,12 @@
                         </div>  
                         <div class="stage" >
                             <div class="left">
-                                <span class="left">上级任务:</span>     
-                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
-                                {%   }  %} 
+                                <span class="left">上级任务:
+                                    {%  if (item.preTitle!="") {      %}
+                                        <span class="iconfont mRight5" style='color:{%=item.preFinishStatus==0?"#e0183e":""%}'>{%=item.preFinishStatus==0?"&#xe61e;":item.preFinishStatus==1?"&#xe621;":"&#xe61f;" %}</span>
+                                    {%   }  %} 
+                                </span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>                                
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
@@ -97,11 +99,12 @@
                         </div> 
                         <div class="stage" >
                             <div class="left">
-                                <span class="left">上级任务:</span>     
-                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
-                                {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
-                                {%   }  %} 
+                                <span class="left">上级任务:
+                                    {%  if (item.preTitle!="") {      %}
+                                        <span class="iconfont mRight5" style='color:{%=item.preFinishStatus==0?"#e0183e":""%}'>{%=item.preFinishStatus==0?"&#xe61e;":item.preFinishStatus==1?"&#xe621;":"&#xe61f;" %}</span>
+                                    {%   }  %} 
+                                </span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>                               
                             </div>
                             <div class="right">
                                 <!--标记颜色--> 
