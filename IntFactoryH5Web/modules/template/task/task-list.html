@@ -4,8 +4,8 @@
     var item=$data[i];
 %}
         <ul class="listabove row">
-            <li style="position:relative;">
-                <a href="/Task/Detail/{%=item.taskID%}"><img onerror="this.src='/modules/images/img-noimg.png'" src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
+            <li style="position:relative;width:145px;margin-bottom:15px;height:124px;">
+                <a href="/Task/Detail/{%=item.taskID%}"><img class="task-list-img" onerror="this.src='/modules/images/img-noimg.png'" data-src='{%=item.orderImg==""?"/modules/images/img-noimg.png":item.orderImg%}' /></a>
             </li>     
             <li class="center-list-task">
                 <!--任务详情-->
@@ -44,7 +44,7 @@
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
                             </div>
                             <div class="right">
@@ -70,7 +70,7 @@
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
                             </div>
                             <div class="right">
@@ -96,7 +96,7 @@
                                 <span>上级任务:</span>     
                                 <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
-                                    <span>({%=item.finishStatus==0?"未接受":item.finishStatus==1?"进行中":"已完成"%})</span>  
+                                    <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
                             </div>
                             <div class="right">

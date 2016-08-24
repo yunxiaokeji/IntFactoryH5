@@ -130,12 +130,19 @@
 
         //显示任务过滤类型
         $(".btn-task-filtertype").click(function () {
-            $(".task-filtertype").slideToggle(400);
+            var _this = $(this);
+            if (!_this.hasClass("hover")) {
+                _this.addClass("hover");
+                $(".task-filtertype").slideDown();
+            } else {
+                _this.removeClass("hover");
+                $(".task-filtertype").slideUp();
+            }            
         });
 
         //任务过滤类型切换
         $(".task-filtertype li").click(function () {
-            $(".task span").text($(this).text());
+            $(".btn-task-filtertype div:first").text($(this).text());
             $(this).parent().hide();
 
             Params.filtertype = $(this).data("filtertype");
@@ -283,6 +290,14 @@
                     $(".btn-finishTask").unbind().click(function () {
                         taskParms.taskID = $(this).data("id");
                         ObjectJS.showConfirmForm(1);
+                    });
+
+                    //延迟加载图片
+                    $(".task-list-img").each(function () {
+                        var _this = $(this);
+                        setTimeout(function () {
+                            _this.attr("src", _this.data("src"));
+                        }, 1000)
                     });
                 });
                 

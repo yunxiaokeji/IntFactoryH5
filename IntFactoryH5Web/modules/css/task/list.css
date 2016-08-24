@@ -32,7 +32,7 @@
 .search .btn-search {color:#333;height:30px;line-height:30px; position:fixed;top:11px;right:15px;font-size:20px;}
 /*退出下拉*/
 .menu-box {position:absolute;top:33px; height:44px;line-height:60px;width:100%;z-index:302; box-shadow:0 0 5px #ccc;background-color:#fff;border-radius:2px;display:none; }
-.menu-box li{text-align:center;color:#333;}
+.menu-box li{text-align:center;color:#333;line-height:44px;}
 .menu-box li a{text-align:center;color:#666;}
 /*进行状态*/
 .task-status{width:100%;background-color:#fff;padding:8px 0;position:fixed;bottom:0;z-index:300;border-top:1px solid #ddd;}
@@ -74,7 +74,7 @@
 .list li .order-type-label{margin-left:5px;float:right;margin-right:15px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;}
 .list .listabove li{float:left;margin-top:15px;}
-.list li:first-child img{width:120px;height:120px;margin-bottom:15px;margin-left:10px;margin-right:15px;}
+.list li:first-child img{width:120px;height:120px;margin-left:10px;margin-right:15px;}
 /*.list li:last-child { float:right;}*/
 /*标记颜色*/
 .list li .write-tag{border:1px solid #ccc;background-color:#fff;}
@@ -97,7 +97,7 @@
 .getback { position:fixed;z-index:555;color:#666;right:12px;bottom:20px;display:none;}
 .getback span{right:10%;}
 /*提示*/
-.list .prompt { text-align:center;color:#999;}
+.list .prompt { text-align:center;color:#999;margin-bottom:60px;}
 /*图标*/
 .iconfont-menu {}
 .iconfont-search {font-size:26px;color:#fff;margin-right:10px;}
