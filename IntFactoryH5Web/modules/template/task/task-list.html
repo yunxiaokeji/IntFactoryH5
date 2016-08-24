@@ -14,19 +14,19 @@
                         <div class="left mTop10">
                             <!-- 状态图标 -->           
                             {%   if (item.finishStatus==0) {      %}
-                                <i class="iconfont-details iconfont" id="iconfont-details_{%=item.taskID%}">&#xe61e;</i>
+                                <i class="iconfont-details iconfont" id="iconFontDetails_{%=item.taskID%}">&#xe61e;</i>
                             {%   }  else if (item.finishStatus==1) {      %}
-                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe621;</i>
+                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe621;</i>
                             {%   }  else {      %}
-                                <i class="iconfont-details iconfont color333" id="iconfont-details_{%=item.taskID%}" >&#xe61f;</i>
+                                <i class="iconfont-details iconfont color333" id="iconFontDetails_{%=item.taskID%}" >&#xe61f;</i>
                             {%   }  %}                                      
                             <a class="color333" href="/Task/Detail/{%=item.taskID%}">{%=item.title%}</a>
                         </div>     
                         <div class="right mTop10">
                             {%   if (item.finishStatus==0) {      %}
-                                <input class="btn-acceptTaskTime" id="btn-acceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
+                                <input class="btn-acceptTaskTime" id="btnAcceptTaskTime_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="接受任务" />
                             {%   }  else if (item.finishStatus==1) {      %}
-                                <input class="btn-finishTask" id="btn-finishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
+                                <input class="btn-finishTask" id="btnFinishTask_{%=item.taskID%}" readonly="readonly" data-id="{%=item.taskID%}" type="text" value="标记完成" />
                             {% }%}
                         </div>
                     </div>                

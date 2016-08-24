@@ -215,8 +215,8 @@
     ObjectJS.setTaskEndTime = function () {
         Global.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
             if (data == 1) {                
-                $("#btn-acceptTaskTime_" + taskParms.taskID).remove();
-                $("#iconfont-details_" + taskParms.taskID).html("&#xe621;").addClass("color333");                            
+                $("#btnAcceptTaskTime_" + taskParms.taskID).remove();
+                $("#iconFontDetails_" + taskParms.taskID).html("&#xe621;").addClass("color333");
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
@@ -235,8 +235,8 @@
     ObjectJS.finishTask = function () {
         Global.post("/Task/FinishTask", taskParms, function (data) {
             if (data == 1) {                
-                $("#btn-finishTask_" + taskParms.taskID).remove();
-                $("#iconfont-details_" + taskParms.taskID).html("&#xe61f;");                
+                $("#btnFinishTask_" + taskParms.taskID).remove();
+                $("#iconFontDetails_" + taskParms.taskID).html("&#xe61f;");
             } else if (data == 0) {
                 alert("失败");
             } else if (data == 2) {
