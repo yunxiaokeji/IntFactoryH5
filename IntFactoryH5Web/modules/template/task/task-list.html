@@ -43,8 +43,8 @@
                         </div>     
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -70,8 +70,8 @@
                         </div>  
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -91,14 +91,14 @@
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
+                            <span>{%=item.order.planTime%}</span>  
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i> 
                         </div> 
-                        <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                        <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i> 
                         <div class="stage" >
                             <div class="left">
-                                <span>上级任务:</span>     
-                                <span>{%=item.preTitle==""?"--":item.preTitle%}</span>
+                                <span class="left">上级任务:</span>     
+                                <span class="Long left" style="width:80px;">{%=item.preTitle==""?"--":item.preTitle%}</span>
                                 {%  if (item.preTitle!="") {      %}
                                     <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"%})</span>  
                                 {%   }  %} 
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     {%   }  %} 
-
+                    <div class="clear"></div>
                 </div>                                                
             </li>           
         </ul>
