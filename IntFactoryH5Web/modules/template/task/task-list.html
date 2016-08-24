@@ -37,7 +37,9 @@
                         </div>                                              
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
+                            <span>{%=item.order.planTime%}</span>  
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>                            
                         </div>     
                         <div class="stage" >
                             <div class="left">
@@ -52,8 +54,7 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+
                             </div>
                         </div>   
                     {%   }  else if (item.finishStatus==1) {      %}
@@ -63,7 +64,9 @@
                         </div>                                               
                         <div class="stage">
                             <span>交货日期:</span>   
-                            <span>{%=item.order.planTime%}</span>                              
+                            <span>{%=item.order.planTime%}</span> 
+                            <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                            <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>                             
                         </div>  
                         <div class="stage" >
                             <div class="left">
@@ -78,8 +81,7 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+                                
                             </div>
                         </div>
                     {%   }  else {      %}
@@ -90,7 +92,9 @@
                         <div class="stage">
                             <span>交货日期:</span>   
                             <span>{%=item.order.planTime%}</span>                              
-                        </div>  
+                        </div> 
+                        <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
+                        <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i> 
                         <div class="stage" >
                             <div class="left">
                                 <span>上级任务:</span>     
@@ -104,8 +108,7 @@
                                 {% if(item.colorValue.length>0){ %}
                                     <div class="tag-make" style="background-color:{%=item.colorValue%}"></div> 
                                 {%   }  %}                              
-                                <div class="order-type-label">{%=item.orderType==1?"打样":"大货"%}</div>
-                                <i class="iconfont right" style="line-height:26px;">{%=item.orderType==1?"&#xe612;":"&#xe60f;"%}</i>
+
                             </div>
                         </div>
                     {%   }  %} 

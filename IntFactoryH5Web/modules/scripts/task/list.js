@@ -300,7 +300,7 @@
                     $(".task-list-img").each(function () {
                         var _this = $(this);
                         setTimeout(function () {
-                            _this.attr("src", _this.data("src"));
+                            _this.attr("src", _this.data("src") + "?imageView2/1/w/120/h/120");
                         }, 1000)
                     });
                 });
