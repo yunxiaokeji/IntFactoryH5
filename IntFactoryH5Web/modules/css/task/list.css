@@ -69,11 +69,11 @@
 .dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none;top:-1px; }
 .list {margin-top:95px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;display:table;}
-    .list .listabove li { display:table-cell;vertical-align:top;}
+.list .listabove li { display:table-cell;vertical-align:top;}
 .list .listabove li:first-child{padding:15px 10px; width:110px;}
 .list .last-stage .iconfont{margin-left:20px;}
 .list li .btn-acceptTaskTime,.list li .btn-finishTask{margin-right:10px;padding:5px 10px;background-color:#4a98e7;border-radius:2px;color:#fff;margin-left:10px;text-align:center;width:60px;border:0;}
-.list li .tag-make { width:16px;height:16px;margin-right:10px;border-radius:8px;}
+.list li .tag-make { width:16px;height:16px;margin-right:10px;border-radius:8px;margin-top:3px;}
 .list li .order-type-label{margin-left:5px;float:right;margin-right:10px;}
 .list li:first-child img{width:110px;height:110px;}
 
