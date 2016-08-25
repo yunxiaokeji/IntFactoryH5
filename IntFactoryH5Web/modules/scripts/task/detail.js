@@ -178,7 +178,7 @@
             setTimeout(function () {
                 $(".reply-layer").hide();
                 $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
-            }, 500);
+            }, 800);
         });
 
         //发表任务讨论
