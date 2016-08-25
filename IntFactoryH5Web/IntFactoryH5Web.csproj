@@ -298,6 +298,7 @@
     <Content Include="modules\template\task\task-costs.html" />
     <Content Include="modules\template\task\task-file-upload-img.html" />
     <Content Include="modules\template\task\task-file-upload.html" />
+    <Content Include="modules\template\task\task-sewn.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

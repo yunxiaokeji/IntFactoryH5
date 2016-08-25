@@ -1,0 +1,19 @@
+﻿<table class="sewn-items table-list">
+    <tr class="tr-header">
+        <td>规格</td>
+        <td>裁剪数</td>
+        <td>车缝数</td>
+    </tr>
+{%
+    for(var i=0;i<5;i++)
+    {
+%}
+    <tr>
+        <td>【颜色：红色{%=i%}】</td>
+        <td>10{%=i%}</td>
+        <td>
+            <input type="text" style="width:50px;text-align:center;" value="{%=i%}" />
+        </td>
+    </tr>
+{%}%}
+</table>
