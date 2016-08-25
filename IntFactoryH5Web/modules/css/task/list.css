@@ -67,7 +67,7 @@
 .dropdownlist .task-sort{border:1px solid #ccc;border-top:0;left:66%;width:34%!important;}
 /*列表*/
 .dropdownlist .potion{width:33%;text-align:center;border-bottom:1px solid #ccc;border-right:1px solid #ccc;background-color:#fff;position:absolute;z-index:299;display:none;top:-1px; }
-.list {margin-top:95px;}
+.list {margin-top:95px;padding-bottom:60px;}
 .list .listabove{width:100%;border-bottom:1px solid #eee;display:table;}
 .list .listabove li { display:table-cell;vertical-align:top;}
 .list .listabove li:first-child{padding:15px 10px; width:110px;}
@@ -96,7 +96,7 @@
 .getback { position:fixed;z-index:555;color:#666;right:10px;bottom:20px;display:none;}
 .getback span{right:10%;}
 /*提示*/
-.list .prompt { text-align:center;color:#999;margin-bottom:60px;}
+.list .prompt { text-align:center;color:#999;margin-bottom:30px;}
 /*图标*/
 .iconfont-search {font-size:26px;color:#fff;margin-right:10px;}
 .ico-status {color:#666;}

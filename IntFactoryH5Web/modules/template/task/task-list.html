@@ -38,10 +38,10 @@
                     </div>               
                  {%   if (item.finishStatus==0) {      %}                           
                         <div class="stage" >
-                                <div class="left">上级任务(
+                                <div class="left">上级任务
                                     {%  if (item.preTitle!="") {      %}
-                                        <span>{%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成" %}</span>
-                                    {%   }  %}):
+                                        <span>({%=item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成" %})</span>
+                                    {%   }  %}:
                                 </div>     
                                 <div class="Long left" style="width:100px;">{%=item.preTitle==""?"--":item.preTitle%}</div>
                                <div class="clear"></div>                          
