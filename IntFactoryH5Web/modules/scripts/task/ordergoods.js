@@ -65,7 +65,6 @@
                                 _this.removeClass('hover');
                                 _this.find('.lump').removeClass('hover');
                                 _this.next().slideUp(400, function () {
-                                
                                 });
                             }
                         }

@@ -32,19 +32,6 @@
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
-
-        //Global.post("/Task/CreateOrderGoodsDoc", {
-        //    orderID: "",
-        //    taskID: "",
-        //    docType: 1,
-        //    isOver: 1,
-        //    details: "",
-        //    remark: "",
-        //    ownerID: ""
-        //}, function (data) {
-        //    console.log(data);
-        //});
-
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
         ObjectJS.haveImg = haveImg;
@@ -310,7 +297,7 @@
         $("nav ul li.menuchecked").click();
     }
 
-    //获取单据信息
+    //获取下单明细
     ObjectJS.getOrderGoods = function (type) {
         Global.post("/Orders/GetOrderGoods", { orderID: Paras.orderID }, function (result) {
             var items = JSON.parse(result);
@@ -338,7 +325,9 @@
                                 }
                                 var model = {
                                     Tr: _thisTr,
-                                    quantity: quantity
+                                    Quantity: quantity,
+                                    Remark: _thisTr.find(".remark").text(),
+                                    ReturnQuantity: 0
                                 };
                                 models.push(model);
                                 details += _thisTr.data("id") + "-" + quantity + ",";
@@ -365,11 +354,45 @@
                                 _thisBtn.text(showMsg + "录入");
                                 var item = JSON.parse(data);
                                 if (item.id) {
+                                    var total=0;
                                     for (var i = 0; i < models.length; i++) {
                                         var model = models[i];
                                         var sewnQuantityHtml = $(model.Tr).find((type == 11 ? '.sewn-quantity' : '.cut-quantity'));
-                                        sewnQuantityHtml.text((sewnQuantityHtml.text() * 1) + (model.quantity * 1));
+                                        sewnQuantityHtml.text((sewnQuantityHtml.text() * 1) + (model.Quantity * 1));
+                                        total+=model.Quantity * 1;
                                     }
+                                    
+                                    /*录入成功后添加一个新的单据*/
+                                    var newDoc = {
+                                        Quantity: total,
+                                        Details: models,
+                                        DocType: type,
+                                        CreateTime: "/date" + new Date().getTime() + "/",
+                                        Owner: { Name: ObjectJS.userName }
+                                    };
+                                    doT.exec("template/orders/cutoutdoc.html", function (fun) {
+                                        var docHtml = fun([newDoc]);
+                                        docHtml = $(docHtml);
+                                        docHtml.find('.doc-header').click(function () {
+                                            var _this = $(this);
+                                            if (!_this.next().is(":animated")) {
+                                                if (!_this.hasClass('hover')) {
+                                                    _this.addClass('hover');
+                                                    _this.find('.lump').addClass('hover');
+                                                    _this.next().slideDown(400, function () {
+                                                    });
+                                                } else {
+                                                    _this.removeClass('hover');
+                                                    _this.find('.lump').removeClass('hover');
+                                                    _this.next().slideUp(400, function () {
+                                                    });
+                                                }
+                                            }
+                                        });
+                                        $(".nav-partdiv").prepend(docHtml);
+                                        $(".nav-partdiv .nodata-txt").remove();
+                                    });
+
                                     $(".goods-items input").val(0);
                                     alert(showMsg + "录入成功");
                                 } else if (data.result == "10001") {

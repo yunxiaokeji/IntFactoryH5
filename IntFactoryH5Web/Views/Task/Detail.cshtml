@@ -141,7 +141,7 @@
                     </div>
                     <div class="clear"></div>
                 </li>
-                @if(task.finishStatus==1)
+                @if (task.finishStatus == 1 && isOwner)
                 {
                     <li>
                         @if((task.mark==13||task.mark==14) && task.orderType==2)
