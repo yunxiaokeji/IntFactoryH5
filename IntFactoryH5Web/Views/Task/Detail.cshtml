@@ -110,7 +110,7 @@
     <!--任务信息-->
     <div class="task-info">
         <div class="main-info">
-            <ul class="left-task-info mLeft10 mRight10">
+            <ul class="mLeft10 mRight10" id="taskBaseInfo">
                 <li class="long" style="display:block;">
                     <span>订单款式：</span><span class="task-code base-info">@(string.IsNullOrEmpty(task.order.goodsName)?"--":task.order.goodsName)</span>
                 </li>
@@ -146,16 +146,19 @@
                     <li>
                         @if((task.mark==13||task.mark==14) && task.orderType==2)
                         {
-                            <span class="btn right show-goods">显示大货明细</span>
+                            <span class="btn right show-goods">显示下单明细</span>
                         }
                         <div class="clear"></div>
                     </li>
                 }
             </ul>
         </div>
+        @if (task.finishStatus == 1 && isOwner)
+        {
         <div class="task-operate-module">
             
         </div>
+        }
         <div class="order-need">
             <div class="text-orderneed" style="width:75px;">订单需求：</div>
             <div class="pBottom10 mTop10" style="word-break:break-all;">@task.order.remark</div>

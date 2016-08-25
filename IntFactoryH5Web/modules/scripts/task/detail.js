@@ -38,7 +38,6 @@
         ObjectJS.userID = userID;
         ObjectJS.userName = userName;
         ObjectJS.isOwner = isOwner;
-
         TaskReplyParas.taskID = jsonTask.taskID;
 
         OrderGoods.init(Global, doT);
@@ -136,14 +135,18 @@
             else if (classname == "navCutoutDoc") {
                 if (!isGet) {
                     $(".talk-status").data('isget', '1');
-                    ObjectJS.getOrderGoods(1);
+                    if ($(".task-operate-module").length > 0) {
+                        ObjectJS.getOrderGoods(1);
+                    }
                     OrderGoods.getGetGoodsDoc(classname, 1);
                 }
             }
                 //车缝
             else if (classname == "navSewnDoc") {
                 if (!isGet) {
-                    ObjectJS.getOrderGoods(11);
+                    if ($(".task-operate-module").length > 0) {
+                        ObjectJS.getOrderGoods(11);
+                    }
                     OrderGoods.getGetGoodsDoc(classname, 11);
                     _this.data("isget", "1");
                 }
@@ -421,11 +424,11 @@
                         if (sewn.data('isget') == 1) {
                             sewn.fadeOut();
                             sewn.data('isget', 0);
-                            _this.text("显示大货明细");
+                            _this.text("显示下单明细");
                         } else {
                             sewn.fadeIn();
                             sewn.data('isget', 1);
-                            _this.text("收起大货明细");
+                            _this.text("收起下单明细");
                         }
                     }
                 });
@@ -488,6 +491,11 @@
             if (data == 1) {
                 $(".end-time").html(new Date(Paras.endTime).toString('yyyy-MM-dd'));
                 $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
+                if ((ObjectJS.task.mark == 14 || ObjectJS.task.mark == 13) && ObjectJS.task.orderType == 2) {
+                    $("#taskBaseInfo").append("<li class='row'><span class='btn right show-goods'>显示大货明细</span></li>");
+                    $(".main-info").after("<div class='task-operate-module'></div>");
+                    ObjectJS.getOrderGoods(ObjectJS.task.mark == 14 ? 11 : 1);
+                }
                 $(".task-accept").find(".btn-finishTask").bind('click', function () {
                     ObjectJS.showConfirmForm(1);
                 });
@@ -510,6 +518,10 @@
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
+                if ((ObjectJS.task.mark == 14 || ObjectJS.task.mark == 13) && ObjectJS.task.orderType == 2) {
+                    $(".task-operate-module").remove();
+                    $(".show-goods").parent().remove();
+                }
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd"));
             } else if (data == 0) {
                 alert("失败");

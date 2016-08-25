@@ -147,7 +147,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .doc-item .doc-header { background-color: #efefef; color: #666;position:relative;line-height:50px;}
 .doc-item .doc-header.hover { background-color: #4a98e7; color: #fff; }
 .doc-item .doc-header .lump { width:0;height:0;border-left:7px solid #888;border-top:7px solid transparent;border-bottom:7px solid transparent;position:absolute;right:10px;top:18px;
-                              transition:transform 0.8s;-moz-transition:-moz-transform 0.8s;-webkit-transition:-webkit-transform 0.8s;}
+                              transition:transform 0.5s linear;-moz-transition:-moz-transform 0.5s linear;-webkit-transition:-webkit-transform 0.5s linear;}
 .doc-item .doc-header .lump.hover { transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);border-left-color:#fff;}
 /*translateZ开启动画加速*/
 .doc-item .doc-content { transform:translateZ(0);-webkit-transform:translateZ(0);-moz-transform:translateZ(0);}
@@ -168,5 +168,5 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .getback { position:fixed;z-index:55555;color:#666;right:-5px;bottom:90px;display:none;}
 .getback .iconfont-back { font-size:30px;text-align:center;}
 @media screen and (max-width:360px) {
-    .goods-items tr td span, .goods-items tr td { font-size: 0.9em; }
+    .goods-items tr td span, .goods-items tr td { font-size: 0.85em; }
 }
