@@ -28,25 +28,28 @@
     var WindowScrollTop = 0;
 
     var ObjectJS = {};
-    ObjectJS.init = function (haveImg, isOwner, userID, task) {
+    ObjectJS.init = function (haveImg, isOwner, userID, task,userName) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
-        Global.post("/Task/CreateOrderGoodsDoc", {
-            orderID: "",
-            taskID: "",
-            docType: 1,
-            isOver: 1,
-            details: "",
-            remark: "",
-            ownerID: ""
-        }, function (data) {
-            console.log(data);
-        });
+
+        //Global.post("/Task/CreateOrderGoodsDoc", {
+        //    orderID: "",
+        //    taskID: "",
+        //    docType: 1,
+        //    isOver: 1,
+        //    details: "",
+        //    remark: "",
+        //    ownerID: ""
+        //}, function (data) {
+        //    console.log(data);
+        //});
+
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
         ObjectJS.haveImg = haveImg;
         ObjectJS.userID = userID;
+        ObjectJS.userName = userName;
         ObjectJS.isOwner = isOwner;
 
         TaskReplyParas.taskID = jsonTask.taskID;
@@ -72,7 +75,7 @@
                 }
             });
         }
-
+        
         var uploader = Upload.uploader({
             browse_button: 'reply-attachment',
             container: 'addition',
@@ -146,12 +149,14 @@
             else if (classname == "navCutoutDoc") {
                 if (!isGet) {
                     $(".talk-status").data('isget', '1');
+                    ObjectJS.getOrderGoods(1);
                     OrderGoods.getGetGoodsDoc(classname, 1);
                 }
             }
                 //车缝
             else if (classname == "navSewnDoc") {
                 if (!isGet) {
+                    ObjectJS.getOrderGoods(11);
                     OrderGoods.getGetGoodsDoc(classname, 11);
                     _this.data("isget", "1");
                 }
@@ -303,8 +308,109 @@
         ObjectJS.bindScroll();
 
         $("nav ul li.menuchecked").click();
-
     }
+
+    //获取单据信息
+    ObjectJS.getOrderGoods = function (type) {
+        Global.post("/Orders/GetOrderGoods", { orderID: Paras.orderID }, function (result) {
+            var items = JSON.parse(result);
+            var template = "template/task/task-sewn.html";/*type为11*/
+            if (type == 1) {
+                template = "template/task/task-cutgoods.html";
+            }
+
+            doT.exec(template, function (templateFun) {
+                var innerHtml = templateFun(items);
+                innerHtml = $(innerHtml);
+                innerHtml.find('.add-doc').click(function () {
+                    var _thisBtn = $(this);
+                    if (_thisBtn.data('isSubmit') != 1) {
+                        var details = "", bl = true;
+                        var models = [];
+                        innerHtml.find(".list-item").each(function () {
+                            var _thisTr = $(this);
+                            var quantity = _thisTr.find(".quantity").val();
+                            if (quantity > 0) {
+                                if (type == 11) {
+                                    if (quantity > (_thisTr.find(".cut-quantity").text() * 1) - (_thisTr.find(".sewn-quantity").text() * 1)) {
+                                        bl = false;
+                                    }
+                                }
+                                var model = {
+                                    Tr: _thisTr,
+                                    quantity: quantity
+                                };
+                                models.push(model);
+                                details += _thisTr.data("id") + "-" + quantity + ",";
+                            }
+                        });
+                        if (!bl) {
+                            alert("数量输入过大");
+                            return false;
+                        }
+                        var showMsg = type == 11 ? "车缝" : type == 1 ? "裁剪" : "--";
+                        if (details.length > 0) {
+                            _thisBtn.data('isSubmit', 1);
+                            _thisBtn.text("提交中...");
+                            Global.post("/Orders/CreateOrderGoodsDoc", {
+                                orderid: Paras.orderID,
+                                taskid: Paras.taskID,
+                                doctype: type,
+                                isover: 0,
+                                details: details,
+                                remark: "",
+                                ownerid: ""
+                            }, function (data) {
+                                _thisBtn.data('isSubmit', 0);
+                                _thisBtn.text(showMsg + "录入");
+                                var item = JSON.parse(data);
+                                if (item.id) {
+                                    for (var i = 0; i < models.length; i++) {
+                                        var model = models[i];
+                                        var sewnQuantityHtml = $(model.Tr).find((type == 11 ? '.sewn-quantity' : '.cut-quantity'));
+                                        sewnQuantityHtml.text((sewnQuantityHtml.text() * 1) + (model.quantity * 1));
+                                    }
+                                    $(".goods-items input").val(0);
+                                    alert(showMsg + "录入成功");
+                                } else if (data.result == "10001") {
+                                    alert("您没有操作权限!")
+                                } else {
+                                    alert(showMsg + "登记失败！");
+                                }
+                            });
+                        } else {
+                            alert("请输入" + showMsg + "数量");
+                            return false;
+                        }
+                    }
+                });
+                innerHtml.find('.quantity').change(function () {
+                    var _this = $(this);
+                    if (!_this.val().isDouble() || _this.val() <= 0) {
+                        _this.val(0);
+                        return false;
+                    }
+                });
+                $(".show-goods").click(function () {
+                    var _this = $(this);
+                    var sewn = $(".goods-items");
+                    if (sewn.length > 0) {
+                        if (sewn.data('isget') == 1) {
+                            sewn.fadeOut();
+                            sewn.data('isget', 0);
+                            _this.text("显示大货明细");
+                        } else {
+                            sewn.fadeIn();
+                            sewn.data('isget', 1);
+                            _this.text("收起大货明细");
+                        }
+                    }
+                });
+
+                $(".task-operate-module").append(innerHtml);
+            });
+        });
+    };
 
     //窗体加载绑定讨论下拉
     ObjectJS.bindScroll = function () {

@@ -1,8 +1,11 @@
 ﻿<table class="table-list hide goods-items">
     <tr class="tr-header">
         <td class="tLeft">规格</td>
-        <td class="tLeft width100"><span>已裁剪</span>/<span class="red">已车缝</span></td>
-        <td class="tRight">车缝数</td>
+        <td class="tLeft">
+            下单数/
+            <span class="red">已裁剪</span>
+        </td>
+        <td class="tRight">裁剪数</td>
     </tr>
 {%
     for(var i=0, j=$data.length; i < j; i++)
@@ -11,7 +14,11 @@
 %}
     <tr data-id="{%=item.AutoID%}" class="list-item">
         <td class="remark">{%=item.Remark%}</td>
-        <td class="tLeft" style="text-indent:5px;"><span class="cut-quantity">{%=item.CutQuantity%}</span>/<span class="red sewn-quantity">{%=item.Complete%}</span></td>
+        <td class="tLeft" style="text-indent:5px;">
+            <span class="goods-quantity">{%=item.Quantity%}</span>
+            /
+            <span class="cut-quantity red">{%=item.CutQuantity%}</span>
+        </td>
         <td class="tRight">
             <input type="tel" class="quantity" style="width:50px;text-align:center;padding:3px 0px;" value="0" />
         </td>
@@ -19,7 +26,7 @@
     {%if(i==j-1&&j>0){%}
     <tr>
         <td colspan="3">
-            <div class="add-doc btn right">车缝录入</div>
+            <div class="add-doc btn right">裁片录入</div>
             <div class="clear"></div>
         </td>
     </tr>

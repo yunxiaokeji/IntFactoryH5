@@ -127,7 +127,7 @@
 
     //获取订单明细
     ObjectJS.getOrderGoods = function () {
-        Global.post("/Task/GetOrderGoods", { id: ObjectJS.orderid }, function (data) {
+        Global.post("/Orders/GetOrderGoods", { id: ObjectJS.orderid }, function (data) {
             ObjectJS.OrderGoods = data.list;
         });
     }

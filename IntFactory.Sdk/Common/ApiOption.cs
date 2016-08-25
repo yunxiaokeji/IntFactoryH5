@@ -69,6 +69,9 @@ namespace IntFactory.Sdk
         GetOrderDetailsByOrderID,
 
         [Description("/api/task/CreateOrderGoodsDoc")]
-        CreateOrderGoodsDoc
+        CreateOrderGoodsDoc,
+
+        [Description("/api/order/GetOrderGoods")]
+        GetOrderGoods
     }
 }
