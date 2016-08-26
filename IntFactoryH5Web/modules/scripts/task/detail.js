@@ -517,7 +517,7 @@
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
             if (data == 1) {
                 $(".end-time").html(new Date(Paras.endTime).toString('yyyy-MM-dd'));
-                $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
+                $(".task-accept").html("<input type='button' class='btn-finishTask header-btn' readonly='readonly' value='标记完成' />");
                 if ((ObjectJS.task.mark == 14 || ObjectJS.task.mark == 13) && ObjectJS.task.orderType == 2) {
                     $("#docInfo").prepend('<div class="task-operate-module"></div>')
                                  .prepend('<div class="row"><span class="btn right show-goods mRight5">裁剪录入</span></div>');
