@@ -198,7 +198,7 @@ namespace IntFactory.Sdk
             paras.Add("clientID", clientID);
             paras.Add("taskID", taskID);
 
-            return HttpRequest.RequestServer<TaskReplyListResult>(ApiOption.SavaTaskReply, paras);
+            return HttpRequest.RequestServer<TaskReplyListResult>(ApiOption.SavaTaskReply, paras, RequestType.Post);
         }
         #endregion
 
