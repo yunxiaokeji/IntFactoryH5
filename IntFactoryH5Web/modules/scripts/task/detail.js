@@ -197,16 +197,16 @@
             newHtml.find('.pic-list,.doc-list').remove();
             newHtml.find('div.clear').remove();
             if (!newHtml.text().trim()) {
-                alert("讨论内容不能为空！");
+                alert("讨论内容不能为空！", 2);
                 return false;
             }
             if ($('.task-file li').find('.mark-progress').length > 0) {
-                alert("文件上传中，请稍等");
+                alert("文件上传中，请稍等", 2);
                 return false;
             }
             _this.html('发表中...');
             if (IsLoading) {
-                alert("发表中,请稍候再试.");
+                alert("发表中,请稍候再试.", 2);
                 return false;
             }
 
@@ -262,7 +262,7 @@
         //点击发表讨论出现弹出层
         $(".txt-talkcontent").click(function () {
             if (IsLoading) {
-                alert("上一条评论发表中,请稍候再试.");
+                alert("上一条评论发表中,请稍候再试.", 2);
                 return false;
             }
             if ($("#pic-list").length == 0) {
@@ -362,15 +362,15 @@
                     ObjectJS.showConfirmForm(1);
                 });
             } else if (data == 0) {
-                alert("失败");
+                alert("失败", 2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
@@ -382,15 +382,15 @@
                 $(".task-accept").html("<span>已完成</span>");
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd"));
             } else if (data == 0) {
-                alert("失败");
+                alert("失败", 2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限;");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
@@ -404,7 +404,7 @@
             } else {
                 ObjectJS.finishTask();
             }
-        });
+        }, "设置");
     }
 
     //设置图片宽高
@@ -530,7 +530,7 @@
             //点击回复把用户名写入文本框
             innerText.find(".return-reply .iconfont").click(function () {
                 if (IsLoading) {
-                    alert("上一条评论发表中,请稍候再试.");
+                    alert("上一条评论发表中,请稍候再试.", 2);
                     return false;
                 }
                 if ($("#pic-list").length == 0) {
