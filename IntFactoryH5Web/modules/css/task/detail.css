@@ -19,7 +19,6 @@ header .task-text {color:#BFD2F2;text-align:center;font-size:16px;}
 .return-icon { font-size:20px;color:#BFD2F2;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
 .task-accept span { color:#BFD2F2;font-size:16px;}
-.task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{background-color:#2F73B8;border:1px solid #fff; color:#fff; text-align:center;font-size:16px;padding:6px 10px; border-radius:2px;width:80px;}
 
 /*焦点图*/
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:50px;text-indent:1em;color:#fff;}
@@ -143,13 +142,13 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 /*下拉显示单据详情*/
 .doc-content ul, .doc-item .doc-header { padding:0 10px;box-sizing:border-box;-webkit-box-sizing:border-box;}
 
-.doc-item {margin:5px 10px;}
+.doc-item {margin:5px;}
 .doc-item .doc-header { background-color: #efefef; color: #666;position:relative;line-height:50px;}
 .doc-item .doc-header.hover { background-color: #4a98e7; color: #fff; }
 .doc-item .doc-header .lump { width:0;height:0;border-left:7px solid #888;border-top:7px solid transparent;border-bottom:7px solid transparent;position:absolute;right:10px;top:18px;
                               transition:transform 0.5s linear;-moz-transition:-moz-transform 0.5s linear;-webkit-transition:-webkit-transform 0.5s linear;}
 .doc-item .doc-header .lump.hover { transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);border-left-color:#fff;}
-/*translateZ开启动画加速*/
+
 .doc-item .doc-content { transform:translateZ(0);-webkit-transform:translateZ(0);-moz-transform:translateZ(0);}
 .doc-item .doc-content ul{ border-bottom:1px solid #efefef;}
 .doc-item .doc-content ul li { line-height:36px;}

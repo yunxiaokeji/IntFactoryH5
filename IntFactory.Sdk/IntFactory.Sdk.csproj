@@ -63,6 +63,7 @@
     <Compile Include="Entity\Task\FilterTasks.cs" />
     <Compile Include="Entity\Task\TaskDetailEntity.cs" />
     <Compile Include="Entity\Task\TaskDetailResult.cs" />
+    <Compile Include="Entity\Task\TaskMember.cs" />
     <Compile Include="Entity\Task\TaskReplyEntity.cs" />
     <Compile Include="Entity\Task\TaskReplyListResult.cs" />
     <Compile Include="Entity\Task\TaskLogEntity.cs" />

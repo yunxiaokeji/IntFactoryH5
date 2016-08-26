@@ -21,6 +21,7 @@ namespace IntFactoryH5Web.Controllers
         {
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
             var resultTask = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskDetail(id, CurrentUser.userID, CurrentUser.clientID);
+
             if (resultTask.error_code != 0)
             {
                 resultTaskInfoObj.Add("result", 0);
@@ -32,6 +33,18 @@ namespace IntFactoryH5Web.Controllers
                 {
                     UserBase userBase = new UserBase();
                     var task = resultTask.task;
+
+                    //当前用户是否有编辑权限
+                    var isEditTask = false;
+                    TaskMember member = task.TaskMembers.Find(a => a.MemberID.ToLower() == CurrentUser.userID.ToLower());
+                    if (member != null)
+                    {
+                        if (member.PermissionType == 2)
+                        {
+                            isEditTask = true;
+                        }
+                    }
+                    ViewBag.IsEditTask = isEditTask;
                     ViewBag.Task = task;
                     ViewBag.DomainUrl = resultTask.domainUrl;
                     ViewBag.Users = CurrentUser;
@@ -167,6 +180,12 @@ namespace IntFactoryH5Web.Controllers
 
             return result.result;
 ;
+        }
+
+        //锁定任务
+        public string LockTask(string taskID)
+        {
+            return TaskBusiness.BaseBusiness.LockTask(taskID, CurrentUser.userID, CurrentUser.clientID);
         }
 
     }

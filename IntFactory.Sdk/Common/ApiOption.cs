@@ -72,6 +72,9 @@ namespace IntFactory.Sdk
         CreateOrderGoodsDoc,
 
         [Description("/api/order/GetOrderGoods")]
-        GetOrderGoods
+        GetOrderGoods,
+
+        [Description("/api/task/LockTask")]
+        LockTask
     }
 }

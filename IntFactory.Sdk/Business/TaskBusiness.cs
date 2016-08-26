@@ -136,6 +136,16 @@ namespace IntFactory.Sdk
             return HttpRequest.RequestServer<OrderBaseResult>(ApiOption.GetOrderInfo, paras);
         }
 
+        public string LockTask(string taskID, string operateID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userID", operateID);
+            paras.Add("clientID", clientID);
+            paras.Add("taskID", taskID);
+            paras.Add("operateID", operateID);
+            return HttpRequest.RequestServer(ApiOption.LockTask, paras);
+        }
+
         public string CreateOrderGoodsDoc(string orderID, string taskID, int docType, int isOver,string details, string remark,
                     string ownerID, string operateID, string clientID, string expressID, string expressCode)
         {

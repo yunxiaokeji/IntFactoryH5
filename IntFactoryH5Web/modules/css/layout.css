@@ -20,6 +20,9 @@ header .task-text {color:#373737;text-align:center;}
 
 .btn {  padding:5px 10px; background-color:#4a98e7; color:#fff; border:none; display:inline-block; border-radius:2px; line-height:18px;}
 
+.header-btn {background-color:#2F73B8;border:1px solid #fff; color:#fff;text-align:center;font-size:16px;padding:6px; border-radius:2px;width:80px;
+                                                              -webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}
+
 /*删除 叉*/
 .ico-delete{ background:url(/modules/images/ico-delete.png) no-repeat; height:30px; min-width:30px; line-height:30px; 
     cursor:pointer;
