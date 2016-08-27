@@ -28,14 +28,14 @@
     var WindowScrollTop = 0;
 
     var ObjectJS = {};
-    ObjectJS.init = function (haveImg, isOwner, userID, task) {
+    ObjectJS.init = function (orderImagesCount, isOwner, userID, task) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
 
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
-        ObjectJS.haveImg = haveImg;
+        ObjectJS.orderImagesCount = orderImagesCount;
         ObjectJS.userID = userID;
         ObjectJS.isOwner = isOwner;
 
@@ -56,20 +56,19 @@
 
     //绑定事件
     ObjectJS.bindEvent = function () {
-        if (ObjectJS.haveImg == 1) {
-            $(".main_image").touchSlider({
-                flexible: true,
-                speed: 200,
-                paging: $(".flicking_con a"),
-                counter: function (e) {
-                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
-                }
-            });
+        if (ObjectJS.orderImagesCount > 0) {
+            if (ObjectJS.orderImagesCount > 1) {
+                $(".main_image").touchSlider({
+                    flexible: true,
+                    speed: 200,
+                    paging: $(".flicking_con a"),
+                    counter: function (e) {
+                        $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                    }
+                });
+            }
 
             ObjectJS.setImagesSize();
-        }
-        else {
-
         }
 
         var uploader = Upload.uploader({
@@ -397,7 +396,7 @@
 
     //接受任务、标记任务完成的弹出浮层
     ObjectJS.showConfirmForm = function (showStatus) {
-        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "确定完成任务?";
         confirm(alertMsg, function () {
             if (showStatus == 0) {
                 ObjectJS.setTaskEndTime();

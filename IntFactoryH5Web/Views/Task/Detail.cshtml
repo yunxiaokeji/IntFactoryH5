@@ -38,7 +38,7 @@
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@(imagesUrl.Length>1?1:0)',
+                    '@(imagesUrl.Length)',
                      '@isOwner',
                     '@UserID',
                     '@taskJson'
