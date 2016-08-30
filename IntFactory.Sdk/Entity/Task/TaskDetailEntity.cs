@@ -86,6 +86,10 @@ namespace IntFactory.Sdk
         /// </summary>
         public string completeTime { get; set; }
 
+        public int lockStatus { get; set; }
+
+        public int status { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>
@@ -97,5 +101,7 @@ namespace IntFactory.Sdk
         public UserBase ownerUser { get; set; }
 
         public OrderBaseEntity order { get; set; }
+
+        public List<TaskMember> TaskMembers { get; set; }
     }
 }

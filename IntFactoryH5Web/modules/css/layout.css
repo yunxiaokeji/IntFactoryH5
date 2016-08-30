@@ -18,6 +18,11 @@ header .task-text {color:#373737;text-align:center;}
 .alert .close { padding:5px 10px; background-color:#ccc; color:#666; border:none; cursor:pointer; display:inline-block; border-radius:2px; }
 .alert .close:hover {  background-color:#999; color:#fff; }
 
+.btn {  padding:5px 10px; background-color:#4a98e7; color:#fff; border:none; display:inline-block; border-radius:2px; line-height:18px;}
+
+.header-btn {background-color:#2F73B8;border:1px solid #fff; color:#fff;text-align:center;font-size:16px;padding:6px; border-radius:2px;width:80px;
+                                                              -webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}
+
 /*删除 叉*/
 .ico-delete{ background:url(/modules/images/ico-delete.png) no-repeat; height:30px; min-width:30px; line-height:30px; 
     cursor:pointer;
@@ -54,7 +59,7 @@ header .task-text {color:#373737;text-align:center;}
 .table-list tr:not(:first-child) td{ padding:5px; line-height:35px; border-bottom:solid 1px #eee; max-width:500px; color:#333; 
                                      white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
 
-.table-list tr td:first-child{ text-indent:12px;}
+.table-list tr td:first-child{ text-indent:2px;}
 
 .table-list td a{ color:#4a98e7;  vertical-align:middle;}
 .table-list td a:hover{ color:red; text-decoration:underline; }

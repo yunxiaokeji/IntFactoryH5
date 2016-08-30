@@ -28,17 +28,16 @@
     var WindowScrollTop = 0;
 
     var ObjectJS = {};
-    ObjectJS.init = function (haveImg, isOwner, userID, task) {
+    ObjectJS.init = function (haveImg, isOwner, userID, task,userName) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
-
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
         ObjectJS.haveImg = haveImg;
         ObjectJS.userID = userID;
+        ObjectJS.userName = userName;
         ObjectJS.isOwner = isOwner;
-
         TaskReplyParas.taskID = jsonTask.taskID;
 
         OrderGoods.init(Global, doT);
@@ -71,7 +70,7 @@
         else {
 
         }
-
+        
         var uploader = Upload.uploader({
             browse_button: 'reply-attachment',
             container: 'addition',
@@ -106,21 +105,21 @@
                     _this.data("isget", "1");
                 }
             }
-                //材料
+            //材料
             else if (classname == "shop-status") {
                 if (!isGet) {
                     ObjectJS.GetOrderDetailsByOrderID();
                     _this.data("isget", "1");
                 }
             }
-                //工艺说明
+            //工艺说明
             else if (classname == "print-status") {
                 if (!isGet) {
                     ObjectJS.getPlateMakings();
                     _this.data("isget", "1");
                 }
             }
-                //日志
+            //日志
             else if (classname == "log-status") {
                 if (!isGet) {
                     ObjectJS.getTaskLogs();
@@ -128,34 +127,41 @@
                 }
                     
             }
-                //手工成本
+            //手工成本
             else if (classname === "navCosts") {
                 if (!isGet) {
                     ObjectJS.getOrderCosts();
                     _this.data("isget", "1");
                 }
             }
-                //打样发货
+            //打样发货
             else if (classname === "navSendDYDoc") {
                 if (!isGet) {
                     OrderGoods.getGetGoodsDoc(classname, 2);
                 }
             }
-                //裁剪
+            //裁剪
             else if (classname == "navCutoutDoc") {
                 if (!isGet) {
                     $(".talk-status").data('isget', '1');
+                    if ($(".task-operate-module").length > 0) {
+                        ObjectJS.getOrderGoods(1);
+                    }
                     OrderGoods.getGetGoodsDoc(classname, 1);
+                    _this.data("isget", "1");
                 }
             }
-                //车缝
+            //车缝
             else if (classname == "navSewnDoc") {
                 if (!isGet) {
+                    if ($(".task-operate-module").length > 0) {
+                        ObjectJS.getOrderGoods(11);
+                    }
                     OrderGoods.getGetGoodsDoc(classname, 11);
                     _this.data("isget", "1");
                 }
             }
-                //发货
+            //发货
             else if (classname == "navSendDoc") {
                 if (!isGet) {
                     OrderGoods.getGetGoodsDoc(classname, 22);
@@ -167,6 +173,7 @@
         $(".getback").click(function () {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
         });
+
         //绑定完成任务
         if ($(".btn-finishTask").length > 0) {
             if ($('.btn-finishTask').val() == "标记完成") {
@@ -178,6 +185,25 @@
             }
         }
 
+        //锁定任务
+        if ($("#lockTask").length > 0) {
+            $("#lockTask").click(function () {
+                var _this = $(this);
+                confirm("锁定后不能对任务进行任何操作,确定要锁定?", function () {
+                    _this.val('锁定中...').attr('disablebed', 'disabled');
+                    Global.post("/Task/LockTask", { taskID: Paras.taskID }, function (data) {;
+                        if (data.result == 1) {
+                            $(".task-operate-module").remove();
+                            $(".show-goods").parent().remove();
+                            _this.parent().html('<span>已完成</span>');
+                        } else {
+                            _this.val("锁定任务").removeAttr("disabled");
+                            alert("网络繁忙,解锁失败");
+                        }
+                    });
+                });
+            });
+        }
         //关闭任务讨论浮层
         $(".cancel-reply").click(function () {
             $("body,html").removeClass('layer');
@@ -185,7 +211,7 @@
             setTimeout(function () {
                 $(".reply-layer").hide();
                 $('body,html').animate({ scrollTop: WindowScrollTop }, 100);
-            }, 500);
+            }, 800);
         });
 
         //发表任务讨论
@@ -302,8 +328,151 @@
         ObjectJS.bindScroll();
 
         $("nav ul li.menuchecked").click();
-
     }
+
+    //获取下单明细
+    ObjectJS.getOrderGoods = function (type) {
+        Global.post("/Orders/GetOrderGoods", { orderID: Paras.orderID }, function (result) {
+            if (result) {
+                var items = JSON.parse(result);
+                var template = "template/task/task-sewn.html";/*type为11*/
+                if (type == 1) {
+                    template = "template/task/task-cutgoods.html";
+                }
+                doT.exec(template, function (templateFun) {
+                    var innerHtml = templateFun(items);
+                    innerHtml = $(innerHtml);
+                    innerHtml.find('.add-doc').click(function () {
+                        var _thisBtn = $(this);
+                        if (_thisBtn.data('isSubmit') != 1) {
+                            var details = "", bl = true;
+                            var models = [];
+                            innerHtml.find(".list-item").each(function () {
+                                var _thisTr = $(this);
+                                var quantity = _thisTr.find(".quantity").val();
+                                if (quantity > 0) {
+                                    if (type == 11) {
+                                        if (quantity > (_thisTr.find(".cut-quantity").text() * 1) - (_thisTr.find(".sewn-quantity").text() * 1)) {
+                                            bl = false;
+                                        }
+                                    }
+                                    var model = {
+                                        Tr: _thisTr,
+                                        Quantity: quantity,
+                                        Remark: _thisTr.find(".remark").text(),
+                                        ReturnQuantity: 0
+                                    };
+                                    models.push(model);
+                                    details += _thisTr.data("id") + "-" + quantity + ",";
+                                }
+                            });
+                            if (!bl) {
+                                alert("数量输入过大");
+                                return false;
+                            }
+                            var showMsg = type == 11 ? "车缝" : type == 1 ? "裁剪" : "--";
+                            if (details.length > 0) {
+                                _thisBtn.data('isSubmit', 1);
+                                _thisBtn.text("提交中...");
+                                Global.post("/Orders/CreateOrderGoodsDoc", {
+                                    orderid: Paras.orderID,
+                                    taskid: Paras.taskID,
+                                    doctype: type,
+                                    isover: 0,
+                                    details: details,
+                                    remark: "",
+                                    ownerid: ""
+                                }, function (data) {
+                                    _thisBtn.data('isSubmit', 0);
+                                    _thisBtn.text(showMsg);
+                                    var item = JSON.parse(data);
+                                    if (item.id) {
+                                        var total = 0;
+                                        for (var i = 0; i < models.length; i++) {
+                                            var model = models[i];
+                                            var sewnQuantityHtml = $(model.Tr).find((type == 11 ? '.sewn-quantity' : '.cut-quantity'));
+                                            sewnQuantityHtml.text((sewnQuantityHtml.text() * 1) + (model.Quantity * 1));
+                                            total += model.Quantity * 1;
+                                        }
+
+                                        /*录入成功后添加一个新的单据*/
+                                        var newDoc = {
+                                            Quantity: total,
+                                            Details: models,
+                                            DocType: type,
+                                            CreateTime: "/date" + new Date().getTime() + "/",
+                                            Owner: { Name: ObjectJS.userName }
+                                        };
+                                        doT.exec("template/orders/cutoutdoc.html", function (fun) {
+                                            var docHtml = fun([newDoc]);
+                                            docHtml = $(docHtml);
+                                            docHtml.find('.doc-header').click(function () {
+                                                var _this = $(this);
+                                                if (!_this.next().is(":animated")) {
+                                                    if (!_this.hasClass('hover')) {
+                                                        _this.addClass('hover');
+                                                        _this.find('.lump').addClass('hover');
+                                                        _this.next().slideDown(400, function () {
+                                                        });
+                                                    } else {
+                                                        _this.removeClass('hover');
+                                                        _this.find('.lump').removeClass('hover');
+                                                        _this.next().slideUp(400, function () {
+                                                        });
+                                                    }
+                                                }
+                                            });
+
+                                            $(".nav-partdiv").prepend(docHtml);
+                                            $(".nav-partdiv .nodata-txt").remove();
+                                        });
+
+                                        $(".goods-items input").val(0);
+                                        alert(showMsg + "录入成功");
+                                    } else if (data.result == "10001") {
+                                        alert("您没有操作权限!")
+                                    } else {
+                                        alert(showMsg + "登记失败！");
+                                    }
+                                });
+                            } else {
+                                alert("请输入" + showMsg + "数量");
+                                return false;
+                            }
+                        }
+                    });
+                    innerHtml.find('.quantity').change(function () {
+                        var _this = $(this);
+                        if (!_this.val().isDouble() || _this.val() <= 0) {
+                            _this.val(0);
+                            return false;
+                        }
+                    });
+                    $(".show-goods").click(function () {
+                        var _this = $(this);
+                        var sewn = $(".goods-items");
+                        if (sewn.length > 0) {
+                            if (sewn.data('isget') == 1) {
+                                sewn.fadeOut();
+                                sewn.data('isget', 0);
+                                if (ObjectJS.task.mark == 13) {
+                                    _this.text("裁剪录入");
+                                } else {
+                                    _this.text("车缝录入");
+                                }
+                            } else {
+                                sewn.fadeIn();
+                                sewn.data('isget', 1);
+                                _this.text("收起信息");
+                            }
+                        }
+                    });
+
+                    $(".task-operate-module").append(innerHtml);
+                });
+            }
+        });
+    };
 
     //窗体加载绑定讨论下拉
     ObjectJS.bindScroll = function () {
@@ -357,7 +526,12 @@
         $.post("/Task/UpdateTaskEndTime", Paras, function (data) {
             if (data == 1) {
                 $(".end-time").html(new Date(Paras.endTime.replace(/-/g, '/')).toString('yyyy-MM-dd'));
-                $(".task-accept").html("<input type='button' class='btn-finishTask' readonly='readonly' value='标记完成' />");
+                $(".task-accept").html("<input type='button' class='btn-finishTask header-btn' readonly='readonly' value='标记完成' />");
+                if ((ObjectJS.task.mark == 14 || ObjectJS.task.mark == 13) && ObjectJS.task.orderType == 2) {
+                    $("#docInfo").prepend('<div class="task-operate-module"></div>')
+                                 .prepend('<div class="row"><span class="btn right show-goods mRight5">裁剪录入</span></div>');
+                    ObjectJS.getOrderGoods(ObjectJS.task.mark == 14 ? 11 : 1);
+                }
                 $(".task-accept").find(".btn-finishTask").bind('click', function () {
                     ObjectJS.showConfirmForm(1);
                 });
@@ -380,6 +554,10 @@
         $.post("/Task/FinishTask", Paras, function (data) {
             if (data == 1) {
                 $(".task-accept").html("<span>已完成</span>");
+                if ((ObjectJS.task.mark == 14 || ObjectJS.task.mark == 13) && ObjectJS.task.orderType == 2) {
+                    $(".task-operate-module").remove();
+                    $(".show-goods").parent().remove();
+                }
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd"));
             } else if (data == 0) {
                 alert("失败");
@@ -448,28 +626,30 @@
 
     //获取任务详情日志列表
     ObjectJS.getTaskLogs = function () {
-        if (LogPageCount >= Paras.logPageIndex) {
-            $(".main-box .loading-lump").show();
-            $.post("/Task/GetLogInfo", Paras, function (data) {
-                $(".main-box .loading-lump").hide();
-                LogPageCount = data.pagecount;
-                if (LogPageCount == 0) {
-                    $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
+        if ($(".log-status").data('isLoading') != 1) {
+            if (logPageCount >= Paras.logPageIndex) {
+                $(".log-status").append('<div class="data-loading"></div>');
+                $(".log-status").data('isLoading', 1);
+                $.post("/Task/GetLogInfo", Paras, function (data) {
+                    $(".log-status").data('isLoading', 0);
+                    $(".log-status .data-loading").remove();
+                    logPageCount = data.pagecount;
+                    if (logPageCount == 0) {
+                        $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
+                    }
+                    else {
+                        doT.exec("template/task/task-log.html", function (templateFun) {
+                            var items = data.items;
+                            var innerText = templateFun(items);
+                            $('.log-status').append(innerText);
+                        });
+                    }
+                })
+            } else {
+                if ($(".log-status .log-box").length > 0 && $(".alert-lastlogpage").length == 0) {
+                    $(".main-box .log-status").append("<div class='alert-lastlogpage center mTop10 color999'>已经是最后一条啦</div>");
                 }
-                else {
-                    doT.exec("template/task/task-log.html", function (templateFun) {
-
-                        var items = data.items;
-
-                        var innerText = templateFun(items);
-
-                        $('.log-status').append(innerText);
-                    });
-                }
-            })
-        } else {
-            $(".log-status .log-box").length == 0 ? "" : $(".alert-lastlogpage").length == 0 ? $(".main-box .log-status").append("<div class='alert-lastlogpage center mTop10 color999'>已经是最后一条啦</div>") : "";
-
+            }
         }
     }
 
@@ -512,13 +692,12 @@
         doT.exec("template/task/detail-reply.html", function (templateFun) {
             var innerText = templateFun(data.items);
             innerText = $(innerText);
-
             if (GetOrAddReply == "GetReply") {
-                $(".talk-main").append(innerText);
                 innerText.find(".reply-content").each(function () {
                     $(this).html(Global.replaceQqface($(this).html()));
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
+                $(".talk-main").append(innerText);
             } else {
                 if ($(".talk-main").find('.nodata-txt').length > 0) {
                     $(".talk-main .nodata-txt").remove();

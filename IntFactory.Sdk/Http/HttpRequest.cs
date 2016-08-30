@@ -94,7 +94,7 @@ namespace IntFactory.Sdk
             return JsonConvert.DeserializeObject<T>(strResult);
         }
         
-        public static string RequestServer(ApiOption apiOption, Dictionary<string, object> paras, RequestType requestType = RequestType.Post)
+        public static string RequestServer(ApiOption apiOption, Dictionary<string, object> paras, RequestType requestType = RequestType.Get)
         {
             string urlPath = GetEnumDesc<ApiOption>(apiOption);
             string url = AppConfig.ApiUrl + urlPath;

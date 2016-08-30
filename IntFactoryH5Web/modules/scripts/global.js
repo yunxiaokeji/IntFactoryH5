@@ -191,7 +191,6 @@
             Modes |= Global.CharMode(password.charCodeAt(i));
         }
         return Global.bitTotal(Modes);
-       
     }
 
     //CharMode函数
