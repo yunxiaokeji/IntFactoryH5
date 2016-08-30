@@ -142,7 +142,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 /*下拉显示单据详情*/
 .doc-content ul, .doc-item .doc-header { padding:0 10px;box-sizing:border-box;-webkit-box-sizing:border-box;}
 
-.doc-item {margin:5px;}
+.doc-item {margin:5px 10px;}
 .doc-item .doc-header { background-color: #efefef; color: #666;position:relative;line-height:50px;}
 .doc-item .doc-header.hover { background-color: #4a98e7; color: #fff; }
 .doc-item .doc-header .lump { width:0;height:0;border-left:7px solid #888;border-top:7px solid transparent;border-bottom:7px solid transparent;position:absolute;right:10px;top:18px;

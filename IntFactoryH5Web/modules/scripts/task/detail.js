@@ -28,7 +28,7 @@
     var WindowScrollTop = 0;
 
     var ObjectJS = {};
-    ObjectJS.init = function (orderImagesCount, isOwner, userID, task) {
+    ObjectJS.init = function (orderImagesCount, isOwner, userID, task, userName) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
@@ -46,7 +46,7 @@
 
         ObjectJS.bindTimerPicker();
         ObjectJS.bindEvent();
-        
+
         //设置图片显示宽高
         $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
         $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
