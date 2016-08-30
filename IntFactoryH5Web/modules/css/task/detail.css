@@ -166,6 +166,6 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 
 .getback { position:fixed;z-index:55555;color:#666;right:-5px;bottom:90px;display:none;}
 .getback .iconfont-back { font-size:30px;text-align:center;}
-@media screen and (max-width:360px) {
-    .goods-items tr td span, .goods-items tr td { font-size: 0.85em; }
+@media screen and (max-width:358px) {
+    .goods-items tr td span, .goods-items tr td { font-size: 11px; }
 }
