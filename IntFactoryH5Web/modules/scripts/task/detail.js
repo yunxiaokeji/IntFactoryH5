@@ -197,7 +197,7 @@
                             _this.parent().html('<span>已完成</span>');
                         } else {
                             _this.val("锁定任务").removeAttr("disabled");
-                            alert("网络繁忙,解锁失败");
+                            alert("网络繁忙,解锁失败",2);
                         }
                     });
                 });
@@ -366,7 +366,7 @@
                                 }
                             });
                             if (!bl) {
-                                alert("数量输入过大");
+                                alert("数量输入过大",2);
                                 return false;
                             }
                             var showMsg = type == 11 ? "车缝" : type == 1 ? "裁剪" : "--";
@@ -429,13 +429,13 @@
                                         $(".goods-items input").val(0);
                                         alert(showMsg + "录入成功");
                                     } else if (data.result == "10001") {
-                                        alert("您没有操作权限!")
+                                        alert("您没有操作权限!",2)
                                     } else {
-                                        alert(showMsg + "登记失败！");
+                                        alert(showMsg + "登记失败！",2);
                                     }
                                 });
                             } else {
-                                alert("请输入" + showMsg + "数量");
+                                alert("请输入" + showMsg + "数量",2);
                                 return false;
                             }
                         }
