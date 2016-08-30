@@ -691,13 +691,12 @@
         doT.exec("template/task/detail-reply.html", function (templateFun) {
             var innerText = templateFun(data.items);
             innerText = $(innerText);
-
             if (GetOrAddReply == "GetReply") {
-                $(".talk-main").append(innerText);
                 innerText.find(".reply-content").each(function () {
                     $(this).html(Global.replaceQqface($(this).html()));
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
+                $(".talk-main").append(innerText);
             } else {
                 if ($(".talk-main").find('.nodata-txt').length > 0) {
                     $(".talk-main .nodata-txt").remove();

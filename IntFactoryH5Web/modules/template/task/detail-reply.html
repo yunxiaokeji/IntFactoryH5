@@ -2,6 +2,7 @@
     for(var i=0;i<$data.length;i++)
     {
         var item=$data[i];
+        console.log(item.content);
         var attachments=item.attachments;
         var images=[];
         var files=[];
@@ -26,7 +27,7 @@
         <div class="clear"></div>
     </div>
     <div class="reply-content mTop10">
-        {%=item.content%}
+        {%=item.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')%}
     </div>
     {%
     if(images.length>0||files.length>0)
