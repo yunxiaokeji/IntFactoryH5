@@ -255,19 +255,17 @@
                     var _this = $(this);
                     if (_this.index() != newHtml.find('div').length - 1) {
                         /*替换换行符*/
-                        //divContent += _this.text() + "<br/>";
-                        divContent += _this.text() + "";
+                        divContent += _this.text().replace(/</g, '&lt;').replace(/>/g, '&gt;') + "<br>";
                     } else {
                         /*如果是最后一个DIV则不换行*/
-                        divContent += _this.text();
+                        divContent += _this.text().replace(/</g, '&lt;').replace(/>/g, '&gt;');
                     }
                 });
                 newHtml.find('div').remove();
                 /*替换换行符*/
-                //divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br/>" : "") + divContent;
-                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "" : "") + divContent;
+                divContent = (newHtml.html().trim() != "" ? newHtml.html().replace(/</g, '&lt;').replace(/>/g, '&gt;') + "<br>" : "") + divContent;
             } else {
-                divContent = newHtml.html();
+                divContent = newHtml.html().replace(/</g, '&lt;').replace(/>/g, '&gt;');
             }
             TaskReplyParas.content = divContent;
             var msgReply = JSON.stringify(TaskReplyParas);

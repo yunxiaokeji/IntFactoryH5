@@ -216,9 +216,6 @@
 
     //查看结果
     Global.replaceQqface = function (str) {
-        str = str.replace(/\</g, '&lt;');
-        str = str.replace(/\>/g, '&gt;');
-        str = str.replace(/\n/g, '<br/>');
         str = str.replace(/\[em_([0-9]*)\]/g, '<img style="width:24px;height:24px;" align="absbottom" src="/modules/images/qqface/$1.gif" border="0" />');
         return str;
     }
