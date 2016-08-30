@@ -254,14 +254,18 @@
                 newHtml.find('div').each(function () {
                     var _this = $(this);
                     if (_this.index() != newHtml.find('div').length - 1) {
-                        divContent += _this.text() + "<br/>";
+                        /*替换换行符*/
+                        //divContent += _this.text() + "<br/>";
+                        divContent += _this.text() + "";
                     } else {
                         /*如果是最后一个DIV则不换行*/
                         divContent += _this.text();
                     }
                 });
                 newHtml.find('div').remove();
-                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br/>" : "") + divContent;
+                /*替换换行符*/
+                //divContent = (newHtml.html().trim() != "" ? newHtml.html() + "<br/>" : "") + divContent;
+                divContent = (newHtml.html().trim() != "" ? newHtml.html() + "" : "") + divContent;
             } else {
                 divContent = newHtml.html();
             }
