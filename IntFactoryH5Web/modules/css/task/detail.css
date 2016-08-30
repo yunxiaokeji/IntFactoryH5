@@ -57,7 +57,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 /*讨论显示区域*/
 .main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:80px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
-.main-box .talk-content li {list-style:none;}
+.main-box .talk-content li {list-style:none;padding:1px;border:1px solid #efefef;}
 .main-box .talk-main { width:100%;}
 
 .main-box .avatar img { width:30px;height:30px;border-radius:50%;}
@@ -157,7 +157,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .no-log {text-align:center;margin:20px 0;color:#666; }
 .log-status { margin:0 10px;}
 .log-status .log-box { border-bottom:1px solid #ccc;width:100%;overflow:hidden;padding:4px 0;display:table;}
-.log-status .log-box img { width:35px;height:35px;border-radius:50%;margin-top:8px;}
+.log-status .log-box img { width:25px;height:25px;border-radius:50%;margin-top:14px;margin-right:5px;}
 .log-status .log-box li { display:table-cell;color:#666;}
 .log-status .log-box .log-name {color:#444040;vertical-align:top;padding-top: 17px;}
 .log-status .log-box li:first-child{padding-right:3px;}

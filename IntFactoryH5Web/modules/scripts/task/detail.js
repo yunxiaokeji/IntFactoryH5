@@ -626,14 +626,14 @@
     //获取任务详情日志列表
     ObjectJS.getTaskLogs = function () {
         if ($(".log-status").data('isLoading') != 1) {
-            if (logPageCount >= Paras.logPageIndex) {
+            if (LogPageCount >= Paras.logPageIndex) {
                 $(".log-status").append('<div class="data-loading"></div>');
                 $(".log-status").data('isLoading', 1);
                 $.post("/Task/GetLogInfo", Paras, function (data) {
                     $(".log-status").data('isLoading', 0);
                     $(".log-status .data-loading").remove();
-                    logPageCount = data.pagecount;
-                    if (logPageCount == 0) {
+                    LogPageCount = data.pagecount;
+                    if (LogPageCount == 0) {
                         $(".log-status").html("<div class='nodata-txt'>暂无数据</div>");
                     }
                     else {
