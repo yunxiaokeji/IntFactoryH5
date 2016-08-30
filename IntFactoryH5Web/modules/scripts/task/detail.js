@@ -28,13 +28,13 @@
     var WindowScrollTop = 0;
 
     var ObjectJS = {};
-    ObjectJS.init = function (haveImg, isOwner, userID, task,userName) {
+    ObjectJS.init = function (orderImagesCount, isOwner, userID, task) {
         var jsonTask = JSON.parse(task.replace(/&quot;/g, '"'));
         Paras.orderID = jsonTask.orderID;
         Paras.taskID = jsonTask.taskID;
         ObjectJS.task = jsonTask;
         ObjectJS.order = jsonTask.order;
-        ObjectJS.haveImg = haveImg;
+        ObjectJS.orderImagesCount = orderImagesCount;
         ObjectJS.userID = userID;
         ObjectJS.userName = userName;
         ObjectJS.isOwner = isOwner;
@@ -55,20 +55,19 @@
 
     //绑定事件
     ObjectJS.bindEvent = function () {
-        if (ObjectJS.haveImg == 1) {
-            $(".main_image").touchSlider({
-                flexible: true,
-                speed: 200,
-                paging: $(".flicking_con a"),
-                counter: function (e) {
-                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
-                }
-            });
+        if (ObjectJS.orderImagesCount > 0) {
+            if (ObjectJS.orderImagesCount > 1) {
+                $(".main_image").touchSlider({
+                    flexible: true,
+                    speed: 200,
+                    paging: $(".flicking_con a"),
+                    counter: function (e) {
+                        $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                    }
+                });
+            }
 
             ObjectJS.setImagesSize();
-        }
-        else {
-
         }
         
         var uploader = Upload.uploader({
@@ -223,16 +222,16 @@
             newHtml.find('.pic-list,.doc-list').remove();
             newHtml.find('div.clear').remove();
             if (!newHtml.text().trim()) {
-                alert("讨论内容不能为空！");
+                alert("讨论内容不能为空！", 2);
                 return false;
             }
             if ($('.task-file li').find('.mark-progress').length > 0) {
-                alert("文件上传中，请稍等");
+                alert("文件上传中，请稍等", 2);
                 return false;
             }
             _this.html('发表中...');
             if (IsLoading) {
-                alert("发表中,请稍候再试.");
+                alert("发表中,请稍候再试.", 2);
                 return false;
             }
 
@@ -288,7 +287,7 @@
         //点击发表讨论出现弹出层
         $(".txt-talkcontent").click(function () {
             if (IsLoading) {
-                alert("上一条评论发表中,请稍候再试.");
+                alert("上一条评论发表中,请稍候再试.", 2);
                 return false;
             }
             if ($("#pic-list").length == 0) {
@@ -536,15 +535,15 @@
                     ObjectJS.showConfirmForm(1);
                 });
             } else if (data == 0) {
-                alert("失败");
+                alert("失败", 2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
@@ -560,29 +559,29 @@
                 }
                 $(".complete-time").html(new Date().toString("yyyy-MM-dd"));
             } else if (data == 0) {
-                alert("失败");
+                alert("失败", 2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限;");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
 
     //接受任务、标记任务完成的弹出浮层
     ObjectJS.showConfirmForm = function (showStatus) {
-        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
+        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "确定完成任务?";
         confirm(alertMsg, function () {
             if (showStatus == 0) {
                 ObjectJS.setTaskEndTime();
             } else {
                 ObjectJS.finishTask();
             }
-        });
+        }, "设置");
     }
 
     //设置图片宽高
@@ -709,7 +708,7 @@
             //点击回复把用户名写入文本框
             innerText.find(".return-reply .iconfont").click(function () {
                 if (IsLoading) {
-                    alert("上一条评论发表中,请稍候再试.");
+                    alert("上一条评论发表中,请稍候再试.", 2);
                     return false;
                 }
                 if ($("#pic-list").length == 0) {

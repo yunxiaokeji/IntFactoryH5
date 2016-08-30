@@ -28,7 +28,7 @@
     var ObjectJS = {};
     ObjectJS.PageCount = 0;
     ObjectJS.IsLoading = false;
-    ObjectJS.init = function () {       
+    ObjectJS.init = function () {
         ObjectJS.bindEvent();
         ObjectJS.getList();
         ObjectJS.getTaskLableColors();        
@@ -218,15 +218,15 @@
                 $("#btnAcceptTaskTime_" + taskParms.taskID).remove();
                 $("#iconFontDetails_" + taskParms.taskID).html("&#xe621;").addClass("color333");
             } else if (data == 0) {
-                alert("失败");
+                alert("失败",2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
@@ -238,15 +238,15 @@
                 $("#btnFinishTask_" + taskParms.taskID).remove();
                 $("#iconFontDetails_" + taskParms.taskID).html("&#xe61f;");
             } else if (data == 0) {
-                alert("失败");
+                alert("失败", 2);
             } else if (data == 2) {
-                alert("有前面阶段任务未完成");
+                alert("有前面阶段任务未完成", 2);
             } else if (data == 3) {
-                alert("没有权限;");
+                alert("没有权限", 2);
             } else if (data == 4) {
-                alert("任务没有接受，不能设置完成");
+                alert("任务没有接受，不能设置完成", 2);
             } else if (data == 5) {
-                alert("任务有未完成步骤");
+                alert("任务有未完成步骤", 2);
             }
         });
     }
@@ -260,7 +260,7 @@
             } else {
                 ObjectJS.finishTask();
             }
-        });
+        }, "设置");
     }
 
     ObjectJS.getList = function (noEmpty) {

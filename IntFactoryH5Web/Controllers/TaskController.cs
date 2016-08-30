@@ -24,8 +24,8 @@ namespace IntFactoryH5Web.Controllers
 
             if (resultTask.error_code != 0)
             {
-                resultTaskInfoObj.Add("result", 0);
-                resultTaskInfoObj.Add("error-msg", resultTask.error_message);
+                Response.Write("<script>alert('页面出现才错误');location.href='/task/list';</script>");
+                Response.End();
             }
             else
             {
@@ -49,6 +49,10 @@ namespace IntFactoryH5Web.Controllers
                     ViewBag.DomainUrl = resultTask.domainUrl;
                     ViewBag.Users = CurrentUser;
                     ViewBag.ModuleName = resultTask.moduleName;
+                }
+                else {
+                    Response.Write("<script>alert('任务不存在');location.href='/task/list';</script>");
+                    Response.End();
                 }
             }
             return View();
