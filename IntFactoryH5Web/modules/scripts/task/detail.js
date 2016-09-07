@@ -603,23 +603,26 @@
 
     //获取任务讨论列表
     ObjectJS.getTaskReplys = function () {
-        GetOrAddReply = "GetReply";
-        if (ReplyPageCount >= Paras.replyPageIndex) {
-            $(".main-box .talk-main").append('<div class="data-loading"></div>');
-            $.post("/Task/GetDiscussInfo", Paras, function (data) {
-                $(".main-box .talk-status .data-loading").remove();
-                ReplyPageCount = data.pagecount;
-                if (ReplyPageCount == 0) {
-                    $(".main-box .talk-main").append('<div class="nodata-txt">暂无数据</div>');
-                }
-                else {
-                    ObjectJS.GetOrAddTaskReply(data, GetOrAddReply);
-                }
-            });
-        } else {
-            if ($(".reply-box").length > 0) {
-                if ($(".alert-lastreplypage").length == 0) {
-                    $(".main-box .talk-main").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条啦</div>");
+        if ($(".log-status").data('isLoading') != 1) {
+            GetOrAddReply = "GetReply";
+            if (ReplyPageCount >= Paras.replyPageIndex) {
+                $(".main-box .talk-main").append('<div class="data-loading"></div>');
+                $(".log-status").data('isLoading', 1);
+                $.post("/Task/GetDiscussInfo", Paras, function (data) {
+                    $(".main-box .talk-status .data-loading").remove();
+                    ReplyPageCount = data.pagecount;
+                    if (ReplyPageCount == 0) {
+                        $(".main-box .talk-main").append('<div class="nodata-txt">暂无数据</div>');
+                    }
+                    else {
+                        ObjectJS.GetOrAddTaskReply(data, GetOrAddReply);
+                    }
+                });
+            } else {
+                if ($(".reply-box").length > 0) {
+                    if ($(".alert-lastreplypage").length == 0) {
+                        $(".main-box .talk-main").append("<div class='alert-lastreplypage center mTop10 color999'>已经是最后一条啦</div>");
+                    }
                 }
             }
         }
@@ -699,6 +702,7 @@
                     $(this).find("img").css({ "width": "36px", "height": "36px" });
                 });
                 $(".talk-main").append(innerText);
+                $(".log-status").data('isLoading', 0);
             } else {
                 if ($(".talk-main").find('.nodata-txt').length > 0) {
                     $(".talk-main .nodata-txt").remove();
@@ -720,6 +724,7 @@
                 if ($("#doc-list").length == 0) {
                     $(".reply-layer-content").append('<ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul><div class="clear"></div>');
                 }
+                WindowScrollTop = $(document).scrollTop();
                 $("body,html").addClass('layer');
                 $(".reply-layer").show();
                 setTimeout(function () { $(".reply-layer").addClass('show'); }, 10);
