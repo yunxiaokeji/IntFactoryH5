@@ -79,7 +79,7 @@
         _wrap.append(_wrapIcon).append(_wrapMsg).append(__wrapClose);
         _alter.append(_wrap);
         _alter.appendTo("body");
-        var left = $(window).width() / 2 - (_alter.outerWidth() / 2)-5 ;
+        var left = $(window).width() / 2 - (_alter.outerWidth() / 2) ;
         _alter.offset({ left: left });
         __wrapClose.click(function () {
             _alter.remove();
@@ -113,7 +113,7 @@
         window_confirm.appendTo("body");
 
         $("input").blur();
-        var left = $(window).width() / 2 - (window_confirm.outerWidth() / 2) - 5;
+        var left = $(window).width() / 2 - (window_confirm.outerWidth() / 2);
         window_confirm.offset({ left: left });
 
         _close.click(function () {
