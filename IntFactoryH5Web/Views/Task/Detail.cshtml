@@ -55,7 +55,7 @@
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">
-            <span style="width:90px;" class="long">@(task.title+"-"+task.ownerUser.name)</span>
+            <span>@(task.title+"-"+task.ownerUser.name)</span>
         </div>
         <div class="task-accept">
             @{

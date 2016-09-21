@@ -14,7 +14,7 @@ left:0;
 top:0;
 color:#BFD2F2;
 }
-header .task-text {color:#BFD2F2;text-align:center;font-size:16px;}
+header .task-text {color:#BFD2F2;font-size:16px;margin-left:45px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:20px;color:#BFD2F2;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
