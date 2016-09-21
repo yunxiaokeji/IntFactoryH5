@@ -6,6 +6,7 @@
 <div class="doc-item">
     <div class="doc-header">
         <span class="left">{%=data.ProductName==""?"未设置":data.ProductName%}</span>
+        <span class="right mRight15">{%=data.PlanQuantity%}</span>
         <div class="clear"></div>
         <div class="lump"></div>
     </div>
@@ -24,10 +25,10 @@
                 <span style="display:inline-block;width:70px;">单&nbsp;&nbsp;&nbsp;价：</span>{%=data.Price%}
             </li>
             <li class="mRight10 long" style="width:100%;">
-                <span style="display:inline-block;width:70px;">消耗量：</span>{%=data.Quantity%}    
+                <span style="display:inline-block;width:70px;">单件消耗：</span>{%=data.Quantity%}    
             </li>
             <li>
-                <span style="display:inline-block;width:70px;">损耗量：</span>{%=data.Loss%}
+                <span style="display:inline-block;width:70px;">采购量：</span>{%=data.PlanQuantity%}
             </li>
             <li class="mRight10 long" style="width:100%;">
                 <span style="display:inline-block;width:70px;">小&nbsp;&nbsp;&nbsp;计：</span>{%=data.TotalMoney%}    

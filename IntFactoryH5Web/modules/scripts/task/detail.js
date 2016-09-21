@@ -48,24 +48,24 @@
         ObjectJS.bindEvent();
 
         //设置图片显示宽高
-        $(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
-        $(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
+        //$(".pic-list li").css({ "margin-right": "10px", "border": "1px solid #ccc" });
+        //$(".pic-list .pic-box img").css({ "width": "100%", "height": "200px" });
         $(".platemakingBody table tr td:last-child").remove();
     }
 
     //绑定事件
     ObjectJS.bindEvent = function () {
         if (ObjectJS.orderImagesCount > 0) {
-            if (ObjectJS.orderImagesCount > 1) {
-                $(".main_image").touchSlider({
-                    flexible: true,
-                    speed: 200,
-                    paging: $(".flicking_con a"),
-                    counter: function (e) {
-                        $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
-                    }
-                });
-            }
+            //if (ObjectJS.orderImagesCount > 1) {
+            //    $(".main_image").touchSlider({
+            //        flexible: true,
+            //        speed: 200,
+            //        paging: $(".flicking_con a"),
+            //        counter: function (e) {
+            //            $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+            //        }
+            //    });
+            //}
 
             ObjectJS.setImagesSize();
         }
@@ -588,17 +588,17 @@
 
     //设置图片宽高
     ObjectJS.setImagesSize = function () {
-        var windowWidth = $(window).width();
-        $(".main_image").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
-        $(".main_image ul li").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
+        //var windowWidth = $(window).width();
+        //$(".main_image").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
+        //$(".main_image ul li").css({ "height": windowWidth + "px", "width": windowWidth + "px" });
 
-        $(".main_image ul li").each(function () {
-            if ($(this).find('img').width() > $(this).find('img').height()) {
-                $(this).find('img').css("height", windowWidth + "px");
-            } else {
-                $(this).find('img').css("width", windowWidth + "px");
-            }
-        });
+        //$(".main_image ul li").each(function () {
+        //    if ($(this).find('img').width() > $(this).find('img').height()) {
+        //        $(this).find('img').css("height", windowWidth + "px");
+        //    } else {
+        //        $(this).find('img').css("width", windowWidth + "px");
+        //    }
+        //});
     }
 
     //获取任务讨论列表

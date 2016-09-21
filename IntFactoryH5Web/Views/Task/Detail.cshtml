@@ -9,15 +9,18 @@
     var ModuleName=ViewBag.ModuleName;
     var isOwner = task.ownerUser.userID.Equals(Users.userID, StringComparison.OrdinalIgnoreCase) ? true : false;
     var isRoot=(task.status != 8 && (ViewBag.IsEditTask || isOwner) && (task.finishStatus == 1 || task.lockStatus == 2)) ? "1" : string.Empty;
-    string[] imagesUrl = { };
-    if(task.order.orderImages.Length!=0)
-    {
-        imagesUrl = task.order.orderImages.Trim(',').Split(',');      
+    string[] imagesUrl = {};
+    if (!string.IsNullOrEmpty(task.orderImg)){
+        imagesUrl = new string[] { task.orderImg };
     }
+    //if(task.order.orderImages.Length!=0)
+    //{
+    //    imagesUrl = task.order.orderImages.Trim(',').Split(',');      
+    //}
 }
 @section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
-    <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
+ @*   <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />*@
     @{
         if(task.finishStatus==0){
         <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
@@ -26,9 +29,9 @@
       }
 }
 @section scripts{
-    <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
+@*    <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
     <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery.js"></script> 
+    <script src="/modules/plug/touchSlider/js/jquery.js"></script> *@
     @if(task.finishStatus==0){
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
@@ -52,7 +55,7 @@
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">
-            <span style="width:90px;" class="long">@(task.title+"-"+task.ownerUser.name)</span>
+            <span>@(task.title+"-"+task.ownerUser.name)</span>
         </div>
         <div class="task-accept">
             @{
@@ -95,7 +98,7 @@
     </header>
 
     <div class="main_visual mTop50">
-        <div class="flicking_con">
+@*        <div class="flicking_con">
             @{
                 if (imagesUrl.Length > 1)
                 {
@@ -105,7 +108,7 @@
                     }
                 }
             }
-        </div>
+        </div>*@
         <div class="main_image">
             <ul>
                 @{
@@ -113,7 +116,7 @@
                     {
                         for (int i = 0; i < imagesUrl.Length; i++)
                         {
-                            <li><img src="@(imagesUrl[i])"></li>
+                            <li><img style="width:100%;" src="@(imagesUrl[i])" ></li>
                         }
                     }
                 }
@@ -127,7 +130,7 @@
         <div class="main-info">
             <ul class="mLeft10 mRight10">
                 <li class="long" style="display:block;">
-                    <span>订单款式：</span><span class="task-code base-info">@(string.IsNullOrEmpty(task.order.goodsName) ? "--" : task.order.goodsName)</span>
+                    <span>款式：</span><span class="task-code base-info">@(task.order.goodsName+"--"+task.order.orderCode)</span>
                 </li>
                 <li>
                     <span>交货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.order.planTime) ? "--" : DateTime.Parse(task.order.planTime).ToString("yyyy-MM-dd"))</span>
