@@ -28,7 +28,7 @@
     color:#999;
     margin-left:10px;
 }
-.search .search-box .txt-search{border:none; width:80%;padding:15px 0; color:#666;font-size:18px;vertical-align:initial;}
+.search .search-box .txt-search{border:none; width:80%;padding:14px 0; color:#666;font-size:16px;vertical-align:initial;}
 .search .btn-search {color:#4a98e7;position:fixed;top:14px;right:10px;font-size:18px;}
 .search .btn-cancel {background-color:#aaa;position:fixed;top:16px;right:70px;font-size:16px;color:#fff;border-radius:12px;padding:3px;}
 /*退出下拉*/
@@ -43,7 +43,7 @@
 .task-status .hover a,.task-status .hover div{color:#4a98e7;}
 /*选择条件的css样式*/
 .filter-task{width:100%;background-color:#fff;}
-.filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none;border-right:1px solid #eee; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .filter-task a{color:#888;}
  .filter-task li .iconfont {color:#888; }
 /*选项下拉*/

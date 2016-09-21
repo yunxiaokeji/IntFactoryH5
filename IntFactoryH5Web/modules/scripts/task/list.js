@@ -37,11 +37,11 @@
     ObjectJS.bindEvent = function () {
         //滚动加载数据
         $(window).scroll(function () {
-            if (document.body.scrollTop > 30) {
-                $(".getback").slideDown("slow");
-            } else {
-                $(".getback").slideUp("slow");
-            }
+            //if (document.body.scrollTop > 30) {
+            //    $(".getback").slideDown("slow");
+            //} else {
+            //    $(".getback").slideUp("slow");
+            //}
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
             if (bottom <= 200) {
                 if (!ObjectJS.IsLoading) {
@@ -194,9 +194,9 @@
         });
         
         //返回顶部
-        $(".getback").click(function () {
-            $('html, body').animate({ scrollTop: 0 }, 'slow');
-        });
+        //$(".getback").click(function () {
+        //    $('html, body').animate({ scrollTop: 0 }, 'slow');
+        //});
     };
 
     //绑定时间控件
