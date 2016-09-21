@@ -71,7 +71,6 @@
 
         //显示关键字遮罩层
         $(".iconfont-search").click(function () {
-            $(".btn-search").text("确定");
             $(".txt-search").val("").focus();
             $(".shade,.search").show();
             $(".span-search").css("width", (document.body.clientWidth - 150) + "px");
@@ -79,27 +78,35 @@
 
         //关键字查询
         $(".btn-search").click(function () {
-            var name = $(this).text();
-            if (name == "确定") {
-                var txt = $(".txt-search").val();
-                if (txt != "") {
-                    $(".shade").slideUp("slow");
-                    $(this).text("取消");
+            var keyWords = $(".txt-search").val();
+            if (keyWords != Params.keyWords) {
+                Params.keyWords = keyWords;
+                Params.pageIndex = 1;
+                ObjectJS.getList();
 
-                    Params.pageIndex = 1;
-                    Params.keyWords = txt;
-                    ObjectJS.getList();
-                    
-                } else {
+                if (keyWords == '') {
+                    $(".btn-cancel").hide();
                     $(".search").hide();
                 }
+                else {
+                    $(".btn-cancel").show();
+                }
             } else {
-                $(".search").hide();
-
-                Params.keyWords = "";
-                ObjectJS.getList();
+                if (keyWords == '') {
+                    $(".search").hide();
+                }
             }
+
             $(".shade").hide();
+        });
+
+        $(".btn-cancel").click(function () {
+            $(".btn-cancel").hide();
+            $(".search").hide();
+            $(".shade").hide();
+            Params.keyWords = "";
+            Params.pageIndex = 1;
+            ObjectJS.getList();
         });
 
         //搜索内容发生变化

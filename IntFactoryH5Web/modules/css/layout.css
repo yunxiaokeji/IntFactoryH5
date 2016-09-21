@@ -59,7 +59,7 @@ header .task-text {color:#373737;text-align:center;}
 
 .table-list .tr-header{ height:35px; text-align:center; }
 .table-list .tr-header td{ height:35px; border-bottom:solid 2px #e6e6e6;  font-weight:bold; color:#666; padding:0 5px;
-                           white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
+                           white-space:normal; overflow: hidden; text-overflow:ellipsis; }
 
 .table-list tr:not(:first-child){ height:35px; cursor:pointer; }
 .table-list tr:not(:first-child):hover { background-color: #f6f6f6; }
