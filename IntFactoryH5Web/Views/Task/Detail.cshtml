@@ -9,18 +9,14 @@
     var ModuleName=ViewBag.ModuleName;
     var isOwner = task.ownerUser.userID.Equals(Users.userID, StringComparison.OrdinalIgnoreCase) ? true : false;
     var isRoot=(task.status != 8 && (ViewBag.IsEditTask || isOwner) && (task.finishStatus == 1 || task.lockStatus == 2)) ? "1" : string.Empty;
-    string[] imagesUrl = {};
-    if (!string.IsNullOrEmpty(task.orderImg)){
-        imagesUrl = new string[] { task.orderImg };
-    }
-    //if(task.order.orderImages.Length!=0)
-    //{
-    //    imagesUrl = task.order.orderImages.Trim(',').Split(',');      
-    //}
+
+    var order = task.order;
+    var imgs = string.IsNullOrEmpty(order.orderImages) ? new string[] { } : order.orderImages.Split(',');
 }
 @section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
- @*   <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />*@
+     <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="/modules/plug/swiper/css/swiper.css" rel="stylesheet" />
     @{
         if(task.finishStatus==0){
         <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
@@ -29,9 +25,12 @@
       }
 }
 @section scripts{
-@*    <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery.js"></script> *@
+    @{
+        if (imgs.Length > 1)
+        {
+        <script src="/modules/plug/swiper/swiper.min.js"></script>
+        }
+    }
     @if(task.finishStatus==0){
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
@@ -42,7 +41,7 @@
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@(imagesUrl.Length)',
+                    '@(imgs.Length)',
                      '@isOwner',
                     '@Users.userID',
                     '@taskJson',
@@ -96,41 +95,39 @@
             }  
         </div>
     </header>
-
-    <div class="main_visual mTop50">
-@*        <div class="flicking_con">
+    <div class="swiper-container" style="margin-top:50px;">
+        <div class="swiper-wrapper">
             @{
-                if (imagesUrl.Length > 1)
+                foreach (var img in imgs)
                 {
-                    for (int i = 0; i < imagesUrl.Length; i++)
-                    {
-                        <a class="@(i == 0 ? "on" : "")" href="javascript:void(0);"></a>
-                    }
+                <div class="swiper-slide">
+                    <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                    <img data-src="@img" class="swiper-lazy">
+                    <!-- Preloader image -->
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
                 }
             }
-        </div>*@
-        <div class="main_image">
-            <ul>
-                @{
-                    if (imagesUrl.Length > 0)
-                    {
-                        for (int i = 0; i < imagesUrl.Length; i++)
-                        {
-                            <li><img style="width:100%;" src="@(imagesUrl[i])" ></li>
-                        }
-                    }
-                }
-            </ul>
-            <div class="clear"></div>
         </div>
-    </div>
-    
+      
+      @{
+          if (imgs.Length > 1)
+          {
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+        <!-- Navigation -->
+        <div class="swiper-button-next swiper-button-white"></div>
+        <div class="swiper-button-prev swiper-button-white"></div>
+        }
+          }
+    </div>    
     <!--任务信息-->
     <div class="task-info">
         <div class="main-info">
             <ul class="mLeft10 mRight10">
                 <li class="long" style="display:block;">
-                    <span>款式：</span><span class="task-code base-info">@(task.order.goodsName+"--"+task.order.orderCode)</span>
+                    <span>
+                        订单款式：</span><span class="task-code base-info">@(task.order.goodsCode+"--"+task.order.goodsName)</span>
                 </li>
                 <li>
                     <span>交货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.order.planTime) ? "--" : DateTime.Parse(task.order.planTime).ToString("yyyy-MM-dd"))</span>
