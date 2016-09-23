@@ -428,7 +428,7 @@
                                             $(".nav-partdiv .nodata-txt").remove();
                                         });
 
-                                        $(".goods-items input").val(0);
+                                        $(".goods-items input").val('');
                                         alert(showMsg + "录入成功");
                                     } else if (data.result == "10001") {
                                         alert("您没有操作权限!",2)
@@ -444,8 +444,8 @@
                     });
                     innerHtml.find('.quantity').change(function () {
                         var _this = $(this);
-                        if (!_this.val().isInt() || _this.val() <= 0) {
-                            _this.val(0);
+                        if (!_this.val().isInt() || _this.val() < 0) {
+                            _this.val('');
                             return false;
                         }
                     });
