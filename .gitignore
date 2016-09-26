@@ -32,3 +32,5 @@ UploadFiles
 *.dbmdl
 
 IntFactoryH5Web/Web.config
+
+[Ww]eb.config
