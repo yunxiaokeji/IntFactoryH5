@@ -343,6 +343,7 @@
     <Content Include="Views\Task\SewnDoc.cshtml" />
     <Content Include="Views\Task\OrderCostDoc.cshtml" />
     <Content Include="Views\Home\Code.cshtml" />
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">
