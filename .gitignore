@@ -19,7 +19,6 @@
 *.ilk
 *.log
 *.suo
-[Ww]eb.config
 [Bb]in
 [Dd]ebug*/
 *.lib
