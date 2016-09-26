@@ -29,11 +29,7 @@
     <div class="login-body">
         <div class="main">
             @{if (BindAccountType==0){
-            <div class="login-title">厂盟
-                @* <div class="left"><img src="/modules/images/logo_login.png"  style="width:28px;"/></div>*@
-@*                 <div class="loginTitle left mLeft5"> </div>
-                 <div class="clear"></div>*@
-            </div>
+            <div class="login-title">厂盟</div>
             }
             else{
              <div class="login-bind">您的微信还未绑定 <span style="color:#000;font-size:18px;">厂盟智能</span> 帐号</div>
@@ -41,7 +37,7 @@
             <div class="login">
                 <div class="registerErr hide"></div>
                 <div class="loginbar">
-                    <input type="text" class="input" id="iptUserName" placeholder="请输入账号" value="@ViewBag.UserName" maxlength="25"/>
+                    <input type="text" style="padding:10px 5px;" class="input" id="iptUserName" placeholder="请输入账号" value="@ViewBag.UserName" maxlength="25"/>
                 </div>
                 <div class="loginbar" style="position:relative;">
                     <input type="password" class="input" id="iptPwd"/>

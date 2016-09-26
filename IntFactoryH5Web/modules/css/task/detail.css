@@ -14,12 +14,11 @@ left:0;
 top:0;
 color:#BFD2F2;
 }
-header .task-text {color:#BFD2F2;text-align:center;font-size:16px;}
+header .task-text {color:#BFD2F2;font-size:16px;margin-left:45px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:20px;color:#BFD2F2;width:40px;}
 .task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
 .task-accept span { color:#BFD2F2;font-size:16px;}
-.task-accept .btn-finishTask,.task-accept .btn-acceptTaskTime{background-color:#2F73B8;border:1px solid #fff; color:#fff; text-align:center;font-size:16px;padding:6px 10px; border-radius:2px;width:80px;}
 
 /*焦点图*/
 .task-msg {width:100%;position:absolute;left:0;top:0;background-color:rgba(165,166,161,0.8);z-index:999;line-height:50px;text-indent:1em;color:#fff;}
@@ -58,7 +57,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 /*讨论显示区域*/
 .main-box {min-height:80px;background-color:#fff;padding:10px 0;margin-bottom:80px;}
 .main-box .talk-content { padding:10px 0;margin:0 20px;position:relative;}
-.main-box .talk-content li {list-style:none;}
+.main-box .talk-content li {list-style:none;padding:1px;border:1px solid #efefef;}
 .main-box .talk-main { width:100%;}
 
 .main-box .avatar img { width:30px;height:30px;border-radius:50%;}
@@ -90,7 +89,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
                transition:transform 0.5s;-webkit-transition:-webkit-transform 0.5s;-moz-transition:-moz-transform 0.5s;
                transform:translateY(100%);-moz-transform:translateY(100%);-webkit-transform:translateY(100%);
                 }
-.reply-layer.show {transform:translateY(0);-webkit-transform:translateY(0);-moz-transform:translateY(0); }
+.reply-layer.show { transform: translateY(0); -webkit-transform: translateY(0); -moz-transform: translateY(0); }
 
 .reply-layer .reply-layer-header { line-height:50px;background-color:#2F73B8;height:50px;color:#BFD2F2;}
 .reply-layer-content {background-color:#fff;padding:10px;outline:none;overflow-y:scroll;-webkit-box-flex:1;-moz-box-flex:1;}
@@ -147,9 +146,9 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .doc-item .doc-header { background-color: #efefef; color: #666;position:relative;line-height:50px;}
 .doc-item .doc-header.hover { background-color: #4a98e7; color: #fff; }
 .doc-item .doc-header .lump { width:0;height:0;border-left:7px solid #888;border-top:7px solid transparent;border-bottom:7px solid transparent;position:absolute;right:10px;top:18px;
-                              transition:transform 0.8s;-moz-transition:-moz-transform 0.8s;-webkit-transition:-webkit-transform 0.8s;}
+                              transition:transform 0.5s linear;-moz-transition:-moz-transform 0.5s linear;-webkit-transition:-webkit-transform 0.5s linear;}
 .doc-item .doc-header .lump.hover { transform:rotate(90deg);-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);border-left-color:#fff;}
-/*translateZ开启动画加速*/
+
 .doc-item .doc-content { transform:translateZ(0);-webkit-transform:translateZ(0);-moz-transform:translateZ(0);}
 .doc-item .doc-content ul{ border-bottom:1px solid #efefef;}
 .doc-item .doc-content ul li { line-height:36px;}
@@ -158,7 +157,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .no-log {text-align:center;margin:20px 0;color:#666; }
 .log-status { margin:0 10px;}
 .log-status .log-box { border-bottom:1px solid #ccc;width:100%;overflow:hidden;padding:4px 0;display:table;}
-.log-status .log-box img { width:35px;height:35px;border-radius:50%;margin-top:8px;}
+.log-status .log-box img { width:25px;height:25px;border-radius:50%;margin-top:14px;margin-right:5px;}
 .log-status .log-box li { display:table-cell;color:#666;}
 .log-status .log-box .log-name {color:#444040;vertical-align:top;padding-top: 17px;}
 .log-status .log-box li:first-child{padding-right:3px;}
@@ -167,3 +166,6 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 
 .getback { position:fixed;z-index:55555;color:#666;right:-5px;bottom:90px;display:none;}
 .getback .iconfont-back { font-size:30px;text-align:center;}
+@media screen and (max-width:358px) {
+    .goods-items tr td span, .goods-items tr td { font-size: 11px; }
+}

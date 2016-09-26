@@ -64,6 +64,29 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult GetOrderGoods(string orderID)
+        {
+            var result = OrderBusiness.BaseBusiness.GetOrderGoods(orderID, CurrentUser.userID, CurrentUser.clientID);
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
+        public JsonResult CreateOrderGoodsDoc(string orderID, string taskID, int docType, int isOver,
+                string details, string remark, string ownerID, string expressID = "", string expressCode = "")
+        {
+            string result = TaskBusiness.BaseBusiness.CreateOrderGoodsDoc(orderID, taskID, docType, isOver, details, remark, ownerID, CurrentUser.userID, CurrentUser.clientID, expressID, expressCode);
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         #endregion
     }
 }

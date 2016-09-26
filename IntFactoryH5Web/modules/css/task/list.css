@@ -21,15 +21,16 @@
 .task-filtertype li{height:40px;line-height:40px; color:#666;}
 /*遮罩*/
 .shade { width:100%;height:100%;top:0; position:fixed;z-index:1002;background-color:rgba(143,143,143,0.6);display:none;}
-.search {width:100%;background-color:rgb(143,143,143);position:fixed;top:0;z-index:1002;display:none;}
-.search .search-box { margin-right:70px;background-color:#fff;border-bottom:1px solid #ddd;}
+.search {width:100%;background-color:#fff;position:fixed;top:0;z-index:1002;display:none;border-bottom:1px solid #eee;}
+.search .search-box { margin-right:60px;border-right:1px solid #eee;}
 .search .search-box .iconfont {
-    font-size:22px;
+    font-size:24px;
     color:#999;
     margin-left:10px;
 }
-.search .search-box .txt-search{border:none; width:80%;padding:15px 0; color:#666;font-size:16px;}
-.search .btn-search {color:#333;height:30px;line-height:30px; position:fixed;top:11px;right:15px;font-size:20px;}
+.search .search-box .txt-search{border:none; width:80%;padding:14px 0; color:#666;font-size:16px;vertical-align:initial;}
+.search .btn-search {color:#4a98e7;position:fixed;top:14px;right:10px;font-size:18px;}
+.search .btn-cancel {background-color:#aaa;position:fixed;top:16px;right:70px;font-size:16px;color:#fff;border-radius:12px;padding:3px;}
 /*退出下拉*/
 .menu-box {position:absolute;top:33px; height:44px;line-height:60px;width:100%;z-index:302; box-shadow:0 0 5px #ccc;background-color:#fff;border-radius:2px;display:none; }
 .menu-box li{text-align:center;color:#333;line-height:44px;}
@@ -42,7 +43,7 @@
 .task-status .hover a,.task-status .hover div{color:#4a98e7;}
 /*选择条件的css样式*/
 .filter-task{width:100%;background-color:#fff;}
-.filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.filter-task li{width:33%;float:left;border:1px solid #ddd;border-left:none;border-right:1px solid #eee; margin-left:-1px;text-align:center;line-height:40px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .filter-task a{color:#888;}
  .filter-task li .iconfont {color:#888; }
 /*选项下拉*/

@@ -5,29 +5,32 @@
     
     JavaScriptSerializer serializer = new JavaScriptSerializer();
     var taskJson= serializer.Serialize(task);
-    var UserID = ViewBag.UserID;
+    var Users = (IntFactory.Sdk.UserBase)ViewBag.Users;
     var ModuleName=ViewBag.ModuleName;
-    var isOwner = task.ownerUser.userID.Equals(UserID, StringComparison.OrdinalIgnoreCase) ? true : false;
-    string[] imagesUrl = { };
-    if(task.order.orderImages.Length!=0)
-    {
-        imagesUrl = task.order.orderImages.Trim(',').Split(',');      
-    }
+    var isOwner = task.ownerUser.userID.Equals(Users.userID, StringComparison.OrdinalIgnoreCase) ? true : false;
+    var isRoot=(task.status != 8 && (ViewBag.IsEditTask || isOwner) && (task.finishStatus == 1 || task.lockStatus == 2)) ? "1" : string.Empty;
+
+    var order = task.order;
+    var imgs = string.IsNullOrEmpty(order.orderImages) ? new string[] { } : order.orderImages.Split(',');
 }
 @section css{
     <link href="/modules/css/task/detail.css" rel="stylesheet" />
-    <link href="/modules/plug/touchSlider/css/style.css" rel="stylesheet" />
+     <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="/modules/plug/swiper/css/swiper.css" rel="stylesheet" />
     @{
         if(task.finishStatus==0){
         <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
         <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
         }
       }
-    }
+}
 @section scripts{
-    <script src="/modules/plug/touchSlider/js/jquery-1.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery_002.js"></script>
-    <script src="/modules/plug/touchSlider/js/jquery.js"></script> 
+    @{
+        if (imgs.Length > 1)
+        {
+        <script src="/modules/plug/swiper/swiper.min.js"></script>
+        }
+    }
     @if(task.finishStatus==0){
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
@@ -38,10 +41,11 @@
         $(function () {
             seajs.use("/modules/scripts/task/detail", function (taskDetail) {
                 taskDetail.init(
-                    '@(imagesUrl.Length)',
+                    '@(imgs.Length)',
                      '@isOwner',
-                    '@UserID',
-                    '@taskJson'
+                    '@Users.userID',
+                    '@taskJson',
+                    '@Users.name'
                  );
             });
         })
@@ -50,13 +54,25 @@
     <header>
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">
-            <span style="width:90px;" class="long">@(task.title+"-"+task.ownerUser.name)</span>
+            <span>@(task.title+"-"+task.ownerUser.name)</span>
         </div>
         <div class="task-accept">
             @{
                 if (task.finishStatus == 2)
                 {
-                    <span>已完成</span>
+                    if(!isOwner&&task.lockStatus==2)
+                    {    
+                        <span>已解锁</span>
+                    }
+                    else if(isOwner&&task.lockStatus==2)
+                    {
+                        <input type="button" id="lockTask" class="header-btn"  value="锁定任务"  />
+                    }
+                    else
+                    {
+                        <span>已完成</span>
+                    }
+
                 }
                 else
                 {
@@ -68,52 +84,50 @@
                     {
                         if (task.finishStatus == 0)
                         {
-                            <input type="text" class="btn-acceptTaskTime" readonly="true" value="接受任务"  />              
+                            <input type="text" class="btn-acceptTaskTime header-btn" readonly="true" style="border-color:#fff;" value="接受任务"  />              
                         }
                         else if (task.finishStatus == 1)
                         { 
-                            <input type="button" class="btn-finishTask"  value="标记完成"  />   
+                            <input type="button" class="btn-finishTask header-btn"  value="标记完成"  />   
                         }
                     }
                 }
             }  
         </div>
     </header>
-
-    <div class="main_visual mTop50">
-        <div class="flicking_con">
+    <div class="swiper-container" style="margin-top:50px;">
+        <div class="swiper-wrapper">
             @{
-                if (imagesUrl.Length > 1)
+                foreach (var img in imgs)
                 {
-                    for (int i = 0; i < imagesUrl.Length; i++)
-                    {
-                        <a class="@(i == 0 ? "on" : "")" href="javascript:void(0);"></a>
-                    }
+                <div class="swiper-slide">
+                    <!-- Required swiper-lazy class and image source specified in data-src attribute -->
+                    <img data-src="@img" class="swiper-lazy">
+                    <!-- Preloader image -->
+                    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                </div>
                 }
             }
         </div>
-        <div class="main_image">
-            <ul>
-                @{
-                    if (imagesUrl.Length > 0)
-                    {
-                        for (int i = 0; i < imagesUrl.Length; i++)
-                        {
-                            <li><img src="@(imagesUrl[i])"></li>
-                        }
-                    }
-                }
-            </ul>
-            <div class="clear"></div>
-        </div>
-    </div>
-    
+      
+      @{
+          if (imgs.Length > 1)
+          {
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+        <!-- Navigation -->
+        <div class="swiper-button-next swiper-button-white"></div>
+        <div class="swiper-button-prev swiper-button-white"></div>
+        }
+          }
+    </div>    
     <!--任务信息-->
     <div class="task-info">
         <div class="main-info">
-            <ul class="left-task-info mLeft10 mRight10">
+            <ul class="mLeft10 mRight10">
                 <li class="long" style="display:block;">
-                    <span>订单款式：</span><span class="task-code base-info">@(string.IsNullOrEmpty(task.order.goodsName)?"--":task.order.goodsName)</span>
+                    <span>
+                        订单款式：</span><span class="task-code base-info">@(task.order.goodsCode+"--"+task.order.goodsName)</span>
                 </li>
                 <li>
                     <span>交货日期：</span><span class="accept-time base-info">@(string.IsNullOrEmpty(task.order.planTime) ? "--" : DateTime.Parse(task.order.planTime).ToString("yyyy-MM-dd"))</span>
@@ -143,16 +157,7 @@
                     <div class="clear"></div>
                 </li>
             </ul>
-            <ul class="right-task-info mRight10">
-                <li>
-                    <div class="dy-info">
-
-                    </div>
-                </li>
-            </ul>
-            <div class="clear"></div>
         </div>
-
         <div class="order-need">
             <div class="text-orderneed" style="width:75px;">订单需求：</div>
             <div class="pBottom10 mTop10" style="word-break:break-all;">@task.order.remark</div>
@@ -163,29 +168,36 @@
     <!--菜单-->
     <nav>
         <ul>
-            <li  class="@(task.mark==0?"menuchecked":"")" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
+            <li  class="@(task.mark == 0 ? "menuchecked" : "")" data-classname="talk-status"><i class="iconfont">&#xe610;</i>讨论</li>
             @{
-                if(task.mark==11){
+                if (task.mark == 11)
+                {
                 <li  class="menuchecked" data-classname="shop-status"><i class="iconfont">&#xe647;</i>@ModuleName</li>
                 }
-                else if(task.mark==12){
+                else if (task.mark == 12)
+                {
                 <li class="menuchecked" data-classname="print-status"><i class="iconfont">&#xe617;</i>@ModuleName</li>
                 }
-                else if(task.mark==16){
+                else if (task.mark == 16)
+                {
                 <li class="menuchecked" data-classname="navCosts"><i class="iconfont">&#xe617;</i>@ModuleName</li>
                 }
-                 else if(task.mark==15 && task.orderType==1){
+                else if (task.mark == 15 && task.orderType == 1)
+                {
                 <li  class="menuchecked" data-classname="navSendDYDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
-                 }
-                  else if(task.mark==13 && task.orderType==2){
+                }
+                else if (task.mark == 13 && task.orderType == 2)
+                {
                  <li  class="menuchecked" data-classname="navCutoutDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
-                  }
-                  else if(task.mark==14 && task.orderType==2){
+                }
+                else if (task.mark == 14 && task.orderType == 2)
+                {
                  <li class="menuchecked" data-classname="navSewnDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
-                  }
-                  else if(task.mark==15 && task.orderType==2){
+                }
+                else if (task.mark == 15 && task.orderType == 2)
+                {
                  <li class="menuchecked" data-classname="navSendDoc"><i class="iconfont">&#xe617;</i>@ModuleName</li>
-                  }
+                }
             }
             <li  data-classname="log-status"><i class="iconfont">&#xe633;</i>日志</li>
         </ul>
@@ -209,18 +221,23 @@
             </div>
         </div>
         @{
-            if(task.mark==11){
+            if (task.mark == 11)
+            {
             <div class="shop-status hide"></div>
             }
-            else if(task.mark==12){
+            else if (task.mark == 12)
+            {
              <div class="print-status hide">
                 <h1 class="plate-remark-msg">制版信息</h1>
                  @{
-                    if (!string.IsNullOrEmpty(task.order.platemaking)){
+                if (!string.IsNullOrEmpty(task.order.platemaking))
+                {
                     <div class="platemakingBody">@(new MvcHtmlString(Server.UrlDecode(task.order.platemaking)))</div>
-                     }else{
+                }
+                else
+                {
                             <div class="nodata-txt">暂无制版信息</div>
-                        }
+                }
                      }
                 <h1 class="plate-remark-msg">工艺说明</h1>
                 <div class="mTop10 tb-plates"></div>
@@ -234,11 +251,11 @@
               }
             else if (task.mark == 13 && task.orderType == 2)
             {
-              Html.RenderPartial("CutoutDoc", "");
+                Html.RenderPartial("CutoutDoc", isRoot);
             }
             else if (task.mark == 14 && task.orderType == 2)
             {
-             Html.RenderPartial("SewnDoc", "");
+                Html.RenderPartial("SewnDoc", isRoot);
             }
             else if (task.mark == 15 && task.orderType == 2)
             {

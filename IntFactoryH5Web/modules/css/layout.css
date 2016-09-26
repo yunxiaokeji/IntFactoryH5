@@ -1,19 +1,18 @@
 ﻿body { background-color:#fff;font-size:14px;}
 
 header { width:100%;background-color:#f8f8f8;line-height:60px;}
-header .task-text {color:#373737;text-align:center;}
 
 /*alert 弹出层样式*/
 .alert {background-color: #333;opacity:0.8; font-size: 13px; position: fixed; top:35%; z-index: 99999; 
          padding:20px;padding-left:40px;  overflow:auto; border-radius:5px;min-width:140px;max-width:260px;}
 .alert .alert-wrap { word-wrap: break-word;  word-break:break-all;color:#fff;font-size:14px;}
 .alert-wrap .alert-icon-right:before {content:"\e613";}
-.alert-wrap .alert-icon-right {display:inline-block;color:#fefefe;font-size:20px;}
+.alert-wrap .alert-icon-right {color:#fefefe;font-size:20px;float:left;}
 .alert-wrap .alert-icon-warn:before {content:"\e64a";}
-.alert-wrap .alert-icon-warn {display:inline-block;color:#fefefe;font-size:20px;}
-.alert-wrap .alert-msg {display:inline-block;color:#fff;font-size:16px;line-height:16px; padding:0 20px 0 15px;}
+.alert-wrap .alert-icon-warn {color:#fefefe;font-size:20px;float:left;}
+.alert-wrap .alert-msg {float:left;color:#fff;font-size:16px;line-height:24px; padding:0 20px 0 15px;max-width:160px;}
 .alert-wrap .alert-close:before {content:"\e628";}
-.alert-wrap .alert-close {display:inline-block;color:#ddd;font-size:16px;padding-top:4px;cursor:pointer;}
+.alert-wrap .alert-close {float:left;color:#ddd;font-size:20px;padding-top:0px;cursor:pointer;}
 .alert-wrap .alert-close:hover {color:#fff;}
 
 .confirm-layer {position: fixed; z-index:99998; top:0; left:0;right:0; bottom:0; background-color:#000; opacity:0.7;}
@@ -24,6 +23,11 @@ header .task-text {color:#373737;text-align:center;}
 .confirm-bottom .sure:hover {  background-color:#2F73B8;  }
 .confirm-bottom .close { padding:5px 40px; color:#999; border:none; cursor:pointer; display:inline-block; }
 .confirm-bottom .close:hover {color:#4a98e7; }
+
+.btn {  padding:5px 10px; background-color:#4a98e7; color:#fff; border:none; display:inline-block; border-radius:2px; line-height:18px;}
+
+.header-btn {background-color:#2F73B8;border:1px solid #fff; color:#fff;text-align:center;font-size:16px;padding:6px; border-radius:2px;width:80px;
+                                                              -webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}
 
 /*删除 叉*/
 .ico-delete{ background:url(/modules/images/ico-delete.png) no-repeat; height:30px; min-width:30px; line-height:30px; 
@@ -54,14 +58,14 @@ header .task-text {color:#373737;text-align:center;}
 
 .table-list .tr-header{ height:35px; text-align:center; }
 .table-list .tr-header td{ height:35px; border-bottom:solid 2px #e6e6e6;  font-weight:bold; color:#666; padding:0 5px;
-                           white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
+                           white-space:normal; overflow: hidden; text-overflow:ellipsis; }
 
 .table-list tr:not(:first-child){ height:35px; cursor:pointer; }
 .table-list tr:not(:first-child):hover { background-color: #f6f6f6; }
 .table-list tr:not(:first-child) td{ padding:5px; line-height:35px; border-bottom:solid 1px #eee; max-width:500px; color:#333; 
                                      white-space:nowrap; overflow: hidden; text-overflow:ellipsis; }
 
-.table-list tr td:first-child{ text-indent:12px;}
+.table-list tr td:first-child{ text-indent:2px;}
 
 .table-list td a{ color:#4a98e7;  vertical-align:middle;}
 .table-list td a:hover{ color:red; text-decoration:underline; }

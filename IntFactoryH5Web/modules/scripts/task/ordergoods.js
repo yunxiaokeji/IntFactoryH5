@@ -64,7 +64,6 @@
                                 _this.removeClass('hover');
                                 _this.find('.lump').removeClass('hover');
                                 _this.next().slideUp(400, function () {
-                                
                                 });
                             }
                         }
@@ -92,7 +91,7 @@
 
     //获取订单明细
     ObjectJS.getOrderGoods = function () {
-        Global.post("/Task/GetOrderGoods", { id: ObjectJS.orderid }, function (data) {
+        Global.post("/Orders/GetOrderGoods", { id: ObjectJS.orderid }, function (data) {
             ObjectJS.OrderGoods = data.list;
         });
     }
