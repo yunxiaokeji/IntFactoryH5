@@ -32,9 +32,3 @@ UploadFiles
 *.dbmdl
 
 IntFactoryH5Web/Web.config
-
-#ignore thumbnails created by windows
-Thumbs.db
-#Ignore files build by Visual Studio
-[Tt]est[Rr]esult*
-*.dll
