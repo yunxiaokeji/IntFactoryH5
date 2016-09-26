@@ -343,14 +343,7 @@
     <Content Include="Views\Task\SewnDoc.cshtml" />
     <Content Include="Views\Task\OrderCostDoc.cshtml" />
     <Content Include="Views\Home\Code.cshtml" />
-    <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntFactory.Sdk\IntFactory.Sdk.csproj">
