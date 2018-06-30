@@ -1,5 +1,5 @@
 ﻿define(function (require, exports, module) {
-    require("jquery");
+    //require("jquery");
     var Global = require("global")
 
     var Home = {};

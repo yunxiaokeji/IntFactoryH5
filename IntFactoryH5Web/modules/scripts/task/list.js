@@ -1,346 +1,259 @@
-﻿define(function (require,exports,module) {
-    var Global = require("global"),
-        doT = require("dot");
+﻿
 
-    var Params = {
-        keyWords: "",
-        filtertype: 1,
+var tasklist = (function (mui) {
+    var params = {
+        Keywords: "",
+        FilterType: 1,
+        OrderType: -1,
+        ColorMark: -1,
+        FinishStatus: 0,
         userID: "",
         taskType: -1,
-        colorMark: -1,
-        finishStatus: 0,
         beginDate: "",
         endDate: "",
-        orderType: -1,
+        
         taskOrderColumn: 0,
         isAsc: 0,
-        pageSize: 5,
-        pageIndex: 1        
+        PageSize: 5,
+        PageIndex: 0
     };
-    
-    var taskParms = {
-        taskID: "",
-        replyPageIndex: 1,
-        logPageIndex: 1,
-        endTime: ""
+    var filterDatas = [
+         {
+             key: "OrderType",
+             title: "订单类型",
+             data: [
+                 { id: "-1", name: "全部" },
+                 { id: "1", name: "打样单" },
+                 { id: "2", name: "大货单" }
+             ]
+         }
+    ];
+    var headFilterData = {
+        key: "FilterType",
+        data: [
+            { id: "", name: "所有任务" },
+            { id: "1", name: "我的任务" },
+            { id: "2", name: "参与任务" }
+        ]
+    }
+    var negativeFilterData = {
+        key: "FinishStatus",
+        data: [
+            { id: "0", name: "未接受", active: true },
+            { id: "1", name: "进行中", active: false },
+            { id: "2", name: "已完成", active: false },
+            { id: "-1", name: "全部", active: false }
+        ]
+    }
+    var muiContent;
+    var headFilterContent;
+    function init() {
+        initMui();
+        bindEvent();
+        bindSearchEvent();
+        bindFilterEvent();
+        //searchList();
+        getLableColors();
     }
 
-    var ObjectJS = {};
-    ObjectJS.PageCount = 0;
-    ObjectJS.IsLoading = false;
-    ObjectJS.init = function () {
-        ObjectJS.bindEvent();
-        ObjectJS.getList();
-        ObjectJS.getTaskLableColors();        
-    };
-
-    ObjectJS.bindEvent = function () {
-        //滚动加载数据
-        $(window).scroll(function () {
-            //if (document.body.scrollTop > 30) {
-            //    $(".getback").slideDown("slow");
-            //} else {
-            //    $(".getback").slideUp("slow");
-            //}
-            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-            if (bottom <= 200) {
-                if (!ObjectJS.IsLoading) {
-                    Params.pageIndex++;
-                    if (Params.pageIndex <= ObjectJS.PageCount) {
-                        ObjectJS.getList(true);
-                    } else {
-                        $(".prompt").remove();
-                        $(".list").append('<div class="prompt">已经是最后一条啦</div>');
-                    }
+    function initMui() {
+        muiContent = new Vue({
+            el: '#offCanvasWrapper',
+            data: {
+                userinfo: Global.currentUser,
+                filterDatas: filterDatas,
+                negativeFilterData: negativeFilterData,
+                listData: [],
+                headFilterName: "我的任务"
+            },
+            methods: {
+                goDetail: function (e) {
+                    var _this = $(e.currentTarget);
+                    location.href = "/task/detail/" + _this.data("id");
                 }
             }
         });
 
-        //页面点击
-        $(document).click(function (e) {
-            if (!$(e.target).parents().hasClass("btn-menu") && !$(e.target).hasClass("btn-menu")) {
-                $(".menu-box").slideUp(400);
-            }
-            if (!$(e.target).parents().hasClass("filter-task") && !$(e.target).hasClass("filter-task")) {
-                $(".dropdownlist .potion").slideUp(400);
-            }
-            if (!$(e.target).parents().hasClass("btn-task-filtertype") && !$(e.target).hasClass("btn-task-filtertype")) {
-                $(".task-filtertype").slideUp(400);
+        headFilterContent = new Vue({
+            el: '#HeadFilter',
+            data: {
+                headFilterData: headFilterData
             }
         });
 
-        //显示关键字遮罩层
-        $(".iconfont-search").click(function () {
-            $(".txt-search").val("").focus();
-            $(".shade,.search").show();
-            $(".span-search").css("width", (document.body.clientWidth - 150) + "px");
-        });
-
-        //关键字查询
-        $(".btn-search").click(function () {
-            var keyWords = $(".txt-search").val();
-            if (keyWords != Params.keyWords) {
-                Params.keyWords = keyWords;
-                Params.pageIndex = 1;
-                ObjectJS.getList();
-
-                if (keyWords == '') {
-                    $(".btn-cancel").hide();
-                    $(".search").hide();
-                }
-                else {
-                    $(".btn-cancel").show();
-                }
-            } else {
-                if (keyWords == '') {
-                    $(".search").hide();
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                //down: {
+                //    //callback: pulldownRefresh
+                //},
+                up: {
+                    height: 50,
+                    contentrefresh: '正在加载...',
+                    contentnomore: '没有更多数据了',
+                    callback: pullUpRefresh
                 }
             }
-
-            $(".shade").hide();
         });
 
-        $(".btn-cancel").click(function () {
-            $(".btn-cancel").hide();
-            $(".search").hide();
-            $(".shade").hide();
-            Params.keyWords = "";
-            Params.pageIndex = 1;
-            ObjectJS.getList();
-        });
+        if (mui.os.plus) {
+            mui.plusReady(function () {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().pullupLoading();
+                }, 1000);
 
-        //搜索内容发生变化
-        $(".txt-search").keyup(function () {
-            
-            var changeAfter = $(".txt-search").val();
-            if (changeAfter == "") {
-                $(".cencal").text("取消");
-            } else if (Params.keyWords == changeAfter) {
-                $(".cencal").text("取消");
-            } else {
-                $(".cencal").text("确定");
-            }
-        });
-
-        //点击遮罩层空白区域
-        $(".shade").click(function () {
-            $(".shade").hide();
-            $(".search").hide();
-        });
-
-        //显示主菜单
-        $(".btn-menu").click(function () {
-            $(".menu-box").slideToggle(400);
-        });
-
-        //显示任务过滤类型
-        $(".btn-task-filtertype").click(function () {
-            var _this = $(this);
-            if (!_this.hasClass("hover")) {
-                _this.addClass("hover");
-                $(".task-filtertype").slideDown();
-            } else {
-                _this.removeClass("hover");
-                $(".task-filtertype").slideUp();
-            }            
-        });
-
-        //任务过滤类型切换
-        $(".task-filtertype li").click(function () {
-            $(".btn-task-filtertype div:first").text($(this).text());
-            $(this).parent().hide();
-
-            Params.filtertype = $(this).data("filtertype");
-            ObjectJS.getList();
-        });
-
-        //任务状态切换
-        $(".task-status li").click(function () {
-            
-            var _this = $(this);
-            if (!_this.hasClass("hover")) {
-                _this.addClass("hover").siblings().removeClass("hover");
-            }
-
-            Params.pageIndex = 1;
-            Params.finishStatus = $(this).data("status");
-            ObjectJS.getList();
-        });
-
-        //显示过滤下拉框
-        $(".filter-task li").click(function () {
-            var slideLi = $("." + $(this).data("id"));
-            slideLi.slideToggle(400).siblings().slideUp("slow");
-        });
-
-        //订单类型切换
-        $(".order-type li").click(function () {
-            $(".type-span").text($(this).text());
-            $(this).parent().hide();
-
-            Params.pageIndex = 1;
-            Params.orderType = $(this).data("id");
-            ObjectJS.getList();
-        });
-
-        //任务排序
-        $(".task-sort li").click(function () {
-            $(".sort-span").text($(this).text());
-            $(this).parent().hide();
-            
-            Params.isAsc = $(this).data("takepo");
-            Params.taskOrderColumn = $(this).data("id");
-            ObjectJS.getList();
-        });
-        
-        //返回顶部
-        //$(".getback").click(function () {
-        //    $('html, body').animate({ scrollTop: 0 }, 'slow');
-        //});
-    };
-
-    //绑定时间控件
-    ObjectJS.bindTimerPicker = function () {        
-        var defaultParas = {
-            preset: 'datetime',
-            theme: 'android-ics light', //皮肤样式
-            display: 'modal', //显示方式 
-            mode: 'scroller', //日期选择模式
-            lang: 'zh',
-            onSelect: function (date) {
-                taskParms.endTime = date;
-                var _this = $(this);
-                taskParms.taskID = _this.data("id");
-                ObjectJS.showConfirmForm(0);
-                _this.val("接受任务");
-            }
-        };
-        $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
-    }
-
-    //设置任务到期时间
-    ObjectJS.setTaskEndTime = function () {
-        Global.post("/Task/UpdateTaskEndTime", taskParms, function (data) {
-            if (data == 1) {                
-                $("#btnAcceptTaskTime_" + taskParms.taskID).remove();
-                $("#iconFontDetails_" + taskParms.taskID).html("&#xe621;").addClass("color333");
-            } else if (data == 0) {
-                alert("失败",2);
-            } else if (data == 2) {
-                alert("有前面阶段任务未完成", 2);
-            } else if (data == 3) {
-                alert("没有权限", 2);
-            } else if (data == 4) {
-                alert("任务没有接受，不能设置完成", 2);
-            } else if (data == 5) {
-                alert("任务有未完成步骤", 2);
-            }
-        });
-    }
-
-    //标记完成任务
-    ObjectJS.finishTask = function () {
-        Global.post("/Task/FinishTask", taskParms, function (data) {
-            if (data == 1) {                
-                $("#btnFinishTask_" + taskParms.taskID).remove();
-                $("#iconFontDetails_" + taskParms.taskID).html("&#xe61f;");
-            } else if (data == 0) {
-                alert("失败", 2);
-            } else if (data == 2) {
-                alert("有前面阶段任务未完成", 2);
-            } else if (data == 3) {
-                alert("没有权限", 2);
-            } else if (data == 4) {
-                alert("任务没有接受，不能设置完成", 2);
-            } else if (data == 5) {
-                alert("任务有未完成步骤", 2);
-            }
-        });
-    }
-
-    //接受任务、标记任务完成的弹出浮层
-    ObjectJS.showConfirmForm = function (showStatus) {
-        var alertMsg = showStatus == 0 ? "任务到期时间不可逆,确定设置?" : "标记完成的任务不可逆,确定设置?";
-        confirm(alertMsg, function () {
-            if (showStatus == 0) {
-                ObjectJS.setTaskEndTime();
-            } else {
-                ObjectJS.finishTask();
-            }
-        }, "设置");
-    }
-
-    ObjectJS.getList = function (noEmpty) {
-        ObjectJS.IsLoading = true;
-        if (!noEmpty) {
-            $(".list").empty();
+            });
+        } else {
+            mui.ready(function () {
+                mui('#pullrefresh').pullRefresh().pullupLoading();
+            });
         }
-        //获取任务列表(页面加载)
-        $(".list").append('<div class="data-loading"></div>');
-        $.post("/Task/GetTask", { filter: JSON.stringify(Params) }, function (data) {
-            //获取用户名
-            $(".login-name").text(data.userName);
-            //判断有无数据
-            if (data.items.length == 0) {
-                $(".list").append("<div class='nodata-txt'>暂无数据 !</div>");
-            } else {
-                //分页数据
-                ObjectJS.PageCount = data.pageCount;
-                //引用doT模板
-                doT.exec("template/task/task-list.html", function (code) {
-                    var $result = code(data.items);                        
-                    $(".list").append($result);
-                    
-                    ObjectJS.bindTimerPicker();
 
-                    $(".btn-finishTask").unbind().click(function () {
-                        taskParms.taskID = $(this).data("id");
-                        ObjectJS.showConfirmForm(1);
-                    });
-
-                    if (Params.filtertype!=1) {
-                        $(".btn-acceptTaskTime").hide();
-                        $(".btn-finishTask").hide();
-                    }
-
-                    //延迟加载图片
-                    $(".task-list-img").each(function () {
-                        var _this = $(this);
-                        setTimeout(function () {
-                            _this.attr("src", _this.data("src") + "?imageView2/1/w/120/h/120");
-                        }, 1000)
-                    });
+        //主界面和侧滑菜单界面均支持区域滚动；
+        mui('#offCanvasSideScroll').scroll();
+        mui('#offCanvasContentScroll').scroll();
+        //实现ios平台原生侧滑关闭页面；
+        if (mui.os.plus && mui.os.ios) {
+            mui.plusReady(function () { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
+                plus.webview.currentWebview().setStyle({
+                    'popGesture': 'none'
                 });
-                
-                ObjectJS.IsLoading = false;
-            }
-            $(".data-loading").remove();
-        });
-    };
+            });
+        }
+    }
 
-    ObjectJS.getTaskLableColors=function(){
-        $.post("/Task/GetTaskLableColors", null, function (data) {
+    function bindEvent() {
+        $("#NegativeFilter a").on("tap", function () {
+            var key = $(this).data("key");
+            if (params[key] != $(this).data("id")) {
+                params[key] = $(this).data("id");
+                searchList();
+            }
+        });
+
+        $("#HeadFilter ul li").on("tap", function () {
+            var key = $(this).data("key");
+            if (params[key] != $(this).data("id")) {
+                params[key] = $(this).data("id");
+                muiContent.headFilterName = $(this).find("a").html();
+                searchList();
+            }
+
+            mui("#HeadFilter").popover('hide');
+        });
+    }
+
+    function bindSearchEvent() {
+        $("#icoSearch").on("tap", function () {
+            $("#layerOfSearch,.search-layer").show();
+        });
+
+        $("#layerOfSearch").click(function () {
+            $("#layerOfSearch,.search-layer").hide();
+        });
+
+        $("#btnSearch").on("tap", function () {
+            var keyword = $("#txtKeywords").val();
+            if (keyword != params.Keywords) {
+                params.Keywords = keyword;
+                searchList();
+                $("#btnCancelSearch").show();
+                $("#layerOfSearch").hide();
+            }
+            else {
+                $("#layerOfSearch,.search-layer").hide();
+            }
+        });
+
+        $("#btnCancelSearch").on("tap", function () {
+            $("#layerOfSearch,.search-layer").hide();
+            $("#txtKeywords").val("");
+            params.Keywords = "";
+            searchList();
+        });
+    }
+
+    function bindFilterEvent() {
+        $("#offCanvasShow").on("tap", function () {
+            mui('.mui-off-canvas-wrap').offCanvas('show');
+        });
+
+        document.getElementById('btnFilterSearch').addEventListener('tap', function () {
+            filterDatas.forEach(function (filterData) {
+                params[filterData.key] = $("#filterContent input[name='" + filterData.key + "']:checked").data("id");
+            });
+            mui('.mui-off-canvas-wrap').offCanvas('close');
+
+            searchList();
+        });
+    }
+
+    function searchList(pageIndex) {
+        if (pageIndex) {
+            params.PageIndex = pageIndex;
+            if (pageIndex == 1) {
+                mui('#pullrefresh').pullRefresh().scrollTo(0, 0);
+            }
+        } else {
+            params.PageIndex = 1;
+            muiContent.listData = [];
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            mui('#pullrefresh').pullRefresh().scrollTo(0, 0);
+        }
+        $.post("/Task/GetTask", { filter: JSON.stringify(params) }, function (data) {
+            if (data.items) {
+                var items = data.items;
+                items.forEach(function (item) {
+                    muiContent.listData.push(item);
+                });
+
+                if (data.pageCount == params.PageIndex || data.pageCount==0) {
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                }
+            } else {
+                mui.alert("查询失败");
+            }
+        });
+    }
+
+    function pullUpRefresh() {
+        setTimeout(function () {
+            params.PageIndex++
+            searchList(params.PageIndex);
+            //mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 10));
+        }, 1000);
+    }
+
+    function getLableColors() {
+        $.post("/Task/GetTaskLableColors", {}, function (data) {
             data = JSON.parse(data);
             var items = data.items;
+            var filterData = {
+                title: "颜色标记",
+                key: "ColorMark",
+                data: [{
+                    id: -1,
+                    name: "全部"
+                }]
+            };
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                var html = '';
-                html += '<li data-id="' + item.ColorID + '"><span class="lable-color" style="background-color:' + item.ColorValue + '"></span><span>' + item.ColorName + '</span></li>';
-
-                $(".task-colormark").append(html);
+                filterData.data.push({
+                    id: item.ColorID,
+                    name: item.ColorName
+                });
             }
-            //任务颜色标记切换
-            $(".task-colormark li").click(function () {
-                $(".colormark-span").text($(this).text());
-                $(this).parent().hide();
-
-                Params.pageIndex = 1;
-                Params.colorMark = $(this).data("id");
-                ObjectJS.getList();
-            });
-            
+            muiContent.filterDatas.push(filterData);
         });
     };
 
-    module.exports = ObjectJS;
+    return {
+        init: init
+    }
+
+})(mui);
+
+$(function () {
+    tasklist.init();
 });
+

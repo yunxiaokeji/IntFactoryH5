@@ -23,6 +23,8 @@ namespace IntFactory.Sdk
         /// </summary>
         public string name;
 
+        public string companyName;
+
         /// <summary>
         /// 用户头像
         /// </summary>

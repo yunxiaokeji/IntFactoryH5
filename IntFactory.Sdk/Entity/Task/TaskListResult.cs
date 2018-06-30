@@ -8,7 +8,7 @@ namespace IntFactory.Sdk
 {
     public class TaskListResult
     {
-        public List<TaskDetailEntity> tasks;
+        public List<TaskDetailEntity> items;
 
         public int totalCount = 0;
 

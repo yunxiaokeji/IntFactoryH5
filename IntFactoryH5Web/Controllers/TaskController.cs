@@ -13,10 +13,17 @@ namespace IntFactoryH5Web.Controllers
         public ActionResult List()
         {
             ViewBag.UserID = CurrentUser.userID;
+            ViewBag.UserName = CurrentUser.name;
 
             return View();
         }
-        
+
+        public ActionResult List2()
+        {
+            ViewBag.UserID = CurrentUser.userID;
+
+            return View();
+        }
         public ActionResult Detail(string id)
         {
             Dictionary<string, object> resultTaskInfoObj = new Dictionary<string, object>();
@@ -86,15 +93,15 @@ namespace IntFactoryH5Web.Controllers
         {
             JavaScriptSerializer java = new JavaScriptSerializer();
             var model = java.Deserialize<FilterTasks>(filter);
-            var list = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, CurrentUser.userID, CurrentUser.clientID);
+            var data = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTasks(model, CurrentUser.userID, CurrentUser.clientID);
             
-            JsonDictionary.Add("items", list.tasks);
-            JsonDictionary.Add("pageCount",list.pageCount);
-            JsonDictionary.Add("totalCount",list.totalCount);
-            JsonDictionary.Add("userName",CurrentUser.name );
+            //JsonDictionary.Add("items", list.tasks);
+            //JsonDictionary.Add("pageCount",list.pageCount);
+            //JsonDictionary.Add("totalCount",list.totalCount);
+            //JsonDictionary.Add("userName",CurrentUser.name );
             return new JsonResult
             {
-                Data = JsonDictionary,
+                Data = data,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

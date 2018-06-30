@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "订单列表";
+    ViewBag.PageName = "order";
+}
+
+@section css{
+<style type="text/css">
+    .mui-bar-popover {
+        width: 30%;
+    }
+</style>
+}
+<body >
+    <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
+        <!--侧滑菜单部分-->
+        <aside id="offCanvasSide" class="mui-off-canvas-left">
+            <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <header class="mui-bar mui-bar-nav">
+                        <h1 class="mui-title">筛选条件</h1>
+                    </header>
+                    <div class="mui-content" id="filterContent">
+                        <div v-for=" filterData in filterDatas">
+                            <h5 class="mui-content-padded">{{filterData.title}}</h5>
+                            <div class="mui-card">
+                                <form class="mui-input-group">
+                                    <div class="mui-input-row mui-radio mui-left" v-for=" option in filterData.data">
+                                        <div v-if="option.id==-1">
+                                            <label>{{option.name}}</label>
+                                            <input v-bind:name="filterData.key" v-bind:data-id="option.id" type="radio" checked>
+                                        </div>
+                                        <div v-else>
+                                            <label>{{option.name}}</label>
+                                            <input v-bind:name="filterData.key" v-bind:data-id="option.id" type="radio">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content pTop10">
+                        <p class="center">
+                            <button id="btnFilterReset" type="button" class="mui-btn">重置</button>
+                            <button id="btnFilterSearch" type="button" class="mui-btn mui-btn-primary">完成</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="mui-inner-wrap">
+            <div class="top-bar-tab mui-bar-nav">
+                <ul class="header">
+                    <li class="left">
+                        <span class="iconfont iconfont-kehujingli" style="font-size:24px;">&#xe601;</span>
+                        <span style="font-size:18px;">{{userinfo.name}}</span>
+                    </li>
+                    <li class="left center">
+                        <a href="#HeadFilter" style="color:#fff;">
+                            <span class="font16" style="margin-right:-4px;">{{headFilterName}}</span>
+                            <span style=" vertical-align: middle;"><span class="iconfont iconfont-arrfill_u-copy">&#xe61c;</span></span>
+                        </a>
+                    </li>
+                    <li class="right" style="text-align:right;padding-top:2px;">
+                        <span id="icoSearch" class="mui-icon mui-icon-search" style="font-size:28px;"></span>
+                    </li>
+                </ul>
+
+                <div class="condition">
+                    <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative left" style="width: 80%; " id="NegativeFilter">
+                        <a v-for="filter in negativeFilterData.data" v-bind:class="filter.active?'mui-control-item mui-active':'mui-control-item'" href="javascript:void(0);" v-bind:data-id="filter.id" v-bind:data-key="negativeFilterData.key">
+                            {{filter.name}}
+                        </a>
+                    </div>
+                    <div class="right pTop10" id="offCanvasShow">
+                        <span style="display:inline-block;vertical-align:top;margin-right:-3px;color:#333">筛选</span>
+                        <span class="mui-icon-extra mui-icon-extra-filter color666"></span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="mui-content mui-scroll-wrapper" style="top:95px; bottom:50px;padding-top:0" id="pullrefresh">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view mui-table-view-chevron">
+                        <li class="mui-table-view-cell mui-media" v-for="item in listData">
+                            @*<a>{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</a>*@
+                            <a href="javascript:;">
+                                <img class="order-img mui-pull-left" on-error="this.src='/modules/images/img-noimg.png'" v-bind:src="item.OrderImage||'/modules/images/img-noimg.png' ">
+                                <div class="mui-media-body">
+                                    <ul class="orderForm">
+                                        <li class="color06c"><span>进度:</span><span>{{item.TaskCount==0?"0.00%":(item.TaskOver/item.TaskCount*100).toFixed(2)+"%"}}</span><span class="pLeft15">状态:</span><span>{{item.StatusStr}}</span></li>
+                                        <li><span>款式:</span><span>{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</span></li>
+                                        <li><span>交货日期:</span><span>{{item.PlanTime.toDate("yyyy-MM-dd")<="1900-01-01"||item.PlanTime.toDate("yyyy-MM-dd")=="2040-01-01"?"未设置":item.PlanTime.toDate("yyyy-MM-dd")}}</span></li>
+                                        <li><span>下单日期:</span><span>{{item.CreateTime.toDate("yyyy-MM-dd")}}</span></li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mui-off-canvas-backdrop"></div>
+
+            @{
+                Html.RenderPartial("../Shared/Footer");
+            }
+        </div>
+    </div>
+
+    <div id="HeadFilter" class="mui-popover mui-bar-popover">
+        <div class="mui-popover-arrow"></div>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell" v-for="filter in headFilterData.data" v-bind:data-id="filter.id" v-bind:data-key="headFilterData.key">
+                <a href="javascript:void(0);">{{filter.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mui-backdrop hide" id="layerOfSearch"></div>
+    <div class="search-layer">
+        <div class="search-box">
+            <span class="mui-icon mui-icon-search" style="font-size:22px;"></span>
+            <input class="txt-keywords" id="txtKeywords" type="text" placeholder="请输入关键字..." />
+        </div>
+        <div class="btn-search" id="btnSearch">搜索</div>
+        <div class="btn-cancel iconfont hide" id="btnCancelSearch">&#xe628;</div>
+    </div>
+@section scripts{
+    <script src="/modules/scripts/orders/list.js"></script>
+}
+</body>
+
+

@@ -56,6 +56,9 @@ namespace IntFactory.Sdk
         [Description("/api/task/savaTaskReply")]
         SavaTaskReply,
 
+        [Description("/api/order/GetOrders")]
+        GetOrders,
+
         [Description("/api/order/getGoodsDocByOrderID")]
         GetGoodsDocByOrderID,
 
@@ -75,6 +78,9 @@ namespace IntFactory.Sdk
         GetOrderGoods,
 
         [Description("/api/task/LockTask")]
-        LockTask
+        LockTask,
+
+        [Description("/api/Customer/GetCustomers")]
+        GetCustomers
     }
 }

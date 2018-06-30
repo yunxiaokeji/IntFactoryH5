@@ -17,8 +17,24 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
+        public ActionResult List()
+        {
+            return View();
+        }
 
         #region
+         [HttpPost]
+        public JsonResult GetOrders(string filter)
+        {
+            var data = OrderBusiness.BaseBusiness.GetOrders(filter, CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = data,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         public JsonResult GetGoodsDocByOrderID(string orderID, int type, string taskID)
         {
             var list = OrderBusiness.BaseBusiness.GetGoodsDocByOrderID(orderID, type, taskID, CurrentUser.userID, CurrentUser.clientID);

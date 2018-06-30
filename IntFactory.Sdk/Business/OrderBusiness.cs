@@ -12,6 +12,16 @@ namespace IntFactory.Sdk
     {
         public static OrderBusiness BaseBusiness = new OrderBusiness();
 
+        public string GetOrders(string filter, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("filter", filter);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetOrders, paras,RequestType.Post);
+        }
+
         public string GetGoodsDocByOrderID(string orderID, int type, string taskID,string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();

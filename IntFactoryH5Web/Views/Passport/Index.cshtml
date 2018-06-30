@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+    ViewBag.PageName = "passport";
+}
+<body>
+    <div class="top-bar-tab mui-bar-nav">
+        <ul class="header">
+            <li class="center" style="width:100%;">
+                <a href="javascript:void(0);" style="color:#fff;">
+                    <span class="font16">个人中心</span>
+                </a>
+            </li>
+        </ul>
+     </div>
+
+    <div class="mui-content" id="muiContent">
+        <ul class="mui-table-view mui-table-view-chevron">
+            <li class="mui-table-view-cell mui-media">
+                <a href="javascript:void(0);">
+                    <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                    <div class="mui-media-body">
+                        {{userinfo.companyName}}
+                        <p class='mui-ellipsis'>账号:{{userinfo.name}}</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell center" id="btnLogout">
+                <a>退出登录</a>
+            </li>
+        </ul>
+    </div>
+
+        @{
+            Html.RenderPartial("../Shared/Footer");
+        }
+    <script type="text/javascript">
+        var muiContent = new Vue({
+            el: '#muiContent',
+            data: {
+                userinfo: Global.currentUser
+            }
+        });
+
+        $(function () {
+            $("#btnLogout").bind("click", function () {
+                location.href = "/home/Logout";
+            });
+
+        });
+    </script>
+</body>

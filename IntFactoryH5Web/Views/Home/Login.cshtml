@@ -17,12 +17,16 @@
     <link href="/modules/css/layout.css?v=@v" rel="stylesheet" />
     <link href="/modules/css/login.css?v=@v" rel="stylesheet" />
 
+    <script src="/Scripts/jquery-1.11.1.js"></script>
     <script src="/Scripts/sea.js?v=@v" type="text/javascript"></script>
     <script src="/Scripts/sea-config.js?v=@v" type="text/javascript"></script>
     <script type="text/javascript">
-        seajs.use(["scripts/login"], function (login) {
-            login.initLogin('@ViewBag.ReturnUrl', '@BindAccountType');
+        $(function () {
+            seajs.use(["scripts/login"], function (login) {
+                login.initLogin('@ViewBag.ReturnUrl', '@BindAccountType');
+            });
         });
+        
     </script>
 </head>
 <body>

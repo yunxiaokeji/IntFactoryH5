@@ -2,7 +2,7 @@
 *{font-family:"Microsoft YaHei";padding:0;margin:0;border:0;list-style-type:none;-webkit-tap-highlight-color:rgba(0,0,0,0);font-size:14px;}
 body {font-family:'Microsoft YaHei';color:#333;font-size:14px;}
 li{ list-style-type:none;}
-a { color: #4a98e7; text-decoration: none;display:inline-block;}
+a { text-decoration: none;display:inline-block;}
 
 input[type="text"],input[type="tel"] { border:solid 1px #ccc; border-radius:2px; font-size:14px;}
 
@@ -64,6 +64,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:non
 .font18 {font-size:18px; }
 .font20 {font-size:20px; }
 
+.color06c { color:#06c !important; }
 .color333 { color:#333 !important; }
 .color666 { color:#666 !important; }
 .color999 { color:#999 !important; }

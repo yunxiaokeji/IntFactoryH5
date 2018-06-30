@@ -1,4 +1,5 @@
 ﻿using IntFactory.Sdk;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,15 @@ namespace IntFactoryH5Web.Controllers
                 Response.Cookies["m_intfactory_userinfo"].Expires = DateTime.Now.AddDays(-1);
             }
 
+            HttpCookie userinfo = Request.Cookies["userinfo"];
+            if (userinfo != null)
+            {
+                TimeSpan ts = new TimeSpan(0, 0, 0, 0); //时间跨度
+                userinfo.Expires = DateTime.Now.Add(ts); //立即过期
+                Response.Cookies.Remove("userinfo");//清除
+                Response.Cookies.Add(userinfo); //写入立即过期的*/
+                Response.Cookies["userinfo"].Expires = DateTime.Now.AddDays(-1);
+            }
             return Redirect("/Home/Login");
         }
 
@@ -183,6 +193,11 @@ namespace IntFactoryH5Web.Controllers
                     cook["pwd"] = pwd;
                     cook.Expires = DateTime.Now.AddMonths(1);
                     Response.Cookies.Add(cook);
+
+                    HttpCookie userinfo = new HttpCookie("userinfo");
+                    userinfo.Value = JsonConvert.SerializeObject(result.user);
+                    userinfo.Expires = DateTime.Now.AddMonths(1);
+                    Response.Cookies.Add(userinfo);
                 }
             }
 
