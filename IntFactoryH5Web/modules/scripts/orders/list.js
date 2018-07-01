@@ -183,6 +183,12 @@ var orderlist = (function (mui) {
             mui('.mui-off-canvas-wrap').offCanvas('show');
         });
 
+        $("#btnFilterReset").on("tap", function () {
+            //muiContent.filterDatas = [];
+            debugger
+            muiContent.filterDatas = filterDatas.sort();
+        });
+
         document.getElementById('btnFilterSearch').addEventListener('tap', function () {
             filterDatas.forEach(function (filterData) {
                 params[filterData.key] = $("#filterContent input[name='" + filterData.key + "']:checked").data("id");
