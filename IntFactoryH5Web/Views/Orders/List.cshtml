@@ -84,13 +84,13 @@
                 <div class="mui-scroll">
                     <ul class="mui-table-view mui-table-view-chevron">
                         <li class="mui-table-view-cell mui-media" v-for="item in listData">
-                            @*<a>{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</a>*@
+                            <a><span>款式:</span><span class="pLeft10">{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</span></a>
                             <a href="javascript:;">
                                 <img class="order-img mui-pull-left" on-error="this.src='/modules/images/img-noimg.png'" v-bind:src="item.OrderImage||'/modules/images/img-noimg.png' ">
                                 <div class="mui-media-body">
                                     <ul class="orderForm">
                                         <li class="color06c"><span>进度:</span><span>{{item.TaskCount==0?"0.00%":(item.TaskOver/item.TaskCount*100).toFixed(2)+"%"}}</span><span class="pLeft15">状态:</span><span>{{item.StatusStr}}</span></li>
-                                        <li><span>款式:</span><span>{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</span></li>
+                                        <li><span>数量:</span><span>{{item.PlanQuantity}}</span></li>
                                         <li><span>交货日期:</span><span>{{item.PlanTime.toDate("yyyy-MM-dd")<="1900-01-01"||item.PlanTime.toDate("yyyy-MM-dd")=="2040-01-01"?"未设置":item.PlanTime.toDate("yyyy-MM-dd")}}</span></li>
                                         <li><span>下单日期:</span><span>{{item.CreateTime.toDate("yyyy-MM-dd")}}</span></li>
                                     </ul>

@@ -51,7 +51,7 @@
         })
     </script>
 }
-    <header>
+    <div class="header">
         <a class="btn-return" href = "javascript:if(history.length>1){ history.go(-1);} else{location.href='/task/list'}"><i class="return-icon iconfont">&#xe60a;</i></a>
         <div class="task-text">
             <span>@(task.title+"-"+task.ownerUser.name)</span>
@@ -84,17 +84,17 @@
                     {
                         if (task.finishStatus == 0)
                         {
-                            <input type="text" class="btn-acceptTaskTime header-btn" readonly="true" style="border-color:#fff;" value="接受任务"  />              
+                            <input type="button" class="btn-acceptTaskTime header-btn" readonly="true" style="border-color:#fff;" value="接受任务" />
                         }
                         else if (task.finishStatus == 1)
-                        { 
+                        {
                             <input type="button" class="btn-finishTask header-btn"  value="标记完成"  />   
                         }
                     }
                 }
             }  
         </div>
-    </header>
+    </div>
     <div class="swiper-container" style="margin-top:50px;">
         <div class="swiper-wrapper">
             @{

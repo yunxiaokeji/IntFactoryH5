@@ -31,7 +31,7 @@ var tasklist = (function (mui) {
     var headFilterData = {
         key: "FilterType",
         data: [
-            { id: "", name: "所有任务" },
+            { id: "-1", name: "所有任务" },
             { id: "1", name: "我的任务" },
             { id: "2", name: "参与任务" }
         ]

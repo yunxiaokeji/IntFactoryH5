@@ -3,7 +3,7 @@ body { background-color:#efefef;}
 html.layer {height:100%;overflow:hidden;}
 body.layer {height:100%;overflow:hidden;}
 
-header {
+.header {
 width: 100%;
 background-color:#2F73B8;
 line-height: 50px;
@@ -14,10 +14,10 @@ left:0;
 top:0;
 color:#BFD2F2;
 }
-header .task-text {color:#BFD2F2;font-size:16px;margin-left:45px;}
+.header .task-text {color:#BFD2F2;font-size:16px;margin-left:45px;}
 .btn-return {position:absolute;text-decoration:none;left:10px;cursor:pointer;}
 .return-icon { font-size:20px;color:#BFD2F2;width:40px;}
-.task-accept {cursor:pointer; position:absolute;right:10px;top:-2px;text-align:center;}
+.task-accept {cursor:pointer; position:absolute;right:10px;top:9px;text-align:center;}
 .task-accept span { color:#BFD2F2;font-size:16px;}
 
 /*焦点图*/

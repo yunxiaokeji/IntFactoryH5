@@ -181,7 +181,8 @@ background-color:#efefef;
     max-height:110px;
     }
     .orderForm li {
-    line-height:28px;
+    line-height:26px;
+    color:#333;
     }
 
     .orderForm li span{

@@ -89,7 +89,7 @@
                                 <div class="mui-media-body">
                                     <ul class="orderForm">
                                         <li class="color06c"><span>{{item.title}}</span></li>
-                                        <li><span>款式:</span><span>{{item.order.goodsCode}}--{{item.order.goodsName}}</span></li>
+                                        <li><span>款式:</span><span>{{item.order.goodsName}}</span></li>
                                         <li><span>{{item.orderType==1?"打样":"大货"}}交货日期:</span><span>{{item.order.planTime}}</span></li>
                                         <li v-if="item.finishStatus==0"><span>上级任务:<span v-if="item.preTitle!='' ">({{item.preFinishStatus==0?"未接受":item.preFinishStatus==1?"进行中":"已完成"}})</span></span><span>{{item.preTitle||"--"}}</span></li>
                                         <li v-else-if="item.finishStatus==1"><span>到期日期:</span><span>{{item.order.planTime}}</span></li>
