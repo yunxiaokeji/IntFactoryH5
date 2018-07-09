@@ -40,6 +40,11 @@ namespace IntFactoryH5Web.Controllers
                         if (result.error_code == 0 && result.user != null)
                         {
                             Session["ClientManager"] = result.user;
+                            HttpCookie usercookie = new HttpCookie("userinfo");
+                            usercookie.Value = JsonConvert.SerializeObject(result.user);
+                            usercookie.Expires = DateTime.Now.AddMonths(1);
+                            Response.Cookies.Add(usercookie);
+
                             return Redirect("/Task/List");
                         }
                     }
@@ -99,6 +104,10 @@ namespace IntFactoryH5Web.Controllers
                     if (result.error_code == 0 && result.user != null)
                     {
                         Session["ClientManager"] = result.user;
+                        HttpCookie usercookie = new HttpCookie("userinfo");
+                        usercookie.Value = JsonConvert.SerializeObject(result.user);
+                        usercookie.Expires = DateTime.Now.AddMonths(1);
+                        Response.Cookies.Add(usercookie);
                     }
                 }
                 else {
@@ -123,6 +132,11 @@ namespace IntFactoryH5Web.Controllers
                     if (result.result == 1)
                     {
                         Session["ClientManager"] = result.user;
+                        HttpCookie usercookie = new HttpCookie("userinfo");
+                        usercookie.Value = JsonConvert.SerializeObject(result.user);
+                        usercookie.Expires = DateTime.Now.AddMonths(1);
+                        Response.Cookies.Add(usercookie);
+
                         if (!string.IsNullOrEmpty(state))
                         {
                             url = state;
@@ -194,10 +208,10 @@ namespace IntFactoryH5Web.Controllers
                     cook.Expires = DateTime.Now.AddMonths(1);
                     Response.Cookies.Add(cook);
 
-                    HttpCookie userinfo = new HttpCookie("userinfo");
-                    userinfo.Value = JsonConvert.SerializeObject(result.user);
-                    userinfo.Expires = DateTime.Now.AddMonths(1);
-                    Response.Cookies.Add(userinfo);
+                    HttpCookie usercookie = new HttpCookie("userinfo");
+                    usercookie.Value = JsonConvert.SerializeObject(result.user);
+                    usercookie.Expires = DateTime.Now.AddMonths(1);
+                    Response.Cookies.Add(usercookie);
                 }
             }
 

@@ -19,8 +19,8 @@
                 <a href="javascript:void(0);">
                     <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                     <div class="mui-media-body">
-                        {{userinfo.companyName}}
-                        <p class='mui-ellipsis'>账号:{{userinfo.name}}</p>
+                        @ViewBag.CompanyName
+                        <p class='mui-ellipsis'>账号:@ViewBag.UserName</p>
                     </div>
                 </a>
             </li>
@@ -42,7 +42,7 @@
                 userinfo: Global.currentUser
             }
         });
-
+        
         $(function () {
             $("#btnLogout").bind("click", function () {
                 location.href = "/home/Logout";

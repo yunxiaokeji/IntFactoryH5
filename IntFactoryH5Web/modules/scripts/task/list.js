@@ -53,7 +53,9 @@ var tasklist = (function (mui) {
         bindSearchEvent();
         bindFilterEvent();
         //searchList();
+
         getLableColors();
+        //getPassportInfo();
     }
 
     function initMui() {
@@ -201,15 +203,16 @@ var tasklist = (function (mui) {
             mui('#pullrefresh').pullRefresh().scrollTo(0, 0);
         }
         $.post("/Task/GetTask", { filter: JSON.stringify(params) }, function (data) {
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.pageCount == params.PageIndex || data.pageCount == 0));
             if (data.items) {
                 var items = data.items;
                 items.forEach(function (item) {
                     muiContent.listData.push(item);
                 });
 
-                if (data.pageCount == params.PageIndex || data.pageCount==0) {
-                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-                }
+                //if (data.pageCount == params.PageIndex || data.pageCount==0) {
+                //    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                //}
             } else {
                 mui.alert("查询失败");
             }
@@ -247,6 +250,12 @@ var tasklist = (function (mui) {
         });
     };
 
+    function getPassportInfo() {
+        $.get("/passport/getPassportInfo", function (data) {
+            Global.setCookie("userinfo", data);
+            muiContent.userinfo = JSON.parse(data);
+        });
+    }
     return {
         init: init
     }

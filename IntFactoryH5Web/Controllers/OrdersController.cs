@@ -19,6 +19,7 @@ namespace IntFactoryH5Web.Controllers
 
         public ActionResult List()
         {
+            ViewBag.UserName = CurrentUser.name;
             return View();
         }
 

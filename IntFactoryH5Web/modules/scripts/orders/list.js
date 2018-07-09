@@ -8,7 +8,7 @@ var orderlist = (function (mui) {
         Status: -1,
         Mark: -1,
         PayStatus: -1,
-        OrderStatus: -1,
+        OrderStatus: 0,
         PublicStatus: -1,
         WarningStatus: -1,
         ReturnStatus: -1,
@@ -64,7 +64,7 @@ var orderlist = (function (mui) {
         bindSearchEvent();
         bindFilterEvent();
         //searchList();
-        getLableColors();
+        //getLableColors();
     }
 
     function initMui() {
@@ -130,8 +130,14 @@ var orderlist = (function (mui) {
     function bindEvent() {
         $("#NegativeFilter a").on("tap", function () {
             var key = $(this).data("key");
-            if (params[key] != $(this).data("id")) {
-                params[key] = $(this).data("id");
+            var id = $(this).data("id");
+            if (params[key] != id) {
+                if (id == 0) {
+                    params.OrderStatus = 0;
+                } else {
+                    params.OrderStatus = -1;
+                }
+                params[key] = id;
                 searchList();
             }
         });
@@ -213,15 +219,15 @@ var orderlist = (function (mui) {
         }
         $.post("/orders/getorders", { filter: JSON.stringify(params) }, function (data) {
             data = JSON.parse(data);
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.pageCount == params.PageIndex || data.pageCount == 0));
             if (data.items) {
                 var items = data.items;
                 items.forEach(function (item) {
                     muiContent.listData.push(item);
                 });
-
-                if (data.pageCount == params.PageIndex || data.pageCount == 0) {
-                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-                }
+                //if (data.pageCount == params.PageIndex || data.pageCount == 0) {
+                //    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                //}
             } else {
                 mui.alert("查询失败");
             }

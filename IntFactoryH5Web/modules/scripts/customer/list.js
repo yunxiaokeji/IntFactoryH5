@@ -198,15 +198,16 @@ var tasklist = (function (mui) {
         }
         $.post("/Customer/GetCustomers", { filter: JSON.stringify(params) }, function (data) {
             data = JSON.parse(data);
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.pageCount == params.PageIndex || data.pageCount == 0));
             if (data.items) {
                 var items = data.items;
                 items.forEach(function (item) {
                     muiContent.listData.push(item);
                 });
 
-                if (data.pageCount == params.PageIndex || data.pageCount == 0) {
-                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-                }
+                //if (data.pageCount == params.PageIndex || data.pageCount == 0) {
+                //    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                //}
                 
             } else {
                 mui.alert("查询失败");
