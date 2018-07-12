@@ -7,6 +7,7 @@ var tasklist = (function (mui) {
         OrderType: -1,
         ColorMark: -1,
         FinishStatus: 0,
+        InvoiceStatus:-1,
         userID: "",
         taskType: -1,
         beginDate: "",
@@ -26,12 +27,21 @@ var tasklist = (function (mui) {
                  { id: "1", name: "打样单" },
                  { id: "2", name: "大货单" }
              ]
-         }
+         },
+          {
+              key: "InvoiceStatus",
+              title: "任务进度",
+              data: [
+                  { id: "-1", name: "全部" },
+                  { id: "1", name: "快到期" },
+                  { id: "2", name: "已超期" }
+              ]
+          }
     ];
     var headFilterData = {
         key: "FilterType",
         data: [
-            { id: "-1", name: "所有任务" },
+            //{ id: "-1", name: "所有任务" },
             { id: "1", name: "我的任务" },
             { id: "2", name: "参与任务" }
         ]
@@ -39,10 +49,10 @@ var tasklist = (function (mui) {
     var negativeFilterData = {
         key: "FinishStatus",
         data: [
-            { id: "0", name: "未接受", active: true },
-            { id: "1", name: "进行中", active: false },
-            { id: "2", name: "已完成", active: false },
-            { id: "-1", name: "全部", active: false }
+            { id: "0", name: "未接受", active: true, count: 0, lable: "nobegin" },
+            { id: "1", name: "进行中", active: false, count: 0, lable: "normal" },
+            { id: "2", name: "已完成", active: false, count: 0, lable: "complete" },
+            { id: "-1", name: "全部", active: false, count: 0, lable: "all" }
         ]
     }
     var muiContent;
@@ -55,6 +65,7 @@ var tasklist = (function (mui) {
         //searchList();
 
         getLableColors();
+        searchTotalCount();
         //getPassportInfo();
     }
 
@@ -139,6 +150,7 @@ var tasklist = (function (mui) {
                 params[key] = $(this).data("id");
                 muiContent.headFilterName = $(this).find("a").html();
                 searchList();
+                searchTotalCount();
             }
 
             mui("#HeadFilter").popover('hide');
@@ -209,13 +221,29 @@ var tasklist = (function (mui) {
                 items.forEach(function (item) {
                     muiContent.listData.push(item);
                 });
-
-                //if (data.pageCount == params.PageIndex || data.pageCount==0) {
-                //    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-                //}
             } else {
                 mui.alert("查询失败");
             }
+        });
+    }
+
+    function searchTotalCount() {
+        $.get("/task/getTaskTotalCount", { filterType: params.FilterType }, function (data) {
+            data = JSON.parse(data);
+            if (data) {
+                muiContent.negativeFilterData.data.forEach(function (filter) {
+                    if (filter.lable == "nobegin") {
+                        filter.count = data.nobegin;
+                    } else if (filter.lable == "normal") {
+                        filter.count = data.normal;
+                    } else if (filter.lable == "complete") {
+                        filter.count = data.complete;
+                    }else if (filter.lable == "all") {
+                        filter.count =data.nobegin+data.normal+ data.complete;
+                    }
+                });
+            }
+            
         });
     }
 

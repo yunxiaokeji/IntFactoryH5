@@ -26,6 +26,9 @@ namespace IntFactory.Sdk
         [Description("/api/task/getTasks")]
         GetTasks,
 
+        [Description("/api/task/GetTaskTotalCount")]
+        GetTaskTotalCount,
+
         [Description("/api/task/getOrderProcess")]
         GetOrderProcess,
 

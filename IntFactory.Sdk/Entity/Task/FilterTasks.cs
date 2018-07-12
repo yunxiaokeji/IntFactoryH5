@@ -38,6 +38,8 @@ namespace IntFactory.Sdk
         /// </summary>
         public int finishStatus = -1;
 
+        public int invoiceStatus = -1;
+
         /// <summary>
         /// 任务创建起始时间
         /// </summary>

@@ -25,7 +25,17 @@ namespace IntFactory.Sdk
             paras.Add("clientID", clientID);
             paras.Add("filter",JsonConvert.SerializeObject(filter).ToString());
 
-            return HttpRequest.RequestServer < TaskListResult>(ApiOption.GetTasks, paras);
+            return HttpRequest.RequestServer <TaskListResult>(ApiOption.GetTasks, paras);
+        }
+
+        public string GetTaskTotalCount(int filterType, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("filterType", filterType);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetTaskTotalCount, paras, RequestType.Get);
         }
 
         /// <summary>

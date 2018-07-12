@@ -106,6 +106,16 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        public JsonResult GetTaskTotalCount(int filterType) {
+            var data = IntFactory.Sdk.TaskBusiness.BaseBusiness.GetTaskTotalCount(filterType, CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = data,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
         //获取订单任务流程列表
         public JsonResult GetTaskFlow()
         {                

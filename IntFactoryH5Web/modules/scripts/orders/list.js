@@ -26,6 +26,15 @@ var orderlist = (function (mui) {
     };
     var filterDatas = [
          {
+             key: "InvoiceStatus",
+             title: "订单进度",
+             data: [
+                 { id: "-1", name: "全部" },
+                 { id: "1", name: "快到期" },
+                 { id: "2", name: "已超期" }
+             ]
+         },
+         {
             key: "SourceType",
             title: "订单来源",
             data:[
@@ -37,16 +46,28 @@ var orderlist = (function (mui) {
             ]
         }
     ];
-    var headFilterData= {
+    //var headFilterData= {
+    //    key: "EntrustType",
+    //    title: "订单类型",
+    //    data: [
+    //        { id: "", name: "所有",total:0 },
+    //        { id: "1", name: "打样", total: 0 },
+    //        { id: "2", name: "大货", total: 0 }
+    //    ]
+    //}
+
+    var headFilterData = {
         key: "EntrustType",
         title: "订单类型",
         data: [
-            { id: "", name: "所有订单" },
-            { id: "1", name: "本厂订单" },
-            { id: "2", name: "协助订单" },
-            { id: "3", name: "委托订单" }
+            { id: "", name: "所有", total: 0 },
+            { id: "1", name: "进行中", total: 0 },
+            { id: "2", name: "已终止", total: 0 },
+            { id: "1", name: "已归档", total: 0 },
+            { id: "2", name: "已完成", total: 0 }
         ]
     }
+
     var negativeFilterData = {
         key: "SearchOrderType",
         title: "订单类别",
@@ -75,7 +96,7 @@ var orderlist = (function (mui) {
                 filterDatas: filterDatas,
                 negativeFilterData:negativeFilterData,
                 listData:[],
-                headFilterName: "所有订单"
+                headFilterName: "所有(0)"
             }
         });
 

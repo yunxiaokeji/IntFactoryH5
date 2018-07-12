@@ -69,7 +69,7 @@
                 <div class="condition">
                     <div class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-negative left" style="width: 80%; " id="NegativeFilter">
                         <a v-for="filter in negativeFilterData.data" v-bind:class="filter.active?'mui-control-item mui-active':'mui-control-item'" href="javascript:void(0);" v-bind:data-id="filter.id" v-bind:data-key="negativeFilterData.key">
-                            {{filter.name}}
+                            {{filter.name}} ({{filter.count}})
                         </a>
                     </div>
                     <div class="right pTop10" id="offCanvasShow">

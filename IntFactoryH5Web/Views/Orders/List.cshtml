@@ -112,7 +112,7 @@
         <div class="mui-popover-arrow"></div>
         <ul class="mui-table-view">
             <li class="mui-table-view-cell" v-for="filter in headFilterData.data" v-bind:data-id="filter.id" v-bind:data-key="headFilterData.key">
-                <a href="javascript:void(0);">{{filter.name}}</a>
+                <a href="javascript:void(0);">{{filter.name}}({{filter.total}})</a>
             </li>
         </ul>
     </div>
