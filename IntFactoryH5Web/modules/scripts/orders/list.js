@@ -24,9 +24,10 @@ var orderlist = (function (mui) {
         PageSize: 5,
         OrderBy: "o.CreateTime desc"
     };
+
     var filterDatas = [
          {
-             key: "InvoiceStatus",
+             key: "WarningStatus",
              title: "订单进度",
              data: [
                  { id: "-1", name: "全部" },
@@ -46,25 +47,26 @@ var orderlist = (function (mui) {
             ]
         }
     ];
-    //var headFilterData= {
-    //    key: "EntrustType",
-    //    title: "订单类型",
-    //    data: [
-    //        { id: "", name: "所有",total:0 },
-    //        { id: "1", name: "打样", total: 0 },
-    //        { id: "2", name: "大货", total: 0 }
-    //    ]
-    //}
 
-    var headFilterData = {
-        key: "EntrustType",
+    var headFilterDataOfNeed= {
+        key: "TypeID",
         title: "订单类型",
         data: [
-            { id: "", name: "所有", total: 0 },
-            { id: "1", name: "进行中", total: 0 },
-            { id: "2", name: "已终止", total: 0 },
-            { id: "1", name: "已归档", total: 0 },
-            { id: "2", name: "已完成", total: 0 }
+            { id: "", name: "所有",count:0,lable:"all" },
+            { id: "1", name: "打样", count: 0, lable: "dy" },
+            { id: "2", name: "大货", count: 0, lable: "dh" }
+        ]
+    }
+
+    var headFilterDataOfOrder = {
+        key: "OrderStatus",
+        title: "订单状态",
+        data: [
+             { id: "1",name: "进行中", count: 0, lable: "normal"},
+             { id: "2", name: "已完成", count: 0, lable: "complete" },
+            { id: "8", name: "已终止", count: 0, lable: "over" },
+            { id: "-1", name: "已归档", count: 0, lable: "archiving" },
+            { id: "-1", name: "所有", count: 0, lable: "all" },
         ]
     }
 
@@ -77,8 +79,10 @@ var orderlist = (function (mui) {
             { id: "2", name: "大货单", active: false }
         ]
     }
+
     var muiContent;
     var headFilterContent;
+    var lableid;
     function init() {
         initMui();
         bindEvent();
@@ -86,6 +90,7 @@ var orderlist = (function (mui) {
         bindFilterEvent();
         //searchList();
         //getLableColors();
+        searchTotalCount();
     }
 
     function initMui() {
@@ -95,15 +100,40 @@ var orderlist = (function (mui) {
                 userinfo: Global.currentUser,
                 filterDatas: filterDatas,
                 negativeFilterData:negativeFilterData,
-                listData:[],
-                headFilterName: "所有(0)"
+                listData: [],
+                firstFilterData: headFilterDataOfNeed.data[0]
             }
         });
+        lableid = headFilterDataOfNeed.data[0].lable;
 
         headFilterContent = new Vue({
             el: '#HeadFilter',
             data: {
-                headFilterData: headFilterData
+                headFilterData: headFilterDataOfNeed
+            },
+            methods: {
+                headFilterClick: function (e) {
+                    var _this = $(e.currentTarget);
+                    var key = $(_this).attr("paraskey");
+                    
+                    if (lableid != $(_this).attr("lableid")) {
+                        params[key] = $(_this).attr("orderstatus");
+                        lableid = $(_this).attr("lableid");
+                        if (lableid == "archiving") {
+                            params.WarningStatus = 9;
+                        } else {
+                            params.WarningStatus = -1;
+                        }
+
+                        muiContent.firstFilterData = {
+                            name: $(_this).attr("name"),
+                            count: $(_this).attr("count")
+                        };
+
+                        searchList();
+                    }
+                    mui("#HeadFilter").popover('hide');
+                }
             }
         });
 
@@ -153,25 +183,23 @@ var orderlist = (function (mui) {
             var key = $(this).data("key");
             var id = $(this).data("id");
             if (params[key] != id) {
-                if (id == 0) {
+                params[key] = id;
+
+                //切换订单类型时  重置头部过滤器
+                params.TypeID = "";
+                params.WarningStatus = -1;
+                if (id == "0") {
+                    headFilterContent.headFilterData = headFilterDataOfNeed;
                     params.OrderStatus = 0;
                 } else {
-                    params.OrderStatus = -1;
+                    headFilterContent.headFilterData = headFilterDataOfOrder;
+                    params["OrderStatus"] = headFilterContent.headFilterData.data[0].id;
                 }
-                params[key] = id;
-                searchList();
-            }
-        });
+                lableid = headFilterContent.headFilterData.data[0].lable;
 
-        $("#HeadFilter ul li").on("tap", function () {
-            var key = $(this).data("key");
-            if (params[key] != $(this).data("id")) {
-                params[key] = $(this).data("id");
-                muiContent.headFilterName = $(this).find("a").html();
                 searchList();
+                searchTotalCount();
             }
-
-            mui("#HeadFilter").popover('hide');
         });
     }
 
@@ -210,11 +238,6 @@ var orderlist = (function (mui) {
             mui('.mui-off-canvas-wrap').offCanvas('show');
         });
 
-        $("#btnFilterReset").on("tap", function () {
-            //muiContent.filterDatas = [];
-            debugger
-            muiContent.filterDatas = filterDatas.sort();
-        });
 
         document.getElementById('btnFilterSearch').addEventListener('tap', function () {
             filterDatas.forEach(function (filterData) {
@@ -252,6 +275,34 @@ var orderlist = (function (mui) {
             } else {
                 mui.alert("查询失败");
             }
+        });
+    }
+
+    function searchTotalCount() {
+        $.get("/orders/GetOrderTotalCount", { searchOrderType: params.SearchOrderType }, function (data) {
+            data = JSON.parse(data);
+            if (data) {
+                headFilterContent.headFilterData.data.forEach(function (filter) {
+                    if (filter.lable == "dy") {
+                        filter.count = data.dy;
+                    } else if (filter.lable == "dh") {
+                        filter.count = data.dh;
+                    }else if (filter.lable == "normal") {
+                        filter.count = data.normal;
+                    } else if (filter.lable == "complete") {
+                        filter.count = data.complete;
+                    } else if (filter.lable == "over") {
+                        filter.count = data.over;
+                    } else if (filter.lable == "archiving") {
+                        filter.count = data.archiving;
+                    } else if (filter.lable == "all") {
+                        filter.count = data.dy + data.dh + data.normal + data.complete;
+                    }
+                });
+
+                muiContent.firstFilterData = headFilterContent.headFilterData.data[0];
+            }
+
         });
     }
 

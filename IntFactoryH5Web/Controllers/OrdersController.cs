@@ -36,6 +36,17 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+         public JsonResult GetOrderTotalCount(int searchOrderType)
+         {
+             var data = OrderBusiness.BaseBusiness.GetOrderTotalCount(searchOrderType, CurrentUser.userID, CurrentUser.clientID);
+
+             return new JsonResult
+             {
+                 Data = data,
+                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
+             };
+         }
+
         public JsonResult GetGoodsDocByOrderID(string orderID, int type, string taskID)
         {
             var list = OrderBusiness.BaseBusiness.GetGoodsDocByOrderID(orderID, type, taskID, CurrentUser.userID, CurrentUser.clientID);

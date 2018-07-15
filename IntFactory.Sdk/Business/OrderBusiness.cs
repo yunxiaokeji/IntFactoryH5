@@ -22,6 +22,16 @@ namespace IntFactory.Sdk
             return HttpRequest.RequestServer(ApiOption.GetOrders, paras,RequestType.Post);
         }
 
+        public string GetOrderTotalCount(int searchOrderType, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("searchOrderType", searchOrderType);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetOrderTotalCount, paras, RequestType.Get);
+        }
+
         public string GetGoodsDocByOrderID(string orderID, int type, string taskID,string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
