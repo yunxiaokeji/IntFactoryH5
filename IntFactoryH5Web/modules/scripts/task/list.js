@@ -52,7 +52,7 @@ var tasklist = (function (mui) {
             { id: "0", name: "未接受", active: true, count: 0, lable: "nobegin" },
             { id: "1", name: "进行中", active: false, count: 0, lable: "normal" },
             { id: "2", name: "已完成", active: false, count: 0, lable: "complete" },
-            { id: "-1", name: "全部", active: false, count: 0, lable: "all" }
+            //{ id: "-1", name: "全部", active: false, count: 0, lable: "all" }
         ]
     }
     var muiContent;

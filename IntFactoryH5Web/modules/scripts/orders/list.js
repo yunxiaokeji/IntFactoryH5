@@ -3,7 +3,7 @@
 var orderlist = (function (mui) {
     var params = {
         SearchOrderType: 0,
-        SearchType: 3,
+        SearchType: 1,
         TypeID: '',
         Status: -1,
         Mark: -1,

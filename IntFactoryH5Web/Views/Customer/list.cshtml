@@ -53,7 +53,7 @@
                 <ul class="header">
                     <li class="left">
                         <span class="iconfont iconfont-kehujingli" style="font-size:24px;">&#xe601;</span>
-                        <span style="font-size:18px;">@ViewBag.UserName</span>
+                        <span style="font-size: 18px; display: inline-block; width: 50px; white-space: nowrap;">@ViewBag.UserName</span>
                     </li>
                     <li class="left center">
                         <a href="#HeadFilter" style="color:#fff;">
@@ -82,19 +82,27 @@
 
             <div class="mui-content mui-scroll-wrapper" style="top:95px; bottom:50px;padding-top:0" id="pullrefresh">
                 <div class="mui-scroll">
-                    <ul class="mui-table-view mui-table-view-chevron">
-                        <li class="mui-table-view-cell mui-media" v-for="item in listData">
-                            <a href="javascript:void(0);">
+                    <ul class="mui-table-view" >
+                        <li class="mui-table-view-cell" v-for="item in listData" >
+                            <div>
                                 <span class="mui-icon mui-icon-contact mui-pull-left color666" style="font-size:34px;"></span>
                                 @*<img class="order-img mui-pull-left" on-error="this.src='/modules/images/img-noimg.png'" v-bind:src="item.orderImg||'/modules/images/img-noimg.png' ">*@
-                                <div class="mui-media-body">
-                                    <ul class="orderForm">
+                                <div class="mui-media-body" >
+                                    <ul class="orderForm mRight10">
                                         <li>
                                             <div class="left">{{item.Name}}</div>
-                                            <div class="right mui-badge mui-badge-success" style="margin-right:75px;">{{item.SourceType==1?"阿里客户":item.SourceType==2?"自助下单":"手工创建"}}</div>
+                                            <div class="right mui-badge mui-badge-success">{{item.SourceType==1?"阿里客户":item.SourceType==2?"自助下单":"手工创建"}}</div>
                                             <div class="clear"></div>
                                         </li>
-                                        <li><span>{{item.MobilePhone}}</span></li>
+                                        <li>
+                                            <div class="left"><span>电话: </span>{{item.MobilePhone}}</div>
+                                            <div class="right"><span>负责人: </span><span class="color06c">{{item.Owner ? item.Owner.Name:"--"}}</span></div>
+                                            <div class="clear"></div>
+                                        </li>
+                                        <li>
+                                            <span>地区: </span>
+                                            <span style="word-break:break-all;display:inline;">{{item.City?item.City.Description:"--"}}</span>
+                                        </li>
                                         <li>
                                             <span>需求单：</span><span class="color06c">{{item.DemandCount}}</span>
                                             <span>打样单：</span><span class="color06c">{{item.DYCount}}</span>
@@ -102,7 +110,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </a>
+                            </div>
                         </li>
                     </ul>
                 </div>

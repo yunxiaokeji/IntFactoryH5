@@ -148,8 +148,17 @@ background-color:#2F73B8;
 color:#fff;
 }
 .top-bar-tab .header li {
-    width:33%;
     line-height:50px;
+}
+.top-bar-tab .header li:first-child {
+    width:25%;
+    overflow:hidden;
+}
+.top-bar-tab .header li:last-child {
+    width:25%;
+}
+.top-bar-tab .header li:nth-child(2) {
+    width:50%;
 }
 .top-bar-tab .condition {
     border-bottom:1px solid #ccc;
