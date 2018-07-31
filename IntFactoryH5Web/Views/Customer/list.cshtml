@@ -95,13 +95,13 @@
                                             <div class="clear"></div>
                                         </li>
                                         <li>
-                                            <div class="left"><span>电话: </span>{{item.MobilePhone}}</div>
+                                            <div class="left"><span>电话: </span><a href="javascript:void(0);" v-on:tap="callMobile($event);" v-bind:data-mobile="item.MobilePhone">{{item.MobilePhone}}</a> </div>
                                             <div class="right"><span>负责人: </span><span class="color06c">{{item.Owner ? item.Owner.Name:"--"}}</span></div>
                                             <div class="clear"></div>
                                         </li>
                                         <li>
-                                            <span>地区: </span>
-                                            <span style="word-break:break-all;display:inline;">{{item.City?item.City.Description:"--"}}</span>
+                                            <span>地址: </span>
+                                            <span style="word-break:break-all;display:inline;">{{item.City?item.City.Description:"--"}}{{item.Address?item.Address:""}}</span>
                                         </li>
                                         <li>
                                             <span>需求单：</span><span class="color06c">{{item.DemandCount}}</span>
@@ -141,7 +141,7 @@
         <div class="btn-cancel iconfont hide" id="btnCancelSearch">&#xe628;</div>
     </div>
     @section scripts{
-        <script src="/modules/scripts/customer/list.js"></script>
+        <script src="/modules/scripts/customer/list.js?v=1"></script>
     }
 </body>
 

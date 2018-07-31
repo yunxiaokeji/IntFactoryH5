@@ -84,7 +84,7 @@
                 <div class="mui-scroll">
                     <ul class="mui-table-view mui-table-view-chevron">
                         <li class="mui-table-view-cell mui-media" v-for="item in listData">
-                            <a><span>款式:</span><span class="pLeft10">{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</span></a>
+                            <a v-on:tap="goDetail($event);" href="javascript:void(0);" v-bind:data-id="item.OrderID"><span>款式:</span><span class="pLeft10">{{(item.GoodsName + item.IntGoodsCode)?(item.IntGoodsCode+ " " + item.GoodsName): item.OrderCode}}</span></a>
                             <a href="javascript:;">
                                 <img class="order-img mui-pull-left" on-error="this.src='/modules/images/img-noimg.png'" v-bind:src="item.OrderImage||'/modules/images/img-noimg.png' ">
                                 <div class="mui-media-body">
@@ -127,7 +127,7 @@
         <div class="btn-cancel iconfont hide" id="btnCancelSearch">&#xe628;</div>
     </div>
 @section scripts{
-    <script src="/modules/scripts/orders/list.js?v=1"></script>
+    <script src="/modules/scripts/orders/list.js?v=2"></script>
 }
 </body>
 

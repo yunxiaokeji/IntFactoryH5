@@ -17,6 +17,11 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
+        public ActionResult Detail()
+        {
+            return View();
+        }
+
         public ActionResult List()
         {
             ViewBag.UserName = CurrentUser.name;
@@ -36,6 +41,16 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+         public JsonResult GetOrderDetail(string id)
+         {
+             var data = OrderBusiness.BaseBusiness.GetOrderDetail(id, CurrentUser.userID, CurrentUser.clientID);
+
+             return new JsonResult
+             {
+                 Data = data,
+                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
+             };
+         }
          public JsonResult GetOrderTotalCount(int searchOrderType)
          {
              var data = OrderBusiness.BaseBusiness.GetOrderTotalCount(searchOrderType, CurrentUser.userID, CurrentUser.clientID);

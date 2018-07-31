@@ -67,6 +67,12 @@ var tasklist = (function (mui) {
                 negativeFilterData: negativeFilterData,
                 listData: [],
                 headFilterName: "我的客户"
+            },
+            methods: {
+                callMobile: function (e) {
+                    var _this = $(e.currentTarget);
+                    location.href = "tel:" + _this.data("mobile");
+                }
             }
         });
 

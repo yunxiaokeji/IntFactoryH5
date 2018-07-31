@@ -62,6 +62,9 @@ namespace IntFactory.Sdk
         [Description("/api/order/GetOrders")]
         GetOrders,
 
+        [Description("/api/order/GetOrderDetail")]
+        GetOrderDetail,
+
         [Description("/api/order/GetOrderTotalCount")]
         GetOrderTotalCount,
 

@@ -23,6 +23,13 @@ Global.delCookie = function (name) {
         document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
 
+Global.GetQueryString=function(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return null;
+}
+
+
 Global.getCurrentUser = function () {
     var userinfo = Global.getCookie("userinfo");
     if (userinfo) {

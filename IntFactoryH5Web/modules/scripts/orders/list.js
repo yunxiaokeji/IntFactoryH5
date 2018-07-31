@@ -88,7 +88,6 @@ var orderlist = (function (mui) {
         bindEvent();
         bindSearchEvent();
         bindFilterEvent();
-        //searchList();
         //getLableColors();
         searchTotalCount();
     }
@@ -102,6 +101,12 @@ var orderlist = (function (mui) {
                 negativeFilterData:negativeFilterData,
                 listData: [],
                 firstFilterData: headFilterDataOfNeed.data[0]
+            },
+            methods: {
+                goDetail: function (e) {
+                    var _this = $(e.currentTarget);
+                    location.href = "/orders/detail?id=" + _this.data("id");
+                }
             }
         });
         lableid = headFilterDataOfNeed.data[0].lable;

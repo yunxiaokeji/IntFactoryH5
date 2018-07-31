@@ -337,6 +337,7 @@
     <Content Include="modules\scripts\font.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\login.js" />
+    <Content Include="modules\scripts\orders\detail.js" />
     <Content Include="modules\scripts\orders\list.js" />
     <Content Include="modules\scripts\prototype.js" />
     <Content Include="modules\scripts\sha1.js" />
@@ -407,6 +408,7 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Customer\list.cshtml" />
     <Content Include="Views\Passport\Index.cshtml" />
+    <Content Include="Views\Orders\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
