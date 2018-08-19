@@ -35,7 +35,10 @@ var orderDetail = (function (mui) {
                 }
 
                 muiContent.model = data.item;
-                setTimeout(function () { mui(".mui-slider").slider(); }, 1000);
+                setTimeout(function () {
+                    mui(".mui-slider").slider();
+                    $("#platemaking table tr td:last-child").remove();
+                }, 1000);
                 getPlateMakings(id);
             } else {
                 mui.alert("查询失败");

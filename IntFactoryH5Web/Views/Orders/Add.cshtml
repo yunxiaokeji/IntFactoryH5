@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "新建打样单";
+}
+
+@section css{
+  <style type="text/css">
+    .mui-views,
+    .mui-view,
+    .mui-pages,
+    .mui-page,
+    .mui-page-content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #fff;
+    }
+    .mui-pages {
+        top: 58px;
+        height: auto;
+    }
+
+    .mui-navbar {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 10;
+        height: 44px;
+    }
+
+    .mui-page {
+        display: none;
+    }
+      .mui-pages .mui-page {
+          display: block;
+      }
+
+      .mui-page.mui-transitioning {
+          -webkit-transition: -webkit-transform 300ms ease;
+          transition: transform 300ms ease;
+      }
+
+      .mui-input-row label{
+          width:40%;
+      }
+
+          .mui-input-row label ~ input, .mui-input-row label ~ select, .mui-input-row label ~ textarea {
+              width: 60%;
+              padding-left:10px;
+          }
+          
+    .liInput {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+    </style >
+  }
+<body>
+    <!--页面主结构开始-->
+    <div id="addorderbody" class="mui-views">
+        <div class="mui-view">
+            <div class="mui-navbar">
+            </div>
+            <div class="mui-pages">
+            </div>
+        </div>
+    </div>
+    <!--页面主结构结束-->
+
+    <div class="mui-page" id="main">
+        <!--页面标题栏开始-->
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>
+            <h1 class="mui-center mui-title">新建打样单</h1>
+        </div>
+
+        <div>
+            <ul class="mui-table-view mui-table-view-chevron">
+                <li class="mui-table-view-cell mui-collapse mui-active">
+                    <a class="mui-navigate-right" href="#">订单信息</a>
+                    <ul class="mui-table-view mui-table-view-chevron">
+                        <li class="mui-table-view-cell ">
+                            <a class="mui-navigate-right" href="#processcategory"><span style="width:40%;display:inline-block;">加工品类：</span><span>{{order.BigCategoryName}}</span></a>
+                        </li>
+                        <li class="mui-table-view-cell">
+                            <a class="mui-navigate-right" id="orderType"><span style="width:40%;display:inline-block;">订单分类：</span><span>{{order.CategoryName}}</span></a>
+                        </li>
+                        <li class="mui-table-view-cell" style="padding-top:4px;padding-bottom:4px;">
+                            <div class="mui-input-row">
+                                <label>交货日期：</label>
+                                <input type="text" class="datatime" v-model="order.PlanTime" readonly="readonly" placeholder="选择年月日" data-options='{"type":"date"}'>
+                            </div>
+                        </li>
+                        <li class="mui-table-view-cell liInput">
+                            <div class="mui-input-row">
+                                <label>期望价格：</label>
+                                <input type="text" v-model="order.PlanPrice" placeholder="请输入期望价格">
+                            </div>
+                        </li>
+                        <li class="mui-table-view-cell liInput">
+                            <div class="mui-input-row">
+                                <label>详细需求：</label>
+                                <input type="text" v-model="order.Remark" placeholder="请输入详细需求">
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="mui-table-view-cell mui-collapse mui-active">
+                    <a class="mui-navigate-right" href="#">客户信息</a>
+                    <ul class="mui-table-view mui-table-view-chevron">
+                        <li class="mui-table-view-cell" style="padding-top:3px;padding-bottom:3px;padding-right:5px;">
+                            <div class="mui-input-row left">
+                                <label>姓名：</label>
+                                <input type="text" v-model="order.PersonName" placeholder="请输入姓名">
+                            </div>
+                            @*<div class="right pTop10"><a>选择已有客户</a></div>*@
+                        </li>
+                        <li class="mui-table-view-cell liInput">
+                            <div class="mui-input-row">
+                                <label>联系电话：</label>
+                                <input type="text" v-model="order.MobileTele" placeholder="请输入联系电话">
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="mui-content-padded pTop20">
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-block" v-on:tap="createOrder();">保存</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="processcategory" class="mui-page">
+        <!--页面标题栏开始-->
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-action-back mui-btn  mui-btn-link mui-btn-nav btnBack">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>
+            <h1 class="mui-center mui-title">加工品类</h1>
+        </div>
+
+        <div class="mui-page-content">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell" v-for="processCategory in processCategorys">
+                    <a class="mui-navigate-right" v-on:tap="setProcessCategory(processCategory.CategoryID,processCategory.Name)">{{processCategory.Name}}</a>
+                </li>
+            </ul>
+        </div>
+     </div>
+
+    @section scripts{
+    <script src="/modules/scripts/orders/add.js?v=1"></script>
+    }
+</body>

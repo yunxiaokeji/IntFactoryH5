@@ -5,23 +5,56 @@
     <style type="text/css">
         .table-list {
             border: 1px solid #cad9ea;
+            table-layout:fixed;
             color: #666;
         }
 
-            .table-list th {
-                background-repeat: repeat-x;
-                height: 30px;
-            }
+        .table-list th {
+            background-repeat: repeat-x;
+            height: 30px;
+        }
 
-            .table-list td,
-            .table-list th {
-                border: 1px solid #cad9ea;
-                padding: 0 1em 0;
-            }
+        .table-list td,
+        .table-list th {
+            border: 1px solid #cad9ea;
+            padding: 0 1em 0;
+        }
 
-            .table-list tr.alter {
-                background-color: #f5fafe;
-            }
+        .table-list tr.alter {
+            background-color: #f5fafe;
+        }
+
+        .task-ing {
+            background: #45BF67;
+        }
+
+        .task-normal {
+            background: #ccc;
+        }
+
+        .task-over {
+            background: #3A7DE5;
+        }
+
+        .task-ing-col {
+            color: #45BF67;
+        }
+
+        .task-normal-col {
+            color: #ccc;
+        }
+
+        .task-over-col {
+            color: #3A7DE5;
+        }
+
+        #progress .mui-navigate-right:after {
+            color: #fff;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item{
+            max-height:400px;
+        }
     </style>
 }
 <body>
@@ -86,8 +119,7 @@
                             <li class="mui-table-view-cell">
                                 尺寸信息
                             </li>
-                            <li class="mui-table-view-cell" style="padding-right:5px;" v-html=" model.Platemaking?decodeURI(model.Platemaking):'暂无制版信息' ">
-                            </li>
+                            <li class="mui-table-view-cell" id="platemaking" style="padding-right:5px;overflow-x:auto;" v-html=" model.Platemaking?decodeURI(model.Platemaking):'暂无制版信息' "></li>
                             <li class="mui-table-view-cell">
                                 工艺说明
                             </li>
@@ -114,12 +146,12 @@
                         <span class="mLeft10">交货时间：</span><span>{{ !model.PlanTime?"未设置":model.PlanTime.toDate("yyyy-MM-dd")<="1900-01-01"||model.PlanTime.toDate("yyyy-MM-dd")=="2040-01-01"?"未设置":model.PlanTime.toDate("yyyy-MM-dd")}}</span>
                     </li>
                     <li class="mui-table-view-cell mui-collapse" v-for="stage in model.Tasts">
-                        <a class="mui-navigate-right" href="#">
+                        <a href="#" v-bind:class=" (stage.FinishStatus==0?'task-normal ':stage.FinishStatus==1?'task-ing':'task-over' ) + ' mui-navigate-right' " style="color:#fff;margin-bottom:2px;">
                             <span class=" width150" style="display:inline-block">{{stage.Title}}</span>
                             <span class="mLeft30">{{stage.FinishStatus == 0 ? "未接受" : stage.FinishStatus == 1 ? "进行中" : "已完成"}}</span>
                         </a>
                         <ul class="mui-table-view mui-table-view-chevron">
-                            <li class="mui-table-view-cell bold">
+                            <li v-bind:class=" (stage.FinishStatus==0?'task-normal-col ':stage.FinishStatus==1?'task-ing-col':'task-over-col' ) + ' mui-table-view-cell bold' ">
                                 <span>任务状态：</span>
                                 <span>{{stage.FinishStatus == 0 ? "未接受" : stage.FinishStatus == 1 ? "进行中" : "已完成"}}</span>
                             </li>
@@ -145,7 +177,6 @@
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
 
@@ -207,7 +238,7 @@
                             </li>
                             <li class="mui-table-view-cell">
                                 <span>采购数量： </span>
-                                <span>{{detail.InQuantity+detail.UseQuantity}}</span>
+                                <span>{{detail.PlanQuantity}}</span>
                             </li>
                             <li class="mui-table-view-cell">
                                 <span>小计： </span>

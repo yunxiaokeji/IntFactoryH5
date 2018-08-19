@@ -22,6 +22,11 @@ namespace IntFactoryH5Web.Controllers
             return View();
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         public ActionResult List()
         {
             ViewBag.UserName = CurrentUser.name;
@@ -61,6 +66,29 @@ namespace IntFactoryH5Web.Controllers
                  JsonRequestBehavior = JsonRequestBehavior.AllowGet
              };
          }
+
+         public JsonResult GetClientProcessCategorys()
+         {
+             var data = OrderBusiness.BaseBusiness.GetClientProcessCategorys(CurrentUser.userID,CurrentUser.clientID);
+
+             return new JsonResult
+             {
+                 Data = data,
+                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
+             };
+         }
+
+         public JsonResult GetProductChildCategorysByID()
+         {
+             var data = OrderBusiness.BaseBusiness.GetProductChildCategorysByID(CurrentUser.userID,CurrentUser.clientID);
+
+             return new JsonResult
+             {
+                 Data = data,
+                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
+             };
+         }
+
 
         public JsonResult GetGoodsDocByOrderID(string orderID, int type, string taskID)
         {
@@ -130,6 +158,16 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        public JsonResult CreateOrder(string entity)
+        {
+            var result = OrderBusiness.BaseBusiness.CreateOrder(entity, CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
     }
 }

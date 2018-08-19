@@ -106,6 +106,9 @@ var orderlist = (function (mui) {
                 goDetail: function (e) {
                     var _this = $(e.currentTarget);
                     location.href = "/orders/detail?id=" + _this.data("id");
+                },
+                goAddOrder: function () {
+                    location.href = "/orders/add";
                 }
             }
         });

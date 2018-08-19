@@ -65,6 +65,12 @@ namespace IntFactory.Sdk
         [Description("/api/order/GetOrderDetail")]
         GetOrderDetail,
 
+        [Description("/api/order/GetClientProcessCategorys")]
+        GetClientProcessCategorys,
+
+        [Description("/api/order/GetProductChildCategorysByID")]
+        GetProductChildCategorysByID,
+
         [Description("/api/order/GetOrderTotalCount")]
         GetOrderTotalCount,
 
@@ -90,6 +96,9 @@ namespace IntFactory.Sdk
         LockTask,
 
         [Description("/api/Customer/GetCustomers")]
-        GetCustomers
+        GetCustomers,
+
+        [Description("/api/order/CreateOrder")]
+        CreateOrder
     }
 }

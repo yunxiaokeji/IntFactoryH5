@@ -32,6 +32,24 @@ namespace IntFactory.Sdk
             return HttpRequest.RequestServer(ApiOption.GetOrderDetail, paras, RequestType.Get);
         }
 
+        public string GetClientProcessCategorys(string userID,string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetClientProcessCategorys, paras, RequestType.Get);
+        }
+
+        public string GetProductChildCategorysByID(string userID,string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetProductChildCategorysByID, paras, RequestType.Get);
+        }
+
         public string GetOrderTotalCount(int searchOrderType, string userID, string clientID)
         {
             var paras = new Dictionary<string, object>();
@@ -94,5 +112,16 @@ namespace IntFactory.Sdk
 
             return HttpRequest.RequestServer(ApiOption.GetOrderDetailsByOrderID, paras);
         }
+
+        public string CreateOrder(string entity, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("entity", entity);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.CreateOrder, paras);
+        }
+
     }
 }

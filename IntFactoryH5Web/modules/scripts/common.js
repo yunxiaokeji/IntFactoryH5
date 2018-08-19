@@ -23,6 +23,16 @@ Global.delCookie = function (name) {
         document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 }
 
+Global.isDouble = function (str) {
+    return str.match(/^\d+(.\d+)?$/);
+}
+
+Global.validateMobilephone = function (mobilephone) {
+    var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+
+    return reg.test(mobilephone);
+}
+
 Global.GetQueryString=function(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);

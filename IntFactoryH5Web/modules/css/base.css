@@ -156,7 +156,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:non
 .width70 { width:65px !important; }
 .minwidth70 { min-width:70px !important; }
 .width80 { width:80px !important; }
-.width100 { width:100px !important; }
+.width100 { width:100px; }
 .width120 { width:120px !important; }
 .width150 { width:150px !important; }
 .width200 { width:200px !important; }
