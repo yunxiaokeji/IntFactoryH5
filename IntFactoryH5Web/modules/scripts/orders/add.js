@@ -1,5 +1,5 @@
 ﻿
-var viewApi = mui('#addorderbody').view({
+var viewApi = mui('#createorderbody').view({
     defaultPage: '#main'
 });
 
@@ -56,6 +56,27 @@ var addOrder = (function () {
             }
         });
 
+        searchcustomerContent = new Vue({
+            el: '#searchcustomer',
+            data: {
+                customers: []
+            },
+            methods: {
+                searchCustomer: function (e) {
+                    var _this = $(e.currentTarget);
+                    var keywords = _this.val();
+                    if(keywords){
+                        getCustomersByKeywords(keywords);
+                    }
+                },
+                setCustomer: function (name, mobilePhone) {
+                    mainContent.order.PersonName = name;
+                    mainContent.order.MobileTele = mobilePhone;
+                    mui.back();
+                }
+            }
+        });
+
         mainContent = new Vue({
             el: '#main',
             data: {
@@ -65,6 +86,7 @@ var addOrder = (function () {
                 createOrder: function () {
                     createOrder();
                 }
+               
             }
         });
     }
@@ -142,6 +164,19 @@ var addOrder = (function () {
                         mainContent.order.CategoryName =items[0].text+"/"+ items[1].text;
                     });
                 });
+
+            } else {
+                mui.alert("查询失败");
+            }
+        });
+    }
+
+    function getCustomersByKeywords(keywords) {
+        $.get("/Customer/GetCustomersByKeywords?keywords=" + keywords, function (data) {
+            data = JSON.parse(data);
+            if (data.items) {
+                searchcustomerContent.customers = data.items;
+
 
             } else {
                 mui.alert("查询失败");

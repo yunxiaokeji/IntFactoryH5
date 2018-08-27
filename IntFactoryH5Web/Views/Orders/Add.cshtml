@@ -59,7 +59,7 @@
   }
 <body>
     <!--页面主结构开始-->
-    <div id="addorderbody" class="mui-views">
+    <div id="createorderbody" class="mui-views">
         <div class="mui-view">
             <div class="mui-navbar">
             </div>
@@ -112,12 +112,12 @@
                 <li class="mui-table-view-cell mui-collapse mui-active">
                     <a class="mui-navigate-right" href="#">客户信息</a>
                     <ul class="mui-table-view mui-table-view-chevron">
-                        <li class="mui-table-view-cell" style="padding-top:3px;padding-bottom:3px;padding-right:5px;">
+                        <li class="mui-table-view-cell" style="padding-top:3px;padding-bottom:3px;position:relative;">
                             <div class="mui-input-row left">
                                 <label>姓名：</label>
                                 <input type="text" v-model="order.PersonName" placeholder="请输入姓名">
                             </div>
-                            @*<div class="right pTop10"><a>选择已有客户</a></div>*@
+                            <div style="position:absolute;right:5px;top:12px;"><a style="font-size: 14px;" href="#searchcustomer">选择已有客户</a></div>
                         </li>
                         <li class="mui-table-view-cell liInput">
                             <div class="mui-input-row">
@@ -153,6 +153,27 @@
             </ul>
         </div>
      </div>
+
+    <div id="searchcustomer" class="mui-page">
+        <!--页面标题栏开始-->
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-action-back mui-btn  mui-btn-link mui-btn-nav btnBack">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>
+            <h1 class="mui-center mui-title">选择客户</h1>
+        </div>
+
+        <div class="mui-page-content">
+            <div class="mui-input-row mui-search">
+                <input type="search" class="mui-input-clear" placeholder="" v-on:keyup="searchCustomer">
+            </div>
+            <ul class="mui-table-view mTop15">
+                <li class="mui-table-view-cell" v-for="customer in customers">
+                    <a class="mui-navigate-right" v-on:tap="setCustomer(customer.Name,customer.MobilePhone)">{{customer.Name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     @section scripts{
     <script src="/modules/scripts/orders/add.js?v=1"></script>

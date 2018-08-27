@@ -20,5 +20,17 @@ namespace IntFactory.Sdk
 
             return HttpRequest.RequestServer(ApiOption.GetCustomers, paras, RequestType.Post);
         }
+
+        public string GetCustomersByKeywords(string keywords, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("keywords", keywords);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.GetCustomersByKeywords, paras, RequestType.Get);
+        }
+
+
     }
 }

@@ -30,5 +30,18 @@ namespace IntFactoryH5Web.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        public JsonResult GetCustomersByKeywords(string keywords)
+        {
+            var data = CustomerBusiness.BaseBusiness.GetCustomersByKeywords(keywords, CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = data,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
     }
 }
