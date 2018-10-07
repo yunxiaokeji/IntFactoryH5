@@ -35,6 +35,11 @@
     }
       .mui-pages .mui-page {
           display: block;
+          position: fixed;
+          height: 100%;
+          top: 45px;
+          overflow: scroll;
+          padding-bottom: 100px;
       }
 
       .mui-page.mui-transitioning {
@@ -101,6 +106,14 @@
                                 <input type="text" v-model="order.PlanPrice" placeholder="请输入期望价格">
                             </div>
                         </li>
+                        <li class="mui-table-view-cell" id="attachment-body">
+                            <span style="width:40%;display:inline-block;padding-left:15px;">附件：</span>
+                            <span class="iconfont" id="btn-attachment">&#xe65a;</span>
+                            <br />
+                            <ul class="pic-list task-file mTop20" id="pic-list" contenteditable="false"></ul>
+                            <div class="clear"></div>
+                            <ul class="doc-list task-file mTop20 upload-file" id="doc-list" contenteditable="false"></ul>
+                        </li>
                         <li class="mui-table-view-cell liInput">
                             <div class="mui-input-row">
                                 <label>详细需求：</label>
@@ -109,31 +122,37 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="mui-table-view-cell mui-collapse mui-active">
                     <a class="mui-navigate-right" href="#">客户信息</a>
                     <ul class="mui-table-view mui-table-view-chevron">
-                        <li class="mui-table-view-cell" style="padding-top:3px;padding-bottom:3px;position:relative;">
+                        <li class="mui-table-view-cell">
+                            <a class="mui-navigate-right" href="#searchcustomer">选择已有客户</a>
+                        </li>
+                        <li class="mui-table-view-cell">
+                            <a class="mui-navigate-right" href="#addcustomer">新建客户</a>
+                        </li>
+                        <li class="mui-table-view-cell" v-show="order.PersonName!=''">
                             <div class="mui-input-row left">
                                 <label>姓名：</label>
-                                <input type="text" v-model="order.PersonName" placeholder="请输入姓名">
+                                <input type="text" v-model="order.PersonName" readonly="readonly">
                             </div>
-                            <div style="position:absolute;right:5px;top:12px;"><a style="font-size: 14px;" href="#searchcustomer">选择已有客户</a></div>
+                            @*<div style="position:absolute;right:5px;top:12px;"><a style="font-size: 14px;" >选择已有客户</a></div>*@
                         </li>
-                        <li class="mui-table-view-cell liInput">
+                        <li class="mui-table-view-cell liInput" v-show="order.MobileTele!=''">
                             <div class="mui-input-row">
                                 <label>联系电话：</label>
-                                <input type="text" v-model="order.MobileTele" placeholder="请输入联系电话">
+                                <input type="text" v-model="order.MobileTele" readonly="readonly">
                             </div>
                         </li>
                     </ul>
                 </li>
             </ul>
 
-            <div class="mui-content-padded pTop20">
-                <button type="button" class="mui-btn mui-btn-primary mui-btn-block" v-on:tap="createOrder();">保存</button>
+            <div class="mui-content-padded pTop20 center">
+                <button type="button" class="mui-btn mui-btn-primary" v-on:tap="createOrder();">保存</button>
             </div>
         </div>
-        
     </div>
 
     <div id="processcategory" class="mui-page">
@@ -152,7 +171,7 @@
                 </li>
             </ul>
         </div>
-     </div>
+    </div>
 
     <div id="searchcustomer" class="mui-page">
         <!--页面标题栏开始-->
@@ -167,15 +186,81 @@
             <div class="mui-input-row mui-search">
                 <input type="search" class="mui-input-clear" placeholder="" v-on:keyup="searchCustomer">
             </div>
-            <ul class="mui-table-view mTop15">
-                <li class="mui-table-view-cell" v-for="customer in customers">
-                    <a class="mui-navigate-right" v-on:tap="setCustomer(customer.Name,customer.MobilePhone)">{{customer.Name}}</a>
-                </li>
-            </ul>
+            <div class="mui-content mui-scroll-wrapper" id="pullrefresh" style="top:45px; bottom:50px;padding-top:0">
+                <div class="mui-scroll">
+                    <ul class="mui-table-view mTop15">
+                        <li class="mui-table-view-cell" v-for="customer in customers">
+                            <a class="mui-navigate-right" v-on:tap="setCustomer(customer.Name,customer.MobilePhone)">{{customer.Name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <div id="addcustomer" class="mui-page">
+        <!--页面标题栏开始-->
+        <div class="mui-navbar-inner mui-bar mui-bar-nav">
+            <button type="button" class="mui-action-back mui-btn  mui-btn-link mui-btn-nav btnBack">
+                <span class="mui-icon mui-icon-left-nav"></span>
+            </button>
+            <h1 class="mui-center mui-title">新建客户</h1>
+        </div>
+
+        <div class="mui-page-content">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>客户名称：</label>
+                        <input type="text" v-model="customer.Name" placeholder="请输入客户名称">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>联系电话：</label>
+                        <input type="text" v-model="customer.MobilePhone" placeholder="请输入联系电话">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>邮箱：</label>
+                        <input type="text" v-model="customer.Email" placeholder="请输入邮箱">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <a class="mui-navigate-right"  id="selectCityCode">
+                        <span style="width:40%;display:inline-block;padding-left:15px;">省份城市：</span>
+                        <span class="pLeft5">{{customer.CityName}}</span>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>详细地址：</label>
+                        <input type="text" v-model="customer.Address" placeholder="请输入详细地址">
+                    </div>
+                </li>
+                <li class="mui-table-view-cell">
+                    <div class="mui-input-row">
+                        <label>备注：</label>
+                        <input type="text" v-model="customer.Description" placeholder="请输入备注">
+                    </div>
+                </li>
+            </ul>
+            <div class="mui-content-padded pTop20 center">
+                <button type="button" class="mui-btn mui-btn-primary" v-on:tap="createCustomer();">确定</button>
+            </div>
+        </div>
+    </div>
     @section scripts{
-    <script src="/modules/scripts/orders/add.js?v=1"></script>
+        <script type="text/javascript">
+            Global.loadJS(["/modules/scripts/orders/add.js"]);
+            $(function () {
+                seajs.use("/modules/scripts/orders/upload.js?version=" + Version, function (upload) {
+                    upload.init(
+                    );
+                });
+            });
+        </script>
     }
 </body>

@@ -30,17 +30,62 @@ var addOrder = (function () {
         OrderImage:"",
         Remark: ""
     };
+
+    var customer = {
+        Name:"",
+        MobilePhone: "",
+        CityCode: "",
+        CityName:"",
+        Address: "",
+        Email: "",
+        Description:""
+    };
+    var searchCustomerParams = {
+        SearchType: 3,
+        Type: -1,
+        SourceType: -1,
+        SourceID: "",
+        StageID: "",
+        Status: 1,
+        FirstName: "",
+        Mark: -1,
+        UserID: "",
+        AgentID: "",
+        TeamID: "",
+        Keywords: "",
+        BeginTime: "",
+        EndTime: "",
+
+        OrderBy: "cus.CreateTime desc",
+        PageIndex: 0,
+        PageSize: 100
+    };
     var processcategoryContent;
     var mainContent;
+    var addcustomerContent;
     function init() {
-        initMui();
+        initVue();
         bindEvent();
         
         getClientProcessCategorys();
         getProductChildCategorysByID();
+        getCitys();
     }
 
-    function initMui() {
+    function initVue() {
+        mainContent = new Vue({
+            el: '#main',
+            data: {
+                order: order
+            },
+            methods: {
+                createOrder: function () {
+                    createOrder();
+                }
+
+            }
+        });
+
         processcategoryContent = new Vue({
             el: '#processcategory',
             data: {
@@ -77,18 +122,45 @@ var addOrder = (function () {
             }
         });
 
-        mainContent = new Vue({
-            el: '#main',
+        addcustomerContent = new Vue({
+            el: '#addcustomer',
             data: {
-                order: order
+                customer: customer
             },
             methods: {
-                createOrder: function () {
-                    createOrder();
+                createCustomer: function () {
+                    createCustomer();
                 }
-               
             }
         });
+
+        mui.init({
+            pullRefresh: {
+                container: '#pullrefresh',
+                //down: {
+                //    //callback: pulldownRefresh
+                //},
+                up: {
+                    height: 50,
+                    contentrefresh: '正在加载...',
+                    contentnomore: '没有更多数据了',
+                    callback: pullUpRefresh
+                }
+            }
+        });
+
+        if (mui.os.plus) {
+            mui.plusReady(function () {
+                setTimeout(function () {
+                    mui('#pullrefresh').pullRefresh().pullupLoading();
+                }, 1000);
+
+            });
+        } else {
+            mui.ready(function () {
+                mui('#pullrefresh').pullRefresh().pullupLoading();
+            });
+        }
     }
 
     function bindEvent() {
@@ -171,12 +243,96 @@ var addOrder = (function () {
         });
     }
 
+    function getCitys() {
+        $.get("/Customer/GetCitys", function (data) {
+            data = JSON.parse(data);
+            if (data.items) {
+                $("#selectCityCode").unbind().bind("tap", function () {
+                    var categorys = [];
+                    data.items.forEach(function (item) {
+                        var category = {
+                            value: item.CityCode,
+                            text: item.Name,
+                            children: []
+                        };
+
+                        item.ChildCity.forEach(function (child) {
+                            var categoryChild = {
+                                value: child.CityCode,
+                                text: child.Name,
+                                children:[]
+                            };
+                            category.children.push(categoryChild);
+
+                            child.ChildCity.forEach(function (child) {
+                                var categoryLastChild = {
+                                    value: child.CityCode,
+                                    text: child.Name
+                                };
+                                categoryChild.children.push(categoryLastChild);
+                            });
+
+                        });
+                        categorys.push(category);
+                    });
+
+                    var dailyExpensePicker = new mui.PopPicker({ buttons: ['取消', '完成'], layer: 3 });
+                    dailyExpensePicker.setData(categorys);
+
+                    dailyExpensePicker.show(function (items) {
+                        var item = items[2];
+                        addcustomerContent.customer.CityCode = item.value;
+                        addcustomerContent.customer.CityName =items[0].text+"-"+items[1].text+"-"+ items[2].text;
+                    });
+                });
+
+            } else {
+                mui.alert("查询失败");
+            }
+        });
+    }
+
     function getCustomersByKeywords(keywords) {
         $.get("/Customer/GetCustomersByKeywords?keywords=" + keywords, function (data) {
             data = JSON.parse(data);
             if (data.items) {
                 searchcustomerContent.customers = data.items;
 
+
+            } else {
+                mui.alert("查询失败");
+            }
+        });
+    }
+
+    function pullUpRefresh() {
+        setTimeout(function () {
+            searchCustomerParams.PageIndex++
+            searchCustomer(searchCustomerParams.PageIndex);
+        }, 1000);
+    }
+
+    function searchCustomer(pageIndex)
+    {
+        if (pageIndex) {
+            searchCustomerParams.PageIndex = pageIndex;
+            if (pageIndex == 1) {
+                mui('#pullrefresh').pullRefresh().scrollTo(0, 0);
+            }
+        } else {
+            searchCustomerParams.PageIndex = 1;
+            searchcustomerContent.customers = [];
+            mui('#pullrefresh').pullRefresh().refresh(true);
+            mui('#pullrefresh').pullRefresh().scrollTo(0, 0);
+        }
+        $.post("/Customer/GetCustomers", { filter: JSON.stringify(searchCustomerParams) }, function (data) {
+            data = JSON.parse(data);
+            mui('#pullrefresh').pullRefresh().endPullupToRefresh((data.pageCount == searchCustomerParams.PageIndex || data.pageCount == 0));
+            if (data.items) {
+                var items = data.items;
+                items.forEach(function (item) {
+                    searchcustomerContent.customers.push(item);
+                });
 
             } else {
                 mui.alert("查询失败");
@@ -227,6 +383,13 @@ var addOrder = (function () {
     function createOrder() {
         if (!validate()) { return; }
 
+        var images = "";
+        $("#pic-list li").each(function () {
+            var _this = $(this);
+            images += _this.data("server") + _this.data("filename") + ",";
+        });
+        mainContent.order.OrderImage = images;
+
         $.post("/orders/CreateOrder", { entity: JSON.stringify(mainContent.order) }, function (data) {
             data = JSON.parse(data);
             if (data.id) {
@@ -237,6 +400,43 @@ var addOrder = (function () {
                 mui.alert("保存失败");
             }
         });
+    }
+
+    function createCustomer() {
+        if (!validateCustomer()) { return; }
+
+        $.post("/Customer/createCustomer", { entity: JSON.stringify(addcustomerContent.customer) }, function (data) {
+            data = JSON.parse(data);
+            if (data.model.CustomerID) {
+                mui.alert("客户创建成功!" + data.model.CustomerID);
+                mainContent.order.PersonName = addcustomerContent.customer.Name;
+                mainContent.order.MobileTele = addcustomerContent.customer.MobilePhone;
+                mui.back();
+
+            } else {
+                mui.alert("客户创建失败,联系电话已存在!");
+            }
+        });
+    }
+
+    function validateCustomer() {
+        var customer = addcustomerContent.customer;
+        if (!customer.Name) {
+            mui.alert("请填写客户名称");
+            return false;
+        }
+
+        if (!customer.MobilePhone) {
+            mui.alert("请填写联系电话");
+            return false;
+        } else {
+            if (!Global.validateMobilephone(customer.MobilePhone)) {
+                mui.alert("联系电话格式有误");
+                return false;
+            }
+        }
+
+        return true;
     }
 
     return {

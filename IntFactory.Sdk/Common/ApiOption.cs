@@ -101,6 +101,12 @@ namespace IntFactory.Sdk
         [Description("/api/Customer/GetCustomersByKeywords")]
         GetCustomersByKeywords,
 
+        [Description("/api/Customer/GetCitys")]
+        GetCitys,
+
+        [Description("/api/Customer/SaveCustomer")]
+        CreateCustomer,
+
         [Description("/api/order/CreateOrder")]
         CreateOrder
     }

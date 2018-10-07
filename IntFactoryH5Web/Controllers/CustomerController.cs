@@ -42,6 +42,27 @@ namespace IntFactoryH5Web.Controllers
             };
         }
 
+        public JsonResult GetCitys()
+        {
+            var data = CustomerBusiness.BaseBusiness.GetCitys(CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = data,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult CreateCustomer(string entity)
+        {
+            var result = CustomerBusiness.BaseBusiness.CreateCustomer(entity, CurrentUser.userID, CurrentUser.clientID);
+
+            return new JsonResult
+            {
+                Data = result,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
     }
 }

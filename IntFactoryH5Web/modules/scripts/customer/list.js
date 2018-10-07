@@ -50,7 +50,7 @@ var tasklist = (function (mui) {
     var muiContent;
     var headFilterContent;
     function init() {
-        initMui();
+        initVue();
         bindEvent();
         bindSearchEvent();
         bindFilterEvent();
@@ -58,7 +58,7 @@ var tasklist = (function (mui) {
         getLableColors();
     }
 
-    function initMui() {
+    function initVue() {
         muiContent = new Vue({
             el: '#offCanvasWrapper',
             data: {

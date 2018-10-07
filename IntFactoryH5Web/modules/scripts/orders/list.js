@@ -84,7 +84,7 @@ var orderlist = (function (mui) {
     var headFilterContent;
     var lableid;
     function init() {
-        initMui();
+        initVue();
         bindEvent();
         bindSearchEvent();
         bindFilterEvent();
@@ -92,7 +92,7 @@ var orderlist = (function (mui) {
         searchTotalCount();
     }
 
-    function initMui() {
+    function initVue() {
         muiContent = new Vue({
             el: '#offCanvasWrapper',
             data: {
@@ -277,9 +277,6 @@ var orderlist = (function (mui) {
                 items.forEach(function (item) {
                     muiContent.listData.push(item);
                 });
-                //if (data.pageCount == params.PageIndex || data.pageCount == 0) {
-                //    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
-                //}
             } else {
                 mui.alert("查询失败");
             }

@@ -31,6 +31,23 @@ namespace IntFactory.Sdk
             return HttpRequest.RequestServer(ApiOption.GetCustomersByKeywords, paras, RequestType.Get);
         }
 
+        public string GetCitys(string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
 
+            return HttpRequest.RequestServer(ApiOption.GetCitys, paras, RequestType.Get);
+        }
+
+        public string CreateCustomer(string entity, string userID, string clientID)
+        {
+            var paras = new Dictionary<string, object>();
+            paras.Add("entity", entity);
+            paras.Add("userID", userID);
+            paras.Add("clientID", clientID);
+
+            return HttpRequest.RequestServer(ApiOption.CreateCustomer, paras);
+        }
     }
 }

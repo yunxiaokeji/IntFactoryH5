@@ -338,6 +338,7 @@
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\login.js" />
     <Content Include="modules\scripts\orders\add.js" />
+    <Content Include="modules\scripts\orders\upload.js" />
     <Content Include="modules\scripts\orders\detail.js" />
     <Content Include="modules\scripts\orders\list.js" />
     <Content Include="modules\scripts\prototype.js" />

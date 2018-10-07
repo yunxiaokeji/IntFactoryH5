@@ -51,6 +51,14 @@ Global.getCurrentUser = function () {
     return userinfo;
 }
 
+Global.loadJS=function(jsFiles) {
+    jsFiles.forEach(function (value, index) {
+        var jsbasepath = "";
+        var fileUrl = jsbasepath + value;
+        document.write('<script  src="' + fileUrl + "?version" + Version + '"></' + 'script>');
+    });
+}
+
 Global.currentUser = Global.getCurrentUser();
 
 

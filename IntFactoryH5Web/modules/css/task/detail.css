@@ -111,9 +111,7 @@ nav ul .menuchecked{border-bottom:5px solid #4a98e7;color:#4a98e7;height:41px;}
 .information-upload { background-color:#fafafa;position:relative;margin-left:60px;}
 .information-upload .filename{color:#222;margin-top:7px;}
 
-/*图片样式*/
-.pic-list li{ position:relative;float:left;margin-right:40px;border:1px solid #ddd;width:120px;height:80px;text-align:center;line-height:80px;margin-bottom:20px;padding:1px;}
-.pic-list li img{ max-width:120px;max-height:80px;}
+
 
 /*讨论附加内容*/
 .addition { width:100%;}

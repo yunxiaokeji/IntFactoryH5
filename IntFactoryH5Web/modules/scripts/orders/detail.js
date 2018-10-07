@@ -3,11 +3,11 @@
 var orderDetail = (function (mui) {
     var muiContent;
     function init() {
-        initMui();
+        initVue();
         getOrderDetail();
     }
 
-    function initMui() {
+    function initVue() {
         muiContent = new Vue({
             el: '#orderDetail',
             data: {

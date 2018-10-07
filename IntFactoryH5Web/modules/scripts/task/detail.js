@@ -506,19 +506,36 @@
     ObjectJS.bindTimerPicker = function () {
         if ($(".btn-acceptTaskTime").length == 0) { return; }
         if (!ObjectJS.isOwner) { return; }
-        var defaultParas = {
-            preset: 'datetime',
-            theme: 'android-ics light', //皮肤样式
-            display: 'modal', //显示方式 
-            mode: 'scroller', //日期选择模式
-            lang: 'zh',
-            onSelect: function (date) {
-                Paras.endTime = date;
-                ObjectJS.showConfirmForm(0);
-                $(".btn-acceptTaskTime").val("接受任务");
-            }
-        };
-        $(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
+
+        bindDataTimeEvent();
+        //var defaultParas = {
+        //    preset: 'datetime',
+        //    theme: 'android-ics light', //皮肤样式
+        //    display: 'modal', //显示方式 
+        //    mode: 'scroller', //日期选择模式
+        //    lang: 'zh',
+        //    onSelect: function (date) {
+                
+        //    }
+        //};
+        //$(".btn-acceptTaskTime").mobiscroll().datetime(defaultParas);
+    }
+
+    function bindDataTimeEvent() {
+        $(".datetime").each(function (i, txtDate) {
+            $(this).on("tap", function () {
+                var self = $(this);
+                var optionsJson = self.attr('data-options') || '{}';
+                var options = JSON.parse(optionsJson);
+                var picker = new mui.DtPicker(options);
+                picker.show(function (rs) {
+                    Paras.endTime = rs.text;
+                    ObjectJS.showConfirmForm(0);
+                    $(".btn-acceptTaskTime").val("接受任务");
+                    picker.dispose();
+                });
+            });
+        });
     }
 
     //设置任务到期时间

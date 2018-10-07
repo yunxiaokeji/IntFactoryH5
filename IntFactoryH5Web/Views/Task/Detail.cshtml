@@ -19,8 +19,8 @@
     <link href="/modules/plug/swiper/css/swiper.css" rel="stylesheet" />
     @{
         if(task.finishStatus==0){
-        <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
-        <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />
+        @*<link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.core-2.5.2.css" rel="stylesheet" />
+        <link href="/modules/plug/dataTimePicker/dev/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" />*@
         }
       }
 }
@@ -32,10 +32,10 @@
         }
     }
     @if(task.finishStatus==0){
-        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
+        @*<script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.core-2.5.2-zh.js"></script>
         <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1.js"></script>
-        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>
+        <script src="/modules/plug/dataTimePicker/dev/js/mobiscroll.datetime-2.5.1-zh.js"></script>*@
     }
     <script type="text/javascript">
         $(function () {
@@ -84,7 +84,7 @@
                     {
                         if (task.finishStatus == 0)
                         {
-                            <input type="button" class="btn-acceptTaskTime header-btn" readonly="true" style="border-color:#fff;" value="接受任务" />
+                            <input type="button" class="btn-acceptTaskTime header-btn datetime" data-options='{"type":"datetime"}' readonly="true" style="border-color:#fff;" value="接受任务" />
                         }
                         else if (task.finishStatus == 1)
                         {
