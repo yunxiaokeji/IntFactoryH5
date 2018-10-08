@@ -370,12 +370,13 @@ var addOrder = (function () {
         if (!order.MobileTele) {
             mui.alert("请填写客户联系电话");
             return false;
-        } else {
-            if (!Global.validateMobilephone(order.MobileTele)) {
-                mui.alert("联系电话格式有误");
-                return false;
-            }
         }
+        //else {
+        //    if (!Global.validateMobilephone(order.MobileTele)) {
+        //        mui.alert("联系电话格式有误");
+        //        return false;
+        //    }
+        //}
 
         return true;
     }
@@ -408,7 +409,7 @@ var addOrder = (function () {
         $.post("/Customer/createCustomer", { entity: JSON.stringify(addcustomerContent.customer) }, function (data) {
             data = JSON.parse(data);
             if (data.model.CustomerID) {
-                mui.alert("客户创建成功!" + data.model.CustomerID);
+                //mui.alert("客户创建成功!");
                 mainContent.order.PersonName = addcustomerContent.customer.Name;
                 mainContent.order.MobileTele = addcustomerContent.customer.MobilePhone;
                 mui.back();
